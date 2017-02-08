@@ -15,204 +15,102 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <file leaf-file-name="EventsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/EventsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticlesController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/ArticlesController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="756">
-              <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
               <folding>
-                <element signature="e#7#47#0#PHP" expanded="false" />
+                <element signature="e#42#89#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config_dev.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="896">
-              <caret line="50" column="24" lean-forward="true" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/TestController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/views/base.html.twig">
+      <file leaf-file-name="PostersController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/PostersController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
-              <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitkeep" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/public/.gitkeep">
+      <file leaf-file-name="TracksController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/TracksController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="140">
+              <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <file leaf-file-name="VideosController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/VideosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1486584435000" expanded="true" signature="0:109" ph="imports: &lt;3 items&gt;" />
-                <marker date="1486584435000" expanded="true" signature="0:171" ph="imports: &lt;4 items&gt;" />
-                <marker date="1486584435000" expanded="true" signature="27:41" ph="parameters.yml" />
-                <marker date="1486584435000" expanded="true" signature="62:74" ph="security.yml" />
-                <marker date="1486584435000" expanded="true" signature="95:107" ph="services.yml" />
-                <marker date="1486584435000" expanded="true" signature="128:169" ph="@RoBundle…rvices.yml" />
-                <marker date="1486584435000" expanded="true" signature="364:390" ph="parameters: &lt;1 key&gt;" />
-                <marker date="1486584435000" expanded="true" signature="388:390" ph="en" />
-                <marker date="1486584435000" expanded="true" signature="392:1208" ph="framework: &lt;14 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="498:508" ph="%secret%" />
-                <marker date="1486584435000" expanded="true" signature="513:608" ph="router: &lt;2 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="539:577" ph="%kernel.r…outing.yml" />
-                <marker date="1486584435000" expanded="true" signature="659:704" ph="validation: {1 key}" />
-                <marker date="1486584435000" expanded="true" signature="698:702" ph="true" />
-                <marker date="1486584435000" expanded="true" signature="760:797" ph="templating: &lt;1 key&gt;" />
-                <marker date="1486584435000" expanded="true" signature="780:797" ph="engines: [1 item]" />
-                <marker date="1486584435000" expanded="true" signature="790:796" ph="twig" />
-                <marker date="1486584435000" expanded="true" signature="819:829" ph="%locale%" />
-                <marker date="1486584435000" expanded="true" signature="880:1106" ph="session: &lt;2 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="1001:1028" ph="session.h…ative_file" />
-                <marker date="1486584435000" expanded="true" signature="1050:1106" ph="%kernel.r…vironment%" />
-                <marker date="1486584435000" expanded="true" signature="1156:1160" ph="true" />
-                <marker date="1486584435000" expanded="true" signature="1179:1208" ph="php_errors: &lt;1 key&gt;" />
-                <marker date="1486584435000" expanded="true" signature="1204:1208" ph="true" />
-                <marker date="1486584435000" expanded="true" signature="1231:1314" ph="twig: &lt;2 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="1259:1275" ph="%kernel.debug%" />
-                <marker date="1486584435000" expanded="true" signature="1298:1314" ph="%kernel.debug%" />
-                <marker date="1486584435000" expanded="true" signature="1341:2065" ph="doctrine: &lt;2 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="1355:1595" ph="dbal: &lt;7 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="1379:1388" ph="pdo_mysql" />
-                <marker date="1486584435000" expanded="true" signature="1407:1424" ph="%database_host%" />
-                <marker date="1486584435000" expanded="true" signature="1443:1460" ph="%database_port%" />
-                <marker date="1486584435000" expanded="true" signature="1479:1496" ph="%database_name%" />
-                <marker date="1486584435000" expanded="true" signature="1515:1532" ph="%database_user%" />
-                <marker date="1486584435000" expanded="true" signature="1551:1572" ph="%database_password%" />
-                <marker date="1486584435000" expanded="true" signature="1591:1595" ph="UTF8" />
-                <marker date="1486584435000" expanded="true" signature="1915:2065" ph="orm: &lt;3 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="1957:1973" ph="%kernel.debug%" />
-                <marker date="1486584435000" expanded="true" signature="1999:2038" ph="doctrine.…underscore" />
-                <marker date="1486584435000" expanded="true" signature="2061:2065" ph="true" />
-                <marker date="1486584435000" expanded="true" signature="2095:2272" ph="swiftmailer: &lt;5 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="2123:2143" ph="%mailer_transport%" />
-                <marker date="1486584435000" expanded="true" signature="2159:2174" ph="%mailer_host%" />
-                <marker date="1486584435000" expanded="true" signature="2190:2205" ph="%mailer_user%" />
-                <marker date="1486584435000" expanded="true" signature="2221:2240" ph="%mailer_password%" />
-                <marker date="1486584435000" expanded="true" signature="2245:2272" ph="spool: {1 key}" />
-                <marker date="1486584435000" expanded="true" signature="2264:2270" ph="memory" />
-              </folding>
+            <state relative-caret-position="420">
+              <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <file leaf-file-name="ImagesController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/ImagesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1486584435000" expanded="true" signature="0:82" ph="ro: &lt;3 keys&gt;" />
-                <marker date="1486584435000" expanded="true" signature="18:41" ph="@RoBundle…ontroller/" />
-                <marker date="1486584435000" expanded="true" signature="56:66" ph="annotation" />
-              </folding>
+            <state relative-caret-position="420">
+              <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing_dev.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
+      <file leaf-file-name="AbstractApiController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/AbstractApiController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-              <folding>
-                <marker date="1486584160000" expanded="true" signature="0:93" ph="_wdt: &lt;2 keys&gt;" />
-                <marker date="1486584160000" expanded="true" signature="20:73" ph="@WebProfi…ng/wdt.xml" />
-                <marker date="1486584160000" expanded="true" signature="88:93" ph="/_wdt" />
-                <marker date="1486584160000" expanded="true" signature="95:203" ph="_profiler: &lt;2 keys&gt;" />
-                <marker date="1486584160000" expanded="true" signature="120:178" ph="@WebProfi…ofiler.xml" />
-                <marker date="1486584160000" expanded="true" signature="193:203" ph="/_profiler" />
-                <marker date="1486584160000" expanded="true" signature="205:299" ph="_errors: &lt;2 keys&gt;" />
-                <marker date="1486584160000" expanded="true" signature="228:277" ph="@TwigBund…errors.xml" />
-                <marker date="1486584160000" expanded="true" signature="292:299" ph="/_error" />
-                <marker date="1486584160000" expanded="true" signature="301:333" ph="_main: &lt;1 key&gt;" />
-                <marker date="1486584160000" expanded="true" signature="322:333" ph="routing.yml" />
-                <marker date="1486584160000" expanded="true" signature="335:435" ph="NelmioApiDocBundle: &lt;2 keys&gt;" />
-                <marker date="1486584160000" expanded="true" signature="369:419" ph="@NelmioAp…outing.yml" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/DefaultController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-              <folding>
-                <element signature="e#39#96#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config_prod.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1486387721000" expanded="true" signature="0:39" ph="imports: &lt;1 item&gt;" />
-                <marker date="1486387721000" expanded="true" signature="27:37" ph="config.yml" />
-                <marker date="1486387721000" expanded="true" signature="166:484" ph="monolog: &lt;1 key&gt;" />
-                <marker date="1486387721000" expanded="true" signature="179:484" ph="handlers: &lt;3 keys&gt;" />
-                <marker date="1486387721000" expanded="true" signature="197:309" ph="main: &lt;3 keys&gt;" />
-                <marker date="1486387721000" expanded="true" signature="229:244" ph="fingers_crossed" />
-                <marker date="1486387721000" expanded="true" signature="271:276" ph="error" />
-                <marker date="1486387721000" expanded="true" signature="303:309" ph="nested" />
-                <marker date="1486387721000" expanded="true" signature="318:440" ph="nested: &lt;3 keys&gt;" />
-                <marker date="1486387721000" expanded="true" signature="345:351" ph="stream" />
-                <marker date="1486387721000" expanded="true" signature="371:415" ph="%kernel.l…nment%.log" />
-                <marker date="1486387721000" expanded="true" signature="435:440" ph="debug" />
-                <marker date="1486387721000" expanded="true" signature="449:484" ph="console: &lt;1 key&gt;" />
-                <marker date="1486387721000" expanded="true" signature="477:484" ph="console" />
-              </folding>
+            <state relative-caret-position="84">
+              <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/EventsController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/app/config/routing_dev.yml" />
-        <option value="$PROJECT_DIR$/src/RoBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
         <option value="$PROJECT_DIR$/src/RoBundle/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/TemplateBundle/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Resources/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/AbstractApiController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/ApiBundle/Resources/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/TestController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/EventsController.php" />
+        <option value="$PROJECT_DIR$/src/ApiBundle/Controller/AbstractApiController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/ArticlesController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/PosterController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/TracksController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/VideosController.php" />
+        <option value="$PROJECT_DIR$/src/RoBundle/Controller/Api/ImagesController.php" />
       </list>
     </option>
   </component>
@@ -301,54 +199,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TemplateBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ro" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ro" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TemplateBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ro" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ro" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="RoBundle" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -374,12 +224,30 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="ro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ro" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Default" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -401,7 +269,33 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ro" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -430,11 +324,81 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.YAML" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="FullScreen" value="true" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/RoBundle/Controller/Api" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ApiBundle/Controller" />
       <recent name="$PROJECT_DIR$/src/FrontBundle/Resources/views" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -451,10 +415,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1943557" sideWeight="0.55663717" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1943557" sideWeight="0.55663717" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43992606" sideWeight="0.5021299" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328541" sideWeight="0.55486727" order="6" side_tool="true" content_ui="tabs" />
@@ -494,219 +458,47 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding>
-            <marker date="1486584160000" expanded="true" signature="0:93" ph="_wdt: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="20:73" ph="@WebProfi…ng/wdt.xml" />
-            <marker date="1486584160000" expanded="true" signature="88:93" ph="/_wdt" />
-            <marker date="1486584160000" expanded="true" signature="95:203" ph="_profiler: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="120:178" ph="@WebProfi…ofiler.xml" />
-            <marker date="1486584160000" expanded="true" signature="193:203" ph="/_profiler" />
-            <marker date="1486584160000" expanded="true" signature="205:299" ph="_errors: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="228:277" ph="@TwigBund…errors.xml" />
-            <marker date="1486584160000" expanded="true" signature="292:299" ph="/_error" />
-            <marker date="1486584160000" expanded="true" signature="301:333" ph="_main: &lt;1 key&gt;" />
-            <marker date="1486584160000" expanded="true" signature="322:333" ph="routing.yml" />
-            <marker date="1486584160000" expanded="true" signature="335:435" ph="NelmioApiDocBundle: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="369:419" ph="@NelmioAp…outing.yml" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/ApiBundle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding>
-            <element signature="e#39#96#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486387721000" expanded="true" signature="0:39" ph="imports: &lt;1 item&gt;" />
-            <marker date="1486387721000" expanded="true" signature="27:37" ph="config.yml" />
-            <marker date="1486387721000" expanded="true" signature="166:484" ph="monolog: &lt;1 key&gt;" />
-            <marker date="1486387721000" expanded="true" signature="179:484" ph="handlers: &lt;3 keys&gt;" />
-            <marker date="1486387721000" expanded="true" signature="197:309" ph="main: &lt;3 keys&gt;" />
-            <marker date="1486387721000" expanded="true" signature="229:244" ph="fingers_crossed" />
-            <marker date="1486387721000" expanded="true" signature="271:276" ph="error" />
-            <marker date="1486387721000" expanded="true" signature="303:309" ph="nested" />
-            <marker date="1486387721000" expanded="true" signature="318:440" ph="nested: &lt;3 keys&gt;" />
-            <marker date="1486387721000" expanded="true" signature="345:351" ph="stream" />
-            <marker date="1486387721000" expanded="true" signature="371:415" ph="%kernel.l…nment%.log" />
-            <marker date="1486387721000" expanded="true" signature="435:440" ph="debug" />
-            <marker date="1486387721000" expanded="true" signature="449:484" ph="console: &lt;1 key&gt;" />
-            <marker date="1486387721000" expanded="true" signature="477:484" ph="console" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
-    <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486387721000" expanded="true" signature="0:39" ph="imports: &lt;1 item&gt;" />
-            <marker date="1486387721000" expanded="true" signature="27:37" ph="config.yml" />
-            <marker date="1486387721000" expanded="true" signature="166:484" ph="monolog: &lt;1 key&gt;" />
-            <marker date="1486387721000" expanded="true" signature="179:484" ph="handlers: &lt;3 keys&gt;" />
-            <marker date="1486387721000" expanded="true" signature="197:309" ph="main: &lt;3 keys&gt;" />
-            <marker date="1486387721000" expanded="true" signature="229:244" ph="fingers_crossed" />
-            <marker date="1486387721000" expanded="true" signature="271:276" ph="error" />
-            <marker date="1486387721000" expanded="true" signature="303:309" ph="nested" />
-            <marker date="1486387721000" expanded="true" signature="318:440" ph="nested: &lt;3 keys&gt;" />
-            <marker date="1486387721000" expanded="true" signature="345:351" ph="stream" />
-            <marker date="1486387721000" expanded="true" signature="371:415" ph="%kernel.l…nment%.log" />
-            <marker date="1486387721000" expanded="true" signature="435:440" ph="debug" />
-            <marker date="1486387721000" expanded="true" signature="449:484" ph="console: &lt;1 key&gt;" />
-            <marker date="1486387721000" expanded="true" signature="477:484" ph="console" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
-          <folding>
-            <element signature="e#7#47#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486584435000" expanded="true" signature="0:82" ph="ro: &lt;3 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="18:41" ph="@RoBundle…ontroller/" />
-            <marker date="1486584435000" expanded="true" signature="56:66" ph="annotation" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding>
-            <marker date="1486584160000" expanded="true" signature="0:93" ph="_wdt: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="20:73" ph="@WebProfi…ng/wdt.xml" />
-            <marker date="1486584160000" expanded="true" signature="88:93" ph="/_wdt" />
-            <marker date="1486584160000" expanded="true" signature="95:203" ph="_profiler: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="120:178" ph="@WebProfi…ofiler.xml" />
-            <marker date="1486584160000" expanded="true" signature="193:203" ph="/_profiler" />
-            <marker date="1486584160000" expanded="true" signature="205:299" ph="_errors: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="228:277" ph="@TwigBund…errors.xml" />
-            <marker date="1486584160000" expanded="true" signature="292:299" ph="/_error" />
-            <marker date="1486584160000" expanded="true" signature="301:333" ph="_main: &lt;1 key&gt;" />
-            <marker date="1486584160000" expanded="true" signature="322:333" ph="routing.yml" />
-            <marker date="1486584160000" expanded="true" signature="335:435" ph="NelmioApiDocBundle: &lt;2 keys&gt;" />
-            <marker date="1486584160000" expanded="true" signature="369:419" ph="@NelmioAp…outing.yml" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding>
-            <element signature="e#39#96#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486584435000" expanded="true" signature="0:109" ph="imports: &lt;3 items&gt;" />
-            <marker date="1486584435000" expanded="true" signature="0:171" ph="imports: &lt;4 items&gt;" />
-            <marker date="1486584435000" expanded="true" signature="27:41" ph="parameters.yml" />
-            <marker date="1486584435000" expanded="true" signature="62:74" ph="security.yml" />
-            <marker date="1486584435000" expanded="true" signature="95:107" ph="services.yml" />
-            <marker date="1486584435000" expanded="true" signature="128:169" ph="@RoBundle…rvices.yml" />
-            <marker date="1486584435000" expanded="true" signature="364:390" ph="parameters: &lt;1 key&gt;" />
-            <marker date="1486584435000" expanded="true" signature="388:390" ph="en" />
-            <marker date="1486584435000" expanded="true" signature="392:1208" ph="framework: &lt;14 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="498:508" ph="%secret%" />
-            <marker date="1486584435000" expanded="true" signature="513:608" ph="router: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="539:577" ph="%kernel.r…outing.yml" />
-            <marker date="1486584435000" expanded="true" signature="659:704" ph="validation: {1 key}" />
-            <marker date="1486584435000" expanded="true" signature="698:702" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="760:797" ph="templating: &lt;1 key&gt;" />
-            <marker date="1486584435000" expanded="true" signature="780:797" ph="engines: [1 item]" />
-            <marker date="1486584435000" expanded="true" signature="790:796" ph="twig" />
-            <marker date="1486584435000" expanded="true" signature="819:829" ph="%locale%" />
-            <marker date="1486584435000" expanded="true" signature="880:1106" ph="session: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1001:1028" ph="session.h…ative_file" />
-            <marker date="1486584435000" expanded="true" signature="1050:1106" ph="%kernel.r…vironment%" />
-            <marker date="1486584435000" expanded="true" signature="1156:1160" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="1179:1208" ph="php_errors: &lt;1 key&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1204:1208" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="1231:1314" ph="twig: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1259:1275" ph="%kernel.debug%" />
-            <marker date="1486584435000" expanded="true" signature="1298:1314" ph="%kernel.debug%" />
-            <marker date="1486584435000" expanded="true" signature="1341:2065" ph="doctrine: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1355:1595" ph="dbal: &lt;7 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1379:1388" ph="pdo_mysql" />
-            <marker date="1486584435000" expanded="true" signature="1407:1424" ph="%database_host%" />
-            <marker date="1486584435000" expanded="true" signature="1443:1460" ph="%database_port%" />
-            <marker date="1486584435000" expanded="true" signature="1479:1496" ph="%database_name%" />
-            <marker date="1486584435000" expanded="true" signature="1515:1532" ph="%database_user%" />
-            <marker date="1486584435000" expanded="true" signature="1551:1572" ph="%database_password%" />
-            <marker date="1486584435000" expanded="true" signature="1591:1595" ph="UTF8" />
-            <marker date="1486584435000" expanded="true" signature="1915:2065" ph="orm: &lt;3 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1957:1973" ph="%kernel.debug%" />
-            <marker date="1486584435000" expanded="true" signature="1999:2038" ph="doctrine.…underscore" />
-            <marker date="1486584435000" expanded="true" signature="2061:2065" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="2095:2272" ph="swiftmailer: &lt;5 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="2123:2143" ph="%mailer_transport%" />
-            <marker date="1486584435000" expanded="true" signature="2159:2174" ph="%mailer_host%" />
-            <marker date="1486584435000" expanded="true" signature="2190:2205" ph="%mailer_user%" />
-            <marker date="1486584435000" expanded="true" signature="2221:2240" ph="%mailer_password%" />
-            <marker date="1486584435000" expanded="true" signature="2245:2272" ph="spool: {1 key}" />
-            <marker date="1486584435000" expanded="true" signature="2264:2270" ph="memory" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="448">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="896">
-          <caret line="50" column="24" lean-forward="true" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+        <state relative-caret-position="28">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/TestController.php">
+    <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/public/.gitkeep">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -717,15 +509,83 @@
     <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
-          <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/public/.gitkeep">
+    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="896">
+          <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1486591208000" expanded="true" signature="0:109" ph="imports: &lt;3 items&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/EventsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/AbstractApiController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/ArticlesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding>
+            <element signature="e#42#89#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/PostersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/TracksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/VideosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/ImagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
           <folding />
         </state>
       </provider>
