@@ -1,0 +1,5 @@
+ro:
+    resource: "@RoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
