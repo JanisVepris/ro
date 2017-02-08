@@ -37,11 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RoBundle/Controller/Api/TestController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/views/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -192,6 +202,7 @@
         <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
         <option value="$PROJECT_DIR$/src/RoBundle/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/TemplateBundle/Resources/views/base.html.twig" />
       </list>
     </option>
   </component>
@@ -262,7 +273,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -277,6 +288,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TemplateBundle" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -295,28 +310,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="RoBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ro" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ro" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RoBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -338,11 +331,37 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Api" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ro" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ro" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -395,7 +414,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1943557" sideWeight="0.55663717" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1943557" sideWeight="0.55663717" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43992606" sideWeight="0.5021299" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328541" sideWeight="0.55486727" order="6" side_tool="true" content_ui="tabs" />
@@ -435,62 +454,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486584435000" expanded="true" signature="0:109" ph="imports: &lt;3 items&gt;" />
-            <marker date="1486584435000" expanded="true" signature="0:171" ph="imports: &lt;4 items&gt;" />
-            <marker date="1486584435000" expanded="true" signature="27:41" ph="parameters.yml" />
-            <marker date="1486584435000" expanded="true" signature="62:74" ph="security.yml" />
-            <marker date="1486584435000" expanded="true" signature="95:107" ph="services.yml" />
-            <marker date="1486584435000" expanded="true" signature="128:169" ph="@RoBundle…rvices.yml" />
-            <marker date="1486584435000" expanded="true" signature="364:390" ph="parameters: &lt;1 key&gt;" />
-            <marker date="1486584435000" expanded="true" signature="388:390" ph="en" />
-            <marker date="1486584435000" expanded="true" signature="392:1208" ph="framework: &lt;14 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="498:508" ph="%secret%" />
-            <marker date="1486584435000" expanded="true" signature="513:608" ph="router: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="539:577" ph="%kernel.r…outing.yml" />
-            <marker date="1486584435000" expanded="true" signature="659:704" ph="validation: {1 key}" />
-            <marker date="1486584435000" expanded="true" signature="698:702" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="760:797" ph="templating: &lt;1 key&gt;" />
-            <marker date="1486584435000" expanded="true" signature="780:797" ph="engines: [1 item]" />
-            <marker date="1486584435000" expanded="true" signature="790:796" ph="twig" />
-            <marker date="1486584435000" expanded="true" signature="819:829" ph="%locale%" />
-            <marker date="1486584435000" expanded="true" signature="880:1106" ph="session: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1001:1028" ph="session.h…ative_file" />
-            <marker date="1486584435000" expanded="true" signature="1050:1106" ph="%kernel.r…vironment%" />
-            <marker date="1486584435000" expanded="true" signature="1156:1160" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="1179:1208" ph="php_errors: &lt;1 key&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1204:1208" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="1231:1314" ph="twig: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1259:1275" ph="%kernel.debug%" />
-            <marker date="1486584435000" expanded="true" signature="1298:1314" ph="%kernel.debug%" />
-            <marker date="1486584435000" expanded="true" signature="1341:2065" ph="doctrine: &lt;2 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1355:1595" ph="dbal: &lt;7 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1379:1388" ph="pdo_mysql" />
-            <marker date="1486584435000" expanded="true" signature="1407:1424" ph="%database_host%" />
-            <marker date="1486584435000" expanded="true" signature="1443:1460" ph="%database_port%" />
-            <marker date="1486584435000" expanded="true" signature="1479:1496" ph="%database_name%" />
-            <marker date="1486584435000" expanded="true" signature="1515:1532" ph="%database_user%" />
-            <marker date="1486584435000" expanded="true" signature="1551:1572" ph="%database_password%" />
-            <marker date="1486584435000" expanded="true" signature="1591:1595" ph="UTF8" />
-            <marker date="1486584435000" expanded="true" signature="1915:2065" ph="orm: &lt;3 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="1957:1973" ph="%kernel.debug%" />
-            <marker date="1486584435000" expanded="true" signature="1999:2038" ph="doctrine.…underscore" />
-            <marker date="1486584435000" expanded="true" signature="2061:2065" ph="true" />
-            <marker date="1486584435000" expanded="true" signature="2095:2272" ph="swiftmailer: &lt;5 keys&gt;" />
-            <marker date="1486584435000" expanded="true" signature="2123:2143" ph="%mailer_transport%" />
-            <marker date="1486584435000" expanded="true" signature="2159:2174" ph="%mailer_host%" />
-            <marker date="1486584435000" expanded="true" signature="2190:2205" ph="%mailer_user%" />
-            <marker date="1486584435000" expanded="true" signature="2221:2240" ph="%mailer_password%" />
-            <marker date="1486584435000" expanded="true" signature="2245:2272" ph="spool: {1 key}" />
-            <marker date="1486584435000" expanded="true" signature="2264:2270" ph="memory" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -719,6 +682,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TemplateBundle/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
           <folding />
         </state>
       </provider>
