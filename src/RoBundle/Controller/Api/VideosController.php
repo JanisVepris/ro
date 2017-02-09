@@ -15,7 +15,7 @@ class VideosController extends AbstractApiController
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/videoPlaylist/{playlistId}/videos",
-     *     name="ro_api_videos_get"
+     *     name="ro_api_videos_index"
      * )
      * @Rest\View
      */
