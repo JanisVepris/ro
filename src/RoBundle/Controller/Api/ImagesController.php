@@ -15,7 +15,7 @@ class ImagesController extends AbstractApiController
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/galleries/{galleryId}/images",
-     *     name="ro_api_images_get"
+     *     name="ro_api_images_index"
      * )
      * @Rest\View
      */
