@@ -15,7 +15,7 @@ class TracksController extends AbstractApiController
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/audioPlaylist/{playlistId}/tracks",
-     *     name="ro_api_tracks_get"
+     *     name="ro_api_tracks_index"
      * )
      * @Rest\View
      */
