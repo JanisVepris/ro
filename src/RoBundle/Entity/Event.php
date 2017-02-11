@@ -77,6 +77,12 @@ class Event
     private $facts;
 
     /**
+     * @var Gallery
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Gallery", mappedBy="event")
+     */
+    private $gallery;
+
+    /**
      * Event constructor.
      */
     public function __construct()
@@ -257,6 +263,25 @@ class Event
     public function setFacts($facts)
     {
         $this->facts = $facts;
+
+        return $this;
+    }
+
+    /**
+     * @return Gallery
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param Gallery $gallery
+     * @return Event
+     */
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
 
         return $this;
     }

@@ -5,7 +5,6 @@ namespace RoBundle\Entity;
 use CommonBundle\Traits\CreatedOnEntityTrait;
 use CommonBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="article")
