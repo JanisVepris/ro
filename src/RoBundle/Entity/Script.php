@@ -5,6 +5,10 @@ use CommonBundle\Traits\CreatedOnEntityTrait;
 use CommonBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Table(name="script")
+ * @ORM\Entity()
+ */
 class Script
 {
     use CreatedOnEntityTrait;

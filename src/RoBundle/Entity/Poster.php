@@ -7,10 +7,8 @@ use CommonBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Poster
- *
  * @ORM\Table(name="poster")
- * @ORM\Entity(repositoryClass="RoBundle\Repository\PosterRepository")
+ * @ORM\Entity()
  */
 class Poster
 {

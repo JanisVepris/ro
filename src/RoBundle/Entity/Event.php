@@ -9,7 +9,7 @@ use CommonBundle\Traits\CreatedOnEntityTrait;
 
 /**
  * @ORM\Table(name="event")
- * @ORM\Entity(repositoryClass="RoBundle\Repository\EventRepository")
+ * @ORM\Entity()
  */
 class Event
 {
