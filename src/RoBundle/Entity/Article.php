@@ -2,16 +2,20 @@
 
 namespace RoBundle\Entity;
 
+use CommonBundle\Traits\CreatedOnEntityTrait;
+use CommonBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Article
- *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="RoBundle\Repository\ArticleRepository")
  */
 class Article
 {
+    use CreatedOnEntityTrait;
+    use UpdatedOnEntityTrait;
+
     /**
      * @var int
      *
@@ -49,6 +53,12 @@ class Article
      */
     private $content;
 
+    /**
+     * @var Event
+     * @ORM\ManyToOne(targetEntity="RoBundle\Entity\Event", inversedBy="articles")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
 
     /**
      * Get id
@@ -154,6 +164,25 @@ class Article
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param Event $event
+     * @return Article
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+
+        return $this;
     }
 }
 
