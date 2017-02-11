@@ -8,3 +8,6 @@ ro:
     type:     annotation
     prefix:   /
 
+admin_area:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /admin
