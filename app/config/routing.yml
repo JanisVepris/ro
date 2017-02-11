@@ -11,3 +11,6 @@ ro:
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix: /admin
+
+admin_routing:
+    resource: "@RoBundle/Resources/config/admin_routing.yml"

@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@RoBundle/Resources/config/services.yml" }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -68,6 +67,11 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
 
 sonata_block:
     default_contexts: [cms]

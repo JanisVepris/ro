@@ -28,7 +28,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
@@ -48,7 +48,7 @@ class Event
 
     /**
      * @var ArrayCollection|Article[]
-     * @ORM\OneToMany(targetEntity="RoBundle\Entity\Article", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="RoBundle\Entity\Article", mappedBy="event", cascade={"persist"})
      */
     private $articles;
 
@@ -192,6 +192,32 @@ class Event
     }
 
     /**
+     * @param Article $article
+     * @return $this
+     */
+    public function addArticle(Article $article)
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function removeArticle(Article $article)
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Poster
      */
     public function getPoster()
@@ -284,6 +310,11 @@ class Event
         $this->gallery = $gallery;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
 

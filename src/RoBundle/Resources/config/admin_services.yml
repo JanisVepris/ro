@@ -1,0 +1,12 @@
+services:
+    ro.admin.article:
+        class: RoBundle\Admin\ArticleAdmin
+        arguments: [~, RoBundle\Entity\Article, RoBundle:ArticleAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Article }
+
+    ro.admin.event:
+        class: RoBundle\Admin\EventAdmin
+        arguments: [~, RoBundle\Entity\Event, RoBundle:EventAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Event }
