@@ -71,6 +71,12 @@ class Event
     private $script;
 
     /**
+     * @var Team
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Facts", mappedBy="event")
+     */
+    private $facts;
+
+    /**
      * Event constructor.
      */
     public function __construct()
@@ -232,6 +238,25 @@ class Event
     public function setScript($script)
     {
         $this->script = $script;
+
+        return $this;
+    }
+
+    /**
+     * @return Team
+     */
+    public function getFacts()
+    {
+        return $this->facts;
+    }
+
+    /**
+     * @param Team $facts
+     * @return Event
+     */
+    public function setFacts($facts)
+    {
+        $this->facts = $facts;
 
         return $this;
     }
