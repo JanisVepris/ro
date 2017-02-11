@@ -17,11 +17,13 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
             // RO Bundles
             new ApiBundle\ApiBundle(),
             new TemplateBundle\TemplateBundle(),
             new RoBundle\RoBundle(),
+            new CommonBundle\CommonBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
