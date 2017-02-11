@@ -63,6 +63,13 @@ class Event
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\Team", mappedBy="event")
      */
     private $team;
+
+    /**
+     * @var Team
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Script", mappedBy="event")
+     */
+    private $script;
+
     /**
      * Event constructor.
      */
@@ -206,6 +213,25 @@ class Event
     public function setTeam($team)
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * @return Team
+     */
+    public function getScript()
+    {
+        return $this->script;
+    }
+
+    /**
+     * @param Team $script
+     * @return Event
+     */
+    public function setScript($script)
+    {
+        $this->script = $script;
 
         return $this;
     }
