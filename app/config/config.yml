@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: sonata_main.yml }
+    - { resource: sonata_clasification.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -53,6 +55,9 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
@@ -62,8 +67,13 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
+#        auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    ApplicationSonataMediaBundle: ~
+                    SonataMediaBundle: ~
 
 assetic:
     debug:          '%kernel.debug%'
@@ -76,59 +86,3 @@ stof_doctrine_extensions:
         default:
             timestampable: true
 
-sonata_admin:
-    templates:
-        layout:  SonataAdminBundle::layout.html.twig
-
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts: [admin]
-
-sonata_formatter:
-    formatters:
-        markdown:
-            service: sonata.formatter.text.markdown
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
-
-
-        text:
-            service: sonata.formatter.text.text
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        rawhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        richhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        twig:
-            service: sonata.formatter.text.twigengine
-            extensions: [] # Twig formatter cannot have extensions
-
-ivory_ck_editor:
-    default_config: default
-    configs:
-        default:
-            height: 300
-            toolbar:
-            - [Bold, Italic, Underline, -, Undo, Redo, -, NumberedList, BulletedList, -, Outdent, Indent, -, Image, Link, Unlink]
-            - [Format, Maximize]
