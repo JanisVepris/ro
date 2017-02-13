@@ -37,7 +37,6 @@ class EventAdmin extends AbstractAdmin
             ->add('image')
             ->add('_action', null, [
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ]

@@ -26,9 +26,7 @@ class ArticleAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('event', null, )
-            ->add('title')
+            ->addIdentifier('title')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -45,8 +43,11 @@ class ArticleAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title')
-            ->add('description')
-            ->add('content');
+            ->add('description', 'textarea')
+            ->add('content', 'sonata_simple_formatter_type', [
+                'format' => 'richhtml',
+                'ckeditor_context' => 'default',
+            ]);
     }
 
     /**
