@@ -1,3 +1,17 @@
-.testaz {
-    background-color: grey
+@font-face {
+    font-family: Open-sans-light;
+    src: url('./OpenSans-Light.ttf');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    font-family: Open-sans-light;
+    width: 100%;
+    height: 50px;
+    background-color: #1E1E1E;
+    color: #E4E4E4;
 }

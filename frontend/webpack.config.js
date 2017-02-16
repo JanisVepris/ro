@@ -28,7 +28,10 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-			// https://github.com/jtangelder/sass-loader
+				test: /\.(woff2?|ttf|eot|svg)$/,
+				loader: 'url?limit=10000'
+			},
+			{
 				test: /\.scss$/,
 				loaders: ['style', 'css', 'sass'],
 			},
