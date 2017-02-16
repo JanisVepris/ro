@@ -7,7 +7,7 @@ use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="article")
+ * @ORM\Table(name="ro3_article")
  * @ORM\Entity()
  */
 class Article
@@ -58,6 +58,12 @@ class Article
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $event;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = false;
 
     /**
      * Get id
@@ -180,6 +186,22 @@ class Article
     public function setEvent($event)
     {
         $this->event = $event;
+
+        return $this;
+    }
+
+    public function isPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param bool $published
+     * @return Article
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
 
         return $this;
     }

@@ -6,7 +6,7 @@ use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="facts")
+ * @ORM\Table(name="ro3_facts")
  * @ORM\Entity()
  */
 class Facts

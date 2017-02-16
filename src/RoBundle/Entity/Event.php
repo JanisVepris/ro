@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Traits\CreatedOnEntityTrait;
 
 /**
- * @ORM\Table(name="event")
+ * @ORM\Table(name="ro3_event")
  * @ORM\Entity(repositoryClass="RoBundle\Repository\EventRepository")
  */
 class Event

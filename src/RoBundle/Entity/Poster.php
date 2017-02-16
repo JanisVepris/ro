@@ -7,7 +7,7 @@ use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="poster")
+ * @ORM\Table(name="ro3_poster")
  * @ORM\Entity()
  */
 class Poster

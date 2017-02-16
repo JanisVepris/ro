@@ -6,7 +6,7 @@ use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="script")
+ * @ORM\Table(name="ro3_script")
  * @ORM\Entity()
  */
 class Script

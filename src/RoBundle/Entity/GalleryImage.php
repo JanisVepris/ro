@@ -6,7 +6,7 @@ use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="gallery_image")
+ * @ORM\Table(name="ro3_gallery_image")
  * @ORM\Entity()
  */
 class GalleryImage

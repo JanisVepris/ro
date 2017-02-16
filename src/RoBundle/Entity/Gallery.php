@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="gallery")
+ * @ORM\Table(name="ro3_gallery")
  * @ORM\Entity()
  */
 class Gallery
