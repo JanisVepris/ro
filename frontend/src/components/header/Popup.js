@@ -38,7 +38,12 @@ class Popup extends React.Component {
 	}
 
 	handleClickOutside(e) {
-		if (!this.props.hidden && e.target.className !== this.props.ignoreOnClickOutsideClass) {
+		
+		const isClickOnToggler = 
+			e.target.className === this.props.ignoreOnClickOutsideClass || 
+			e.target.parentNode.className === this.props.ignoreOnClickOutsideClass
+
+		if (!this.props.hidden && !isClickOnToggler) {
 			this.props.onClickOutside()
 		}
 	}
