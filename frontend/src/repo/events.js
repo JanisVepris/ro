@@ -1,5 +1,8 @@
 import eventsMock from './events-mock'
 
 export const getEvents = () => {
-	return Promise.resolve(eventsMock)
+	
+	const delayedPromise = new Promise((resolve) => setTimeout(() => resolve(eventsMock), 1000))
+
+	return Promise.resolve(delayedPromise)
 }

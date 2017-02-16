@@ -3,17 +3,13 @@ import { Router, Route, IndexRoute } from 'react-router'
 import { history } from './store'
 import App from './containers/app'
 
-import EventOverview from './containers/overview'
-//import News from './routes/News'
+import News from './containers/news'
 
 export default () => (
 	<Router history={ history }>
-		<Route path='/' component={ App }>
-			<IndexRoute component={ EventOverview } />
-			<Route path='/:eventSlug' component={ EventOverview }>
-			</Route>
+		<Route path='/(:eventSlug)' component={ App }>
+			<IndexRoute component={ News } />
+			<Route path='/:eventSlug/naujienos' component={ News } />
 		</Route>
 	</Router>
 )
-// <IndexRoute component={ News } />
-// <Route path='/naujienos' component={ News } />

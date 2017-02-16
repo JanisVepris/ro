@@ -1,12 +1,20 @@
 import * as eventInfoRepo from '../repo/event-info'
+import * as eventArticlesRepo from '../repo/event-articles'
 
 // Action types
 export const EVENT_ADD = 'EVENT_ADD'
+export const EVENT_NEWS_SET = 'EVENT_NEWS_SET'
 
 // Action creators
 export const addEvent = (event) => ({
 	type: EVENT_ADD,
 	event
+})
+
+export const setNews = (id, news) => ({
+	type: EVENT_NEWS_SET,
+	id,
+	news
 })
 
 // Thunks
@@ -24,6 +32,26 @@ export const loadEventInfo = (id) => (
 	return eventInfoRepo.getEventInfo(id)
 		.then(response => {
 			dispatch(addEvent(response))
+		})
+		.catch(err => {
+			console.log(err)
+		})
+}
+
+export const loadEventNews = (id) => (
+	dispatch,
+	getState
+) => {
+
+	const state = getState()
+
+	if (state.events.newsById[id]) {
+		return Promise.resolve()
+	}
+
+	return eventArticlesRepo.getEventArticles(id)
+		.then(response => {
+			dispatch(setNews(id, response))
 		})
 		.catch(err => {
 			console.log(err)
