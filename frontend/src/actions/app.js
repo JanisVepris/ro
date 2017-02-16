@@ -1,6 +1,8 @@
 import * as eventsRepo from '../repo/events'
 import * as eventInfoRepo from '../repo/event-info'
 
+import { addEvent } from './events'
+
 // Action types
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
 export const APP_SET_EVENTS = 'APP_SET_EVENTS'
@@ -22,7 +24,7 @@ export const setAvailableEvents = (events) => ({
 })
 
 // Thunks
-export const initialize = () => (
+export const initialize = (urlParams) => (
 	dispatch,
 	getState
 ) => {
@@ -31,8 +33,16 @@ export const initialize = () => (
 		.then(response => {
 
 			dispatch(setAvailableEvents(response))
-			
-			dispatch(setActiveEvent(response[0].id))
+
+			const activeEvent = urlParams.eventSlug
+				? response.find(event => event.slug === urlParams.eventSlug) || response[0]
+				: response[0]
+
+			if (!activeEvent.id) {
+				throw Error('Event not found')
+			}
+
+			dispatch(setActiveEvent(activeEvent.id))
 
 			return dispatch(loadEventInfo(getState().app.activeEventId))
 		})
@@ -55,9 +65,9 @@ const loadEventInfo = (id) => (
 		return Promise.resolve()
 	}
 
-	return eventInfoRepo.getEventsInfo(id)
+	return eventInfoRepo.getEventInfo(id)
 		.then(response => {
-			console.log(response)
+			dispatch(addEvent(response))
 		})
 		.catch(err => {
 			console.log(err)
