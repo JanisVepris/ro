@@ -3,6 +3,7 @@ import '../../styles/main.scss'
 
 const Button = ({
 	labels,
+	selectedIndex,
 	actions,
 	hidden
 }) => {
@@ -12,13 +13,19 @@ const Button = ({
 	}
 
 	return (
-		<div className="header-button">
+		<div className="header-dropdown">
 			{ 
-				labels.map((label, index) =>
-					<div key={ index } onClick={ actions[index] }>
+				labels.map((label, index) => {
+
+					const isSelected = index === selectedIndex
+					const selectedClassName = isSelected ? 'selected' : ''
+
+					return (
+						<div key={ index } className={ selectedClassName } onClick={ actions[index] }>
 						{ label }
 					</div>
-				)
+					)
+				})
 			}
 		</div>
 	)

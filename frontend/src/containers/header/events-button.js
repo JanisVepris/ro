@@ -4,8 +4,8 @@ import Button from '../../components/header/Button'
 
 import { toggleEventsDropdown } from '../../actions/header'
 
-const mapStateToProps = () => ({
-	label: 'MIDI ROKO OPERA'
+const mapStateToProps = (state) => ({
+	label: state.app.eventsById[state.app.activeEventId].name
 })
 
 export default connect(

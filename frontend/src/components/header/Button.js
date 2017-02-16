@@ -9,6 +9,7 @@ const Button = ({
 	return (
 		<div className="header-button" onClick={ onClick }>
 			{ label }
+			<i className="arrow mr-s" />
 		</div>
 	)
 }

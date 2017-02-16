@@ -12,8 +12,8 @@ const getEventsLabels = createSelector(
 	getEvents,
 	(events) => Object.keys(events).reduce(
 		(obj, event) => [
-			...obj,
-			events[event].name
+			events[event].name,
+			...obj
 		],
 	[])
 )
@@ -22,8 +22,8 @@ const getEventsIds = createSelector(
 	getEvents,
 	(events) => Object.keys(events).reduce(
 		(obj, event) => [
-			...obj,
-			events[event].id
+			events[event].id,
+			...obj
 		],
 	[])
 )
@@ -31,6 +31,7 @@ const getEventsIds = createSelector(
 const mapStateToProps = (state) => ({
 	labels: getEventsLabels(state),
 	ids: getEventsIds(state),
+	selectedIndex: getEventsIds(state).indexOf(state.app.activeEventId),
 	hidden: false
 })
 

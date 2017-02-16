@@ -28,7 +28,7 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-				test: /\.(woff2?|ttf|eot|svg)$/,
+				test: /\.(woff2?|ttf|eot|png)$/,
 				loader: 'url?limit=10000'
 			},
 			{
