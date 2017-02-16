@@ -1,0 +1,4 @@
+services:
+    admin.controller.event_controller:
+        class: AdminBundle\Controller\AdminEventsController
+        arguments: ["@admin.service.event_service"]

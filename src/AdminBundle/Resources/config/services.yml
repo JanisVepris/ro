@@ -1,4 +1,4 @@
 services:
     admin.service.event_service:
-    	class: AdminBundle\Service\EventService
-    	arguments: ['@ro.repository.event_repository']
+        class: AdminBundle\Service\EventService
+        arguments: ['@ro.repository.event_repository']
