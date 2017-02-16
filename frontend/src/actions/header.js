@@ -1,18 +1,7 @@
-import { push } from 'react-router-redux'
+// Action types
+export const HEADER_TOGGLE_EVENTS = 'HEADER_TOGGLE_EVENTS'
 
-import { setActiveEvent } from './app'
-import { loadEventInfo } from './events'
-
-// Thunks
-export const navigateToOverview = (id) => (
-	dispatch,
-	getState
-) => {
-
-	const eventSlug = getState().app.eventsById[id].eventSlug
-
-	dispatch(push('/' + eventSlug))
-	dispatch(setActiveEvent(id))
-
-	return dispatch(loadEventInfo(id))
-}
+// Action creators
+export const toggleEventsDropdown = () => ({
+	type: HEADER_TOGGLE_EVENTS
+})

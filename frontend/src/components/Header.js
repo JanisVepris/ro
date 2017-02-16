@@ -1,13 +1,16 @@
 import * as React from 'react'
 import '../styles/main.scss'
 
-const Header = () => {
+import EventsButton from '../containers/header/events-button'
+import EventsPopup from '../containers/header/events-popup'
 
-	return (
-		<div className="header">
-			header
+const Header = () => (
+	<div className="header">
+		<div>
+			<EventsButton />
+			<EventsPopup />
 		</div>
-	)
-}
+	</div>
+)
 
 export default Header

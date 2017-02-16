@@ -1,6 +1,7 @@
 import * as eventsRepo from '../repo/events'
+import { push } from 'react-router-redux'
 
-import { loadEventInfo } from './events'
+import { loadEventInfo, loadEventNews } from './events'
 
 // Action types
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
@@ -50,4 +51,19 @@ export const initialize = (urlParams) => (
 		.catch(error => {
 			console.log('Error: ', error)
 		})
+}
+
+// Thunks
+export const navigateToOverview = (id) => (
+	dispatch,
+	getState
+) => {
+
+	const eventSlug = getState().app.eventsById[id].slug
+
+	dispatch(push('/' + eventSlug))
+	dispatch(setActiveEvent(id))
+
+	return dispatch(loadEventInfo(id))
+		.then(() => dispatch(loadEventNews(id)))
 }
