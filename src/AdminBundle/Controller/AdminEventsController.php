@@ -19,7 +19,6 @@ class AdminEventsController extends Controller
         $this->eventService = $eventService;
     }
 
-
     /**
      * @Route("/list", name="admin_events_list")
      * @Template
