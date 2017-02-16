@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 
 import Popup from '../../components/header/Popup'
 
 import { navigateToOverview } from '../../actions/app'
-
-import { createSelector } from 'reselect'
+import { toggleEventsDropdown } from '../../actions/header'
 
 const getEvents = (state) => state.app.eventsById
 
@@ -32,17 +32,23 @@ const mapStateToProps = (state) => ({
 	labels: getEventsLabels(state),
 	ids: getEventsIds(state),
 	selectedIndex: getEventsIds(state).indexOf(state.app.activeEventId),
-	hidden: false
+	hidden: !state.header.isEventsDropdownVisible,
+	ignoreOnClickOutsideClass: 'header-button'
 })
 
 export default connect(
 	mapStateToProps,
 	{
-		navigateToOverview
+		navigateToOverview,
+		onClickOutside: toggleEventsDropdown
 	},
 	(sp, dp) => ({
 		...sp,
-		actions: sp.ids.map(id => () => dp.navigateToOverview(id))
+		...dp,
+		actions: sp.ids.map(id => () => {
+			dp.navigateToOverview(id)
+			dp.onClickOutside()
+		})
 	})
 )(Popup)
 
