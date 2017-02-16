@@ -1,0 +1,6 @@
+services:
+    ro.repository.event_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - RoBundle\Entity\Event
