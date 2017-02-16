@@ -1,13 +1,17 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { browserHistory } from 'react-router'
+import thunk from 'redux-thunk'
+import freeze from 'redux-freeze'
 import { syncHistoryWithStore, routerMiddleware, routerReducer} from 'react-router-redux'
 
-import freeze from 'redux-freeze'
+// Reducers
+import app from './reducers/app'
 
 // Middleware
 const middlewares = []
 
 middlewares.push(routerMiddleware(browserHistory))
+middlewares.push(thunk)
 
 // eslint-disable-next-line no-undef, no-process-env
 if (process.env.NODE_ENV !== 'production') {
@@ -25,7 +29,8 @@ if (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {
 
 // Reducers
 const reducers = combineReducers({
-	routing: routerReducer
+	routing: routerReducer,
+	app
 })
 
 // Store
