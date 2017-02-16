@@ -18,12 +18,13 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
 
             // RO Bundles
+            new CoreBundle\CoreBundle(),
             new ApiBundle\ApiBundle(),
             new TemplateBundle\TemplateBundle(),
             new RoBundle\RoBundle(),
-            new CommonBundle\CommonBundle(),
             new AdminBundle\AdminBundle(),
         ];
 

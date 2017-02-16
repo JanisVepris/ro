@@ -2,10 +2,10 @@
 
 namespace RoBundle\Entity;
 
-use CommonBundle\Traits\UpdatedOnEntityTrait;
+use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use CommonBundle\Traits\CreatedOnEntityTrait;
+use CoreBundle\Traits\CreatedOnEntityTrait;
 
 /**
  * @ORM\Table(name="event")

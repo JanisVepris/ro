@@ -1,5 +1,5 @@
 <?php
-namespace CommonBundle\Traits;
+namespace CoreBundle\Traits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;

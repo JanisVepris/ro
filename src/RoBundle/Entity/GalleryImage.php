@@ -1,8 +1,8 @@
 <?php
 namespace RoBundle\Entity;
 
-use CommonBundle\Traits\CreatedOnEntityTrait;
-use CommonBundle\Traits\UpdatedOnEntityTrait;
+use CoreBundle\Traits\CreatedOnEntityTrait;
+use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
