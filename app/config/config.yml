@@ -2,8 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: sonata_main.yml }
-    - { resource: sonata_clasification.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -67,13 +65,13 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-#        naming_strategy: doctrine.orm.naming_strategy.underscore
-#        auto_mapping: true
-        entity_managers:
-            default:
-                mappings:
-                    ApplicationSonataMediaBundle: ~
-                    SonataMediaBundle: ~
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+#        entity_managers:
+#            default:
+#                mappings:
+#                    ApplicationSonataMediaBundle: ~
+#                    SonataMediaBundle: ~
 
 assetic:
     debug:          '%kernel.debug%'

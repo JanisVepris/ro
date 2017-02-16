@@ -8,8 +8,7 @@ ro:
     type:     annotation
     prefix:   /
 
-libs_routing:
-    resource: "routing_libs.yml"
-
-admin_routing:
-    resource: "@RoBundle/Resources/config/admin_routing.yml"
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
