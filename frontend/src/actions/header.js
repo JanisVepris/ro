@@ -1,50 +1,18 @@
-/*import { Dispatch } from 'redux'
+import { push } from 'react-router-redux'
 
-
-// types
-export const LOCATION_ITEMS_ADD = 'LOCATION_ITEMS_ADD'
-
-/
-// simple actions
-export const addItems = (ruleUid: string, ids: number[]): ILocationItemAction => ({
-	type: LOCATION_ITEMS_ADD,
-	ruleUid,
-	ids
-})
-
-export const removeItems = (ruleUid: string, ids: number[]): ILocationItemAction => ({
-	type: LOCATION_ITEMS_REMOVE,
-	ruleUid,
-	ids
-})
-
-export const setLocationsNames = (
-	ids: number[],
-	names: string[]
-): ISetLocationNames => ({
-	type: LOCATION_SET_NAMES,
-	ids,
-	names
-})
+import { setActiveEvent } from './app'
+import { loadEventInfo } from './events'
 
 // Thunks
-export const resolveLocationNames = (ids: number[]) => (
-	dispatch: Dispatch,
-	getState: () => TState
+export const navigateToOverview = (id) => (
+	dispatch,
+	getState
 ) => {
 
-	const { locationNameById } = getState().targeting
+	const eventSlug = getState().app.eventsById[id].eventSlug
 
-	const unresolvedLocationIds = ids.filter(id => !locationNameById[id])
-	if (!unresolvedLocationIds.length) {
-		return Promise.resolve()
-	}
+	dispatch(push('/' + eventSlug))
+	dispatch(setActiveEvent(id))
 
-	return LocationsRepo.getLocationsNames(unresolvedLocationIds)
-		.then(names => dispatch(setLocationsNames(ids, names)))
+	return dispatch(loadEventInfo(id))
 }
-
-export const addLocationItem = (ruleUid: string, id: number) => (
-	dispatch: Dispatch
-) => dispatch(resolveLocationNames([id]))
-		.then(dispatch(addItems(ruleUid, [id])))*/

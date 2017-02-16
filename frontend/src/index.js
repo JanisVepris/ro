@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import * as Router from './router.js'
+import * as Router from './router'
 import store from './store.js'
 
 ReactDOM.render(

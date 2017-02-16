@@ -1,7 +1,6 @@
 import * as eventsRepo from '../repo/events'
-import * as eventInfoRepo from '../repo/event-info'
 
-import { addEvent } from './events'
+import { loadEventInfo } from './events'
 
 // Action types
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
@@ -44,32 +43,11 @@ export const initialize = (urlParams) => (
 
 			dispatch(setActiveEvent(activeEvent.id))
 
-			return dispatch(loadEventInfo(getState().app.activeEventId))
+			return Promise.resolve()
 		})
-		.then(() => {
-			dispatch(setInitialized())
-		})
+		.then(() => dispatch(loadEventInfo(getState().app.activeEventId)))
+		.then(() => dispatch(setInitialized()))
 		.catch(error => {
 			console.log('Error: ', error)
-		})
-}
-
-const loadEventInfo = (id) => (
-	dispatch,
-	getState
-) => {
-
-	const state = getState()
-
-	if (state.app.eventsById[state.app.activeEventId]) {
-		return Promise.resolve()
-	}
-
-	return eventInfoRepo.getEventInfo(id)
-		.then(response => {
-			dispatch(addEvent(response))
-		})
-		.catch(err => {
-			console.log(err)
 		})
 }

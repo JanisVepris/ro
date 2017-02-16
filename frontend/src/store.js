@@ -6,6 +6,7 @@ import { syncHistoryWithStore, routerMiddleware, routerReducer} from 'react-rout
 
 // Reducers
 import app from './reducers/app'
+import events from './reducers/events'
 
 // Middleware
 const middlewares = []
@@ -30,7 +31,8 @@ if (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {
 // Reducers
 const reducers = combineReducers({
 	routing: routerReducer,
-	app
+	app,
+	events
 })
 
 // Store
