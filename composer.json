@@ -32,7 +32,8 @@
         "jms/serializer-bundle": "^1.1",
         "nelmio/api-doc-bundle": "^2.13",
         "symfony/assetic-bundle": "^2.8",
-        "stof/doctrine-extensions-bundle": "^1.2"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

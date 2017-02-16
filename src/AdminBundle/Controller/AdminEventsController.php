@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * @Route("/event", service="admin.controller.event_controller")
+ * @Route("/events", service="admin.controller.event_controller")
  */
 class AdminEventsController extends Controller
 {
