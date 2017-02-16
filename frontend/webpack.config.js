@@ -17,19 +17,19 @@ module.exports = {
 	],
 	output: {
 		path: buildDir + '/js',
-		publicPath: 'js/',
+		publicPath: 'http://localhost:8080/js/',
 		filename: 'bundle.js',
 	},
 	module: {
 		loaders: [
 			{
+				test: /\.(woff2?|ttf|eot|png)$/,
+				loader: 'url?limit=10000'
+			},
+			{
 				test: /\.js$/,
 				loaders: ['react-hot', 'babel'],
 				exclude: /node_modules/,
-			},
-			{
-				test: /\.(woff2?|ttf|eot|png)$/,
-				loader: 'url?limit=10000'
 			},
 			{
 				test: /\.scss$/,
@@ -42,7 +42,7 @@ module.exports = {
 		],
 	},
 	devServer: {
-		contentBase: buildDir,
+		contentBase: buildDir
 	},
 	plugins: [
 		new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
