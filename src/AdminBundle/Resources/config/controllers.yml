@@ -1,4 +1,10 @@
 services:
+    admin.controller.abstract_controller:
+        abstract: true
+        calls:
+            - ['setContainer', ['@service_container']]
+
     admin.controller.event_controller:
         class: AdminBundle\Controller\AdminEventsController
         arguments: ["@admin.service.event_service"]
+        parent: admin.controller.abstract_controller

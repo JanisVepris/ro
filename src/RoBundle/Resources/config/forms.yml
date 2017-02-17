@@ -1,0 +1,5 @@
+services:
+    ro.form.type.gender:
+        class: RoBundle\Form\Type\EventType
+        tags:
+            - { name: form.type }

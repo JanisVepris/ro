@@ -3,6 +3,10 @@
 
 {% block content %}
     {{ main_toolbar(false, false, path('admin_events_create'), path('admin_events_list')) }}
+    {{ form_start(form) }}
+    {{ form_row(form) }}
+    <input type="submit" value="Submit">
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block sidebar %}{% endblock %}
