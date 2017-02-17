@@ -72,3 +72,15 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.main-toolbar {
+    margin-bottom: 20px;
+}
+
+.main-toolbar .btn {
+    margin-left: 10px;
+}

@@ -1,0 +1,36 @@
+{% macro main_toolbar(createUrl = false, editUrl = false, saveUrl = false, cancelUrl = false, deleteUrl = false) %}
+    {% import _self as macros %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right main-toolbar">
+                {% if createUrl %}{{ macros.main_toolbar_btn_create_new(createUrl) }}{% endif %}
+                {% if editUrl %}{{ macros.main_toolbar_btn_edit(editUrl) }}{% endif %}
+                {% if saveUrl %}{{ macros.main_toolbar_btn_save(saveUrl) }}{% endif %}
+                {% if cancelUrl %}{{ macros.main_toolbar_btn_cancel(cancelUrl) }}{% endif %}
+                {% if deleteUrl %}{{ macros.main_toolbar_btn_delete(deleteUrl) }}{% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro main_toolbar_btn_create_new(url) %}
+    <a href="{{ url }}" class="btn btn-primary">Sukurti naują</a>
+{% endmacro %}
+
+{% macro main_toolbar_btn_edit(url) %}
+    <a href="{{ url }}" class="btn btn-info">Redaguoti</a>
+{% endmacro %}
+
+{% macro main_toolbar_btn_save(url) %}
+    <a href="{{ url }}" class="btn btn-success">Išsaugoti</a>
+{% endmacro %}
+
+{% macro main_toolbar_btn_cancel(url) %}
+    <a href="{{ url }}" class="btn btn-warning">Atšaukti</a>
+{% endmacro %}
+
+{% macro main_toolbar_btn_delete(url) %}
+    <a href="{{ url }}" class="btn btn-danger">Ištrinti</a>
+{% endmacro %}
+

@@ -1,10 +1,23 @@
 {% extends '@Admin/admin_base.html.twig' %}
 
+{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
+
 {% set tabTitle = 'Event list' %}
 
 {% block sidebar %}
 {% endblock %}
 
 {% block content %}
-    Testing.
+    {{ main_toolbar(path('admin_events_create')) }}
+
+    <div class="placeholders">
+        {% for event in events %}
+            <div class="col-xs- col-sm-3 placeholder">
+                <img src="{{ event.image }}" alt="{{ event.title }}" class="img-circle">
+                <h4>{{ event.title }}</h4>
+            </div>
+        {% else %}
+            Nėra nė vienos Roko Operos :(
+        {% endfor %}
+    </div>
 {% endblock %}

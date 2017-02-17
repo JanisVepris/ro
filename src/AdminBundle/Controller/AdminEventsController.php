@@ -31,4 +31,13 @@ class AdminEventsController extends Controller
             'events' => $events,
         ];
     }
+
+    /**
+     * @Route("/create", name="admin_events_create")
+     * @Template
+     */
+    public function createAction()
+    {
+        return [];
+    }
 }

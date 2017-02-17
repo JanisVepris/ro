@@ -1,0 +1,8 @@
+{% extends '@Admin/admin_base.html.twig' %}
+{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
+
+{% block content %}
+    {{ main_toolbar(false, false, path('admin_events_create'), path('admin_events_list')) }}
+{% endblock %}
+
+{% block sidebar %}{% endblock %}

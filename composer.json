@@ -33,7 +33,8 @@
         "nelmio/api-doc-bundle": "^2.13",
         "symfony/assetic-bundle": "^2.8",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "liip/imagine-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
