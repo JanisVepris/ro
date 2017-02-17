@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">{% if pageTitle is defined %}{{ pageTitle }}{% else %}MIDI RO Admin{% endif %}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">{% if pageTitle is defined %}{{ pageTitle }}{% else %}MIDI RO Admin{% endif %}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('ROLE_SUPER_ADMIN') == true %}
+                    <li><a href="#">Vartotojų valdymas</a></li>
+                {% endif %}
+                <li><a href="{{ path('fos_user_profile_edit') }}">{{ app.user.fullName }}</a></li>
+                <li><a href="{{ path('fos_user_security_logout')}}">Atsijungti</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

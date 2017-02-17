@@ -12,9 +12,12 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     {
         $superAdmin = new User();
         $superAdmin
-            ->setUsername('ro.admin@midi.lt')
+            ->setUsername('admin')
+            ->setFirstName('Janis')
+            ->setLastName('Vepris')
             ->setEmail('ro.admin@midi.lt')
-            ->setPassword('12345')
+            ->setPlainPassword('12345')
+            ->setEnabled(true)
             ->addRole(User::ROLE_SUPER_ADMIN);
 
         $manager->persist($superAdmin);
