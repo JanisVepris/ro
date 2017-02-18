@@ -116,4 +116,18 @@ class AdminEventsController extends AbstractAdminController
 
         return $this->redirectToRoute('admin_events_list');
     }
+
+    /**
+     * @Route("/delete/{eventId}/image", name="admin_events_image_delete")
+     * @ParamConverter("event", options={"id" = "eventId"})
+     */
+    public function deleteImageAction(Event $event)
+    {
+        if (!$this->securityContext->isGranted(User::ROLE_SUPER_ADMIN)) {
+            throw new AccessDeniedHttpException('Forbidden');
+        }
+
+        $this->eventService->deleteEventImage($event);
+        return $this->redirectToRoute('admin_events_edit', ['eventId' => $event->getId()]);
+    }
 }

@@ -40,4 +40,13 @@ class EventService
         $this->em->remove($event);
         $this->em->flush();
     }
+
+    public function deleteEventImage(Event $event)
+    {
+        $image = $event->getEventImage();
+        $event->setEventImage(null);
+
+        $this->em->remove($image);
+        $this->em->flush();
+    }
 }
