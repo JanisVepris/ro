@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
+import Config from '../../config'
 
 import Popup from '../../components/header/Popup'
 
-import { setActiveCategory } from '../../actions/app' 
+import { navigateToCategory } from '../../actions/header' 
 import { toggleNavigationDropdown } from '../../actions/header'
 
 const getEventInfo = (state) => state.events.byId[state.app.activeEventId]
-const getCategories = (state) => state.app.categories
+const getCategories = () => Config.categories
 
 const getAvailableCategories = createSelector(
 	getEventInfo,
@@ -26,7 +27,7 @@ const getAvailableCategories = createSelector(
 const getCategoriesNames = createSelector(
 	getCategories,
 	(categories) => {
-		return Object.keys(categories).map(category => categories[category])
+		return Object.keys(categories).map(category => categories[category].title)
 	}
 )
 
@@ -41,14 +42,14 @@ const mapStateToProps = (state) => ({
 export default connect(
 	mapStateToProps,
 	{
-		setActiveCategory,
+		navigateToCategory,
 		onClickOutside: toggleNavigationDropdown
 	},
 	(sp, dp) => ({
 		...sp,
 		...dp,
 		actions: sp.categories.map(category => () => {
-			dp.setActiveCategory(category)
+			dp.navigateToCategory(category)
 			dp.onClickOutside()
 		})
 	})

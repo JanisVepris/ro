@@ -69,6 +69,7 @@ export const navigateToOverview = (id) => (
 
 	dispatch(push('/' + eventSlug))
 	dispatch(setActiveEvent(id))
+	dispatch(setActiveCategory('news'))
 
 	return dispatch(loadEventInfo(id))
 		.then(() => dispatch(loadEventNews(id)))

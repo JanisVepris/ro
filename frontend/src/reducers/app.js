@@ -32,15 +32,9 @@ const activeCategory = toReducer('news', () => ({
 	[APP_SET_ACTIVE_CATEGORY]: action => action.category
 }))
 
-const categories = toReducer({
-	news: 'Naujienos',
-	gallery: 'Galerija'
-}, () => ({}))
-
 export default combineReducers({
 	initialized,
 	activeEventId,
 	eventsById,
-	activeCategory,
-	categories
+	activeCategory
 })
