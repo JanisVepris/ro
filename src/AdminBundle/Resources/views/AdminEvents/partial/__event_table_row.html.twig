@@ -42,7 +42,7 @@
         <div class="btn-group">
             {{ table_action_edit(path('admin_events_edit', {'eventId': event.id})) }}
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                {{ table_action_delete('#') }}
+                {{ table_action_delete(path('admin_events_delete', {'eventId': event.id })) }}
             {% endif %}
         </div>
     </td>

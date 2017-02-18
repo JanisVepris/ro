@@ -34,4 +34,10 @@ class EventService
         $this->em->persist($event);
         $this->em->flush($event);
     }
+
+    public function deleteEvent(Event $event)
+    {
+        $this->em->remove($event);
+        $this->em->flush();
+    }
 }

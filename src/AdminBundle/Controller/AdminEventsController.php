@@ -2,6 +2,7 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Service\EventService;
+use CoreBundle\Entity\User;
 use RoBundle\Entity\Event;
 use RoBundle\Form\Type\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -11,6 +12,7 @@ use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * @Route("/events", service="admin.controller.event_controller")
@@ -98,5 +100,20 @@ class AdminEventsController extends AbstractAdminController
         return [
             'form' => $form->createView(),
         ];
+    }
+
+    /**
+     * @Route("/delete/{eventId}", name="admin_events_delete")
+     * @ParamConverter("event", options={"id" = "eventId"})
+     */
+    public function deleteAction(Event $event)
+    {
+        if (!$this->securityContext->isGranted(User::ROLE_SUPER_ADMIN)) {
+            throw new AccessDeniedHttpException('Forbidden');
+        }
+
+        $this->eventService->deleteEvent($event);
+
+        return $this->redirectToRoute('admin_events_list');
     }
 }
