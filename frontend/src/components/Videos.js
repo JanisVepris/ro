@@ -14,8 +14,8 @@ export default class App extends React.Component {
 		}
 
 		return (
-			<div>
-				video playlistas
+			<div className="content">
+				<p className="article-title">{ this.props.title }</p>
 			</div>
 		)
 	}

@@ -3,8 +3,34 @@
     src: url('./media/OpenSans-Light.ttf');
 }
 
+@font-face {
+    font-family: Oswalf-regular;
+    src: url('./media/Oswald-Regular.ttf');
+}
+
 body {
     font-family: Open-sans-light;
     margin: 0;
     padding: 0;
+    background-color: #212121;
+    color: #A5A5A5;
+}
+
+.article-title {
+    font-family: Oswalf-regular;
+    font-size: 48px;
+    text-transform: uppercase;
+    color: #E4E4E4;
+}
+
+.content {
+    margin-top: 36px;
+    margin-left: 144px;
+    margin-right: 144px;
+    margin-bottom: 36px;
+}
+
+.content > * {
+    padding-left: 12px;
+    padding-right: 12px;
 }

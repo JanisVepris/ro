@@ -13,6 +13,7 @@ const Header = () => (
 			<EventsButton />
 			<EventsPopup />
 		</div>
+		<p className="header-title">MIDI ROKO OPEROS</p>
 		<div className="header-categories float-right">
 			<NavigationButton />
 			<NavigationPopup />

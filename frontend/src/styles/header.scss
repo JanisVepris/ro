@@ -21,6 +21,15 @@
     float: left;
 }
 
+.header-title {
+    position: absolute;
+    margin: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    pointer-events: none;
+}
+
 .header-categories {
     width: 200px;
     cursor: pointer;
