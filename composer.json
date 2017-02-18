@@ -37,7 +37,8 @@
         "symfony/assetic-bundle": "^2.8",
         "stof/doctrine-extensions-bundle": "^1.2",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "liip/imagine-bundle": "^1.7"
+        "liip/imagine-bundle": "^1.7",
+        "lstrojny/functional-php": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
