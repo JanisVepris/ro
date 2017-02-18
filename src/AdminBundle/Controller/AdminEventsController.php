@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-/** @Route("/events", service="admin.controller.event_controller") */
+/** @Route("/events", service="admin.controller.events_controller") */
 class AdminEventsController extends AbstractAdminController
 {
     /** @var EventService */

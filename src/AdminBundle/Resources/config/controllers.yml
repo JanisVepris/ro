@@ -5,7 +5,7 @@ services:
             - ['setContainer', ['@service_container']]
             - ['setSecurityContext', ['@security.authorization_checker']]
 
-    admin.controller.event_controller:
+    admin.controller.events_controller:
         class: AdminBundle\Controller\AdminEventsController
         parent: admin.controller.abstract_controller
         arguments:
