@@ -2,11 +2,14 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\DataTransfer\Api\EventData;
 use ApiBundle\DataTransfer\Api\EventListItemData;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use RoBundle\Entity\Event;
 use RoBundle\Service\EventService;
 use Functional as F;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /** @Rest\Route(service="api.controller.events_controller") */
 class EventsController extends AbstractApiController
@@ -46,16 +49,19 @@ class EventsController extends AbstractApiController
      * @ApiDoc(
      *     description="Get event by ID",
      *     section="Event",
-     *     tags={"TODO"}
+     *     output="ApiBundle\DataTransfer\Api\EventData"
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}",
      *     name="ro_api_events_get"
      * )
+     * @ParamConverter("event", options={"id" = "eventId"})
      * @Rest\View
      */
-    public function getAction()
+    public function getAction(Event $event)
     {
-        return $this->createView([]);
+        return $this->createView(
+            EventData::createFromEntity($event)
+        );
     }
 }

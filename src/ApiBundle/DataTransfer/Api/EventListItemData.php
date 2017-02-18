@@ -29,7 +29,7 @@ class EventListItemData
      * @param string $title
      * @param string $slug
      */
-    public function __construct($id, $title, $slug)
+    private function __construct($id, $title, $slug)
     {
         $this->id = $id;
         $this->title = $title;
