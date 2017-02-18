@@ -26,7 +26,7 @@ class EventService
     /** @return Event[] */
     public function getAllEvents()
     {
-        return $this->eventRepository->findAll();
+        return $this->eventRepository->getEventsOrderedByDate();
     }
 
     public function saveEvent(Event $event)
