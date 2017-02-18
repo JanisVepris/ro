@@ -5,6 +5,7 @@ use ApiBundle\Controller\AbstractApiController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
+/** @Rest\Route(service="api.controller.lyrics_controller") */
 class LyricsController extends AbstractApiController
 {
     /**

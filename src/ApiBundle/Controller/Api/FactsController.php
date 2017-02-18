@@ -5,6 +5,7 @@ use ApiBundle\Controller\AbstractApiController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
+/** @Rest\Route(service="api.controller.facts_controller") */
 class FactsController extends AbstractApiController
 {
     /**
@@ -15,7 +16,7 @@ class FactsController extends AbstractApiController
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/facts",
-     *     name="ro_api_fact_get"
+     *     name="ro_api_facts_get"
      * )
      * @Rest\View
      */

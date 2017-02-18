@@ -1,0 +1,39 @@
+api_articles:
+    type: rest
+    resource: api.controller.articles_controller
+
+api_events:
+    type: rest
+    resource: api.controller.events_controller
+
+api_facts:
+    type: rest
+    resource: api.controller.facts_controller
+
+api_images:
+    type: rest
+    resource: api.controller.images_controller
+
+api_lyrics:
+    type: rest
+    resource: api.controller.lyrics_controller
+
+api_posters:
+    type: rest
+    resource: api.controller.posters_controller
+
+api_scripts:
+    type: rest
+    resource: api.controller.scripts_controller
+
+api_teams:
+    type: rest
+    resource: api.controller.teams_controller
+
+api_tracks:
+    type: rest
+    resource: api.controller.tracks_controller
+
+api_videos:
+    type: rest
+    resource: api.controller.videos_controller

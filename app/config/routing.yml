@@ -5,8 +5,8 @@ _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
 api:
-    resource: "@ApiBundle/Controller/"
-    type:     annotation
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    type:     rest
     prefix:   /
 
 ro:

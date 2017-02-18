@@ -1,0 +1,46 @@
+services:
+    api.controller.abstract_controller:
+        abstract: true
+        calls:
+            - ['setContainer', ['@service_container']]
+
+    api.controller.articles_controller:
+        class: ApiBundle\Controller\Api\ArticlesController
+        parent: api.controller.abstract_controller
+
+    api.controller.events_controller:
+        class: ApiBundle\Controller\Api\EventsController
+        parent: api.controller.abstract_controller
+        arguments: ["@ro.service.event_service"]
+
+    api.controller.facts_controller:
+        class: ApiBundle\Controller\Api\ArticlesController
+        parent: api.controller.abstract_controller
+
+    api.controller.images_controller:
+        class: ApiBundle\Controller\Api\ImagesController
+        parent: api.controller.abstract_controller
+
+    api.controller.lyrics_controller:
+        class: ApiBundle\Controller\Api\LyricsController
+        parent: api.controller.abstract_controller
+
+    api.controller.posters_controller:
+            class: ApiBundle\Controller\Api\PostersController
+            parent: api.controller.abstract_controller
+
+    api.controller.scripts_controller:
+        class: ApiBundle\Controller\Api\ScriptsController
+        parent: api.controller.abstract_controller
+
+    api.controller.teams_controller:
+        class: ApiBundle\Controller\Api\TeamsController
+        parent: api.controller.abstract_controller
+
+    api.controller.tracks_controller:
+        class: ApiBundle\Controller\Api\TracksController
+        parent: api.controller.abstract_controller
+
+    api.controller.videos_controller:
+        class: ApiBundle\Controller\Api\VideosController
+        parent: api.controller.abstract_controller
