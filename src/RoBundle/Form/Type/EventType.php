@@ -2,11 +2,11 @@
 
 namespace RoBundle\Form\Type;
 
+use RoBundle\Entity\EventImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
 {
@@ -14,12 +14,8 @@ class EventType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('eventDate', DateType::class);
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-
+            ->add('eventDate', DateType::class)
+            ->add('eventImage', UploadFileType::class, ['data_class' => EventImage::class]);
     }
 
     public function getBlockPrefix()

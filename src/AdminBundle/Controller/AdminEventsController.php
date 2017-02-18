@@ -6,6 +6,8 @@ use RoBundle\Entity\Event;
 use RoBundle\Form\Type\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,9 +19,13 @@ class AdminEventsController extends AbstractAdminController
     /** @var EventService */
     private $eventService;
 
-    public function __construct(EventService $eventService)
+    /** @var UploadableManager */
+    private $uploadableManager;
+
+    public function __construct(EventService $eventService, UploadableManager $uploadableManager)
     {
         $this->eventService = $eventService;
+        $this->uploadableManager = $uploadableManager;
     }
 
     /**
@@ -50,6 +56,14 @@ class AdminEventsController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($event->getEventImage()->getFile() instanceof UploadedFile) {
+                $this->uploadableManager->markEntityToUpload(
+                    $event->getEventImage(),
+                    $event->getEventImage()->getFile()
+                );
+            }
+
             $this->eventService->saveEvent($event);
             return $this->redirectToRoute('admin_events_list');
         }

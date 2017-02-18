@@ -3,3 +3,8 @@ services:
         class: RoBundle\Form\Type\EventType
         tags:
             - { name: form.type }
+
+    ro.form.type.upload_file:
+        class: RoBundle\Form\Type\UploadFileType
+        tags:
+            - { name: form.type }

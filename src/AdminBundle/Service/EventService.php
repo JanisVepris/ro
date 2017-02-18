@@ -13,7 +13,10 @@ class EventService
     /** @var EntityManager */
     private $em;
 
-    /** @param EventRepository $eventRepository */
+    /**
+     * @param EventRepository $eventRepository
+     * @param EntityManager $em
+     */
     public function __construct(EventRepository $eventRepository, EntityManager $em)
     {
         $this->eventRepository = $eventRepository;

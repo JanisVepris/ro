@@ -13,19 +13,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-
-        $event = new Event();
-        $event
-            ->setTitle('test title')
-            ->setEventDate(new \DateTime('NOW'));
-
-        $em = $this->get('doctrine.orm.default_entity_manager');
-
-        $em->persist($event);
-        $em->flush();
-
-        dump($event);die;
-
         return $this->render('TemplateBundle::base.html.twig');
     }
 }

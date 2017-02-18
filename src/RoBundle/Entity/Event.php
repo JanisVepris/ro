@@ -47,6 +47,13 @@ class Event
     private $image;
 
     /**
+     * @var EventImage
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\EventImage", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="event_image_id", referencedColumnName="id")
+     */
+    private $eventImage;
+
+    /**
      * @var ArrayCollection|Article[]
      * @ORM\OneToMany(targetEntity="RoBundle\Entity\Article", mappedBy="event", cascade={"persist"})
      */
@@ -170,6 +177,22 @@ class Event
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function getEventImage()
+    {
+        return $this->eventImage;
+    }
+
+    /**
+     * @param EventImage $eventImage
+     * @return Event
+     */
+    public function setEventImage($eventImage)
+    {
+        $this->eventImage = $eventImage;
+
+        return $this;
     }
 
     /**
