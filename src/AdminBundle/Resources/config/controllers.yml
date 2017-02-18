@@ -9,5 +9,5 @@ services:
         class: AdminBundle\Controller\AdminEventsController
         parent: admin.controller.abstract_controller
         arguments:
-            - "@admin.service.event_service"
+            - "@ro.service.event_service"
             - "@stof_doctrine_extensions.uploadable.manager"

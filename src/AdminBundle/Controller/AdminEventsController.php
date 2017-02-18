@@ -1,7 +1,7 @@
 <?php
 namespace AdminBundle\Controller;
 
-use AdminBundle\Service\EventService;
+use RoBundle\Service\EventService;
 use CoreBundle\Entity\User;
 use RoBundle\Entity\Event;
 use RoBundle\Form\Type\EventType;
@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 

@@ -1,1 +1,6 @@
 services:
+    ro.service.event_service:
+        class: RoBundle\Service\EventService
+        arguments:
+            - '@ro.repository.event_repository'
+            - '@doctrine.orm.default_entity_manager'

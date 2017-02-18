@@ -1,5 +1,5 @@
 <?php
-namespace AdminBundle\Service;
+namespace RoBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use RoBundle\Entity\Event;

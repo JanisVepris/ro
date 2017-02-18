@@ -5,6 +5,10 @@ use Doctrine\ORM\EntityRepository;
 
 class EventRepository  extends EntityRepository
 {
+    /**
+     * @param string $order
+     * @return array
+     */
     public function getEventsOrderedByDate($order = 'DESC')
     {
         return $this
