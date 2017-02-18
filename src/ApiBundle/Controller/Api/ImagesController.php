@@ -1,21 +1,21 @@
 <?php
-namespace RoBundle\Controller\Api;
+namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
-class VideosController extends AbstractApiController
+class ImagesController extends AbstractApiController
 {
     /**
      * @ApiDoc(
-     *     description="Get video list by playlist id",
-     *     section="Video",
+     *     description="Get image list by gallery id",
+     *     section="Gallery",
      *     tags={"TODO"}
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/videoPlaylist/{playlistId}/videos",
-     *     name="ro_api_videos_index"
+     *     path="/api/events/{eventId}/galleries/{galleryId}/images",
+     *     name="ro_api_images_index"
      * )
      * @Rest\View
      */

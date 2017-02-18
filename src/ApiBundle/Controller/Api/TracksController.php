@@ -1,5 +1,5 @@
 <?php
-namespace RoBundle\Controller\Api;
+namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;

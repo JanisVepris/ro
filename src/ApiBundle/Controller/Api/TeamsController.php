@@ -1,21 +1,21 @@
 <?php
-namespace RoBundle\Controller\Api;
+namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
-class FactsController extends AbstractApiController
+class TeamsController extends AbstractApiController
 {
     /**
      * @ApiDoc(
-     *     description="Get facts page content by event id.",
-     *     section="Facts",
+     *     description="Get team page content by event id.",
+     *     section="Team",
      *     tags={"TODO"}
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/facts",
-     *     name="ro_api_fact_get"
+     *     path="/api/events/{eventId}/team",
+     *     name="ro_api_teams_get"
      * )
      * @Rest\View
      */

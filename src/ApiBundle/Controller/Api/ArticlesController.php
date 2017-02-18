@@ -1,22 +1,21 @@
 <?php
-namespace RoBundle\Controller\Api;
+namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
-
-class EventsController extends AbstractApiController
+class ArticlesController extends AbstractApiController
 {
     /**
      * @ApiDoc(
-     *     description="Get event list",
-     *     section="Event",
+     *     description="Get article list by event id",
+     *     section="Article",
      *     tags={"TODO"}
      * )
      * @Rest\Get(
-     *     path="/api/events",
-     *     name="ro_api_events_index"
+     *     path="/api/events/{eventId}/articles",
+     *     name="ro_api_articles_index"
      * )
      * @Rest\View
      */
@@ -27,13 +26,13 @@ class EventsController extends AbstractApiController
 
     /**
      * @ApiDoc(
-     *     description="Get event by ID",
-     *     section="Event",
+     *     description="Get article by id",
+     *     section="Article",
      *     tags={"TODO"}
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}",
-     *     name="ro_api_events_get"
+     *     path="/api/events/{eventId}/articles/{articleId}",
+     *     name="ro_api_articles_get"
      * )
      * @Rest\View
      */
