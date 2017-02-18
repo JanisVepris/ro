@@ -47,6 +47,7 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
         $uploadableManager = $this->container->get('stof_doctrine_extensions.uploadable.manager');
 
         $eventTitles = $this->getEventTitles();
+        $eventCount = count($eventTitles);
 
         foreach ($eventTitles as $eventTitle) {
             $event = new Event();
@@ -57,7 +58,7 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
 
             $event
                 ->setTitle($eventTitle)
-                ->setEventDate($faker->unique()->dateTimeBetween('-19 years'))
+                ->setEventDate(new \DateTime(sprintf('-%d years', $eventCount--)))
                 ->setEventImage($eventImage);
 
             $uploadableManager->markEntityToUpload($event->getEventImage(), $event->getEventImage()->getFile());

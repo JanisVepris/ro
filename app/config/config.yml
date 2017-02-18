@@ -69,5 +69,6 @@ stof_doctrine_extensions:
         default:
             timestampable: true
             uploadable: true
+            sluggable: true
     uploadable:
         default_file_path: "%kernel.root_dir%/../web/uploads"

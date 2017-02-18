@@ -6,10 +6,12 @@ use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Traits\CreatedOnEntityTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="ro3_event")
  * @ORM\Entity(repositoryClass="RoBundle\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event
 {
@@ -38,6 +40,18 @@ class Event
      * @ORM\Column(name="event_date", type="datetime", unique=true)
      */
     private $eventDate;
+
+    /**
+     * @var string
+     * @Gedmo\Slug(
+     *     fields={"eventDate"},
+     *     separator="_",
+     *     unique=true,
+     *     dateFormat="Y"
+     * )
+     * @ORM\Column(name="slug", type="string", unique=true)
+     */
+    private $slug;
 
     /**
      * @var EventImage
@@ -146,6 +160,22 @@ class Event
     public function getEventDate()
     {
         return $this->eventDate;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Event
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getEventImage()
@@ -322,6 +352,15 @@ class Event
     public function hasFacts()
     {
         return (bool) $this->facts;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setYearValueFromEventDate()
+    {
+        $this->year = $this->eventDate->format('Y');
     }
 
     public function __toString()
