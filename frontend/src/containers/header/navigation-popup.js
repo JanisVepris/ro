@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 	categories: getAvailableCategories(state),
 	selectedIndex: getAvailableCategories(state).indexOf(state.app.activeCategory),
 	hidden: !state.header.isNavigationDropdownVisible,
-	ignoreOnClickOutsideClass: 'header-button'
+	outsideClickIgnoreClass: 'header-categories'
 })
 
 export default connect(

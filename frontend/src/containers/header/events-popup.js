@@ -33,7 +33,7 @@ const mapStateToProps = (state) => ({
 	ids: getEventsIds(state),
 	selectedIndex: getEventsIds(state).indexOf(state.app.activeEventId),
 	hidden: !state.header.isEventsDropdownVisible,
-	ignoreOnClickOutsideClass: 'header-button'
+	outsideClickIgnoreClass: 'header-events'
 })
 
 export default connect(

@@ -17,6 +17,7 @@
 }
 
 .header label {
+    height: 25px;
     float: left;
 }
 
@@ -27,6 +28,10 @@
 
 .header-events {
     cursor: pointer;
+}
+
+.header-events .header-button {
+     padding-right: 24px;
 }
 
 .header-events .header-dropdown {
@@ -83,11 +88,12 @@
     background-position: center;
 }
 
-.instagram-icon{
+.instagram-icon {
     background-image: url('media/instagram.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
 
 .facebook-icon {
@@ -95,4 +101,5 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
