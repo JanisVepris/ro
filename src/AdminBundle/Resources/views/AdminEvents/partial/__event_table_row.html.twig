@@ -8,7 +8,9 @@
         {{ event.eventDate|date('Y-m-d') }}
     </td>
     <td class="text-left text-vertical-center">
-        <h4>{{ event.title }}</h4>
+        <a href="{{ path('admin_articles_list', {'eventId': event.id}) }}">
+            <h4>{{ event.title }}</h4>
+        </a>
     </td>
     <td class="text-center text-vertical-center">
         {% if event.hasPoster %}
