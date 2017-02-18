@@ -1,0 +1,6 @@
+services:
+    ro.twig.extension.event_extension:
+        class: RoBundle\Twig\EventExtension
+        public: false
+        tags:
+          - { name: twig.extension }

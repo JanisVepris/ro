@@ -37,3 +37,7 @@
 !/web/uploads/media/Images/
 /web/uploads/media/Images/*
 !/web/uploads/media/Images/.gitkeep
+
+!/web/media/cache/
+/web/media/cache/*
+!/web/media/cache/.gitkeep
