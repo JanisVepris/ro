@@ -1,6 +1,4 @@
 import * as React from 'react'
-import '../styles/header.scss'
-import '../styles/helpers.scss'
 
 import EventsButton from '../containers/header/events-button'
 import EventsPopup from '../containers/header/events-popup'
@@ -15,7 +13,7 @@ const Header = () => (
 			<EventsButton />
 			<EventsPopup />
 		</div>
-		<div className="header-categories">
+		<div className="header-categories float-right">
 			<NavigationButton />
 			<NavigationPopup />
 		</div>

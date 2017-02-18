@@ -1,5 +1,4 @@
 import * as React from 'react'
-import '../../styles/main.scss'
 
 import OnClickOutside from 'react-onclickoutside'
 
@@ -24,10 +23,11 @@ class Popup extends React.Component {
 					labels.map((label, index) => {
 
 						const isSelected = index === selectedIndex
-						const selectedClassName = isSelected ? 'selected' : ''
+						const selectedClassName = isSelected ? ' selected' : ''
+						const className = 'no-select pl-l'  + selectedClassName
 
 						return (
-							<div key={ index } className={ selectedClassName } onClick={ actions[index] }>
+							<div key={ index } className={ className } onClick={ actions[index] }>
 							{ label }
 						</div>
 						)
@@ -41,7 +41,7 @@ class Popup extends React.Component {
 		
 		const isClickOnToggler = 
 			e.target.className === this.props.ignoreOnClickOutsideClass || 
-			e.target.parentNode.className === this.props.ignoreOnClickOutsideClass
+			e.target.parentNode.className.indexOf(this.props.ignoreOnClickOutsideClass) > -1
 
 		if (!this.props.hidden && !isClickOnToggler) {
 			this.props.onClickOutside()

@@ -24,5 +24,13 @@
 
 .float-right {
 	float: right;
+	margin-left: auto;
 }
 
+.no-select {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}

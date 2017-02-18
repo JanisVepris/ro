@@ -1,5 +1,4 @@
 import * as React from 'react'
-import '../../styles/main.scss'
 
 const Button = ({
 	label,
@@ -7,9 +6,9 @@ const Button = ({
 }) => {
 
 	return (
-		<div className="header-button" onClick={ onClick }>
-			{ label }
-			<i className="arrow mr-s" />
+		<div className="header-button no-select" onClick={ onClick }>
+			<label>{ label }</label>
+			<i className="arrow ml" />
 		</div>
 	)
 }
