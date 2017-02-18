@@ -53,7 +53,6 @@ class AdminEventsController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if ($event->getEventImage()->getFile() instanceof UploadedFile) {
                 $this->uploadableManager->markEntityToUpload(
                     $event->getEventImage(),
@@ -82,7 +81,6 @@ class AdminEventsController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if ($event->getEventImage()->getFile() instanceof UploadedFile) {
                 $this->uploadableManager->markEntityToUpload(
                     $event->getEventImage(),

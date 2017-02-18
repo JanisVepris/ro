@@ -113,8 +113,7 @@ class EventData
         $hasPoster,
         $hasTeam,
         $hasScript
-    )
-    {
+    ) {
         $this->id = $id;
         $this->title = $title;
         $this->playlistId = $playlistId;

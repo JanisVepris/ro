@@ -423,4 +423,3 @@ class Event
         return $this->title;
     }
 }
-

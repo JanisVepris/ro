@@ -10,7 +10,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="ro3_event_images")
  * @ORM\Entity()
- * @Uploadable(path="web/uploads/media/EventPic/", allowOverwrite=true, appendNumber=true, filenameGenerator="ALPHANUMERIC")
+ * @Uploadable(
+ *     path="web/uploads/media/EventPic/",
+ *     allowOverwrite=true,
+ *     appendNumber=true,
+ *     filenameGenerator="ALPHANUMERIC"
+ * )
  */
 class EventImage
 {

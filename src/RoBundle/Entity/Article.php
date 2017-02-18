@@ -211,4 +211,3 @@ class Article
         return $this->title;
     }
 }
-

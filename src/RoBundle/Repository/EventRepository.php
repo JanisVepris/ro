@@ -3,7 +3,7 @@ namespace RoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class EventRepository  extends EntityRepository
+class EventRepository extends EntityRepository
 {
     /**
      * @param string $order
