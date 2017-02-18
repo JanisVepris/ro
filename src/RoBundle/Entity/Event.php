@@ -91,10 +91,28 @@ class Event
     private $facts;
 
     /**
+     * @var Lyrics
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Lyrics", mappedBy="event")
+     */
+    private $lyrics;
+
+    /**
      * @var Gallery
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\Gallery", mappedBy="event")
      */
     private $gallery;
+
+    /**
+     * @var Playlist
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Playlist", mappedBy="event")
+     */
+    private $playlist;
+
+    /**
+     * @var VideoPlaylist
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\VideoPlaylist", mappedBy="event")
+     */
+    private $videoPlaylist;
 
     /**
      * Event constructor.
@@ -332,6 +350,43 @@ class Event
         $this->gallery = $gallery;
 
         return $this;
+    }
+
+    public function getPlaylist()
+    {
+        return $this->playlist;
+    }
+
+    /**
+     * @param Playlist $playlist
+     * @return Event
+     */
+    public function setPlaylist($playlist)
+    {
+        $this->playlist = $playlist;
+
+        return $this;
+    }
+
+    public function getVideoPlaylist()
+    {
+        return $this->videoPlaylist;
+    }
+
+    /**
+     * @param VideoPlaylist $videoPlaylist
+     * @return Event
+     */
+    public function setVideoPlaylist($videoPlaylist)
+    {
+        $this->videoPlaylist = $videoPlaylist;
+
+        return $this;
+    }
+
+    public function hasLyrics()
+    {
+        return (bool) $this->lyrics;
     }
 
     public function hasPoster()
