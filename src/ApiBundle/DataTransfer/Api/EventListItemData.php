@@ -20,7 +20,7 @@ class EventListItemData
 
     /**
      * @var string
-     * @Serializer\Exclude()
+     * @Serializer\Type("string")
      */
     private $slug;
 
@@ -29,14 +29,15 @@ class EventListItemData
      * @param string $title
      * @param string $slug
      */
-    public function __construct($id, $title)
+    public function __construct($id, $title, $slug)
     {
         $this->id = $id;
         $this->title = $title;
+        $this->slug = $slug;
     }
 
     public static function createFromEntity(Event $event)
     {
-        return new static($event->getId(), $event->getTitle());
+        return new static($event->getId(), $event->getTitle(), $event->getSlug());
     }
 }
