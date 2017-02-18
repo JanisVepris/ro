@@ -7,6 +7,7 @@ import { loadEventInfo, loadEventNews } from './events'
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
 export const APP_SET_EVENTS = 'APP_SET_EVENTS'
 export const APP_SET_ACTIVE_EVENT = 'APP_SET_ACTIVE_EVENT'
+export const APP_SET_ACTIVE_CATEGORY = 'APP_SET_ACTIVE_CATEGORY'
 
 // Action creators
 export const setInitialized = () => ({
@@ -21,6 +22,11 @@ export const setActiveEvent = (id) => ({
 export const setAvailableEvents = (events) => ({
 	type: APP_SET_EVENTS,
 	events
+})
+
+export const setActiveCategory = (category) => ({
+	type: APP_SET_ACTIVE_CATEGORY,
+	category
 })
 
 // Thunks

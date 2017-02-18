@@ -4,6 +4,8 @@ import '../styles/helpers.scss'
 
 import EventsButton from '../containers/header/events-button'
 import EventsPopup from '../containers/header/events-popup'
+import NavigationButton from '../containers/header/navigation-button'
+import NavigationPopup from '../containers/header/navigation-popup'
 
 const Header = () => (
 	<div className="header">
@@ -12,6 +14,10 @@ const Header = () => (
 		<div className="header-events ml-xxl">
 			<EventsButton />
 			<EventsPopup />
+		</div>
+		<div className="header-categories">
+			<NavigationButton />
+			<NavigationPopup />
 		</div>
 	</div>
 )

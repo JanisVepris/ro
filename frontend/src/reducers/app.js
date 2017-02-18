@@ -4,7 +4,8 @@ import { toReducer } from './utils'
 import { 
 	APP_SET_INITIALIZED,
 	APP_SET_EVENTS,
-	APP_SET_ACTIVE_EVENT
+	APP_SET_ACTIVE_EVENT,
+	APP_SET_ACTIVE_CATEGORY
 } from '../actions/app'
 
 const initialized = toReducer(false, () => ({
@@ -27,8 +28,19 @@ const eventsById = toReducer({}, () => ({
 	)
 }))
 
+const activeCategory = toReducer('news', () => ({
+	[APP_SET_ACTIVE_CATEGORY]: action => action.category
+}))
+
+const categories = toReducer({
+	news: 'Naujienos',
+	gallery: 'Galerija'
+}, () => ({}))
+
 export default combineReducers({
 	initialized,
 	activeEventId,
-	eventsById
+	eventsById,
+	activeCategory,
+	categories
 })
