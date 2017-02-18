@@ -1,5 +1,6 @@
 import * as eventInfoRepo from '../repo/event-info'
 import * as eventArticlesRepo from '../repo/event-articles'
+
 import { setHeaderCover } from './header'
 
 // Action types

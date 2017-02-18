@@ -7,6 +7,10 @@ export default {
 		gallery: {
 			title: 'Galerija',
 			slug: 'galerija'
+		},
+		videos: {
+			title: 'Įrašai',
+			slug: 'irasai'
 		}
 	}
 }

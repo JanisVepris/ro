@@ -8,6 +8,7 @@ import { syncHistoryWithStore, routerMiddleware, routerReducer} from 'react-rout
 import app from './reducers/app'
 import events from './reducers/events'
 import header from './reducers/header'
+import videos from './reducers/videos'
 import galleries from './reducers/galleries'
 
 // Middleware
@@ -36,7 +37,8 @@ const reducers = combineReducers({
 	app,
 	events,
 	header,
-	galleries
+	galleries,
+	videos
 })
 
 // Store
