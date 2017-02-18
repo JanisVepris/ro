@@ -1,9 +1,10 @@
 {% extends '@Admin/admin_base.html.twig' %}
-{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
+{% from '@Admin/AdminLayout/macros.html.twig' import form_actions %}
 
 {% block content %}
     {{ form_start(form) }}
     {{ form_row(form) }}
+    {{ form_actions(path('admin_events_list')) }}
     {{ form_end(form) }}
 {% endblock %}
 

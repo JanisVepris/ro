@@ -10,14 +10,23 @@
 {% block content %}
     {{ main_toolbar(path('admin_events_create')) }}
 
-    <div class="placeholders">
+    <table class="table table-striped table-hover .table-vertical-center">
+        <thead>
+        <th class="text-center">Foto</th>
+        <th class="text-center">Data</th>
+        <th class="text-left">Pavadinimas</th>
+        <th class="text-center">Plakatas</th>
+        <th class="text-center">Scenarijus</th>
+        <th class="text-center">Dalyviai</th>
+        <th class="text-center">Faktai</th>
+        <th class="text-center">Veiksmai</th>
+        </thead>
         {% for event in events %}
-            <div class="col-xs- col-sm-3 placeholder">
-                {{ event_thumb(event, 'small') }}
-                <h4>{{ event.title }}</h4>
-            </div>
+            {% include '@Admin/AdminEvents/partial/__event_table_row.html.twig' with {'event': event} %}
         {% else %}
-            Nėra nė vienos Roko Operos :(
+            <tr>
+                <td>Roko Operų sąrašas tuščias ;(</td>
+            </tr>
         {% endfor %}
-    </div>
+    </table>
 {% endblock %}

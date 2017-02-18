@@ -10,15 +10,15 @@
         MIDI RO ADMIN {% if tabTitle is defined %} - {{ tabTitle }}{% endif %}
     </title>
     <link rel="stylesheet" href="{{ asset('bundles/admin/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/admin/css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/admin/css/custom.css') }}">
 </head>
 <body>
 
 {% include '@Admin/AdminLayout/header.html.twig' %}
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-sm-9  col-md-10 main">
+        <div class="col-md-12 main">
             {% block content %}{% endblock %}
         </div>
     </div>

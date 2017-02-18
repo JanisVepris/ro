@@ -10,7 +10,6 @@ class EventExtension extends \Twig_Extension
         return 'ro_twig_event_extension';
     }
 
-
     public function getFunctions()
     {
         return [

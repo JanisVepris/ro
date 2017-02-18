@@ -3,6 +3,9 @@
     "license": "proprietary",
     "type": "project",
     "autoload": {
+        "psr-0": {
+            "Faker\\": "vendor/fzaninotto/faker/src/Faker"
+        },
         "psr-4": {
             "": "src/"
         },
@@ -39,7 +42,8 @@
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "fzaninotto/faker": "^1.6"
     },
     "scripts": {
         "symfony-scripts": [

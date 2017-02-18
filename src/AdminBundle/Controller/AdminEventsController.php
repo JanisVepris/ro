@@ -4,6 +4,7 @@ namespace AdminBundle\Controller;
 use AdminBundle\Service\EventService;
 use RoBundle\Entity\Event;
 use RoBundle\Form\Type\EventType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
@@ -31,7 +32,6 @@ class AdminEventsController extends AbstractAdminController
     /**
      * @Route("/list", name="admin_events_list")
      * @Template
-     * @return array
      */
     public function listAction()
     {
@@ -44,13 +44,40 @@ class AdminEventsController extends AbstractAdminController
 
     /**
      * @Route("/create", name="admin_events_create")
-     * @Template
-     * @param Request $request
-     * @return array|RedirectResponse
+     * @Template("@Admin/AdminEvents/form.html.twig")
      */
     public function createAction(Request $request)
     {
         $event = new Event();
+        $form = $this->createForm(EventType::class, $event);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($event->getEventImage()->getFile() instanceof UploadedFile) {
+                $this->uploadableManager->markEntityToUpload(
+                    $event->getEventImage(),
+                    $event->getEventImage()->getFile()
+                );
+            }
+
+            $this->eventService->saveEvent($event);
+            return $this->redirectToRoute('admin_events_list');
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/edit/{eventId}", name="admin_events_edit")
+     * @Template("@Admin/AdminEvents/form.html.twig")
+     * @ParamConverter("event", options={"id" = "eventId"})
+     */
+    public function editAction(Request $request, Event $event)
+    {
         $form = $this->createForm(EventType::class, $event);
 
         $form->handleRequest($request);

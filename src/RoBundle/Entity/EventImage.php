@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="ro3_event_images")
  * @ORM\Entity()
- * @Uploadable(path="uploads/media/EventPic/", allowOverwrite=true, appendNumber=true, filenameGenerator="ALPHANUMERIC")
+ * @Uploadable(path="web/uploads/media/EventPic/", allowOverwrite=true, appendNumber=true, filenameGenerator="ALPHANUMERIC")
  */
 class EventImage
 {
@@ -103,6 +103,12 @@ class EventImage
      */
     public function getWebPath()
     {
-        return $this->filePath ? sprintf('/%s', $this->filePath) : null;
+        if (!$this->filePath) {
+            return null;
+        }
+
+        $path = preg_replace('/^web\//', '', $this->filePath);
+
+        return sprintf('/%s', $path);
     }
 }

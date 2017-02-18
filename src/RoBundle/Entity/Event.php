@@ -40,13 +40,6 @@ class Event
     private $eventDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    /**
      * @var EventImage
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\EventImage", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="event_image_id", referencedColumnName="id")
@@ -153,30 +146,6 @@ class Event
     public function getEventDate()
     {
         return $this->eventDate;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Event
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 
     public function getEventImage()
@@ -333,6 +302,26 @@ class Event
         $this->gallery = $gallery;
 
         return $this;
+    }
+
+    public function hasPoster()
+    {
+        return (bool) $this->poster;
+    }
+
+    public function hasTeam()
+    {
+        return (bool) $this->team;
+    }
+
+    public function hasScript()
+    {
+        return (bool) $this->script;
+    }
+
+    public function hasFacts()
+    {
+        return (bool) $this->facts;
     }
 
     public function __toString()

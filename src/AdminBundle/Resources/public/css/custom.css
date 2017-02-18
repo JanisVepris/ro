@@ -1,0 +1,19 @@
+body {
+    padding-top: 50px;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.main-toolbar {
+    margin-bottom: 20px;
+}
+
+.main-toolbar .btn {
+    margin-left: 10px;
+}
+
+.text-vertical-center {
+    vertical-align: middle !important;
+}

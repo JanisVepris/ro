@@ -1,0 +1,49 @@
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_edit %}
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
+<tr>
+    <td class="text-center text-vertical-center">
+        {{ event_thumb(event, 'small', true) }}
+    </td>
+    <td class="text-center text-vertical-center">
+        {{ event.eventDate|date('Y-m-d') }}
+    </td>
+    <td class="text-left text-vertical-center">
+        <h4>{{ event.title }}</h4>
+    </td>
+    <td class="text-center text-vertical-center">
+        {% if event.hasPoster %}
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        {% else %}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        {% endif %}
+    </td>
+    <td class="text-center text-vertical-center">
+        {% if event.hasScript %}
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        {% else %}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        {% endif %}
+    </td>
+    <td class="text-center text-vertical-center">
+        {% if event.hasTeam %}
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        {% else %}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        {% endif %}
+    </td>
+    <td class="text-center text-vertical-center">
+        {% if event.hasFacts %}
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        {% else %}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        {% endif %}
+    </td>
+    <td class="text-center text-vertical-center">
+        <div class="btn-group">
+            {{ table_action_edit(path('admin_events_edit', {'eventId': event.id})) }}
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                {{ table_action_delete('#') }}
+            {% endif %}
+        </div>
+    </td>
+</tr>
