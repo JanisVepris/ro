@@ -1,5 +1,6 @@
 import * as eventInfoRepo from '../repo/event-info'
 import * as eventArticlesRepo from '../repo/event-articles'
+import { setHeaderCover } from './header'
 
 // Action types
 export const EVENT_ADD = 'EVENT_ADD'
@@ -44,6 +45,9 @@ export const loadEventNews = (id) => (
 ) => {
 
 	const state = getState()
+	const { activeEventId } = state.app
+
+	dispatch(setHeaderCover(state.events.byId[activeEventId].image))
 
 	if (state.events.newsById[id]) {
 		return Promise.resolve()

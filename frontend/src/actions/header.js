@@ -6,6 +6,8 @@ import Config from '../config'
 // Action types
 export const HEADER_TOGGLE_EVENTS = 'HEADER_TOGGLE_EVENTS'
 export const HEADER_TOGGLE_NAVIGATION = 'HEADER_TOGGLE_NAVIGATION'
+export const HEADER_SET_COVER = 'HEADER_SET_COVER'
+export const HEADER_SET_LOADING = 'HEADER_SET_LOADING'
 
 // Action creators
 export const toggleEventsDropdown = () => ({
@@ -14,6 +16,16 @@ export const toggleEventsDropdown = () => ({
 
 export const toggleNavigationDropdown = () => ({
 	type: HEADER_TOGGLE_NAVIGATION
+})
+
+export const setHeaderCover = (url) => ({
+	type: HEADER_SET_COVER,
+	url
+})
+
+export const setHeaderLoading = (loading) => ({
+	type: HEADER_SET_LOADING,
+	loading
 })
 
 export const navigateToCategory = (category) => (

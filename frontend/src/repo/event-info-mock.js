@@ -8,7 +8,7 @@ export default (id) => {
 			galleryId:	332015,
 			videoPlaylistId: 442015,
 			eventDate:  '2016-04-23',
-			image: 'http://rokooperos.midi.lt/wp-content/uploads/Teatromatika_13_010.jpg'
+			image: 'https://www.dropbox.com/s/l8un19bszqsye5g/cover2.png?raw=1'
 		},
 		[112014]: {
 			title: 'Naktis, kai sustojo malūnas',
@@ -17,7 +17,7 @@ export default (id) => {
 			galleryId:	332014,
 			videoPlaylistId: null,
 			eventDate:  '2016-04-04',
-			image: 'http://rokooperos.midi.lt/wp-content/uploads/Viduramziai_rytoj_05_005.jpg'
+			image: 'https://www.dropbox.com/s/q8z14hzcr8eifrk/cover_mock.png?raw=1'
 		}
 	}
 

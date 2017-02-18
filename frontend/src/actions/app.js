@@ -2,6 +2,7 @@ import * as eventsRepo from '../repo/events'
 import { push } from 'react-router-redux'
 
 import { loadEventInfo, loadEventNews } from './events'
+import { setHeaderCover } from './header'
 
 // Action types
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
@@ -53,7 +54,14 @@ export const initialize = (urlParams) => (
 			return Promise.resolve()
 		})
 		.then(() => dispatch(loadEventInfo(getState().app.activeEventId)))
-		.then(() => dispatch(setInitialized()))
+		.then(() => {
+
+			const state = getState()
+			const { activeEventId } = state.app
+
+			dispatch(setHeaderCover(state.events.byId[activeEventId].image))
+			dispatch(setInitialized())
+		})
 		.catch(error => {
 			console.log('Error: ', error)
 		})

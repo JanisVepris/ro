@@ -1,10 +1,13 @@
 import React from 'react'
 import Header from './Header'
+
 import { initialize } from '../actions/app'
 
 import '../styles/main.scss'
 import '../styles/header.scss'
 import '../styles/helpers.scss'
+
+import Cover from '../containers/header/Cover'
 
 export default class App extends React.Component {
 
@@ -15,12 +18,15 @@ export default class App extends React.Component {
 	render() {
 
 		if (!this.props.initialized) {
-			return <div>initializing</div>
+			return (
+				<div>Spinner</div>
+			)
 		}
 
 		return (
 			<div>
 				<Header />
+				<Cover />
 				{ this.props.children }
 			</div>
 		)
