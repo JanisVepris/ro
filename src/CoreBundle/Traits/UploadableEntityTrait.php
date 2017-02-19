@@ -91,4 +91,9 @@ trait UploadableEntityTrait
 
         return sprintf('/%s', $path);
     }
+
+    public function setAsFixture()
+    {
+        $this->uploadPath = sprintf('web/%s', $this->uploadPath);
+    }
 }

@@ -54,14 +54,14 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
 
             $path = $faker->image(sys_get_temp_dir(), 300, 300, 'cats');
             $eventImage = new EventImage();
-            $eventImage->setFile(new UploadedFile($path, $path));
+            $eventImage
+                ->setFile(new UploadedFile($path, $path))
+                ->setAsFixture();
 
             $event
                 ->setTitle($eventTitle)
                 ->setEventDate(new \DateTime(sprintf('-%d years', $eventCount--)))
                 ->setEventImage($eventImage);
-
-
 
             $uploadableManager->markEntityToUpload($event->getEventImage(), $event->getEventImage()->getFile());
             $manager->persist($event);

@@ -1,6 +1,7 @@
 <?php
 namespace RoBundle\Entity;
 
+use CoreBundle\Entity\AbstractUploadableEntity;
 use CoreBundle\Traits\EntityIdFieldTrait;
 use CoreBundle\Entity\UploadableEntityInterface;
 use CoreBundle\Traits\UploadableEntityTrait;
@@ -13,14 +14,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="ro3_event_images")
  * @ORM\Entity()
  * @Uploadable(
- *     path="web/uploads/media/EventPic/",
+ *     pathMethod="getUploadPath",
  *     allowOverwrite=true,
  *     appendNumber=true,
  *     filenameGenerator="ALPHANUMERIC"
  * )
  */
-class EventImage implements UploadableEntityInterface
+class EventImage extends AbstractUploadableEntity
 {
     use EntityIdFieldTrait;
     use UploadableEntityTrait;
+
+    private $uploadPath = self::BASE_UPLOAD_DIR . '/EventPic/';
+
+    public function getUploadPath()
+    {
+        return $this->uploadPath;
+    }
 }
