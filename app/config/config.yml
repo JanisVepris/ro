@@ -5,6 +5,7 @@ imports:
     - { resource: fos_user.yml }
     - { resource: fos_rest.yml }
     - { resource: liip_imagine.yml }
+    - { resource: ivory_ck_editor.yml }
 
 parameters:
     locale: en

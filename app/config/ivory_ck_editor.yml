@@ -1,0 +1,6 @@
+ivory_ck_editor:
+    default_config: article_config
+    configs:
+        article_config:
+            toolbar: "standard"
+            uiColor: "#ffffff"

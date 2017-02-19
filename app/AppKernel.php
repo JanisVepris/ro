@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
             // RO Bundles
             new CoreBundle\CoreBundle(),
