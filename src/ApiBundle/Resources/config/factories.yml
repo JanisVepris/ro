@@ -1,0 +1,8 @@
+services:
+    api.factory.article_data_factory:
+        class: ApiBundle\Factory\ArticleDataFactory
+        arguments: ['@core.service.absolute_url_generator']
+
+    api.factory.event_data_factory:
+        class: ApiBundle\Factory\EventDataFactory
+        arguments: ['@core.service.absolute_url_generator']

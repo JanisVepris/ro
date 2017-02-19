@@ -2,8 +2,8 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\EventData;
 use ApiBundle\DataTransfer\Api\EventListItemData;
+use ApiBundle\Factory\EventDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
@@ -17,9 +17,17 @@ class EventsController extends AbstractApiController
     /** @var EventService */
     private $eventService;
 
-    public function __construct(EventService $eventService)
+    /** @var EventDataFactory */
+    private $eventDataFactory;
+
+    /**
+     * @param EventService $eventService
+     * @param EventDataFactory $eventDataFactory
+     */
+    public function __construct(EventService $eventService, EventDataFactory $eventDataFactory)
     {
         $this->eventService = $eventService;
+        $this->eventDataFactory = $eventDataFactory;
     }
 
     /**
@@ -61,7 +69,7 @@ class EventsController extends AbstractApiController
     public function getAction(Event $event)
     {
         return $this->createView(
-            EventData::createFromEntity($event)
+            $this->eventDataFactory->createFromEntity($event)
         );
     }
 }

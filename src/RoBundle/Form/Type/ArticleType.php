@@ -1,6 +1,7 @@
 <?php
 namespace RoBundle\Form\Type;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use RoBundle\Entity\ArticleImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -15,7 +16,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', CKEditorType::class)
             ->add('published', CheckboxType::class, ['required' => false])
             ->add('articleImage', UploadFileType::class, ['data_class' => ArticleImage::class]);
     }

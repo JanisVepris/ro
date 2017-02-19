@@ -7,12 +7,16 @@ services:
     api.controller.articles_controller:
         class: ApiBundle\Controller\Api\ArticlesController
         parent: api.controller.abstract_controller
-        arguments: ["@ro.service.article_service"]
+        arguments:
+            - "@ro.service.article_service"
+            - "@api.factory.article_data_factory"
 
     api.controller.events_controller:
         class: ApiBundle\Controller\Api\EventsController
         parent: api.controller.abstract_controller
-        arguments: ["@ro.service.event_service"]
+        arguments:
+            - "@ro.service.event_service"
+            - "@api.factory.event_data_factory"
 
     api.controller.facts_controller:
         class: ApiBundle\Controller\Api\FactsController

@@ -2,7 +2,6 @@
 namespace ApiBundle\DataTransfer\Api;
 
 use JMS\Serializer\Annotation as Serializer;
-use RoBundle\Entity\Article;
 
 class ArticleData
 {
@@ -58,17 +57,5 @@ class ArticleData
         $this->content = $content;
         $this->image = $image;
         $this->createdOn = $createdOn;
-    }
-
-    public static function createFromEntity(Article $article)
-    {
-        return new static(
-            $article->getId(),
-            $article->getTitle(),
-            $article->getDescription(),
-            $article->getContent(),
-            $article->getArticleImage() ? $article->getArticleImage()->getWebPath() : null,
-            $article->getCreatedOn()
-        );
     }
 }

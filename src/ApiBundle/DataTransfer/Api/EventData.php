@@ -2,7 +2,6 @@
 namespace ApiBundle\DataTransfer\Api;
 
 use JMS\Serializer\Annotation as Serializer;
-use RoBundle\Entity\Event;
 
 class EventData
 {
@@ -99,7 +98,7 @@ class EventData
      * @param bool $hasTeam
      * @param bool $hasScript
      */
-    private function __construct(
+    public function __construct(
         $id,
         $title,
         $playlistId,
@@ -127,24 +126,5 @@ class EventData
         $this->hasPoster = $hasPoster;
         $this->hasTeam = $hasTeam;
         $this->hasScript = $hasScript;
-    }
-
-    public static function createFromEntity(Event $event)
-    {
-        return new static(
-            $event->getId(),
-            $event->getTitle(),
-            $event->getPlaylist() ? $event->getPlaylist()->getId() : null,
-            $event->getGallery() ? $event->getGallery()->getId() : null,
-            $event->getVideoPlaylist() ? $event->getVideoPlaylist()->getId() : null,
-            $event->getEventDate(),
-            $event->getEventImage() ? $event->getEventImage()->getWebPath() : null,
-            $event->getSlug(),
-            $event->hasLyrics(),
-            $event->hasFacts(),
-            $event->hasPoster(),
-            $event->hasTeam(),
-            $event->hasScript()
-        );
     }
 }

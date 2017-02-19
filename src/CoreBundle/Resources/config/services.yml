@@ -1,0 +1,4 @@
+services:
+    core.service.absolute_url_generator:
+        class: CoreBundle\Service\AbsoluteUrlGenerator
+        arguments: ['@router.request_context']

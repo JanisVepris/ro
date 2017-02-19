@@ -2,13 +2,14 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\ArticleData;
 use ApiBundle\DataTransfer\Api\ArticleListData;
+use ApiBundle\Factory\ArticleDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
 use RoBundle\Service\ArticleService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @Rest\Route(service="api.controller.articles_controller") */
 class ArticlesController extends AbstractApiController
@@ -16,9 +17,13 @@ class ArticlesController extends AbstractApiController
     /** @var ArticleService */
     private $articleService;
 
-    public function __construct(ArticleService $articleService)
+    /** @var ArticleDataFactory */
+    private $articleDataFactory;
+
+    public function __construct(ArticleService $articleService, ArticleDataFactory $articleDataFactory)
     {
         $this->articleService = $articleService;
+        $this->articleDataFactory = $articleDataFactory;
     }
 
     /**
@@ -73,8 +78,12 @@ class ArticlesController extends AbstractApiController
     {
         $article = $this->articleService->getPublishedArticleById($event, $articleId);
 
+        if (!$article) {
+            throw new NotFoundHttpException();
+        }
+
         return $this->createView(
-            ArticleData::createFromEntity($article)
+            $this->articleDataFactory->createFromEntity($article)
         );
     }
 }
