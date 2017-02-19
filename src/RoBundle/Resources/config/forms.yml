@@ -1,10 +1,15 @@
 services:
+    ro.form.type.upload_file:
+        class: RoBundle\Form\Type\UploadFileType
+        tags:
+            - { name: form.type }
+
     ro.form.type.gender:
         class: RoBundle\Form\Type\EventType
         tags:
             - { name: form.type }
 
-    ro.form.type.upload_file:
-        class: RoBundle\Form\Type\UploadFileType
-        tags:
-            - { name: form.type }
+    ro.form.type.article:
+            class: RoBundle\Form\Type\ArticleType
+            tags:
+                - { name: form.type }

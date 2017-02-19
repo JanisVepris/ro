@@ -4,3 +4,9 @@ services:
         arguments:
             - '@ro.repository.event_repository'
             - '@doctrine.orm.default_entity_manager'
+
+    ro.service.article_service:
+            class: RoBundle\Service\ArticleService
+            arguments:
+                - '@doctrine.orm.default_entity_manager'
+                - '@stof_doctrine_extensions.uploadable.manager'

@@ -1,5 +1,4 @@
 <?php
-
 namespace RoBundle\Entity;
 
 use CoreBundle\Traits\CreatedOnEntityTrait;
@@ -34,13 +33,6 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
@@ -64,6 +56,13 @@ class Article
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = false;
+
+    /**
+     * @var ArticleImage
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\ArticleImage", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="article_image_id", referencedColumnName="id")
+     */
+    private $articleImage;
 
     /**
      * Get id
@@ -97,30 +96,6 @@ class Article
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Article
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 
     /**
@@ -202,6 +177,22 @@ class Article
     public function setPublished($published)
     {
         $this->published = $published;
+
+        return $this;
+    }
+
+    public function getArticleImage()
+    {
+        return $this->articleImage;
+    }
+
+    /**
+     * @param ArticleImage $articleImage
+     * @return Article
+     */
+    public function setArticleImage($articleImage)
+    {
+        $this->articleImage = $articleImage;
 
         return $this;
     }

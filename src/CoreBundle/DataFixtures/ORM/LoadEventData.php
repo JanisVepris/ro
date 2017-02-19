@@ -61,6 +61,8 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
                 ->setEventDate(new \DateTime(sprintf('-%d years', $eventCount--)))
                 ->setEventImage($eventImage);
 
+
+
             $uploadableManager->markEntityToUpload($event->getEventImage(), $event->getEventImage()->getFile());
             $manager->persist($event);
         }

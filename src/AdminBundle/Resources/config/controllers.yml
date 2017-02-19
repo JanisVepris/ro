@@ -15,3 +15,5 @@ services:
     admin.controller.articles_controller:
         class: AdminBundle\Controller\AdminArticlesController
         parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.article_service"

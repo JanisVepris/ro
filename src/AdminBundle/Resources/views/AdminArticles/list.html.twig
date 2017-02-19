@@ -1,4 +1,5 @@
 {% extends '@Admin/admin_base.html.twig' %}
+{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
 
 {% set tabTitle = 'Event list' %}
 
@@ -6,4 +7,5 @@
     <div class="text-center">
         <h2>MIDI Roko Operos "{{ event.title }}" Straipsniai</h2>
     </div>
+    {{ main_toolbar(path('admin_articles_create', {'eventId': event.id})) }}
 {% endblock %}
