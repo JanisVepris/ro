@@ -58,4 +58,27 @@ class AdminArticlesController extends AbstractAdminController
             'form' => $form->createView(),
         ];
     }
+
+    /**
+     * @Route("/edit/{articleId}", name="admin_articles_edit")
+     * @Template("@Admin/AdminArticles/form.html.twig")
+     * @ParamConverter("event", options={"id" = "eventId"})
+     * @ParamConverter("article", options={"id" = "articleId"})
+     */
+    public function editAction(Request $request, Event $event, Article $article)
+    {
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $this->articleService->saveArticle($article, $event);
+
+            return $this->redirectToRoute('admin_articles_list', ['eventId' => $event->getId()]);
+        }
+
+        return [
+            'event' => $event,
+            'form' => $form->createView(),
+        ];
+    }
 }
