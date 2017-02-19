@@ -44,6 +44,12 @@ class ArticleService
         $this->em->flush($article);
     }
 
+    public function deleteArticle(Article $article)
+    {
+        $this->em->remove($article);
+        $this->em->flush();
+    }
+
     /**
      * @param Event $event
      * @return Article[]

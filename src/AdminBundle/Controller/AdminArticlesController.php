@@ -1,6 +1,7 @@
 <?php
 namespace AdminBundle\Controller;
 
+use CoreBundle\Entity\User;
 use RoBundle\Entity\Article;
 use RoBundle\Entity\Event;
 use RoBundle\Form\Type\ArticleType;
@@ -9,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /** @Route("/event/{eventId}/articles", service="admin.controller.articles_controller") */
 class AdminArticlesController extends AbstractAdminController
@@ -80,5 +82,21 @@ class AdminArticlesController extends AbstractAdminController
             'event' => $event,
             'form' => $form->createView(),
         ];
+    }
+
+    /**
+     * @Route("/delete/{articleId}", name="admin_articles_delete")
+     * @ParamConverter("article", options={"id" = "articleId"})
+     * @ParamConverter("event", options={"id" = "eventId"})
+     */
+    public function deleteAction(Event $event, Article $article)
+    {
+        if (!$this->securityContext->isGranted(User::ROLE_SUPER_ADMIN)) {
+            throw new AccessDeniedHttpException('Forbidden');
+        }
+
+        $this->articleService->deleteArticle($article);
+        
+        return $this->redirectToRoute('admin_articles_list', ['eventId' => $event->getId()]);
     }
 }
