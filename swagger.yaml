@@ -1,0 +1,393 @@
+swagger: '2.0'
+info:
+  title: MIDI Roko Operos API
+  version: 1.0.0
+host: ro.dev
+schemes:
+  - http
+basePath: /
+produces:
+  - application/json
+paths:
+
+  /api/events:
+    get:
+      summary: Get an array of all events
+      responses:
+        '200':
+          description: An array of events
+          schema:
+            type: array
+            items:
+                $ref: '#/definitions/EventListItem'
+
+  /api/events/{eventId}:
+    get:
+      summary: Get event data by ID
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Event data object
+          schema:
+            $ref: '#/definitions/Event'
+
+  /api/events/{eventId}/poster:
+    get:
+      summary: Get poster url for an event
+      parameters:
+        - name: eventId
+          in: path
+          description: event (year) of images.
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Poster URL
+          schema:
+            $ref: '#/definitions/Poster'
+
+  /api/events/{eventId}/articles:
+    get:
+      summary: Get a list of articles by event ID
+      parameters:
+        - name: eventId
+          in: path
+          description: Event ID
+          required: true
+          type: integer
+        - name: limit
+          in: query
+          description: count of articles per page
+          required: false
+          type: integer
+          default: 10
+        - name: offset
+          in: query
+          description: first article index
+          required: false
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: an array of articles
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+              limit:
+                type: integer
+              offset:
+                type: integer
+              articles:
+                type: array
+                items:
+                  $ref: '#/definitions/ArticleListItem'
+
+  /api/events/{eventId}/articles/{articleId}:
+    get:
+      summary: Get article by ID
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event of articles
+          required: true
+          type: integer
+        - name: articleId
+          in: path
+          description: ID of article to fetch
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: article response
+          schema:
+            $ref: '#/definitions/Article'
+
+  /api/events/{eventId}/audioPlaylists/{playlistId}/tracks:
+    get:
+      summary: Get a list of mp3 file URLs
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event of articles
+          required: true
+          type: integer
+        - name: playlistId
+          in: path
+          description: id of playlist
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: an array of MP3 URL's and titles
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Audio'
+
+  /api/events/{eventId}/videoPlaylists/{playlistId}/videos:
+    get:
+      summary: Get a list of video URLs
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+        - name: playlistId
+          in: path
+          description: id of playlist
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: an array of youtube video URLs and titles
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Video'
+
+  /api/events/{eventId}/galleries/{galleryId}/images:
+    get:
+      summary: Get a list of image URLs by gallery ID
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+        - name: galleryId
+          in: path
+          description: images of given gallery
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: an array of images
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GalleryImage'
+
+  /api/events/{eventId}/team:
+    get:
+      summary: Get team HTML content by event ID
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: HTML content of team members definition
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+
+  /api/events/{eventId}/lyrics:
+    get:
+      summary: Get a list of lyric items by event ID
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: an array of lyrics descriptions
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Lyric'
+
+  /api/events/{eventId}/lyrics/{lyricId}:
+    get:
+      summary: Get lyric HTML content by lyric ID
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+        - name: lyricId
+          in: path
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: lyric item object
+          schema:
+            $ref: '#/definitions/LyricItem'
+
+  /api/events/{eventId}/script:
+    get:
+      description: Get script HTML content by event ID
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: script response HTML
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+
+  /api/events/{eventId}/facts:
+    get:
+      description: Get facts HTML content by event ID
+      parameters:
+        - name: eventId
+          in: path
+          description: event ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: facts HTML
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+
+definitions:
+
+  EventListItem:
+    type: object
+    properties:
+        id:
+            type: integer
+        title:
+            type: string
+        slug:
+            type: string
+
+  Event:
+    type: object
+    properties:
+      title:
+        type: string
+      id:
+        type: integer
+      playlistId:
+        type: integer
+      galleryId:
+        type: integer
+      videoPlaylistId:
+        type: integer
+      eventDate:
+        type: string
+      image:
+        type: string
+      slug:
+        type: string
+      hasLyrics:
+        type: boolean
+      hasFacts:
+        type: boolean
+      hasPoster:
+        type: boolean
+      hasTeam:
+        type: boolean
+      hasScript:
+        type: boolean
+
+  ArticleListItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: unique identifier for the article
+      title:
+        type: string
+        description: title of the article
+      description:
+        type: string
+        description: short introduction of the article
+      createdOn:
+        type: string
+        description: entry date of the article
+
+
+  Article:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: unique identifier for the article
+      title:
+        type: string
+        description: title of the article
+      image:
+        type: string
+        description: URL for article image
+      description:
+        type: string
+        description: short introduction of the article
+      content:
+        type: string
+        description: HTML content of the article
+      createdOn:
+        type: string
+        description: entry date of the article
+
+
+  Audio:
+    type: object
+    properties:
+      title:
+        type: string
+      url:
+        type: string
+
+  Video:
+    type: object
+    properties:
+      title:
+        type: string
+      url:
+        type: string
+
+  Lyric:
+    type: object
+    properties:
+      title:
+        type: string
+      id:
+        type: integer
+
+  LyricItem:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      content:
+        type: string
+
+  Poster:
+    type: object
+    properties:
+      url:
+        type: string
+
+  GalleryImage:
+    type: object
+    properties:
+      url:
+        type: string
