@@ -63,6 +63,15 @@ class ArticleService
 
     /**
      * @param Event $event
+     * @return Article[]
+     */
+    public function getAllArticlesByEvent(Event $event)
+    {
+        return $this->articleRepository->findAllArticlesByEvent($event);
+    }
+
+    /**
+     * @param Event $event
      * @return int
      */
     public function countPublishedArticles(Event $event)

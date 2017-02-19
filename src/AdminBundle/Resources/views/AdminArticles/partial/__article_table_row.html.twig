@@ -2,7 +2,14 @@
 {% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
 
 <tr>
-    <td class="text-left text-vertical-center"><h5>{{ article.title }}</h5></td>
+    <td class="text-left text-vertical-center"><h4>{{ article.title }}</h4></td>
+    <td class="text-center text-vertical-center">
+        {% if article.published %}
+            <h4><span class="label label-success">Matomas</span></h4>
+        {% else %}
+            <span class="label label-danger">Neatomas</span>
+        {% endif %}
+    </td>
     <td class="text-center text-vertical-center">{{ article.event.title }}</td>
     <td class="text-center text-vertical-center">{{ article.createdOn.format('Y-m-d H:i') }}</td>
     <td class="text-center text-vertical-center">{{ article.updatedOn.format('Y-m-d H:i') }}</td>

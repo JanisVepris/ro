@@ -30,7 +30,7 @@ class AdminArticlesController extends AbstractAdminController
      */
     public function listAction(Event $event)
     {
-        $articles = $this->articleService->getPublishedArticles($event);
+        $articles = $this->articleService->getAllArticlesByEvent($event);
 
         return [
             'event' => $event,

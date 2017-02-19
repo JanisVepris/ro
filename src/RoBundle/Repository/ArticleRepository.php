@@ -28,6 +28,21 @@ class ArticleRepository extends EntityRepository
 
     /**
      * @param Event $event
+     * @return Article[]
+     */
+    public function findAllArticlesByEvent(Event $event)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.event = :event')
+            ->orderBy('a.createdOn', 'DESC')
+            ->setParameter('event', $event)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param Event $event
      * @return integer
      */
     public function countPublishedArticlesByEvent(Event $event)
