@@ -6,7 +6,7 @@
   },
   "host" : "ro.dev",
   "schemes" : [ "http" ],
-  "basePath" : "/vą",
+  "basePath" : "/",
   "produces" : [ "application/json" ],
   "paths" : {
     "/api/events" : {
