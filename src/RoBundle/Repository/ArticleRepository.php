@@ -42,4 +42,23 @@ class ArticleRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * @param Event $event
+     * @param $articleId
+     * @return Article
+     */
+    public function findPublishedArticleById(Event $event, $articleId)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.id = :id')
+            ->andWhere('a.event = :event')
+            ->andWhere('a.published = :published')
+            ->setParameter('id', $articleId)
+            ->setParameter('event', $event)
+            ->setParameter('published', true)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

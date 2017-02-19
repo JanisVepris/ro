@@ -2,6 +2,7 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\DataTransfer\Api\ArticleData;
 use ApiBundle\DataTransfer\Api\ArticleListData;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -65,10 +66,15 @@ class ArticlesController extends AbstractApiController
      *     path="/api/events/{eventId}/articles/{articleId}",
      *     name="ro_api_articles_get"
      * )
+     * @ParamConverter("event", options={"id" = "eventId"})
      * @Rest\View
      */
-    public function getAction()
+    public function getAction(Event $event, $articleId)
     {
-        return $this->createView([]);
+        $article = $this->articleService->getPublishedArticleById($event, $articleId);
+
+        return $this->createView(
+            ArticleData::createFromEntity($article)
+        );
     }
 }

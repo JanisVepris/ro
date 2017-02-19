@@ -69,4 +69,14 @@ class ArticleService
     {
         return $this->articleRepository->countPublishedArticlesByEvent($event);
     }
+
+    /**
+     * @param Event $event
+     * @param integer $articleId
+     * @return Article
+     */
+    public function getPublishedArticleById(Event $event, $articleId)
+    {
+        return $this->articleRepository->findPublishedArticleById($event, $articleId);
+    }
 }
