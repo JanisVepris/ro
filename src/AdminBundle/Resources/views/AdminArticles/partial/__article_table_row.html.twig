@@ -1,7 +1,7 @@
 {% from '@Admin/AdminLayout/macros.html.twig' import table_action_edit %}
 {% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
 
-<tr>
+<tr{% if not article.published %} class="danger"{% endif %}>
     <td class="text-left text-vertical-center"><h4>{{ article.title }}</h4></td>
     <td class="text-center text-vertical-center">
         {% if article.published %}
