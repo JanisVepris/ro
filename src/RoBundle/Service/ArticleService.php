@@ -65,7 +65,7 @@ class ArticleService
      * @param Event $event
      * @return int
      */
-    public function getPublishedArticleCount(Event $event)
+    public function countPublishedArticles(Event $event)
     {
         return $this->articleRepository->countPublishedArticlesByEvent($event);
     }

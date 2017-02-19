@@ -7,6 +7,7 @@ services:
     api.controller.articles_controller:
         class: ApiBundle\Controller\Api\ArticlesController
         parent: api.controller.abstract_controller
+        arguments: ["@ro.service.article_service"]
 
     api.controller.events_controller:
         class: ApiBundle\Controller\Api\EventsController
@@ -14,7 +15,7 @@ services:
         arguments: ["@ro.service.event_service"]
 
     api.controller.facts_controller:
-        class: ApiBundle\Controller\Api\ArticlesController
+        class: ApiBundle\Controller\Api\FactsController
         parent: api.controller.abstract_controller
 
     api.controller.images_controller:
