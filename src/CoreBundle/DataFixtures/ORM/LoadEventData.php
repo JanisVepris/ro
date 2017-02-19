@@ -13,31 +13,80 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     protected $container;
 
-    private function getEventTitles()
+    private function getEventData()
     {
         return [
-            'Raudonkepuraitė',
-            'Juodas Katinas Supermatematikas',
-            'Felixo Katinai',
-            'Byla Nr. 4',
-            'Žaidimo Pabaiga',
-            'EM\'FIVA',
-            'Pradžių Pradžia',
-            'New Gardukas',
-            'Amžinoji Žiemos Sesija',
-            'Visorių Sindromas',
-            'Teatromatika',
-            'Viduramžiai Rytoj',
-            '404: Rojus Nerastas',
-            'Dievas Iš Mašinos',
-            'Naktis, Kai Sustojo Malūnas',
-            'ProtoTipas',
-            'Roko Opera 2017',
+            [
+                'title' => 'Raudonkepuraitė',
+                'refId' => 1,
+            ],
+            [
+                'title' => 'Juodas Katinas Supermatematikas',
+                'refId' => 2,
+            ],
+            [
+                'title' => 'Byla Nr. 4',
+                'refId' => 3,
+            ],
+            [
+                'title' => 'Žaidimo Pabaiga',
+                'refId' => 4,
+            ],
+            [
+                'title' => 'EM\'FIVA',
+                'refId' => 5,
+            ],
+            [
+                'title' => 'Pradžių Pradžia',
+                'refId' => 6,
+            ],
+            [
+                'title' => 'New Gardukas',
+                'refId' => 7,
+            ],
+            [
+                'title' => 'Amžinoji Žiemos Sesija',
+                'refId' => 8,
+            ],
+            [
+                'title' => 'Visorių Sindromas',
+                'refId' => 9,
+            ],
+            [
+                'title' => 'Teatromatika',
+                'refId' => 10,
+            ],
+            [
+                'title' => 'Viduramžiai Rytoj',
+                'refId' => 11,
+            ],
+            [
+                'title' => '404: Rojus Nerastas',
+                'refId' => 12,
+            ],
+            [
+                'title' => 'Dievas Iš Mašinos',
+                'refId' => 13,
+            ],
+            [
+                'title' => 'Naktis, Kai Sustojo Malūnas',
+                'refId' => 14,
+            ],
+            [
+                'title' => 'ProtoTipas',
+                'refId' => 15,
+            ],
+            [
+                'title' => 'Roko Opera 2017',
+                'refId' => 16,
+            ],
+            [
+                'title' => 'Raudonkepuraitė',
+                'refId' => 17,
+            ],
         ];
     }
 
@@ -46,10 +95,10 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
         $faker = FakerFactory::create('lt_LT');
         $uploadableManager = $this->container->get('stof_doctrine_extensions.uploadable.manager');
 
-        $eventTitles = $this->getEventTitles();
-        $eventCount = count($eventTitles);
+        $events = $this->getEventData();
+        $eventCount = count($events);
 
-        foreach ($eventTitles as $eventTitle) {
+        foreach ($events as $eventData) {
             $event = new Event();
 
             $path = $faker->image(sys_get_temp_dir(), 300, 300, 'cats');
@@ -59,12 +108,15 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
                 ->setAsFixture();
 
             $event
-                ->setTitle($eventTitle)
+                ->setTitle($eventData['title'])
                 ->setEventDate(new \DateTime(sprintf('-%d years', $eventCount--)))
                 ->setEventImage($eventImage);
 
             $uploadableManager->markEntityToUpload($event->getEventImage(), $event->getEventImage()->getFile());
+
             $manager->persist($event);
+
+            $this->addReference(sprintf('ro_event_%d', $eventData['refId']), $event);
         }
 
         $manager->flush();
