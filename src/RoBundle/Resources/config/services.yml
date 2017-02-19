@@ -10,3 +10,4 @@ services:
             arguments:
                 - '@doctrine.orm.default_entity_manager'
                 - '@stof_doctrine_extensions.uploadable.manager'
+                - '@ro.repository.article_repository'

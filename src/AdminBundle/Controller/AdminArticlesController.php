@@ -28,21 +28,21 @@ class AdminArticlesController extends AbstractAdminController
      */
     public function listAction(Event $event)
     {
+        $articles = $this->articleService->getPublishedArticles($event);
+
         return [
             'event' => $event,
-            'articles' => $event->getArticles()
+            'articles' => $articles,
         ];
     }
 
     /**
      * @Route("/create", name="admin_articles_create")
-     * @Template
+     * @Template("@Admin/AdminArticles/form.html.twig")
      * @ParamConverter("event", options={"id" = "eventId"})
      */
     public function createAction(Request $request, Event $event)
     {
-        // TODO: FIX UPLOAD DIRECTORY SHIT
-
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);

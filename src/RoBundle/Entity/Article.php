@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="ro3_article")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="RoBundle\Repository\ArticleRepository")
  */
 class Article
 {

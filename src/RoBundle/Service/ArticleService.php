@@ -4,6 +4,7 @@ namespace RoBundle\Service;
 use Doctrine\ORM\EntityManager;
 use RoBundle\Entity\Article;
 use RoBundle\Entity\Event;
+use RoBundle\Repository\ArticleRepository;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -15,10 +16,17 @@ class ArticleService
     /** @var UploadableManager */
     private $uploadableManager;
 
-    public function __construct(EntityManager $em, UploadableManager $uploadableManager)
-    {
+    /** @var ArticleRepository */
+    private $articleRepository;
+
+    public function __construct(
+        EntityManager $em,
+        UploadableManager $uploadableManager,
+        ArticleRepository $articleRepository
+    ) {
         $this->em = $em;
         $this->uploadableManager = $uploadableManager;
+        $this->articleRepository = $articleRepository;
     }
 
     public function saveArticle(Article $article, Event $event)
@@ -34,5 +42,14 @@ class ArticleService
 
         $this->em->persist($article);
         $this->em->flush($article);
+    }
+
+    /**
+     * @param Event $event
+     * @return Article[]
+     */
+    public function getPublishedArticles(Event $event)
+    {
+        return $this->articleRepository->findAllPublishedArticlesByEvent($event);
     }
 }

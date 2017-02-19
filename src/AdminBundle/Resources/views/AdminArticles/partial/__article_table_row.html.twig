@@ -1,0 +1,17 @@
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_edit %}
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
+
+<tr>
+    <td class="text-left text-vertical-center">{{ article.title }}</td>
+    <td class="text-center text-vertical-center">{{ article.event.title }}</td>
+    <td class="text-center text-vertical-center">{{ article.createdOn.format('Y-m-d H:i') }}</td>
+    <td class="text-center text-vertical-center">{{ article.updatedOn.format('Y-m-d H:i') }}</td>
+    <td class="text-right text-vertical-center">
+        <div class="btn-group">
+            {{ table_action_edit(path('admin_events_edit', {'eventId': event.id})) }}
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                {{ table_action_delete(path('admin_events_delete', {'eventId': event.id })) }}
+            {% endif %}
+        </div>
+    </td>
+</tr>
