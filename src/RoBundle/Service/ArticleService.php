@@ -52,10 +52,21 @@ class ArticleService
 
     /**
      * @param Event $event
+     * @param integer $limit
+     * @param integer $offset
      * @return Article[]
      */
-    public function getPublishedArticles(Event $event)
+    public function getPublishedArticles(Event $event, $limit = null, $offset = 0)
     {
-        return $this->articleRepository->findAllPublishedArticlesByEvent($event);
+        return $this->articleRepository->findAllPublishedArticlesByEvent($event, $limit, $offset);
+    }
+
+    /**
+     * @param Event $event
+     * @return int
+     */
+    public function getPublishedArticleCount(Event $event)
+    {
+        return $this->articleRepository->countPublishedArticlesByEvent($event);
     }
 }

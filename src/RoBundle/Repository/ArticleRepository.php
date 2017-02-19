@@ -11,7 +11,7 @@ class ArticleRepository extends EntityRepository
      * @param Event $event
      * @return Article[]
      */
-    public function findAllPublishedArticlesByEvent(Event $event)
+    public function findAllPublishedArticlesByEvent(Event $event, $limit = null, $offset = 0)
     {
         return $this
             ->createQueryBuilder('a')
@@ -20,7 +20,26 @@ class ArticleRepository extends EntityRepository
             ->orderBy('a.createdOn', 'DESC')
             ->setParameter('event', $event)
             ->setParameter('published', true)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param Event $event
+     * @return integer
+     */
+    public function countPublishedArticlesByEvent(Event $event)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.event = :event')
+            ->andWhere('a.published = :published')
+            ->setParameter('event', $event)
+            ->setParameter('published', true)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

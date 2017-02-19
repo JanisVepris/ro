@@ -96,7 +96,7 @@ class AdminArticlesController extends AbstractAdminController
         }
 
         $this->articleService->deleteArticle($article);
-        
+
         return $this->redirectToRoute('admin_articles_list', ['eventId' => $event->getId()]);
     }
 }
