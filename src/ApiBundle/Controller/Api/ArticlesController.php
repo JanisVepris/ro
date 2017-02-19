@@ -60,7 +60,7 @@ class ArticlesController extends AbstractApiController
      * @ApiDoc(
      *     description="Get article by id",
      *     section="Article",
-     *     tags={"TODO"}
+     *     output="ApiBundle\DataTransfer\Api\ArticleData"
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/articles/{articleId}",
