@@ -5,6 +5,14 @@ services:
             - ['setContainer', ['@service_container']]
             - ['setSecurityContext', ['@security.authorization_checker']]
 
+    admin.controller.article_content_image_controller:
+        class: AdminBundle\Controller\ImageUploadController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "%article_inline_image_dir%"
+            - "@core.service.absolute_url_generator"
+            - "@jms_serializer"
+
     admin.controller.events_controller:
         class: AdminBundle\Controller\AdminEventsController
         parent: admin.controller.abstract_controller

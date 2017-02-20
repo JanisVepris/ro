@@ -16,7 +16,15 @@ class ArticleType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('content', CKEditorType::class)
+            ->add('content', CKEditorType::class, [
+                'config' => [
+//                    'filebrowserBrowseRoute' => 'elfinder',
+//                    'filebrowserBrowseRouteParameters' => [
+//                        'instance' => 'default',
+//                        'homeFolder' => ''
+//                    ]
+                ],
+            ])
             ->add('published', CheckboxType::class, ['required' => false])
             ->add('articleImage', UploadFileType::class, ['data_class' => ArticleImage::class]);
     }
