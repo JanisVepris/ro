@@ -1,0 +1,24 @@
+{% extends '@Admin/admin_base.html.twig' %}
+{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
+
+{% set tabTitle = event.title ~ ' - Plakatas' %}
+
+{% block content %}
+    <div class="text-center">
+        <h2>MIDI Roko Operos "{{ event.title }}" Plakatas</h2>
+    </div>
+    <div class="col-md-12">
+        {% if event.hasPoster %}
+            <div class="col-md-6">
+                <div><h4>Plakatas</h4></div>
+                <div><img src="{{ event.poster.webPath }}" alt=""></div>
+            </div>
+        {% endif %}
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            {{ form_row(form) }}
+            <input type="submit" value="Įkelti">
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

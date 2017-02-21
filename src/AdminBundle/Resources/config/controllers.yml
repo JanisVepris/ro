@@ -25,3 +25,10 @@ services:
         parent: admin.controller.abstract_controller
         arguments:
             - "@ro.service.article_service"
+
+    admin.controller.posters_controller:
+        class: AdminBundle\Controller\AdminPostersController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@stof_doctrine_extensions.uploadable.manager"
+            - "@ro.service.event_service"

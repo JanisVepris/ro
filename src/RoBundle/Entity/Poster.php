@@ -1,93 +1,34 @@
 <?php
-
 namespace RoBundle\Entity;
 
-use CoreBundle\Traits\CreatedOnEntityTrait;
-use CoreBundle\Traits\UpdatedOnEntityTrait;
+use CoreBundle\Entity\AbstractUploadableEntity;
+use CoreBundle\Traits\EntityIdFieldTrait;
+use CoreBundle\Entity\UploadableEntityInterface;
+use CoreBundle\Traits\UploadableEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Mapping\Annotation\Uploadable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ro3_poster")
  * @ORM\Entity()
+ * @Uploadable(
+ *     pathMethod="getUploadPath",
+ *     allowOverwrite=true,
+ *     appendNumber=true,
+ *     filenameGenerator="ALPHANUMERIC"
+ * )
  */
-class Poster
+class Poster extends AbstractUploadableEntity
 {
-    use CreatedOnEntityTrait;
-    use UpdatedOnEntityTrait;
+    use EntityIdFieldTrait;
+    use UploadableEntityTrait;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    private $uploadPath = self::BASE_UPLOAD_DIR . '/Posters/';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255, nullable=true)
-     */
-    private $url;
-
-    /**
-     * @var Event
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Event", inversedBy="poster")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     */
-    private $event;
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getUploadPath()
     {
-        return $this->id;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return Poster
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return Event
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
-     * @param Event $event
-     * @return Poster
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
-
-        return $this;
+        return $this->uploadPath;
     }
 }

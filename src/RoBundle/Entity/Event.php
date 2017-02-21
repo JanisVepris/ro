@@ -68,7 +68,8 @@ class Event
 
     /**
      * @var Poster
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Poster", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Poster", mappedBy="event", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="poster_id", referencedColumnName="id")
      */
     private $poster;
 
