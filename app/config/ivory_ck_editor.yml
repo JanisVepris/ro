@@ -4,12 +4,13 @@ ivory_ck_editor:
     default_config: article_config
     configs:
         article_config:
+            allowedContent: true
             extraPlugins: 'videoembed,dragresize'
             imageUploadUrl: '/admin/article/image/upload'
             filebrowserUploadRouteParameters: ~
             filebrowserBrowseRouteAbsolute: true
 #            extraPlugins: 'lineutils,widgetselection,clipboard,dialogui,notificationaggregator,notification,filetools,widget,uploadwidget,imageupload'
             toolbar:
-                - ['Bold', 'Italic', 'Underline', 'Strike', '-', 'VideoEmbed', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'NumberedList', 'BulletedList', '-' , 'Outdent', 'Indent', '-', 'Image', 'Link', 'Unlink', '-', 'TextColor', 'Styles', 'Format', 'FontSize', 'Maximize', 'Source']
+                - ['Bold', 'Italic', 'Underline', 'Strike', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'NumberedList', 'BulletedList', '-' , 'Outdent', 'Indent', '-', 'Image', 'VideoDetector', 'Link', 'Unlink', '-', 'TextColor', 'Styles', 'Format', 'FontSize', 'Maximize', 'Source']
             uiColor: "#fcfcfc"
             height: 450
