@@ -33,7 +33,7 @@ class EventExtension extends \Twig_Extension
             return '';
         }
 
-        return $environment->render(' RoBundle:Extensions:eventThumb.html.twig', [
+        return $environment->render('RoBundle:Extensions:eventThumb.html.twig', [
             'imagePath' => $event->getEventImage()->getWebPath(),
             'alt' => $event->getTitle(),
             'filter' => sprintf('event_thumb_%s', $size),

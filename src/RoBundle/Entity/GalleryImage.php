@@ -1,92 +1,48 @@
 <?php
 namespace RoBundle\Entity;
 
-use CoreBundle\Traits\CreatedOnEntityTrait;
-use CoreBundle\Traits\UpdatedOnEntityTrait;
+use CoreBundle\Entity\AbstractUploadableEntity;
+use CoreBundle\Traits\EntityIdFieldTrait;
+use CoreBundle\Traits\UploadableEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Uploadable;
 
 /**
  * @ORM\Table(name="ro3_gallery_image")
  * @ORM\Entity()
+ * @Uploadable(
+ *     pathMethod="getUploadPath",
+ *     allowOverwrite=true,
+ *     appendNumber=true,
+ *     filenameGenerator="ALPHANUMERIC"
+ * )
  */
-class GalleryImage
+class GalleryImage extends AbstractUploadableEntity
 {
-    use CreatedOnEntityTrait;
-    use UpdatedOnEntityTrait;
+    use EntityIdFieldTrait;
+    use UploadableEntityTrait;
+
+    /** @var string */
+    private $uploadPath = self::BASE_UPLOAD_DIR . '/GalleryImages/';
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var string
-     * @ORM\Column(name="url", type="string")
-     */
-    private $url;
-
-    /**
-     * @var Event
+     * @var Gallery
      * @ORM\ManyToOne(targetEntity="RoBundle\Entity\Gallery", inversedBy="images")
      * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
      */
     private $gallery;
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getUploadPath()
     {
-        return $this->id;
+        return $this->uploadPath;
     }
 
-    /**
-     * @param int $id
-     * @return GalleryImage
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param string $url
-     * @return GalleryImage
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * @return Event
-     */
     public function getGallery()
     {
         return $this->gallery;
     }
 
-    /**
-     * @param Event $gallery
-     * @return GalleryImage
-     */
-    public function setGallery($gallery)
+    public function setGallery(Gallery $gallery)
     {
         $this->gallery = $gallery;
 

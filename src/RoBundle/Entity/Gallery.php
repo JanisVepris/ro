@@ -81,7 +81,7 @@ class Gallery
     }
 
     /**
-     * @return ArrayCollection|GalleryImage[]
+     * @return GalleryImage[]
      */
     public function getImages()
     {
@@ -95,6 +95,32 @@ class Gallery
     public function setImages($images)
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @param GalleryImage $image
+     * @return $this
+     */
+    public function addImage(GalleryImage $image)
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param GalleryImage $image
+     * @return $this
+     */
+    public function removeImage(GalleryImage $image)
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+        }
 
         return $this;
     }

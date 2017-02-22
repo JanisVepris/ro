@@ -1,0 +1,23 @@
+{% extends '@Admin/admin_base.html.twig' %}
+
+{% set tabTitle = event.title ~ ' - Galerija' %}
+
+{% block content %}
+    <div class="text-center">
+        <h2>Įkelti nuotraukas į galeriją</h2>
+    </div>
+    <div class="col-md-12">
+        <div class="text-center">
+            <input type="file" name="file" id="filer_input" multiple="multiple">
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script src="{{ asset('bundles/admin/js/custom_filer.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            init_filer("{{ path('admin_galleries_image_upload', {'eventId': event.id}) }}")
+        });
+    </script>
+{% endblock %}

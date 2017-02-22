@@ -32,3 +32,11 @@ services:
         arguments:
             - "@stof_doctrine_extensions.uploadable.manager"
             - "@ro.service.event_service"
+
+    admin.controller.galleries_controller:
+        class: AdminBundle\Controller\AdminGalleriesController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.gallery_service"
+            - "@stof_doctrine_extensions.uploadable.manager"
+            - "%gallery_image_dir"

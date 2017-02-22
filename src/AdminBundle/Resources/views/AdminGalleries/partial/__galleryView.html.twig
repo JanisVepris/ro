@@ -1,0 +1,23 @@
+<div class="text-center">
+    <h4><a href="{{ path('admin_galleries_images_add', {'eventId': event.id}) }}">Įkelti nuotraukas</a></h4>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        {% for image in gallery.images %}
+                <div class="col-md-4 text-center">
+                    <div>
+                        <img src="{{ image.webPath()|imagine_filter('gallery_thumb') }}" alt="" class="gallery-thumb">
+                    </div>
+                    <div>
+                        <a href="{{ path('admin_galleries_image_remove', {'eventId': event.id, 'imageId': image.id}) }}">Pašalinti</a>
+                    </div>
+                </div>
+            {% if  loop.index % 3 == 0 %}
+            </div>
+            <div class="row">
+            {% endif %}
+        {% else %}
+            Galerijoje nėr nuotraukų ;(
+        {% endfor %}
+    </div>
+</div>

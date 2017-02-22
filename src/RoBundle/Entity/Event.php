@@ -410,6 +410,11 @@ class Event
         return (bool) $this->facts;
     }
 
+    public function hasGallery()
+    {
+        return (bool) $this->gallery;
+    }
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
