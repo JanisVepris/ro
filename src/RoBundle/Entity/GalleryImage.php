@@ -12,9 +12,9 @@ use Gedmo\Mapping\Annotation\Uploadable;
  * @ORM\Entity()
  * @Uploadable(
  *     pathMethod="getUploadPath",
- *     allowOverwrite=true,
+ *     allowOverwrite=false,
  *     appendNumber=true,
- *     filenameGenerator="ALPHANUMERIC"
+ *     filenameGenerator="SHA1"
  * )
  */
 class GalleryImage extends AbstractUploadableEntity

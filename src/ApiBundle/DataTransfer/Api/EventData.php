@@ -27,12 +27,6 @@ class EventData
      * @var integer
      * @Serializer\Type("integer")
      */
-    private $galleryId;
-
-    /**
-     * @var integer
-     * @Serializer\Type("integer")
-     */
     private $videoPlaylistId;
 
     /**
@@ -84,10 +78,15 @@ class EventData
     private $hasScript;
 
     /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     */
+    private $hasGallery;
+
+    /**
      * @param int $id
      * @param string $title
      * @param int $playlistId
-     * @param int $galleryId
      * @param int $videoPlaylistId
      * @param \DateTime $eventDate
      * @param string $image
@@ -97,12 +96,12 @@ class EventData
      * @param bool $hasPoster
      * @param bool $hasTeam
      * @param bool $hasScript
+     * @param bool $hasGallery
      */
     public function __construct(
         $id,
         $title,
         $playlistId,
-        $galleryId,
         $videoPlaylistId,
         \DateTime $eventDate,
         $image,
@@ -111,12 +110,12 @@ class EventData
         $hasFacts,
         $hasPoster,
         $hasTeam,
-        $hasScript
+        $hasScript,
+        $hasGallery
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->playlistId = $playlistId;
-        $this->galleryId = $galleryId;
         $this->videoPlaylistId = $videoPlaylistId;
         $this->eventDate = $eventDate;
         $this->image = $image;
@@ -126,5 +125,6 @@ class EventData
         $this->hasPoster = $hasPoster;
         $this->hasTeam = $hasTeam;
         $this->hasScript = $hasScript;
+        $this->hasGallery = $hasGallery;
     }
 }

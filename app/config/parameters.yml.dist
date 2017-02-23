@@ -14,3 +14,4 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
     article_inline_image_dir: "%kernel.root_dir%/../web/uploads/media/Images/"
     gallery_image_dir: "%kernel.root_dir%/../web/uploads/media/GalleryImages/"
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy

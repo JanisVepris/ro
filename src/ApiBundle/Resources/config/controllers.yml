@@ -25,6 +25,8 @@ services:
     api.controller.images_controller:
         class: ApiBundle\Controller\Api\ImagesController
         parent: api.controller.abstract_controller
+        arguments:
+            - "@ro.service.gallery_service"
 
     api.controller.lyrics_controller:
         class: ApiBundle\Controller\Api\LyricsController

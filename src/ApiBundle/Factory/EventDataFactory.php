@@ -21,7 +21,6 @@ class EventDataFactory
             $event->getId(),
             $event->getTitle(),
             $event->getPlaylist() ? $event->getPlaylist()->getId() : null,
-            $event->getGallery() ? $event->getGallery()->getId() : null,
             $event->getVideoPlaylist() ? $event->getVideoPlaylist()->getId() : null,
             $event->getEventDate(),
             $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($event->getEventImage()->getWebPath()),
@@ -30,7 +29,8 @@ class EventDataFactory
             $event->hasFacts(),
             $event->hasPoster(),
             $event->hasTeam(),
-            $event->hasScript()
+            $event->hasScript(),
+            $event->hasGallery()
         );
     }
 }

@@ -124,4 +124,9 @@ class Gallery
 
         return $this;
     }
+
+    public function hasImages()
+    {
+        return (bool) $this->images->count();
+    }
 }
