@@ -373,9 +373,6 @@
         "playlistId" : {
           "type" : "integer"
         },
-        "galleryId" : {
-          "type" : "integer"
-        },
         "videoPlaylistId" : {
           "type" : "integer"
         },
@@ -401,6 +398,9 @@
           "type" : "boolean"
         },
         "hasScript" : {
+          "type" : "boolean"
+        },
+        "hasGallery" : {
           "type" : "boolean"
         }
       }
