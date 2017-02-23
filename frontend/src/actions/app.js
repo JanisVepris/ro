@@ -1,5 +1,6 @@
 import * as eventsRepo from '../repo/events'
 import { push } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 
 import { loadEventInfo, loadEventNews } from './events'
 import { setHeaderCover } from './header'
@@ -74,8 +75,10 @@ export const navigateToOverview = (id) => (
 ) => {
 
 	const eventSlug = getState().app.eventsById[id].slug
+	const newPath = '/' + eventSlug
 
-	dispatch(push('/' + eventSlug))
+	browserHistory.push(newPath)
+	dispatch(push(newPath))
 	dispatch(setActiveEvent(id))
 	dispatch(setActiveCategory('news'))
 
