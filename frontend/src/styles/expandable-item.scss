@@ -1,0 +1,21 @@
+.expandable-item-container {
+	clear: both;
+    margin-bottom: 12px;
+	border: 1px solid #ddd;
+	border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.expandable-item-title {
+    background-color: #eee;
+    padding: 10px 15px;
+    margin: 0px;
+}
+
+.expandable-item-content {
+	color: #333;
+    background-color: #fff;
+	padding: 12px 24px;
+}

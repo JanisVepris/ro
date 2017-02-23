@@ -6,6 +6,7 @@ import { initialize } from '../actions/app'
 import '../styles/main.scss'
 import '../styles/header.scss'
 import '../styles/helpers.scss'
+import '../styles/expandable-item.scss'
 
 import Cover from '../containers/header/Cover'
 import Footer from './Footer'

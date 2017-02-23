@@ -1,6 +1,9 @@
 import React from 'react'
 import { loadVideoPlaylist } from '../actions/videos'
 
+//temp
+import ExpandableItem from './ExpandableItem'
+
 export default class App extends React.Component {
 
 	componentWillMount() {
@@ -16,6 +19,7 @@ export default class App extends React.Component {
 		return (
 			<div className="content">
 				<p className="article-title">{ this.props.title }</p>
+				<ExpandableItem />
 			</div>
 		)
 	}
