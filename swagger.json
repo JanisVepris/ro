@@ -208,12 +208,6 @@
           "description" : "event ID",
           "required" : true,
           "type" : "integer"
-        }, {
-          "name" : "galleryId",
-          "in" : "path",
-          "description" : "images of given gallery",
-          "required" : true,
-          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
