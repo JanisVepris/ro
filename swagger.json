@@ -199,7 +199,7 @@
         }
       }
     },
-    "/api/events/{eventId}/galleries/{galleryId}/images" : {
+    "/api/events/{eventId}/gallery/images" : {
       "get" : {
         "summary" : "Get a list of image URLs by gallery ID",
         "parameters" : [ {
