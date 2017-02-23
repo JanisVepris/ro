@@ -8,6 +8,7 @@ import '../styles/header.scss'
 import '../styles/helpers.scss'
 
 import Cover from '../containers/header/Cover'
+import Footer from './Footer'
 
 export default class App extends React.Component {
 
@@ -28,6 +29,7 @@ export default class App extends React.Component {
 				<Header />
 				<Cover />
 				{ this.props.children }
+				<Footer />
 			</div>
 		)
 	}
