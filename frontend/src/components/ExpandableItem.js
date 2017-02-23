@@ -20,6 +20,7 @@ export default class ExpandableItem extends React.Component {
 				<SmoothCollapse expanded={ this.state.expanded }>
 					<div className="expandable-item-content">
 						{ this.props.content }
+						{ this.props.children }
 					</div>
 				</SmoothCollapse>
 			</div>

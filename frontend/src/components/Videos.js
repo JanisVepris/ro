@@ -1,8 +1,9 @@
 import React from 'react'
-import { loadVideoPlaylist } from '../actions/videos'
 
-//temp
 import ExpandableItem from './ExpandableItem'
+import ReactPlayer from 'react-player'
+
+import { loadVideoPlaylist } from '../actions/videos'
 
 export default class App extends React.Component {
 
@@ -19,7 +20,21 @@ export default class App extends React.Component {
 		return (
 			<div className="content">
 				<p className="article-title">{ this.props.title }</p>
-				<ExpandableItem />
+				{ this.props.videos.map((video, index) => 
+					<ExpandableItem key={ index } title={ video.title }>
+						<div className="expandable-item-video-max-width">
+							<div className="expandable-item-video-wrapper">
+								<ReactPlayer 
+									url={ video.url }
+									controls={ true }
+									className='expandable-item-video'
+									width={ 'auto' }
+									height={ 'auto' }
+									/>
+							</div>
+						</div>
+					</ExpandableItem>
+				)}
 			</div>
 		)
 	}

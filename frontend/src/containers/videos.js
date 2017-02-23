@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 	return {
 		initialized: !!videos,
 		videoPlaylistId,
-		ids: videos && videos.length,
+		videos,
 		title: eventName + ': Įrašai',
 		hidden: state.header.loading
 	}

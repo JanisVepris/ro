@@ -19,3 +19,22 @@
     background-color: #fff;
 	padding: 12px 24px;
 }
+
+.expandable-item-video-max-width {
+    max-width: 640px;
+    margin: auto;
+}
+
+.expandable-item-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+}
+
+.expandable-item-video {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
