@@ -40,3 +40,9 @@ services:
             - "@ro.service.gallery_service"
             - "@stof_doctrine_extensions.uploadable.manager"
             - "%gallery_image_dir"
+
+    admin.controller.video_playlists_controller:
+        class: AdminBundle\Controller\AdminVideoPlaylistsController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.video_playlist_service"

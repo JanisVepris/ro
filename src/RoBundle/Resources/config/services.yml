@@ -15,6 +15,11 @@ services:
     ro.service.gallery_service:
         class: RoBundle\Service\GalleryService
         arguments:
-            - '@doctrine.orm.entity_manager'
+            - '@doctrine.orm.default_entity_manager'
             - "@stof_doctrine_extensions.uploadable.manager"
             - "@core.service.absolute_url_generator"
+
+    ro.service.video_playlist_service:
+        class: RoBundle\Service\VideoPlaylistService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"

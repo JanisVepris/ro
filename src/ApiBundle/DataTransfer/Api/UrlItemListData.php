@@ -8,6 +8,7 @@ class UrlItemListData
     /**
      * @var UrlItemData[]
      * @Serializer\Type("array<ApiBundle\DataTransfer\Api\UrlItemData>")
+     * @Serializer\Inline()
      */
     private $items;
 

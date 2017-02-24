@@ -2,9 +2,7 @@
 namespace AdminBundle\Controller;
 
 use RoBundle\Entity\Event;
-use RoBundle\Entity\Gallery;
 use RoBundle\Entity\GalleryImage;
-use RoBundle\Form\Type\UploadFileType;
 use RoBundle\Service\GalleryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -69,6 +67,10 @@ class AdminGalleriesController extends AbstractAdminController
      */
     public function addAction(Event $event)
     {
+        if (!$event->hasGallery()) {
+            throw new NotFoundHttpException();
+        }
+
         return [
             'event' => $event
         ];

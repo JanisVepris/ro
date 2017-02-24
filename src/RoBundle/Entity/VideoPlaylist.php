@@ -1,6 +1,7 @@
 <?php
 namespace RoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +25,23 @@ class VideoPlaylist
      */
     private $event;
 
+    /**
+     * @var ArrayCollection|Video[]
+     * @ORM\OneToMany(
+     *     targetEntity="RoBundle\Entity\Video",
+     *     mappedBy="videoPlaylist",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     */
+    private $videos;
+
+    public function __construct()
+    {
+        $this->videos = new ArrayCollection();
+    }
+
+
     public function getId()
     {
         return $this->id;
@@ -43,5 +61,36 @@ class VideoPlaylist
         $this->event = $event;
 
         return $this;
+    }
+
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param ArrayCollection|Video[] $videos
+     * @return VideoPlaylist
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
+
+        return $this;
+    }
+
+    public function addVideo(Video $video)
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->setVideoPlaylist($this);
+        }
+    }
+
+    public function removeVideo(Video $video)
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+        }
     }
 }

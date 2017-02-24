@@ -415,6 +415,11 @@ class Event
         return (bool) $this->gallery;
     }
 
+    public function hasVideoPlaylist()
+    {
+        return (bool) $this->videoPlaylist;
+    }
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()

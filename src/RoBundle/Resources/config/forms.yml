@@ -10,6 +10,16 @@ services:
             - { name: form.type }
 
     ro.form.type.article:
-            class: RoBundle\Form\Type\ArticleType
-            tags:
-                - { name: form.type }
+        class: RoBundle\Form\Type\ArticleType
+        tags:
+            - { name: form.type }
+
+    ro.form.type.video_playlist:
+        class: RoBundle\Form\Type\VideoPlaylistType
+        tags:
+            - { name: form.type }
+
+    ro.form.type.video:
+        class: RoBundle\Form\Type\VideoType
+        tags:
+            - { name: form.type }

@@ -1,0 +1,18 @@
+<div class="text-center">
+    <h4><a href="{{ path('admin_video_playlists_videos_add', {'eventId': event.id}) }}">Pridėti įrašus</a></h4>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        {% for video in playlist.videos %}
+        <div class="col-md-6 text-center">
+            {{ video.url }}
+        </div>
+        {% if  loop.index % 2 == 0 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        {% else %}
+            Nėr video įrašų ;(
+        {% endfor %}
+    </div>
+</div>

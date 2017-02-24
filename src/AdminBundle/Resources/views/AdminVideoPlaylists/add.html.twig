@@ -1,0 +1,37 @@
+{% extends '@Admin/admin_base.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <div id="video-url-list">
+        {{ form_row(form.videos) }}
+    </div>
+    <input type="submit" value="Išsaugoti">
+    {{ form_end(form) }}
+    <a href="#" id="add-field" data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}">+ Video</a>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var videoCount = '{{ form.videos|length }}';
+
+        jQuery(document).ready(function() {
+            jQuery('#add-field').click(function(e) {
+                e.preventDefault();
+
+                var videosList = jQuery('#ro_bundle_video_playlist_type_videos');
+
+                // grab the prototype template
+                var newWidget = videosList.attr('data-prototype');
+                // replace the "__name__" used in the id and name of the prototype
+                // with a number that's unique to your emails
+                // end name attribute looks like name="contact[emails][2]"
+                newWidget = newWidget.replace(/__name__/g, videoCount);
+                videoCount++;
+
+                // create a new list element and add it to the list
+                var newLi = jQuery('<div></div>').html(newWidget);
+                newLi.appendTo(videosList);
+            });
+        })
+    </script>
+{% endblock %}

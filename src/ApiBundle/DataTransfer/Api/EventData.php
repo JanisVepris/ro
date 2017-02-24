@@ -24,12 +24,6 @@ class EventData
     private $playlistId;
 
     /**
-     * @var integer
-     * @Serializer\Type("integer")
-     */
-    private $videoPlaylistId;
-
-    /**
      * @var \DateTime
      * @Serializer\Type("DateTime<'Y.m.d'>")
      */
@@ -84,10 +78,15 @@ class EventData
     private $hasGallery;
 
     /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     */
+    private $hasVideoPlaylist;
+
+    /**
      * @param int $id
      * @param string $title
      * @param int $playlistId
-     * @param int $videoPlaylistId
      * @param \DateTime $eventDate
      * @param string $image
      * @param string $slug
@@ -102,7 +101,6 @@ class EventData
         $id,
         $title,
         $playlistId,
-        $videoPlaylistId,
         \DateTime $eventDate,
         $image,
         $slug,
@@ -111,12 +109,12 @@ class EventData
         $hasPoster,
         $hasTeam,
         $hasScript,
-        $hasGallery
+        $hasGallery,
+        $hasVideoPlaylist
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->playlistId = $playlistId;
-        $this->videoPlaylistId = $videoPlaylistId;
         $this->eventDate = $eventDate;
         $this->image = $image;
         $this->slug = $slug;
@@ -126,5 +124,6 @@ class EventData
         $this->hasTeam = $hasTeam;
         $this->hasScript = $hasScript;
         $this->hasGallery = $hasGallery;
+        $this->hasVideoPlaylist = $hasVideoPlaylist;
     }
 }
