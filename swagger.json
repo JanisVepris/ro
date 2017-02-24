@@ -170,19 +170,13 @@
         }
       }
     },
-    "/api/events/{eventId}/videoPlaylists/{playlistId}/videos" : {
+    "/api/events/{eventId}/videoPlaylists/videos" : {
       "get" : {
         "summary" : "Get a list of video URLs",
         "parameters" : [ {
           "name" : "eventId",
           "in" : "path",
           "description" : "event ID",
-          "required" : true,
-          "type" : "integer"
-        }, {
-          "name" : "playlistId",
-          "in" : "path",
-          "description" : "id of playlist",
           "required" : true,
           "type" : "integer"
         } ],
@@ -373,9 +367,6 @@
         "playlistId" : {
           "type" : "integer"
         },
-        "videoPlaylistId" : {
-          "type" : "integer"
-        },
         "eventDate" : {
           "type" : "string"
         },
@@ -401,6 +392,9 @@
           "type" : "boolean"
         },
         "hasGallery" : {
+          "type" : "boolean"
+        },
+        "hasVideoPlaylist" : {
           "type" : "boolean"
         }
       }
