@@ -46,3 +46,9 @@ services:
         parent: admin.controller.abstract_controller
         arguments:
             - "@ro.service.video_playlist_service"
+
+    admin.controller.scripts_controller:
+        class: AdminBundle\Controller\AdminScriptsController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.script_service"

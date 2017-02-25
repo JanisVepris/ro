@@ -23,3 +23,8 @@ services:
         class: RoBundle\Form\Type\VideoType
         tags:
             - { name: form.type }
+
+    ro.form.type.script:
+        class: RoBundle\Form\Type\ScriptType
+        tags:
+            - { name: form.type }

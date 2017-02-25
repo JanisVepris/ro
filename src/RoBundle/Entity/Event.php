@@ -80,13 +80,13 @@ class Event
     private $team;
 
     /**
-     * @var Team
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Script", mappedBy="event")
+     * @var Script
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Script", mappedBy="event", cascade={"persist", "remove"})
      */
     private $script;
 
     /**
-     * @var Team
+     * @var Facts
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\Facts", mappedBy="event")
      */
     private $facts;
@@ -270,7 +270,7 @@ class Event
      * @param Poster $poster
      * @return Event
      */
-    public function setPoster($poster)
+    public function setPoster(Poster $poster)
     {
         $this->poster = $poster;
 
@@ -289,7 +289,7 @@ class Event
      * @param Team $team
      * @return Event
      */
-    public function setTeam($team)
+    public function setTeam(Team $team)
     {
         $this->team = $team;
 
@@ -297,7 +297,7 @@ class Event
     }
 
     /**
-     * @return Team
+     * @return Script
      */
     public function getScript()
     {
@@ -305,10 +305,10 @@ class Event
     }
 
     /**
-     * @param Team $script
+     * @param Script $script
      * @return Event
      */
-    public function setScript($script)
+    public function setScript(Script $script)
     {
         $this->script = $script;
 
@@ -316,7 +316,7 @@ class Event
     }
 
     /**
-     * @return Team
+     * @return Facts
      */
     public function getFacts()
     {
@@ -324,10 +324,10 @@ class Event
     }
 
     /**
-     * @param Team $facts
+     * @param Facts $facts
      * @return Event
      */
-    public function setFacts($facts)
+    public function setFacts(Facts $facts)
     {
         $this->facts = $facts;
 
@@ -346,7 +346,7 @@ class Event
      * @param Gallery $gallery
      * @return Event
      */
-    public function setGallery($gallery)
+    public function setGallery(Gallery $gallery)
     {
         $this->gallery = $gallery;
 
@@ -362,7 +362,7 @@ class Event
      * @param Playlist $playlist
      * @return Event
      */
-    public function setPlaylist($playlist)
+    public function setPlaylist(Playlist $playlist)
     {
         $this->playlist = $playlist;
 
@@ -378,7 +378,7 @@ class Event
      * @param VideoPlaylist $videoPlaylist
      * @return Event
      */
-    public function setVideoPlaylist($videoPlaylist)
+    public function setVideoPlaylist(VideoPlaylist $videoPlaylist)
     {
         $this->videoPlaylist = $videoPlaylist;
 

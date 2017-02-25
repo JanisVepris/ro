@@ -23,3 +23,8 @@ services:
         class: RoBundle\Service\VideoPlaylistService
         arguments:
             - "@doctrine.orm.default_entity_manager"
+
+    ro.service.script_service:
+        class: RoBundle\Service\ScriptService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
