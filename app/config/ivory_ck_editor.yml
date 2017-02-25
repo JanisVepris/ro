@@ -1,8 +1,17 @@
 ivory_ck_editor:
     base_path: "bundles/admin/js/ckeditor"
     js_path: "bundles/admin/js/ckeditor/ckeditor.js"
-    default_config: article_config
+    default_config: default
     configs:
+        default:
+            allowedContent: true
+            filebrowserUploadRouteParameters: ~
+            filebrowserBrowseRouteAbsolute: true
+#            extraPlugins: 'lineutils,widgetselection,clipboard,dialogui,notificationaggregator,notification,filetools,widget,uploadwidget,imageupload'
+            toolbar:
+                - ['Bold', 'Italic', 'Underline', 'Strike', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'NumberedList', 'BulletedList', '-' , 'Outdent', 'Indent', '-', 'TextColor', 'Styles', 'Format', 'FontSize', 'Maximize']
+            uiColor: "#fcfcfc"
+            height: 450
         article_config:
             allowedContent: true
             extraPlugins: 'videoembed,dragresize'
@@ -11,6 +20,6 @@ ivory_ck_editor:
             filebrowserBrowseRouteAbsolute: true
 #            extraPlugins: 'lineutils,widgetselection,clipboard,dialogui,notificationaggregator,notification,filetools,widget,uploadwidget,imageupload'
             toolbar:
-                - ['Bold', 'Italic', 'Underline', 'Strike', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'NumberedList', 'BulletedList', '-' , 'Outdent', 'Indent', '-', 'Image', 'VideoDetector', 'Link', 'Unlink', '-', 'TextColor', 'Styles', 'Format', 'FontSize', 'Maximize', 'Source']
+                - ['Bold', 'Italic', 'Underline', 'Strike', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'NumberedList', 'BulletedList', '-' , 'Outdent', 'Indent', '-', 'Image', 'VideoDetector', 'Link', 'Unlink', '-', 'TextColor', 'Styles', 'Format', 'FontSize', 'Maximize']
             uiColor: "#fcfcfc"
             height: 450
