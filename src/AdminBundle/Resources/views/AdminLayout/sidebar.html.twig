@@ -11,6 +11,6 @@
     <ul class="nav nav-sidebar">
         <li><a href=""><span class="glyphicon glyphicon-headphones"></span> Dainų tekstai</a></li>
         <li><a href="{{ path('admin_scripts_edit', {'eventId': event.id}) }}"><span class="glyphicon glyphicon-list-alt"></span> Scenarijus</a></li>
-        <li><a href=""><span class="glyphicon glyphicon-user"></span> Dalyviai</a></li>
+        <li><a href="{{ path('admin_teams_edit', {'eventId': event.id}) }}"><span class="glyphicon glyphicon-user"></span> Dalyviai</a></li>
     </ul>
 </div>

@@ -75,7 +75,7 @@ class Event
 
     /**
      * @var Team
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Team", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Team", mappedBy="event", cascade={"persist", "remove"})
      */
     private $team;
 
@@ -87,13 +87,13 @@ class Event
 
     /**
      * @var Facts
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Facts", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Facts", mappedBy="event", cascade={"persist", "remove"})
      */
     private $facts;
 
     /**
      * @var Lyrics
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Lyrics", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Lyrics", mappedBy="event", cascade={"persist", "remove"})
      */
     private $lyrics;
 

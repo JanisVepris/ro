@@ -4,9 +4,9 @@ namespace RoBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use RoBundle\Entity\Event;
-use RoBundle\Entity\Script;
+use RoBundle\Entity\Team;
 
-class ScriptService
+class TeamService
 {
     /** @var EntityManager */
     private $em;
@@ -19,9 +19,9 @@ class ScriptService
         $this->em = $em;
     }
 
-    public function saveScript(Event $event, Script $script)
+    public function saveTeam(Event $event, Team $team)
     {
-        $event->setScript($script);
+        $event->setTeam($team);
         $this->em->persist($event);
         $this->em->flush();
     }

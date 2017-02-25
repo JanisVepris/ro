@@ -45,17 +45,6 @@ class Team
     }
 
     /**
-     * @param int $id
-     * @return Team
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getContent()
@@ -86,7 +75,7 @@ class Team
      * @param Event $event
      * @return Team
      */
-    public function setEvent($event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
 

@@ -2,45 +2,47 @@
 namespace AdminBundle\Controller;
 
 use RoBundle\Entity\Event;
-use RoBundle\Entity\Script;
+use RoBundle\Entity\Team;
 use RoBundle\Form\Type\HtmlContentType;
-use RoBundle\Service\ScriptService;
+use RoBundle\Service\TeamService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @Route("/event/{eventId}/script", service="admin.controller.scripts_controller") */
-class AdminScriptsController extends AbstractAdminController
+/** @Route("/event/{eventId}/team", service="admin.controller.teamss_controller") */
+class AdminTeamsController extends AbstractAdminController
 {
-    /** @var ScriptService */
-    private $scriptService;
+    /** @var TeamService */
+    private $teamService;
 
-    public function __construct(ScriptService $scriptService)
+    public function __construct(TeamService $teamService)
     {
-        $this->scriptService = $scriptService;
+        $this->teamService = $teamService;
     }
 
     /**
-     * @Route("/edit", name="admin_scripts_edit")
+     * @Route("/edit", name="admin_teams_edit")
      * @Template
      * @ParamConverter("event", options={"id" = "eventId"})
      */
     public function editAction(Request $request, Event $event)
     {
-        $script = $event->getScript();
+        $team = $event->getTeam();
 
-        if (!$script) {
-            $script = new Script();
-            $script->setEvent($event);
+        if (!$team) {
+            $team = new Team();
+            $team->setEvent($event);
         }
 
-        $form = $this->createForm(HtmlContentType::class, $script);
+        $form = $this->createForm(HtmlContentType::class, $team, [
+            'data_class' => Team::class
+        ]);
 
         $form->handleRequest($request);
 
         if ($form->isValid() && $form->isSubmitted()) {
-            $this->scriptService->saveScript($event, $script);
+            $this->teamService->saveTeam($event, $team);
         }
 
         return [

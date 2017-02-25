@@ -28,3 +28,8 @@ services:
         class: RoBundle\Service\ScriptService
         arguments:
             - "@doctrine.orm.default_entity_manager"
+
+    ro.service.team_service:
+        class: RoBundle\Service\TeamService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
