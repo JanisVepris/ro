@@ -21,7 +21,7 @@ class VideosController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\VideoListData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/videoPlaylist/videos",
+     *     path="/api/events/{eventId}/videoPlaylists/videos",
      *     name="ro_api_videos_index"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})
