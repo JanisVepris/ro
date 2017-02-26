@@ -4,11 +4,11 @@ const Footer = () => (
 	<footer>
 		<p className="footer-title mt">ORGANIZATORIAI</p>
 		<div className="footer-contacts-container">
-			<p>KONTAKTAI</p>
-			<p className="footer-contacts">rokooperos@midi.lt</p>
+			<div>KONTAKTAI</div>
+			<label>rokooperos@midi.lt</label>
 		</div>
-		<i className="vusa-mif-icon float-right" />
-		<i className="midi-icon float-right" />
+		<i className="vusa-mif-icon float-right" onClick={() => { window.open('http://mif.vusa.lt/') }} />
+		<i className="midi-icon float-right" onClick={() => { window.open('http://midi.lt/') }} />
 		<i className="midi-ro-icon float-right" />
 	</footer>
 )
