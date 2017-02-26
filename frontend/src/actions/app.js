@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 import { loadEventInfo, loadEventNews } from './events'
-import { setHeaderCover } from './header'
+import { setHeaderCover, setHeaderLoading } from './header'
 
 // Action types
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
@@ -80,10 +80,13 @@ export const navigateToOverview = (id) => (
 	browserHistory.push(newPath)
 	dispatch(push(newPath))
 
+	dispatch(setHeaderLoading(true))
+
 	return dispatch(loadEventInfo(id))
 		.then(() => dispatch(loadEventNews(id)))
 		.then(() => {
 			dispatch(setActiveCategory('news'))
 			dispatch(setActiveEvent(id))
+			dispatch(setHeaderCover(getState().events.byId[id].image))
 		})
 }

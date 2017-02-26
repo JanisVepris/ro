@@ -46,17 +46,13 @@ export const loadEventNews = (id) => (
 ) => {
 
 	const state = getState()
-	const { activeEventId } = state.app
 
 	if (state.events.newsById[id]) {
 		return Promise.resolve()
 	}
 
 	return eventArticlesRepo.getEventArticles(id)
-		.then(response => {
-			dispatch(setNews(id, response))
-			dispatch(setHeaderCover(state.events.byId[activeEventId].image))
-		})
+		.then(response => dispatch(setNews(id, response)))
 		.catch(err => {
 			console.log(err)
 		})
