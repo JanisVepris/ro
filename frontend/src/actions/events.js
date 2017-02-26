@@ -27,7 +27,7 @@ export const loadEventInfo = (id) => (
 	
 	const state = getState()
 
-	if (state.events.byId[state.app.activeEventId]) {
+	if (state.events.byId[id]) {
 		return Promise.resolve()
 	}
 
@@ -48,8 +48,6 @@ export const loadEventNews = (id) => (
 	const state = getState()
 	const { activeEventId } = state.app
 
-	dispatch(setHeaderCover(state.events.byId[activeEventId].image))
-
 	if (state.events.newsById[id]) {
 		return Promise.resolve()
 	}
@@ -57,6 +55,7 @@ export const loadEventNews = (id) => (
 	return eventArticlesRepo.getEventArticles(id)
 		.then(response => {
 			dispatch(setNews(id, response))
+			dispatch(setHeaderCover(state.events.byId[activeEventId].image))
 		})
 		.catch(err => {
 			console.log(err)

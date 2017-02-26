@@ -79,9 +79,11 @@ export const navigateToOverview = (id) => (
 
 	browserHistory.push(newPath)
 	dispatch(push(newPath))
-	dispatch(setActiveEvent(id))
-	dispatch(setActiveCategory('news'))
 
 	return dispatch(loadEventInfo(id))
 		.then(() => dispatch(loadEventNews(id)))
+		.then(() => {
+			dispatch(setActiveCategory('news'))
+			dispatch(setActiveEvent(id))
+		})
 }
