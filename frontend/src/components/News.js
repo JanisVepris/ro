@@ -1,6 +1,8 @@
 import React from 'react'
 import { loadEventNews } from '../actions/events'
 
+import NewsOverviewTable from '../containers/news/news-overview-table'
+
 export default class App extends React.Component {
 
 	componentWillMount() {
@@ -14,8 +16,8 @@ export default class App extends React.Component {
 		}
 
 		return (
-			<div>
-				{ this.props.ids }
+			<div className="content">
+				<NewsOverviewTable />
 			</div>
 		)
 	}

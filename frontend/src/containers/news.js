@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 	return {
 		initialized: !!news,
 		eventId: activeEventId,
-		ids: news && news.total
+		ids: news
 	}
 }
 
