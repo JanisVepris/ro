@@ -13,10 +13,11 @@ const NewsOverviewItem = ({
 	return (
 		<div className={ containerClassName }>
 			<div className="news-overview-item-image-container">
-				<div className="news-overview-item-image" style={{ backgroundImage: `url(${imageUrl})` }} />
+				<div className="news-overview-item-image clickable" style={{ backgroundImage: `url(${imageUrl})` }} />
 			</div>
 			<p className="news-overview-item-title">{ title }</p>
-			<p className="news-overview-item-date">{ createdOn }</p>
+			<label className="news-overview-item-date">{ createdOn }</label>
+			<label className="news-overview-item-read-more clickable">Skaityti daugiau...</label>
 		</div>
 	)
 }

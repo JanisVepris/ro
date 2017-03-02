@@ -21,6 +21,7 @@ export default class App extends React.Component {
 
 		return (
 			<div className="content">
+				<p className="article-title">{ this.props.title }</p>
 				<NewsOverviewTable />
 			</div>
 		)

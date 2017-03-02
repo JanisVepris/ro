@@ -1,10 +1,13 @@
 .header {
+    position: fixed;
     width: 100%;
     height: 50px;
+    margin-top: -50px;
     background-color: #1E1E1E;
     color: #E4E4E4;
     display: flex;
     align-items: center;
+    z-index: 1;
 }
 
 .header > * {
@@ -114,6 +117,7 @@
 }
 
 .cover {
+    margin-top: 50px;
     width: 100%;
 }
 
