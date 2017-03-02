@@ -62,3 +62,9 @@ body {
         padding: 24px;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .content {
+        padding: 12px;
+    }
+}
