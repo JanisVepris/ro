@@ -17,7 +17,7 @@ const NewsOverviewLatestItem = ({
 				<p className="latest-article-title">{ title }</p>
 				<label className="latest-article-date">{ createdOn }</label>
 				<p className="latest-article-description">{ description }</p>
-				<label className="latest-article-read-more clickable float-right">Skaityti daugiau...</label>
+				<label className="latest-article-read-more clickable float-right no-select">Skaityti daugiau...</label>
 			</div>
 		</div>
 	)
