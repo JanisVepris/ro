@@ -2,13 +2,21 @@ import * as React from 'react'
 
 const NewsOverviewItem = ({
 	imageUrl,
+	createdOn,
 	title,
-	onClick
+	onClick,
+	hasSpacingMargin
 }) => {
 
+	const containerClassName = 'news-overview-item' + (hasSpacingMargin ? ' news-spacing-margin' : '')
+
 	return (
-		<div>
-			
+		<div className={ containerClassName }>
+			<div className="news-overview-item-image-container">
+				<div className="news-overview-item-image" style={{ backgroundImage: `url(${imageUrl})` }} />
+			</div>
+			<p>{ title }</p>
+			<label>{ createdOn }</label>
 		</div>
 	)
 }

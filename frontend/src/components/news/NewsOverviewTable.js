@@ -3,44 +3,60 @@ import * as React from 'react'
 import NewsOverviewLatestItem from './NewsOverviewLatestItem'
 import NewsOverviewItem from './NewsOverviewItem'
 
-const NewsOverviewTable = ({
-	news
-}) => {
-	console.log(news)
-	return (
-		<div>
-			<div>
-				{
-					news.length > 0 &&
-						<NewsOverviewLatestItem 
-							imageUrl={ news[0].image }
-							description={ news[0].description }
-							title={ news[0].title }
-							onClick={ () => {} }
-							createdOn={ news[0].createdOn }
-							/>
-				}
-			</div>
-			<div>
-				{	
-					news.map((newsItem, index) => {
+export default class NewsOverviewTable extends React.Component {
 
-						if (index === 0) {
-							return
-						}
+	constructor() {
 
-						return <NewsOverviewItem
-									key={ index }
-									imageUrl={ newsItem.image }
-									title={ newsItem.title }
-									onClick={ () => {} }
-									createdDate={ newsItem.createdDate }
-									/>
+		super()
+		this.state = {
+			marginSpacingMod: window.innerWidth > 950 ? 3 : 2
+		}
+
+		window.addEventListener('resize', () => {
+
+			const marginSpacingMod = window.innerWidth > 950 ? 3 : 2
+
+			if (this.state.marginSpacingMod !== marginSpacingMod) {
+				this.setState({ marginSpacingMod })
+			}
+		})
+	}  
+
+	render() {
+
+		const { firstArticle, articles } = this.props
+
+		return (
+			<div>
+				<div>
+					{
+						firstArticle &&
+							<NewsOverviewLatestItem 
+								imageUrl={ firstArticle.image }
+								description={ firstArticle.description }
+								title={ firstArticle.title }
+								onClick={ () => {} }
+								createdOn={ firstArticle.createdOn }
+								/>
 					}
-				)}
+				</div>
+				<div className="news-overview-container">
+					{	
+						articles.map((newsItem, index) => (
+							<NewsOverviewItem
+								key={ index }
+								imageUrl={ newsItem.image }
+								title={ newsItem.title }
+								onClick={ () => {} }
+								createdOn={ newsItem.createdOn }
+								hasSpacingMargin={ 
+									(index + 1) % this.state.marginSpacingMod !== 0
+								}
+								/>
+						)
+					)}
+				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
-
-export default NewsOverviewTable
