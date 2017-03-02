@@ -11,6 +11,10 @@ export default class App extends React.Component {
 
 	render() {
 
+		if (this.props.headerLoading) {
+			return <div />
+		}
+
 		if (!this.props.initialized) {
 			return <div>initializing news</div>
 		}
