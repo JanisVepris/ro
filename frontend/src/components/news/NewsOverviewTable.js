@@ -17,7 +17,7 @@ const NewsOverviewTable = ({
 							description={ news[0].description }
 							title={ news[0].title }
 							onClick={ () => {} }
-							createdDate={ news[0].createdDate }
+							createdOn={ news[0].createdOn }
 							/>
 				}
 			</div>

@@ -33,4 +33,32 @@ body {
 
 .content {
     padding: 36px 144px;
+    font-size: 15px;
+}
+
+// Media queries
+
+@media screen and (max-width: 1300px) {
+    .content {
+        padding: 36px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .content {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .content {
+        padding: 36px 72px;
+    }
+}
+
+// Mobile
+@media screen and (max-width: 650px) {
+    .content {
+        padding: 24px;
+    }
 }

@@ -8,7 +8,7 @@ const NewsOverviewItem = ({
 
 	return (
 		<div>
-			{ title }
+			
 		</div>
 	)
 }
