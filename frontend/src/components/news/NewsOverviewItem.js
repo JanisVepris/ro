@@ -15,8 +15,8 @@ const NewsOverviewItem = ({
 			<div className="news-overview-item-image-container">
 				<div className="news-overview-item-image" style={{ backgroundImage: `url(${imageUrl})` }} />
 			</div>
-			<p>{ title }</p>
-			<label>{ createdOn }</label>
+			<p className="news-overview-item-title">{ title }</p>
+			<p className="news-overview-item-date">{ createdOn }</p>
 		</div>
 	)
 }
