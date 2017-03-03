@@ -4,7 +4,7 @@ import Config from '../config'
 import * as articleRepo from '../repo/event-article'
 
 import { loadEventNews } from './events'
-import { setHeaderCover } from './header'
+import { setHeaderLoading, setHeaderCover } from './header'
 
 // Action types
 export const ARTICLE_SET_ACTIVE = 'ARTICLE_SET_ACTIVE'
@@ -40,6 +40,7 @@ export const navigateToArticle = (articleSlug) => (
 
 	dispatch(push('/' + eventSlug + '/' + categorySlug + '/' + articleSlug))
 	dispatch(setArticleLoading(true))
+	dispatch(setHeaderLoading(true))
 
 	return dispatch(loadEventNews(activeEventId))
 		.then(() => {

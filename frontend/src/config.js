@@ -4,6 +4,10 @@ export default {
 			title: 'Naujienos',
 			slug: 'naujienos'
 		},
+		article: {
+			title: 'Naujienos',
+			slug: 'naujienos'
+		},
 		gallery: {
 			title: 'Galerija',
 			slug: 'galerija'

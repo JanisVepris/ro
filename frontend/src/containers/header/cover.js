@@ -4,7 +4,8 @@ import Cover from '../../components/header/Cover'
 import { setHeaderLoading } from '../../actions/header'
 
 const mapStateToProps = (state) => ({
-	url: state.header.coverUrl
+	url: state.header.coverUrl,
+	isLoading: state.header.loading
 })
 
 export default connect(

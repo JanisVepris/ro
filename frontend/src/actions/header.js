@@ -39,6 +39,10 @@ export const navigateToCategory = (category) => (
 		return
 	}
 
+	if (category !== 'article') {
+		dispatch(setHeaderCover(state.events.byId[state.app.activeEventId].image))
+	}
+
 	const categorySlug = Config.categories[category].slug
 	const eventSlug = state.app.eventsById[state.app.activeEventId].slug
 

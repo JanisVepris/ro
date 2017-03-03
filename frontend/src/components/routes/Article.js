@@ -1,10 +1,12 @@
 import React from 'react'
-
 import { navigateToArticle } from '../../actions/articles'
+import { navigateToCategory } from '../../actions/header'
+import Spinner from '../Spinner'
 
 export default class App extends React.Component {
 
 	componentWillMount() {
+		this.props.dispatch(navigateToCategory('article'))
 		this.props.dispatch(navigateToArticle(this.props.params.articleSlug))
 	}
 
@@ -15,7 +17,7 @@ export default class App extends React.Component {
 		}
 
 		if (this.props.articleLoading) {
-			return <div>initializing article</div>
+			return <Spinner />
 		}
 
 		return (

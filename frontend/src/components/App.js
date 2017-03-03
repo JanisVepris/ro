@@ -27,7 +27,7 @@ export default class App extends React.Component {
 
 		if (!this.props.initialized) {
 			return (
-				<div>Spinner</div>
+				<div />
 			)
 		}
 

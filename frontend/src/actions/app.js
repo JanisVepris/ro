@@ -63,14 +63,7 @@ export const initialize = (urlParams) => (
 			return Promise.resolve()
 		})
 		.then(() => dispatch(loadEventInfo(getState().app.activeEventId)))
-		.then(() => {
-
-			const state = getState()
-			const { activeEventId } = state.app
-
-			dispatch(setHeaderCover(state.events.byId[activeEventId].image))
-			dispatch(setInitialized())
-		})
+		.then(() => dispatch(setInitialized()))
 		.catch(error => {
 			console.log('Error: ', error)
 		})
