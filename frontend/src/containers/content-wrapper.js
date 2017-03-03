@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import ContentWrapper from '../components/ContentWrapper'
 
+// Reik selektoriaus kategorijom
 const mapStateToProps = (state) => {
 
 	const headerLoading = state.header.loading
@@ -13,7 +14,7 @@ const mapStateToProps = (state) => {
 		contentLoading = headerLoading || !state.events.newsById[activeEventId]
 	} else 
 	if (activeCategory === 'article') {
-		contentLoading = headerLoading || !state.events.articleById[state.app.activeArticle]
+		contentLoading = headerLoading || !state.events.articleById[state.events.activeArticle]
 	} else 	
 	if (activeCategory === 'videos') {
 		contentLoading = headerLoading || !state.videos.byId[state.events.byId[activeEventId].videoPlaylistId]

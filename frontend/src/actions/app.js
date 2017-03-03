@@ -76,6 +76,7 @@ export const navigateToOverview = (id) => (
 ) => {
 
 	dispatch(setHeaderLoading(true))
+	window.scrollTo(0, 0)
 
 	const eventSlug = getState().app.eventsById[id].slug
 	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug
