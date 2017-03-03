@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 
 import NewsOverviewTable from '../../components/news/NewsOverviewTable'
 
+import { navigateToArticle } from '../../actions/articles'
+
 // Pagingo logika tures atgult cia
 // Reik selectoriu
 const mapStateToProps = (state) => {
@@ -16,5 +18,25 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(
-	mapStateToProps
+	mapStateToProps,
+	{
+		navigateToArticle
+	},
+	(stateProps, dispatchProps) => {
+
+		const firstArticle = {
+			...stateProps.firstArticle,
+			onClick: () => dispatchProps.navigateToArticle(stateProps.firstArticle.slug)
+		}
+		
+		const articles = stateProps.articles.map(article => ({
+			...article,
+			onClick: () => dispatchProps.navigateToArticle(article.slug)
+		}))
+
+		return {
+			firstArticle,
+			articles
+		}
+	}
 )(NewsOverviewTable)

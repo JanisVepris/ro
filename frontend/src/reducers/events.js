@@ -6,6 +6,12 @@ import {
 	EVENT_NEWS_SET
 } from '../actions/events'
 
+import { 
+	ARTICLE_SET_ACTIVE,
+	ARTICLE_SET_LOADING,
+	ARTICLE_SET
+} from '../actions/articles'
+
 const byId = toReducer({}, state => ({
 	[EVENT_ADD]: action => ({
 		...state,
@@ -20,7 +26,25 @@ const newsById = toReducer({}, state => ({
 	})
 }))
 
+const articleById = toReducer({}, state => ({
+	[ARTICLE_SET]: action => ({
+		...state,
+		[action.id]: action.article
+	})
+}))
+
+const activeArticle = toReducer(null, () => ({
+	[ARTICLE_SET_ACTIVE]: action => action.id
+}))
+
+const articleLoading = toReducer(false, () => ({
+	[ARTICLE_SET_LOADING]: action => action.loading
+}))
+
 export default combineReducers({
 	byId,
-	newsById
+	newsById,
+	activeArticle,
+	articleLoading,
+	articleById
 })

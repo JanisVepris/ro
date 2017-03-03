@@ -7,28 +7,32 @@ export default (id) => {
 			offset: 0,
 			articles: [
 				{
-					articleId: 201402,
+					id: 201402,
+					slug: 'artiklas201402',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje. Šį kartą kalbiname Artūrą Žabą, kuris dar studijuodamas Lietuvos muzikos ir teatro akademijoje dalyvavo MIDI Roko Operoje. Pasidomėjome, kaip jam sekėsi derinti šiuos du dalykus.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201403,
+					id: 201403,
+					slug: 'artiklas201403',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201404,
+					id: 201404,
+					slug: 'artiklas201404',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201405,
+					id: 201405,
+					slug: 'artiklas201405',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
@@ -42,35 +46,40 @@ export default (id) => {
 			offset: 0,
 			articles: [
 				{
-					articleId: 201501,
+					id: 201501,
+					slug: 'artiklas201501',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje. Šį kartą kalbiname Artūrą Žabą, kuris dar studijuodamas Lietuvos muzikos ir teatro akademijoje dalyvavo MIDI Roko Operoje. Pasidomėjome, kaip jam sekėsi derinti šiuos du dalykus ir kitus.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201502,
+					id: 201502,
+					slug: 'artiklas201502',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201503,
+					id: 201503,
+					slug: 'artiklas201503',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201504,
+					id: 201504,
+					slug: 'artiklas201504',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
 					createdOn: '2016.03.12'
 				},
 				{
-					articleId: 201505,
+					id: 201505,
+					slug: 'artiklas201505',
 					title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
 					image: 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',

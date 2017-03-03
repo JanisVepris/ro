@@ -1,8 +1,6 @@
 import * as eventInfoRepo from '../repo/event-info'
 import * as eventArticlesRepo from '../repo/event-articles'
 
-import { setHeaderCover } from './header'
-
 // Action types
 export const EVENT_ADD = 'EVENT_ADD'
 export const EVENT_NEWS_SET = 'EVENT_NEWS_SET'

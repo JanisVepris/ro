@@ -35,7 +35,7 @@ export default class NewsOverviewTable extends React.Component {
 								imageUrl={ firstArticle.image }
 								description={ firstArticle.description }
 								title={ firstArticle.title }
-								onClick={ () => {} }
+								onClick={ firstArticle.onClick }
 								createdOn={ firstArticle.createdOn }
 								/>
 					}
@@ -47,7 +47,7 @@ export default class NewsOverviewTable extends React.Component {
 								key={ index }
 								imageUrl={ newsItem.image }
 								title={ newsItem.title }
-								onClick={ () => {} }
+								onClick={ newsItem.onClick }
 								createdOn={ newsItem.createdOn }
 								hasSpacingMargin={ 
 									(index + 1) % this.state.marginSpacingMod !== 0

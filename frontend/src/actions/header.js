@@ -35,8 +35,10 @@ export const navigateToCategory = (category) => (
 
 	const state = getState()
 
-	if (state.app.activeCategory === category) {
-		return
+	const activeEvent = state.events.byId[state.app.activeEventId]
+
+	if (state.header.coverUrl !== activeEvent.image) {
+		dispatch(setHeaderCover(activeEvent.image))
 	}
 
 	const categorySlug = Config.categories[category].slug
