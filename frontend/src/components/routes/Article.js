@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { navigateToArticle } from '../actions/articles'
+import { navigateToArticle } from '../../actions/articles'
 
 export default class App extends React.Component {
 

@@ -1,5 +1,4 @@
 import * as eventVideosRepo from '../repo/event-videos'
-import { navigateToCategory } from './header'
 
 // Action types
 export const VIDEO_PLAYLIST_SET = 'VIDEO_PLAYLIST_SET'
@@ -17,8 +16,6 @@ export const loadVideoPlaylist = (id) => (
 ) => {
 
 	const state = getState()
-
-	dispatch(navigateToCategory('videos'))
 
 	if (state.galleries.byId[id]) {
 		return Promise.resolve()

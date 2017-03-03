@@ -1,13 +1,15 @@
 import React from 'react'
 
-import ExpandableItem from './ExpandableItem'
+import ExpandableItem from './../ExpandableItem'
 import ReactPlayer from 'react-player'
 
-import { loadVideoPlaylist } from '../actions/videos'
+import { loadVideoPlaylist } from '../../actions/videos'
+import { navigateToCategory } from '../../actions/header'
 
 export default class App extends React.Component {
 
 	componentWillMount() {
+		this.props.dispatch(navigateToCategory('videos'))
 		this.props.dispatch(loadVideoPlaylist(this.props.videoPlaylistId))
 	}
 

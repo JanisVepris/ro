@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import GalleryComponent from '../components/Gallery'
+import GalleryComponent from '../components/routes/Gallery'
 
 const mapStateToProps = (state) => {
 	

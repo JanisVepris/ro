@@ -1,8 +1,8 @@
 import React from 'react'
-import { loadEventNews } from '../actions/events'
-import { setHeaderCover, navigateToCategory } from '../actions/header'
+import { loadEventNews } from '../../actions/events'
+import { setHeaderCover, navigateToCategory } from '../../actions/header'
 
-import NewsOverviewTable from '../containers/news/news-overview-table'
+import NewsOverviewTable from '../../containers/news/news-overview-table'
 
 export default class News extends React.Component {
 

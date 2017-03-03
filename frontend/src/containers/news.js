@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import NewsComponent from '../components/News'
+import NewsComponent from '../components/routes/News'
 
 const mapStateToProps = (state) => {
 	

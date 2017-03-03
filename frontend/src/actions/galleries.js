@@ -1,5 +1,4 @@
 import * as eventGalleryRepo from '../repo/event-galleries'
-import { navigateToCategory } from './header'
 
 // Action types
 export const GALLERY_SET = 'EVENT_NEWS_SET'
@@ -17,8 +16,6 @@ export const loadGallery = (id) => (
 ) => {
 
 	const state = getState()
-
-	dispatch(navigateToCategory('gallery'))
 
 	if (state.galleries.byId[id]) {
 		return Promise.resolve()
