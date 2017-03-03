@@ -107,7 +107,21 @@ body {
     animation: spin 1s linear infinite;
 }
 
+.cover .spinner-container {
+    padding-bottom: 50px;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+// Other
+img {
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }

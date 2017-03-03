@@ -17,7 +17,7 @@ const NewsOverviewItem = ({
 			</div>
 			<p className="news-overview-item-title ">{ title }</p>
 			<label className="news-overview-item-date">{ createdOn }</label>
-			<label className="news-overview-item-read-more no-select">Skaityti...</label>
+			<label className="news-overview-item-read-more no-select clickable">Skaityti...</label>
 		</div>
 	)
 }

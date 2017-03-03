@@ -8,20 +8,24 @@ const Cover = ({
 	onLoad
 }) => {
 
-	const coverStyle = {
+	const imageStyle = {
 		visibility: isLoading ? 'hidden' : 'visible'
 	}
 
-	return (
-		<div className='cover'>
+	const coverStyle = {
+		minHeight: isLoading ? '100vh' : 'auto'
+	}
 
-			{ isLoading && <Spinner />}
+	return (
+		<div className='cover relative' style={ coverStyle }>
+
+			{ isLoading && <Spinner /> }
 
 			<ImageLoader
 				src={ url }
 				wrapper={ React.DOM.div }
 				onLoad={ onLoad }
-				style={ coverStyle }>
+				style={ imageStyle }>
 			</ImageLoader>
 		</div>
 	)
