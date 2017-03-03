@@ -1,6 +1,7 @@
 import * as eventsRepo from '../repo/events'
 import { push } from 'react-router-redux'
 import { browserHistory } from 'react-router'
+import Config from '../config'
 
 import { loadEventInfo, loadEventNews } from './events'
 import { setHeaderCover, setHeaderLoading } from './header'
@@ -9,6 +10,7 @@ import { setHeaderCover, setHeaderLoading } from './header'
 export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
 export const APP_SET_EVENTS = 'APP_SET_EVENTS'
 export const APP_SET_ACTIVE_EVENT = 'APP_SET_ACTIVE_EVENT'
+export const APP_SET_DEFAULT_EVENT = 'APP_SET_DEFAULT_EVENT'
 export const APP_SET_ACTIVE_CATEGORY = 'APP_SET_ACTIVE_CATEGORY'
 
 // Action creators
@@ -31,6 +33,11 @@ export const setActiveCategory = (category) => ({
 	category
 })
 
+export const setDefaultEvent = (id) => ({
+	type: APP_SET_DEFAULT_EVENT,
+	id
+})
+
 // Thunks
 export const initialize = (urlParams) => (
 	dispatch,
@@ -51,6 +58,7 @@ export const initialize = (urlParams) => (
 			}
 
 			dispatch(setActiveEvent(activeEvent.id))
+			dispatch(setDefaultEvent(response[0].id))
 
 			return Promise.resolve()
 		})
@@ -75,18 +83,40 @@ export const navigateToOverview = (id) => (
 ) => {
 
 	const eventSlug = getState().app.eventsById[id].slug
-	const newPath = '/' + eventSlug
+	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug
 
 	browserHistory.push(newPath)
 	dispatch(push(newPath))
-
-	dispatch(setHeaderLoading(true))
 
 	return dispatch(loadEventInfo(id))
 		.then(() => dispatch(loadEventNews(id)))
 		.then(() => {
 			dispatch(setActiveCategory('news'))
-			dispatch(setActiveEvent(id))
 			dispatch(setHeaderCover(getState().events.byId[id].image))
 		})
+}
+
+export const setActiveEventBySlug = (slug) => (
+	dispatch,
+	getState
+) => {
+
+	if (!slug) {
+		dispatch(setActiveEvent(getState().app.defaultEventId))
+		return
+	}
+
+	const { eventsById } = getState().app
+
+	const event = Object.keys(eventsById)
+		.map(eventId => eventsById[eventId])
+		.find(event => event.slug === slug)
+
+	const eventId = event && event.id
+	
+	if (eventId === getState().app.activeEventId) {
+		return
+	}
+
+	dispatch(setActiveEvent(eventId))
 }

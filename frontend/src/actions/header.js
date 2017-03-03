@@ -35,10 +35,8 @@ export const navigateToCategory = (category) => (
 
 	const state = getState()
 
-	const activeEvent = state.events.byId[state.app.activeEventId]
-
-	if (state.header.coverUrl !== activeEvent.image) {
-		dispatch(setHeaderCover(activeEvent.image))
+	if (state.app.activeCategory === category) {
+		return
 	}
 
 	const categorySlug = Config.categories[category].slug
@@ -49,8 +47,13 @@ export const navigateToCategory = (category) => (
 }
 
 export const setHeaderCover = (url) => (
-	dispatch
+	dispatch,
+	getState
 ) => {
+
+	if (getState().header.coverUrl === url) {
+		return
+	}
 
 	dispatch(setHeaderLoading(true))
 	dispatch(setHeaderImage(url))

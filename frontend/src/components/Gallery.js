@@ -1,7 +1,7 @@
 import React from 'react'
 import { loadGallery } from '../actions/galleries'
 
-export default class App extends React.Component {
+export default class Gallery extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(loadGallery(this.props.galleryId))

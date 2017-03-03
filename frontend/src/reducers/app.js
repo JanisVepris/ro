@@ -5,6 +5,7 @@ import {
 	APP_SET_INITIALIZED,
 	APP_SET_EVENTS,
 	APP_SET_ACTIVE_EVENT,
+	APP_SET_DEFAULT_EVENT,
 	APP_SET_ACTIVE_CATEGORY
 } from '../actions/app'
 
@@ -14,6 +15,10 @@ const initialized = toReducer(false, () => ({
 
 const activeEventId = toReducer(null, () => ({
 	[APP_SET_ACTIVE_EVENT]: action => action.id
+}))
+
+const defaultEventId = toReducer(null, () => ({
+	[APP_SET_DEFAULT_EVENT]: action => action.id
 }))
 
 const eventsById = toReducer({}, () => ({
@@ -35,6 +40,7 @@ const activeCategory = toReducer('news', () => ({
 export default combineReducers({
 	initialized,
 	activeEventId,
+	defaultEventId,
 	eventsById,
 	activeCategory
 })

@@ -59,7 +59,7 @@ export const navigateToArticle = (articleSlug) => (
 				: Promise.reject()
 		})
 		.then(article => {
-			debugger
+			
 			if (article.image) {
 				dispatch(setHeaderCover(article.image))
 			}	

@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 
-import { initialize } from '../actions/app'
+import { initialize, setActiveEventBySlug } from '../actions/app'
 
 import '../styles/main.scss'
 import '../styles/header.scss'
@@ -17,6 +17,10 @@ export default class App extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(initialize(this.props.params))
+	}
+
+	componentWillReceiveProps(newProps) {
+		newProps.dispatch(setActiveEventBySlug(newProps.params.eventSlug))
 	}
 
 	render() {
