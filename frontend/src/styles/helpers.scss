@@ -43,6 +43,14 @@
 	position: relative;
 }
 
+.min-opacity {
+	opacity: 0;
+}
+
+.max-opacity {
+	opacity: 1;
+}
+
 .no-select {
   -webkit-touch-callout: none;
     -webkit-user-select: none;

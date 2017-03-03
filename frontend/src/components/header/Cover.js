@@ -8,10 +8,6 @@ const Cover = ({
 	onLoad
 }) => {
 
-	const imageStyle = {
-		visibility: isLoading ? 'hidden' : 'visible'
-	}
-
 	const coverStyle = {
 		minHeight: isLoading ? '100vh' : 'auto'
 	}
@@ -22,10 +18,10 @@ const Cover = ({
 			{ isLoading && <Spinner /> }
 
 			<ImageLoader
+				className={ isLoading ? 'min-opacity' : 'max-opacity opacity-animation'}
 				src={ url }
 				wrapper={ React.DOM.div }
-				onLoad={ onLoad }
-				style={ imageStyle }>
+				onLoad={ onLoad }>
 			</ImageLoader>
 		</div>
 	)

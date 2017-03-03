@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 
 	return {
 		headerLoading: state.header.loading,
-		initialized: !!news,
+		newsLoading: !news,
 		eventId: activeEventId,
 		ids: news,
 		title: eventName + ': Naujienos'

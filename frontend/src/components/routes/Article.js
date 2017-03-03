@@ -12,16 +12,15 @@ export default class App extends React.Component {
 
 	render() {
 
-		if (this.props.headerLoading) {
-			return <div />
-		}
-
-		if (this.props.articleLoading) {
+		if (!this.props.headerLoading && this.props.articleLoading) {
 			return <Spinner />
 		}
 
+		const contentClassName = 'content'
+			+ (this.props.headerLoading || this.props.articleLoading ? '' : ' max-opacity opacity-animation')
+
 		return (
-			<div className="content">
+			<div className={ contentClassName }>
 				<label className="article-title">{ this.props.title }</label>
 				<label className="article" style={{ display: 'block' }}>{ this.props.date }</label>
 				<div className="article mt-xl" dangerouslySetInnerHTML={{ __html: this.props.content }} />

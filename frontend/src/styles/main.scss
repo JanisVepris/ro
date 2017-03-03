@@ -36,6 +36,15 @@ body {
 .content {
     padding: 36px 144px;
     font-size: 15px;
+    opacity: 0;
+}
+
+.opacity-animation {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 
 .content .article {
@@ -87,6 +96,11 @@ body {
 }
 
 // Spinner
+.content-spinner {
+    position: relative;
+    height: 300px;
+}
+
 .spinner-container {
     position: absolute;
     width: 50px;

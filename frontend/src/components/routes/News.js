@@ -1,5 +1,6 @@
 import React from 'react'
 import { navigateToOverview } from '../../actions/app'
+import Spinner from '../Spinner'
 
 import NewsOverviewTable from '../../containers/news/news-overview-table'
 
@@ -11,16 +12,15 @@ export default class News extends React.Component {
 
 	render() {
 
-		if (this.props.headerLoading) {
-			return <div />
+		if (!this.props.headerLoading && this.props.newsLoading) {
+			return <Spinner />
 		}
 
-		if (!this.props.initialized) {
-			return <div>initializing news</div>
-		}
+		const contentClassName = 'content'
+			+ (this.props.headerLoading || this.props.newsLoading ? '' : ' max-opacity opacity-animation')
 
 		return (
-			<div className="content">
+			<div className={ contentClassName }>
 				<p className="article-title">{ this.props.title }</p>
 				<NewsOverviewTable />
 			</div>

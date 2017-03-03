@@ -56,6 +56,7 @@ export const setHeaderCover = (url) => (
 ) => {
 
 	if (getState().header.coverUrl === url) {
+		dispatch(setHeaderLoading(false))
 		return
 	}
 

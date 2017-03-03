@@ -75,6 +75,8 @@ export const navigateToOverview = (id) => (
 	getState
 ) => {
 
+	dispatch(setHeaderLoading(true))
+
 	const eventSlug = getState().app.eventsById[id].slug
 	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug
 
