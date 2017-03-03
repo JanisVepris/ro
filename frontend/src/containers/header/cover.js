@@ -14,7 +14,6 @@ export default connect(
 	},
 	(sp, dp) => ({
 		...sp,
-		onLoad: () => dp.setHeaderLoading(false),
-		beforeLoad: () => dp.setHeaderLoading(true)
+		onLoad: () => dp.setHeaderLoading(false)
 	})
 )(Cover)

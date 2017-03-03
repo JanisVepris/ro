@@ -3,23 +3,17 @@ import ImageLoader from 'react-imageloader'
 
 const Cover = ({
 	url,
-	beforeLoad,
 	onLoad
-}) => {
-
-	beforeLoad()
-
-	return (
-		<div className='cover'>
-			<ImageLoader
-				src={ url }
-				wrapper={ React.DOM.div }
-				preloader={ preloader }
-				onLoad={ onLoad }>
-			</ImageLoader>
-		</div>
-	)
-}
+}) => (
+	<div className='cover'>
+		<ImageLoader
+			src={ url }
+			wrapper={ React.DOM.div }
+			preloader={ preloader }
+			onLoad={ onLoad }>
+		</ImageLoader>
+	</div>
+)
 
 const preloader = () => {
 	return <div>SPINNAH IMAGE</div>

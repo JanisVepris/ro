@@ -18,7 +18,7 @@ export const toggleNavigationDropdown = () => ({
 	type: HEADER_TOGGLE_NAVIGATION
 })
 
-export const setHeaderCover = (url) => ({
+export const setHeaderImage = (url) => ({
 	type: HEADER_SET_COVER,
 	url
 })
@@ -46,4 +46,12 @@ export const navigateToCategory = (category) => (
 
 	dispatch(push('/' + eventSlug + '/' + categorySlug))
 	dispatch(setActiveCategory(category))
+}
+
+export const setHeaderCover = (url) => (
+	dispatch
+) => {
+
+	dispatch(setHeaderLoading(true))
+	dispatch(setHeaderImage(url))
 }
