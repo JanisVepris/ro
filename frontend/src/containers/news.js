@@ -8,8 +8,6 @@ const mapStateToProps = (state) => {
 	const eventName = state.app.eventsById[activeEventId].name
 
 	return {
-		headerLoading: state.header.loading,
-		newsLoading: !news,
 		eventId: activeEventId,
 		ids: news,
 		title: eventName + ': Naujienos'

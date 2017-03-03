@@ -11,8 +11,7 @@ const mapStateToProps = (state) => {
 	const eventName = state.app.eventsById[activeEventId].name
 
 	return {
-		headerLoading: state.header.loading,
-		videosLoading: !videos,
+		initialized: !!videos,
 		videoPlaylistId,
 		videos,
 		title: eventName + ': Įrašai',

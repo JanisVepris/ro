@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from './Header'
+import ContentWrapper from '../containers/content-wrapper'
 
 import { initialize, setActiveEventBySlug } from '../actions/app'
 
@@ -10,7 +11,6 @@ import '../styles/helpers.scss'
 import '../styles/news-overview.scss'
 import '../styles/expandable-item.scss'
 
-import Cover from '../containers/header/Cover'
 import Footer from './Footer'
 
 export default class App extends React.Component {
@@ -34,8 +34,9 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<Header />
-				<Cover />
-				{ this.props.children }
+				<ContentWrapper>
+					{ this.props.children }
+				</ContentWrapper>
 				<Footer />
 			</div>
 		)

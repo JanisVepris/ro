@@ -8,7 +8,6 @@ const mapStateToProps = (state) => {
 	const urls = state.galleries.byId[activeGalleryId]
 
 	return {
-		headerLoading: state.header.loading,
 		galleryLoading: !urls,
 		galleryId: activeGalleryId,
 		ids: urls && urls.length
