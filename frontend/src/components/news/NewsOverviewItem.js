@@ -8,16 +8,16 @@ const NewsOverviewItem = ({
 	hasSpacingMargin
 }) => {
 
-	const containerClassName = 'news-overview-item' + (hasSpacingMargin ? ' news-spacing-margin' : '')
+	const containerClassName = 'news-overview-item clickable' + (hasSpacingMargin ? ' news-spacing-margin' : '')
 
 	return (
-		<div className={ containerClassName }>
-			<div className="news-overview-item-image-container clickable" onClick={ onClick }>
+		<div className={ containerClassName } onClick={ onClick }>
+			<div className="news-overview-item-image-container ">
 				<div className="news-overview-item-image" style={{ backgroundImage: `url(${imageUrl})` }} />
 			</div>
-			<p className="news-overview-item-title">{ title }</p>
+			<p className="news-overview-item-title ">{ title }</p>
 			<label className="news-overview-item-date">{ createdOn }</label>
-			<label className="news-overview-item-read-more clickable no-select" onClick={ onClick }>Skaityti daugiau...</label>
+			<label className="news-overview-item-read-more no-select">Skaityti daugiau...</label>
 		</div>
 	)
 }
