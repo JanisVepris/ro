@@ -38,12 +38,14 @@ export default class App extends React.Component {
 		return (
 			<div style={ containerStyle }>
 
-				<div className="fullpage-spinner-container">
-					<div className="content-spinner">
-						{ this.props.headerLoading && this.state.fullPageReload && <Spinner /> }
+				{ this.props.headerLoading && this.state.fullPageReload && (
+					<div className="fullpage-spinner-container">
+						<div className="content-spinner">
+							<Spinner /> 
+						</div>
 					</div>
-				</div>
-
+				)}
+				
 				<div>
 
 					<div className={ coverWrapperClassName }>
