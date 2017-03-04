@@ -54,6 +54,10 @@ export const navigateToArticle = (articleSlug) => (
 			
 			const article = eventNews && eventNews.articles.find(article => article.slug === articleSlug)
 
+			if (article.image) {
+				dispatch(setHeaderLoading(true))
+			}
+
 			const articleId = article && article.id
 
 			if (getState().events.articleById[articleId]) {
@@ -68,7 +72,7 @@ export const navigateToArticle = (articleSlug) => (
 			
 			if (article.image) {
 				dispatch(setHeaderCover(article.image))
-			}	
+			}
 			
 			dispatch(setActiveArticle(article.id))
 			dispatch(setArticleLoading(false))

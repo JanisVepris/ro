@@ -8,7 +8,7 @@ export default class App extends React.Component {
 	render() {
 
 		const wrapperClassName = 'content-wrapper'
-			+ (this.props.contentLoading ? '' : ' max-opacity opacity-animation')
+			+ ((this.props.headerLoading || this.props.contentLoading) ? '' : ' max-opacity opacity-animation')
 
 		const containerStyle = {
 			minHeight: '100vh'
@@ -18,7 +18,7 @@ export default class App extends React.Component {
 			<div style={ containerStyle }>
 				<div className="content-spinner-container">
 					<div className="content-spinner">
-						{ this.props.contentLoading && <Spinner /> }
+						{ (this.props.headerLoading || this.props.contentLoading) && <Spinner /> }
 					</div>
 				</div>
 

@@ -33,7 +33,7 @@ const eventsById = toReducer({}, () => ({
 	)
 }))
 
-const activeCategory = toReducer('news', () => ({
+const activeCategory = toReducer('', () => ({
 	[APP_SET_ACTIVE_CATEGORY]: action => action.category
 }))
 
