@@ -30,21 +30,8 @@ class AdminLyricsController extends AbstractAdminController
     {
         return [
             'event' => $event,
-            'lyrics' => $event->getLyrics()->getLyricList(),
+            'lyrics' => $event->getLyrics(),
         ];
-    }
-
-    /**
-     * @Route("/create", name="admin_lyrics_create")
-     * @ParamConverter("event", options={"id" = "eventId"})
-     */
-    public function createAction(Event $event)
-    {
-        if (!$event->hasLyrics()) {
-            $this->lyricsService->createLyrics($event);
-        }
-
-        return $this->redirectToRoute('admin_lyrics_show', ['eventId' => $event->getId()]);
     }
 
     /**
@@ -61,7 +48,7 @@ class AdminLyricsController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isValid() && $form->isSubmitted()) {
-            $this->lyricsService->saveLyric($event->getLyrics(), $lyric);
+            $this->lyricsService->saveLyric($event, $lyric);
 
             return $this->redirectToRoute('admin_lyrics_show', ['eventId' => $event->getId()]);
         }
@@ -85,7 +72,7 @@ class AdminLyricsController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isValid() && $form->isSubmitted()) {
-            $this->lyricsService->saveLyric($event->getLyrics(), $lyric);
+            $this->lyricsService->saveLyric($event, $lyric);
 
             return $this->redirectToRoute('admin_lyrics_show', ['eventId' => $event->getId()]);
         }

@@ -25,8 +25,14 @@ class LyricsService
         $this->em->flush();
     }
 
-    public function saveLyric(Lyrics $lyrics, Lyric $lyric)
+    public function saveLyric(Event $event, Lyric $lyric)
     {
+        if (!$event->hasLyricsRelation()) {
+            $this->createLyrics($event);
+        }
+
+        $lyrics = $event->getLyrics();
+
         $lyric->setLyrics($lyrics);
         $lyrics->addLyric($lyric);
         $this->em->persist($lyrics);
