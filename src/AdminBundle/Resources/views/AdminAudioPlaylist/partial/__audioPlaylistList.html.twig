@@ -1,0 +1,29 @@
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
+
+<div>
+    <h4><a href="{{ path('admin_playlist_add', {'eventId': event.id}) }}">Pridėti įrašą</a></h4>
+</div>
+<table class="table table-striped table-hover">
+    <thead>
+    <th>Nr.</th>
+    <th>Pavadinimas</th>
+    <th>Įkelta</th>
+    <th>Veiksmai</th>
+    </thead>
+    <tbody>
+    {% if event.hasAudioPlaylist %}
+        {% for track in playlist.tracks %}
+            <td>{{ loop.index }}</td>
+            <td>{{ track.title }}</td>
+            <td>{{ track.createdOn|date('Y-m-d H:i:s') }}</td>
+            <td>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    {{ table_action_delete(path('admin_playlist_delete', {'eventId': event.id, 'trackId': track.id})) }}
+                {% endif %}
+            </td>
+        {% endfor %}
+    {% else %}
+        <td colspan="4">Nėr įrašų :(</td>
+    {% endif %}
+    </tbody>
+</table>

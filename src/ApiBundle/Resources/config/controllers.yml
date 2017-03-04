@@ -49,6 +49,8 @@ services:
     api.controller.tracks_controller:
         class: ApiBundle\Controller\Api\TracksController
         parent: api.controller.abstract_controller
+        arguments:
+            - "@api.factory.track_data_factory"
 
     api.controller.videos_controller:
         class: ApiBundle\Controller\Api\VideosController

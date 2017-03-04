@@ -70,3 +70,9 @@ services:
         parent: admin.controller.abstract_controller
         arguments:
             - "@ro.service.lyrics_service"
+
+    admin.controller.audio_playlist_controller:
+        class: AdminBundle\Controller\AdminAudioPlaylistController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.audio_playlist_service"

@@ -1,6 +1,7 @@
 <?php
 namespace RoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +25,17 @@ class Playlist
      */
     private $event;
 
+    /**
+     * @var ArrayCollection|Track[]
+     * @ORM\OneToMany(targetEntity="RoBundle\Entity\Track", mappedBy="playlist", cascade={"persist", "remove"})
+     */
+    private $tracks;
+
+    public function __construct()
+    {
+        $this->tracks = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -41,6 +53,40 @@ class Playlist
     public function setEvent($event)
     {
         $this->event = $event;
+
+        return $this;
+    }
+
+    public function getTracks()
+    {
+        return $this->tracks;
+    }
+
+    /**
+     * @param ArrayCollection|Track[] $tracks
+     * @return Playlist
+     */
+    public function setTracks($tracks)
+    {
+        $this->tracks = $tracks;
+
+        return $this;
+    }
+
+    public function addTrack(Track $track)
+    {
+        if (!$this->tracks->contains($track)) {
+            $this->tracks->add($track);
+        }
+
+        return $this;
+    }
+
+    public function removeTrack(Track $track)
+    {
+        if ($this->tracks->contains($track)) {
+            $this->tracks->removeElement($track);
+        }
 
         return $this;
     }

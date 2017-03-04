@@ -1,0 +1,13 @@
+{% extends '@Admin/admin_base.html.twig' %}
+{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
+
+{% set tabTitle = event.title ~ ' - MP3' %}
+
+{% block content %}
+    <div class="text-center">
+        <h2>MIDI Roko Operos "{{ event.title }}" Audio įraša</h2>
+    </div>
+    <div class="col-md-12">
+        {% include 'AdminBundle:AdminAudioPlaylist/partial:__audioPlaylistList.html.twig' with {'playlist': playlist} %}
+    </div>
+{% endblock %}

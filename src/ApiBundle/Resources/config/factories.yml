@@ -6,3 +6,7 @@ services:
     api.factory.event_data_factory:
         class: ApiBundle\Factory\EventDataFactory
         arguments: ['@core.service.absolute_url_generator']
+
+    api.factory.track_data_factory:
+        class: ApiBundle\Factory\TrackDataFactory
+        arguments: ['@core.service.absolute_url_generator']

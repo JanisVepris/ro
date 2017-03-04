@@ -28,3 +28,8 @@ services:
         class: RoBundle\Form\Type\LyricType
         tags:
             - { name: form.type }
+
+    ro.form.type.lyric:
+        class: RoBundle\Form\Type\AudioType
+        tags:
+            - { name: form.type }

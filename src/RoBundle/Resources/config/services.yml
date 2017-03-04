@@ -43,3 +43,9 @@ services:
         class: RoBundle\Service\LyricsService
         arguments:
             - "@doctrine.orm.default_entity_manager"
+
+    ro.service.audio_playlist_service:
+        class: RoBundle\Service\AudioPlaylistService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@stof_doctrine_extensions.uploadable.manager"

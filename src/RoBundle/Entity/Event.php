@@ -105,13 +105,13 @@ class Event
 
     /**
      * @var Playlist
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Playlist", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Playlist", mappedBy="event", cascade={"persist", "remove"})
      */
     private $playlist;
 
     /**
      * @var VideoPlaylist
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\VideoPlaylist", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\VideoPlaylist", mappedBy="event", cascade={"persist", "remove"})
      */
     private $videoPlaylist;
 
@@ -434,6 +434,16 @@ class Event
     public function hasVideoPlaylist()
     {
         return (bool) $this->videoPlaylist;
+    }
+
+    public function hasAudioPlaylist()
+    {
+        return (bool) $this->playlist && !$this->playlist->getTracks()->isEmpty();
+    }
+
+    public function hasPlaylist()
+    {
+        return (bool) $this->playlist;
     }
 
     /**

@@ -5,7 +5,7 @@
     <ul class="nav nav-sidebar">
         <li><a href="{{ path('admin_posters_show', {'eventId': event.id}) }}"><span class="glyphicon glyphicon-picture"></span> Plakatas</a></li>
         <li><a href="{{ path('admin_galleries_show', {'eventId': event.id}) }}"><span class="glyphicon glyphicon-camera"></span> Nuotraukų galerija</a></li>
-        <li><a href=""><span class="glyphicon glyphicon-music"></span> Audio playlist'as</a></li>
+        <li><a href="{{ path('admin_playlist_show', {'eventId': event.id}) }}"><span class="glyphicon glyphicon-music"></span> Audio playlist'as</a></li>
         <li><a href="{{ path('admin_video_playlists_show', {'eventId': event.id}) }}"><span class="glyphicon glyphicon-play"></span> Video playlist'as</a></li>
     </ul>
     <ul class="nav nav-sidebar">
