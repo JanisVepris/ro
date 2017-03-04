@@ -8,7 +8,7 @@ export default class App extends React.Component {
 	render() {
 
 		const wrapperClassName = 'content-wrapper'
-			+ ((this.props.headerLoading || this.props.contentLoading) ? '' : ' max-opacity opacity-animation')
+			+ (this.props.contentLoading ? '' : ' max-opacity opacity-animation')
 
 		const containerStyle = {
 			minHeight: '100vh'

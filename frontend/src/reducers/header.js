@@ -5,7 +5,7 @@ import {
 	HEADER_TOGGLE_EVENTS,
 	HEADER_TOGGLE_NAVIGATION,
 	HEADER_SET_COVER,
-	HEADER_SET_LOADING,
+	HEADER_SET_LOADING
 } from '../actions/header'
 
 const isEventsDropdownVisible = toReducer(false, state => ({
