@@ -71,6 +71,7 @@ export const navigateToArticle = (articleSlug) => (
 		.then(article => {
 			
 			if (article.image) {
+				// setint maza jei telefuons
 				dispatch(setHeaderCover(article.image))
 			}
 			

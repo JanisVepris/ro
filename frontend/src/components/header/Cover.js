@@ -6,11 +6,10 @@ const Cover = ({
 	onLoad
 }) => {
 	return (
-		<div className='cover relative'>
+		<div className='cover relative' onLoad={ onLoad }>
 			<ImageLoader
 				src={ url }
-				wrapper={ React.DOM.div }
-				onLoad={ onLoad }>
+				wrapper={ React.DOM.div }>
 			</ImageLoader>
 		</div>
 	)
