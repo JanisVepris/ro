@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import VideoPlaylistComponent from '../components/routes/Videos'
-import hideable from '../components/hideable'
 
 const mapStateToProps = (state) => {
 	
@@ -21,4 +20,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
 	mapStateToProps
-)(hideable(VideoPlaylistComponent))
+)(VideoPlaylistComponent)
