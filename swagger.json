@@ -453,6 +453,14 @@
           "type" : "string",
           "description" : "HTML content of the article"
         },
+        "thumbBig" : {
+          "type" : "string",
+          "description" : "big article thumbnail"
+        },
+        "thumbSmall" : {
+          "type" : "string",
+          "description" : "small article thumbnai"
+        },
         "createdOn" : {
           "type" : "string",
           "description" : "entry date of the article"
