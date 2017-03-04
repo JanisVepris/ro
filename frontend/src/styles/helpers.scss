@@ -51,6 +51,10 @@
 	opacity: 1;
 }
 
+.no-click {
+	pointer-events: none;
+}
+
 .no-select {
   -webkit-touch-callout: none;
     -webkit-user-select: none;

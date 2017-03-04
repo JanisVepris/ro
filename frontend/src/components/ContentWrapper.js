@@ -8,7 +8,8 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			fullPageReload: true
+			fullPageReload: true,
+			reanimate: false
 		}
 	}
 
@@ -21,18 +22,32 @@ export default class App extends React.Component {
 		if (!newProps.headerLoading && !newProps.contentLoading) {
 			this.state.fullPageReload = false
 		}
+
+		if (this.props.headerLoading === newProps.headerLoading && 
+			this.props.contentLoading === newProps.contentLoading) {
+			this.state.reanimate = true
+		}
 	}
 
 	render() {
 
 		const coverWrapperClassName = 'header-wrapper'
-			+ (this.state.fullPageReload ? '' : ' max-opacity opacity-animation')
+			+ (this.state.fullPageReload ? ' no-click' : ' max-opacity opacity-animation')
 
 		const contentClassName = 'content'
-			+ (this.props.headerLoading || this.props.contentLoading ? '' : ' max-opacity opacity-animation')
+			+ (this.props.headerLoading || this.props.contentLoading || this.state.reanimate ? ' no-click' : ' max-opacity opacity-animation')
 
 		const containerStyle = {
 			minHeight: '100vh'
+		}
+
+		if (this.state.reanimate) {
+			setTimeout(() => {
+				this.setState({
+					fullPageReload: this.state.fullPageReload,
+					reanimate: false
+				})
+			}, 0)
 		}
 
 		return (
