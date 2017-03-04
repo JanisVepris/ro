@@ -53,6 +53,12 @@ services:
         arguments:
             - "@ro.service.script_service"
 
+    admin.controller.facts_controller:
+        class: AdminBundle\Controller\AdminFactsController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.facts_service"
+
     admin.controller.teamss_controller:
         class: AdminBundle\Controller\AdminTeamsController
         parent: admin.controller.abstract_controller

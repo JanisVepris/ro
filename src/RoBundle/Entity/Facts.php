@@ -45,17 +45,6 @@ class Facts
     }
 
     /**
-     * @param int $id
-     * @return Facts
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getContent()

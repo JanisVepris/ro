@@ -29,6 +29,11 @@ services:
         arguments:
             - "@doctrine.orm.default_entity_manager"
 
+    ro.service.facts_service:
+        class: RoBundle\Service\FactsService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+
     ro.service.team_service:
         class: RoBundle\Service\TeamService
         arguments:
