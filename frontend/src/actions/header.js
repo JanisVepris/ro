@@ -39,10 +39,8 @@ export const navigateToCategory = (category) => (
 		return
 	}
 
-	dispatch(setHeaderLoading(true))
-
 	if (category !== 'article') {
-		dispatch(setHeaderCover(state.events.byId[state.app.activeEventId].image))
+		dispatch(setHeaderCover(state.events.byId[state.app.activeEventId].image, true))
 	} else {
 		window.scrollTo(0, 0)
 	}
@@ -54,18 +52,23 @@ export const navigateToCategory = (category) => (
 	dispatch(setActiveCategory(category))
 }
 
-export const setHeaderCover = (url) => (
+export const setHeaderCover = (url, animate) => (
 	dispatch,
 	getState
 ) => {
 
+	dispatch(setHeaderLoading(true))
+
 	if (getState().header.coverUrl === url) {
-		setTimeout(() => {
+		if (animate) {
+			setTimeout(() => {
+				dispatch(setHeaderLoading(false))
+			}, 0)
+		} else {
 			dispatch(setHeaderLoading(false))
-		}, 0)
+		}
 		return
 	}
 
-	dispatch(setHeaderLoading(true))
 	dispatch(setHeaderImage(url))
 }

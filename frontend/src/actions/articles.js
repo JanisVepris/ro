@@ -3,6 +3,7 @@ import Config from '../config'
 
 import * as articleRepo from '../repo/event-article'
 
+import { setActiveCategory } from './app'
 import { loadEventNews } from './events'
 import { setHeaderLoading, setHeaderCover } from './header'
 
@@ -33,14 +34,18 @@ export const navigateToArticle = (articleSlug) => (
 	getState
 ) => {
 
-	const { activeEventId, activeCategory, eventsById } = getState().app
+	const state = getState()
+
+	const { activeEventId, activeCategory, eventsById } = state.app
 
 	const categorySlug = Config.categories[activeCategory].slug
 	const eventSlug = eventsById[activeEventId].slug
 
 	dispatch(push('/' + eventSlug + '/' + categorySlug + '/' + articleSlug))
 	dispatch(setArticleLoading(true))
-	dispatch(setHeaderLoading(true))
+	dispatch(setActiveCategory('article'))
+
+	window.scrollTo(0, 0)
 
 	return dispatch(loadEventNews(activeEventId))
 		.then(() => {

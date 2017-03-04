@@ -1,12 +1,12 @@
 import React from 'react'
 import { navigateToArticle } from '../../actions/articles'
-import { navigateToCategory } from '../../actions/header'
 
 export default class App extends React.Component {
 
 	componentWillMount() {
-		this.props.dispatch(navigateToCategory('article'))
-		this.props.dispatch(navigateToArticle(this.props.params.articleSlug))
+		if (!this.props.isAlreadyLoading) {
+			this.props.dispatch(navigateToArticle(this.props.params.articleSlug))
+		}
 	}
 
 	render() {

@@ -20,7 +20,7 @@ const coverUrl = toReducer(null, () => ({
 	[HEADER_SET_COVER]: (action) => action.url
 }))
 
-const loading = toReducer(true, () => ({
+const loading = toReducer(false, () => ({
 	[HEADER_SET_LOADING]: (action) => action.loading
 }))
 

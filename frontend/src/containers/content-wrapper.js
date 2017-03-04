@@ -8,8 +8,8 @@ const mapStateToProps = (state) => {
 	const activeCategory = state.app.activeCategory
 	const { activeEventId } = state.app
 
-	let contentLoading
-
+	let contentLoading = true
+	
 	if (activeCategory === 'news') {
 		contentLoading = headerLoading || !state.events.newsById[activeEventId]
 	} else 

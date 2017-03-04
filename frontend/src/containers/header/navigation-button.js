@@ -5,10 +5,15 @@ import Button from '../../components/header/Button'
 
 import { toggleNavigationDropdown } from '../../actions/header'
 
-const mapStateToProps = (state) => ({
-	label: Config.categories[state.app.activeCategory].title,
-	expanded: state.header.isNavigationDropdownVisible
-})
+const mapStateToProps = (state) => {
+	
+	const activeCategory = state.app.activeCategory || 'news'
+
+	return {
+		label: Config.categories[activeCategory].title,
+		expanded: state.header.isNavigationDropdownVisible
+	}
+}
 
 export default connect(
 	mapStateToProps,

@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
 	const article = articleById[activeArticle]
 
 	return {
+		isAlreadyLoading: state.events.articleLoading,
 		title: article && article.title,
 		content: article && article.content,
 		date: article && article.date

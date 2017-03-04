@@ -55,9 +55,12 @@ export const initialize = (urlParams) => (
 			if (!activeEvent.id) {
 				throw Error('Event not found')
 			}
-
+			
 			dispatch(setDefaultEvent(response[0].id))
-			return dispatch(navigateToOverview(activeEvent.id))
+			dispatch(setActiveEvent(activeEvent.id))
+
+			return dispatch(loadEventInfo(activeEvent.id))
+				.then(() => dispatch(loadEventNews(activeEvent.id)))
 		})
 		.then(() => dispatch(setInitialized()))
 		.catch(error => {
@@ -71,15 +74,21 @@ export const navigateToOverview = (id) => (
 	getState
 ) => {
 
-	const { activeEventId, eventsById } = getState().app
+	const { activeEventId, eventsById, activeCategory } = getState().app
 
-	if (activeEventId === id) {
+	if (activeEventId === id && activeCategory === 'news') {
+
+		if (!getState().header.loading) {
+			dispatch(setHeaderCover(getState().events.byId[id].image))
+		}
+		
 		return
 	}
-
+	
 	dispatch(setActiveEvent(id))
-
+	dispatch(setActiveCategory('news'))
 	dispatch(setHeaderLoading(true))
+
 	window.scrollTo(0, 0)
 
 	const eventSlug = eventsById[id].slug
@@ -87,13 +96,10 @@ export const navigateToOverview = (id) => (
 
 	browserHistory.push(newPath)
 	dispatch(push(newPath))
-
+	
 	return dispatch(loadEventInfo(id))
 		.then(() => dispatch(loadEventNews(id)))
-		.then(() => {
-			dispatch(setActiveCategory('news'))
-			dispatch(setHeaderCover(getState().events.byId[id].image))
-		})
+		.then(() => Promise.resolve(dispatch(setHeaderCover(getState().events.byId[id].image, true))))
 }
 
 export const setActiveEventBySlug = (slug) => (
