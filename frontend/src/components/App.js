@@ -20,7 +20,9 @@ export default class App extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		newProps.dispatch(setActiveEventBySlug(newProps.params.eventSlug))
+		if (this.props.params.eventSlug !== newProps.params.eventSlug) {
+			newProps.dispatch(setActiveEventBySlug(newProps.params.eventSlug))
+		}
 	}
 
 	render() {

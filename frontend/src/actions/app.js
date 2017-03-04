@@ -40,8 +40,7 @@ export const setDefaultEvent = (id) => ({
 
 // Thunks
 export const initialize = (urlParams) => (
-	dispatch,
-	getState
+	dispatch
 ) => {
 
 	return eventsRepo.getEvents()
@@ -57,12 +56,9 @@ export const initialize = (urlParams) => (
 				throw Error('Event not found')
 			}
 
-			dispatch(setActiveEvent(activeEvent.id))
 			dispatch(setDefaultEvent(response[0].id))
-
-			return Promise.resolve()
+			return dispatch(navigateToOverview(activeEvent.id))
 		})
-		.then(() => dispatch(loadEventInfo(getState().app.activeEventId)))
 		.then(() => dispatch(setInitialized()))
 		.catch(error => {
 			console.log('Error: ', error)
@@ -75,10 +71,18 @@ export const navigateToOverview = (id) => (
 	getState
 ) => {
 
+	const { activeEventId, eventsById } = getState().app
+
+	if (activeEventId === id) {
+		return
+	}
+
+	dispatch(setActiveEvent(id))
+
 	dispatch(setHeaderLoading(true))
 	window.scrollTo(0, 0)
 
-	const eventSlug = getState().app.eventsById[id].slug
+	const eventSlug = eventsById[id].slug
 	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug
 
 	browserHistory.push(newPath)
@@ -96,7 +100,7 @@ export const setActiveEventBySlug = (slug) => (
 	dispatch,
 	getState
 ) => {
-
+	
 	if (!slug) {
 		dispatch(setActiveEvent(getState().app.defaultEventId))
 		return
@@ -113,6 +117,6 @@ export const setActiveEventBySlug = (slug) => (
 	if (eventId === getState().app.activeEventId) {
 		return
 	}
-
+	
 	dispatch(setActiveEvent(eventId))
 }
