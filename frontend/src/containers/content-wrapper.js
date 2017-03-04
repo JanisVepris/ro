@@ -11,19 +11,20 @@ const mapStateToProps = (state) => {
 	let contentLoading = true
 	
 	if (activeCategory === 'news') {
-		contentLoading = headerLoading || !state.events.newsById[activeEventId]
+		contentLoading = !state.events.newsById[activeEventId]
 	} else 
 	if (activeCategory === 'article') {
-		contentLoading = headerLoading || !state.events.articleById[state.events.activeArticle]
+		contentLoading = !state.events.articleById[state.events.activeArticle]
 	} else 	
 	if (activeCategory === 'videos') {
-		contentLoading = headerLoading || !state.videos.byId[state.events.byId[activeEventId].videoPlaylistId]
+		contentLoading = !state.videos.byId[state.events.byId[activeEventId].videoPlaylistId]
 	} else 
 	if (activeCategory === 'gallery') {
-		contentLoading = headerLoading || !state.galleries.byId[state.events.byId[activeEventId].galleryId]
+		contentLoading = !state.galleries.byId[state.events.byId[activeEventId].galleryId]
 	}
 
 	return {
+		headerLoading,
 		contentLoading
 	}
 }
