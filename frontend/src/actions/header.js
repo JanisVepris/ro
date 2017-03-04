@@ -39,6 +39,8 @@ export const navigateToCategory = (category) => (
 		return
 	}
 
+	dispatch(setHeaderLoading(true))
+
 	if (category !== 'article') {
 		dispatch(setHeaderCover(state.events.byId[state.app.activeEventId].image))
 	} else {
@@ -58,7 +60,9 @@ export const setHeaderCover = (url) => (
 ) => {
 
 	if (getState().header.coverUrl === url) {
-		dispatch(setHeaderLoading(false))
+		setTimeout(() => {
+			dispatch(setHeaderLoading(false))
+		}, 0)
 		return
 	}
 
