@@ -403,7 +403,7 @@ class Event
 
     public function hasLyrics()
     {
-        return (bool) $this->lyrics;
+        return (bool) $this->lyrics && !$this->lyrics->getLyricList()->isEmpty();
     }
 
     public function hasPoster()
@@ -428,12 +428,12 @@ class Event
 
     public function hasGallery()
     {
-        return (bool) $this->gallery;
+        return (bool) $this->gallery && $this->gallery->hasImages();
     }
 
     public function hasVideoPlaylist()
     {
-        return (bool) $this->videoPlaylist;
+        return (bool) $this->videoPlaylist && !$this->videoPlaylist->getVideos()->isEmpty();
     }
 
     public function hasAudioPlaylist()
@@ -441,9 +441,24 @@ class Event
         return (bool) $this->playlist && !$this->playlist->getTracks()->isEmpty();
     }
 
-    public function hasPlaylist()
+    public function hasPlaylistRelation()
     {
         return (bool) $this->playlist;
+    }
+
+    public function hasVideoPlaylistRelation()
+    {
+        return (bool) $this->videoPlaylist;
+    }
+
+    public function hasGalleryRelation()
+    {
+        return (bool) $this->gallery;
+    }
+
+    public function hasLyricsRelation()
+    {
+        return (bool) $this->lyrics;
     }
 
     /**

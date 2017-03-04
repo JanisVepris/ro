@@ -1,7 +1,7 @@
 function init_filer(uploadUrl) {
     $("#filer_input").filer({
         limit: 500,
-        fileMaxSize: 2,
+        fileMaxSize: 5,
         extensions: ["png", "jpeg", "jpg"],
         showThumbs: true,
         theme: "dragdropbox",

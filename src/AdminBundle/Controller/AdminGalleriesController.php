@@ -50,27 +50,12 @@ class AdminGalleriesController extends AbstractAdminController
     }
 
     /**
-     * @Route("/create", name="admin_galleries_create")
-     * @ParamConverter("event", options={"id" = "eventId"})
-     */
-    public function createAction(Event $event)
-    {
-        $this->galleryService->createGalleryForEvent($event);
-
-        return $this->redirectToRoute('admin_galleries_show', ['eventId' => $event->getId()]);
-    }
-
-    /**
      * @Route("/images/add", name="admin_galleries_images_add")
      * @Template
      * @ParamConverter("event", options={"id" = "eventId"})
      */
     public function addAction(Event $event)
     {
-        if (!$event->hasGallery()) {
-            throw new NotFoundHttpException();
-        }
-
         return [
             'event' => $event
         ];
@@ -82,6 +67,10 @@ class AdminGalleriesController extends AbstractAdminController
      */
     public function imageUploadAction(Request $request, Event $event)
     {
+        if (!$event->hasGalleryRelation()) {
+            $this->galleryService->createGalleryForEvent($event);
+        }
+
         $gallery = $event->getGallery();
 
         if (!$gallery) {

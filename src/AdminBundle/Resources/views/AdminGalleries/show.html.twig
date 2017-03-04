@@ -8,10 +8,6 @@
         <h2>MIDI Roko Operos "{{ event.title }}" Nuotraukų Galerija</h2>
     </div>
     <div class="col-md-12">
-        {% if not event.hasGallery %}
-            {{ main_toolbar(path('admin_galleries_create', {'eventId': event.id})) }}
-        {% else %}
-            {% include 'AdminBundle:AdminGalleries/partial:__galleryView.html.twig' with {'gallery': gallery} %}
-        {% endif %}
+        {% include 'AdminBundle:AdminGalleries/partial:__galleryView.html.twig' with {'gallery': gallery} %}
     </div>
 {% endblock %}

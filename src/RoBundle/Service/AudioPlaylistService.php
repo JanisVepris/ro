@@ -42,7 +42,7 @@ class AudioPlaylistService
             );
         }
 
-        if (!$event->hasPlaylist()) {
+        if (!$event->hasPlaylistRelation()) {
             $this->createPlaylist($event);
         }
 
