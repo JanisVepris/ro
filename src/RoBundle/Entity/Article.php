@@ -4,10 +4,12 @@ namespace RoBundle\Entity;
 use CoreBundle\Traits\CreatedOnEntityTrait;
 use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="ro3_article")
  * @ORM\Entity(repositoryClass="RoBundle\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -63,6 +65,24 @@ class Article
      * @ORM\JoinColumn(name="article_image_id", referencedColumnName="id")
      */
     private $articleImage;
+
+    /**
+     * @var string
+     * @Gedmo\Slug(
+     *     fields={"titleCut"},
+     *     separator="-",
+     *     unique=true
+     * )
+     * @ORM\Column(name="slug", type="string", unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title_cut", type="string")
+     */
+    private $titleCut;
 
     /**
      * Get id
@@ -195,6 +215,31 @@ class Article
         $this->articleImage = $articleImage;
 
         return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function cutTitle()
+    {
+        $this->titleCut = substr($this->title, 0, 40);
     }
 
     public function __toString()

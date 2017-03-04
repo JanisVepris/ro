@@ -15,6 +15,12 @@ class ArticleData
      * @var string
      * @Serializer\Type("string")
      */
+    private $slug;
+
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     */
     private $title;
 
     /**
@@ -49,7 +55,7 @@ class ArticleData
      * @param string $image
      * @param string $createdOn
      */
-    public function __construct($id, $title, $description, $content, $image, $createdOn)
+    public function __construct($id, $slug, $title, $description, $content, $image, $createdOn)
     {
         $this->id = $id;
         $this->title = $title;
@@ -57,5 +63,6 @@ class ArticleData
         $this->content = $content;
         $this->image = $image;
         $this->createdOn = $createdOn;
+        $this->slug = $slug;
     }
 }

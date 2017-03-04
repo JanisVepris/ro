@@ -25,6 +25,7 @@ class ArticleDataFactory
 
         return new ArticleData(
             $article->getId(),
+            $article->getSlug(),
             $article->getTitle(),
             $article->getDescription(),
             $article->getContent(),

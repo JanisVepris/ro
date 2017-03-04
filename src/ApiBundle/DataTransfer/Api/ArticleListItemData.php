@@ -11,6 +11,12 @@ class ArticleListItemData
      * @Serializer\Type("integer")
      */
     private $id;
+
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     */
+    private $slug;
     
     /**
      * @var string
@@ -36,18 +42,20 @@ class ArticleListItemData
      * @param string $description
      * @param \DateTime $createdOn
      */
-    private function __construct($id, $title, $description, \DateTime $createdOn)
+    private function __construct($id, $slug, $title, $description, \DateTime $createdOn)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->createdOn = $createdOn;
+        $this->slug = $slug;
     }
 
     public static function createFromEntity(Article $article)
     {
         return new static(
             $article->getId(),
+            $article->getSlug(),
             $article->getTitle(),
             $article->getDescription(),
             $article->getCreatedOn()
