@@ -4,6 +4,7 @@ namespace RoBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use RoBundle\Entity\Event;
+use RoBundle\Entity\Video;
 use RoBundle\Entity\VideoPlaylist;
 
 class VideoPlaylistService
@@ -28,6 +29,12 @@ class VideoPlaylistService
     public function savePlaylistVideos(VideoPlaylist $videoPlaylist)
     {
         $this->em->persist($videoPlaylist);
+        $this->em->flush();
+    }
+
+    public function deleteVideo(Video $video)
+    {
+        $this->em->remove($video);
         $this->em->flush();
     }
 }

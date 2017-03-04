@@ -8,10 +8,6 @@
         <h2>MIDI Roko Operos "{{ event.title }}" Video playlista'as</h2>
     </div>
     <div class="col-md-12">
-        {% if not event.hasVideoPlaylist %}
-            {{ main_toolbar(path('admin_video_playlists_create', {'eventId': event.id})) }}
-        {% else %}
-            {% include 'AdminBundle:AdminVideoPlaylists/partial:__playlistView.html.twig' with {'playlist': event.videoPlaylist} %}
-        {% endif %}
+        {% include 'AdminBundle:AdminVideoPlaylists/partial:__playlistView.html.twig' with {'playlist': event.videoPlaylist} %}
     </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 namespace AdminBundle\Controller;
 
 use RoBundle\Entity\Event;
+use RoBundle\Entity\Video;
 use RoBundle\Form\Type\VideoPlaylistType;
 use RoBundle\Service\VideoPlaylistService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -34,25 +35,14 @@ class AdminVideoPlaylistsController extends AbstractAdminController
     }
 
     /**
-     * @Route("/create", name="admin_video_playlists_create")
-     * @ParamConverter("event", options={"id" = "eventId"})
-     */
-    public function createAction(Event $event)
-    {
-        $this->videoPlaylistService->createPlaylistForEvent($event);
-
-        return $this->redirectToRoute('admin_video_playlists_show', ['eventId' => $event->getId()]);
-    }
-
-    /**
      * @Route("/videos/add", name="admin_video_playlists_videos_add")
      * @Template
      * @ParamConverter("event", options={"id" = "eventId"})
      */
     public function addAction(Request $request, Event $event)
     {
-        if (!$event->hasVideoPlaylist()) {
-            throw new NotFoundHttpException();
+        if (!$event->hasVideoPlaylistRelation()) {
+            $this->videoPlaylistService->createPlaylistForEvent($event);
         }
 
         $playlist = $event->getVideoPlaylist();
@@ -63,11 +53,25 @@ class AdminVideoPlaylistsController extends AbstractAdminController
 
         if ($form->isValid() && $form->isSubmitted()) {
             $this->videoPlaylistService->savePlaylistVideos($playlist);
+
+            return $this->redirectToRoute('admin_video_playlists_show', ['eventId' => $event->getId()]);
         }
 
         return [
             'event' => $event,
             'form' => $form->createView()
         ];
+    }
+
+    /**
+     * @Route("/videos/{videoId}/delete", name="admin_video_playlists_videos_delete")
+     * @ParamConverter("event", options={"id" = "eventId"})
+     * @ParamConverter("video", options={"id" = "videoId"})
+     */
+    public function deleteAction(Event $event, Video $video)
+    {
+        $this->videoPlaylistService->deleteVideo($video);
+
+        return $this->redirectToRoute('admin_video_playlists_show', ['eventId' => $event->getId()]);
     }
 }

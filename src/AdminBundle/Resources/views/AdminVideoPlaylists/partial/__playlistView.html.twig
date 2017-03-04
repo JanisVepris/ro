@@ -1,18 +1,30 @@
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
+
 <div class="text-center">
     <h4><a href="{{ path('admin_video_playlists_videos_add', {'eventId': event.id}) }}">Pridėti įrašus</a></h4>
 </div>
 <div class="col-md-12">
-    <div class="row">
-        {% for video in playlist.videos %}
-        <div class="col-md-6 text-center">
-            {{ video.url }}
-        </div>
-        {% if  loop.index % 2 == 0 %}
-    </div>
-    <div class="row">
-        {% endif %}
+    <table class="table table-striped table-hover">
+        <thead>
+        <th>Nr.</th>
+        <th>Pavadinimas</th>
+        <th>Veiksmai</th>
+        </thead>
+        <tbody>
+        {% if event.hasVideoPlaylist %}
+            {% for video in playlist.videos %}
+                <td>{{ loop.index }}</td>
+                <td>{{ video.title }}</td>
+                <td>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        {{ table_action_delete(path('admin_video_playlists_videos_delete', {'eventId': event.id, 'videoId': video.id})) }}
+                    {% endif %}
+                </td>
+            {% endfor %}
         {% else %}
-            Nėr video įrašų ;(
-        {% endfor %}
-    </div>
+            <td colspan="3">Nėra video įrašų :(</td>
+        {% endif %}
+        </tbody>
+    </table>
+
 </div>
