@@ -141,19 +141,13 @@
         }
       }
     },
-    "/api/events/{eventId}/audioPlaylists/{playlistId}/tracks" : {
+    "/api/events/{eventId}/audioPlaylist/tracks" : {
       "get" : {
         "summary" : "Get a list of mp3 file URLs",
         "parameters" : [ {
           "name" : "eventId",
           "in" : "path",
           "description" : "ID of event of articles",
-          "required" : true,
-          "type" : "integer"
-        }, {
-          "name" : "playlistId",
-          "in" : "path",
-          "description" : "id of playlist",
           "required" : true,
           "type" : "integer"
         } ],
@@ -364,9 +358,6 @@
         "id" : {
           "type" : "integer"
         },
-        "playlistId" : {
-          "type" : "integer"
-        },
         "eventDate" : {
           "type" : "string"
         },
@@ -396,6 +387,9 @@
         },
         "hasVideoPlaylist" : {
           "type" : "boolean"
+        },
+        "hasAudioPlaylist" : {
+          "type" : "boolean"
         }
       }
     },
@@ -406,6 +400,10 @@
           "type" : "integer",
           "description" : "unique identifier for the article"
         },
+        "slug" : {
+          "type" : "string",
+          "description" : "slug of the article"
+        },
         "title" : {
           "type" : "string",
           "description" : "title of the article"
@@ -413,6 +411,14 @@
         "description" : {
           "type" : "string",
           "description" : "short introduction of the article"
+        },
+        "thumbBig" : {
+          "type" : "string",
+          "description" : "big article thumbnail"
+        },
+        "thumbSmall" : {
+          "type" : "string",
+          "description" : "small article thumbnai"
         },
         "createdOn" : {
           "type" : "string",
@@ -426,6 +432,10 @@
         "id" : {
           "type" : "integer",
           "description" : "unique identifier for the article"
+        },
+        "slug" : {
+          "type" : "string",
+          "description" : "slug of the article"
         },
         "title" : {
           "type" : "string",
