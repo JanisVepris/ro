@@ -59,8 +59,14 @@ services:
         arguments:
             - "@ro.service.facts_service"
 
-    admin.controller.teamss_controller:
+    admin.controller.teams_controller:
         class: AdminBundle\Controller\AdminTeamsController
         parent: admin.controller.abstract_controller
         arguments:
             - "@ro.service.team_service"
+
+    admin.controller.lyrics_controller:
+        class: AdminBundle\Controller\AdminLyricsController
+        parent: admin.controller.abstract_controller
+        arguments:
+            - "@ro.service.lyrics_service"

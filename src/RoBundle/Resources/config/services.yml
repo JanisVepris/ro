@@ -38,3 +38,8 @@ services:
         class: RoBundle\Service\TeamService
         arguments:
             - "@doctrine.orm.default_entity_manager"
+
+    ro.service.lyrics_service:
+        class: RoBundle\Service\LyricsService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"

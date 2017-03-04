@@ -1,0 +1,27 @@
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_edit %}
+{% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
+
+<div>
+    <h4><a href="{{ path('admin_lyrics_add', {'eventId': event.id}) }}">Pridėti</a></h4>
+</div>
+<table class="table table-hover table-striped">
+    <thead>
+    <th>Pavadinimas</th>
+    <th>Veiksmai</th>
+    </thead>
+    <tbody>
+    {% for lyric in lyrics %}
+        <td>{{ lyric.title }}</td>
+        <td>
+            <div class="btn-group">
+                {{ table_action_edit(path('admin_lyrics_edit', {'eventId': event.id, 'lyricId': lyric.id})) }}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    {#{{ table_action_delete(path('admin_articles_delete', {'eventId': event.id, 'articleId': article.id })) }}#}
+                {% endif %}
+            </div>
+        </td>
+    {% else %}
+        <td colspan="2">Nėr dainų tekstų :(</td>
+    {% endfor %}
+    </tbody>
+</table>

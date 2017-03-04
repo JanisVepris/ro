@@ -1,0 +1,9 @@
+{% extends '@Admin/admin_base.html.twig' %}
+{% from '@Admin/AdminLayout/macros.html.twig' import form_actions %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form) }}
+    {{ form_actions(path('admin_lyrics_show', {'eventId': event.id})) }}
+    {{ form_end(form) }}
+{% endblock %}

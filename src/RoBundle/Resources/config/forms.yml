@@ -24,7 +24,7 @@ services:
         tags:
             - { name: form.type }
 
-    ro.form.type.script:
-        class: RoBundle\Form\Type\ScriptType
+    ro.form.type.lyric:
+        class: RoBundle\Form\Type\LyricType
         tags:
             - { name: form.type }

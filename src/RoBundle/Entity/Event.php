@@ -385,6 +385,22 @@ class Event
         return $this;
     }
 
+    public function getLyrics()
+    {
+        return $this->lyrics;
+    }
+
+    /**
+     * @param Lyrics $lyrics
+     * @return Event
+     */
+    public function setLyrics(Lyrics $lyrics)
+    {
+        $this->lyrics = $lyrics;
+
+        return $this;
+    }
+
     public function hasLyrics()
     {
         return (bool) $this->lyrics;
