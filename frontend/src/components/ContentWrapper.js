@@ -31,11 +31,17 @@ export default class App extends React.Component {
 
 	render() {
 
-		const coverWrapperClassName = 'header-wrapper'
-			+ (this.state.fullPageReload ? ' no-click' : ' max-opacity opacity-animation')
+		const coverWrapperClassName = 'cover-wrapper'
+			+ ( this.state.fullPageReload 
+				? ' no-click'
+				: ' max-opacity opacity-animation'
+			)
 
 		const contentClassName = 'content'
-			+ (this.props.headerLoading || this.props.contentLoading || this.state.reanimate ? ' no-click' : ' max-opacity opacity-animation')
+			+ ( this.props.headerLoading || this.props.contentLoading || this.state.reanimate
+				? ' no-click'
+				: ' max-opacity opacity-animation'
+			)
 
 		const containerStyle = {
 			minHeight: '100vh'
