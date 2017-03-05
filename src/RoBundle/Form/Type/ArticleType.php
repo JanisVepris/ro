@@ -15,7 +15,9 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, [
+                'attr' => ['maxlength' => '400']
+            ])
             ->add('content', CKEditorType::class, ['config_name' => 'article_config'])
             ->add('published', CheckboxType::class, ['required' => false])
             ->add('articleImage', UploadFileType::class, ['data_class' => ArticleImage::class]);

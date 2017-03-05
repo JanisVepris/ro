@@ -5,6 +5,7 @@ use CoreBundle\Traits\CreatedOnEntityTrait;
 use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ro3_article")
@@ -36,6 +37,9 @@ class Article
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\Length(
+     *     max=400
+     * )
      */
     private $description;
 
