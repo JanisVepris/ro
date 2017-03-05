@@ -108,9 +108,6 @@
                   "items" : {
                     "$ref" : "#/definitions/ArticleListItem"
                   }
-                },
-                "metadata" : {
-                  "$ref" : "#/definitions/Metadata"
                 }
               }
             }
