@@ -1,15 +1,18 @@
 <?php
+
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use ApiBundle\DataTransfer\Api\ArticleListData;
 use ApiBundle\Factory\ArticleDataFactory;
+use ApiBundle\Factory\ArticleListItemDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
 use RoBundle\Service\ArticleService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Functional as F;
 
 /** @Rest\Route(service="api.controller.articles_controller") */
 class ArticlesController extends AbstractApiController
@@ -20,10 +23,17 @@ class ArticlesController extends AbstractApiController
     /** @var ArticleDataFactory */
     private $articleDataFactory;
 
-    public function __construct(ArticleService $articleService, ArticleDataFactory $articleDataFactory)
-    {
+    /** @var ArticleListItemDataFactory */
+    private $articleListItemDataFactory;
+
+    public function __construct(
+        ArticleService $articleService,
+        ArticleDataFactory $articleDataFactory,
+        ArticleListItemDataFactory $articleListItemDataFactory
+    ) {
         $this->articleService = $articleService;
         $this->articleDataFactory = $articleDataFactory;
+        $this->articleListItemDataFactory = $articleListItemDataFactory;
     }
 
     /**
@@ -55,6 +65,8 @@ class ArticlesController extends AbstractApiController
     {
         $articles = $this->articleService->getPublishedArticles($event, $limit, $offset);
         $articleCount = $this->articleService->countPublishedArticles($event);
+
+        $articles = F\map($articles, [$this->articleListItemDataFactory, 'createFromEntity']);
 
         return $this->createView(
             ArticleListData::create($articleCount, $limit, $offset, $articles)

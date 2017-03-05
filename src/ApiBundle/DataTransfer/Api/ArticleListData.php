@@ -54,8 +54,6 @@ class ArticleListData
      */
     public static function create($total, $limit, $offset, array $articles)
     {
-        $articles = F\map($articles, [ArticleListItemData::class, 'createFromEntity']);
-
         return new static($total, $limit, $offset, $articles);
     }
 }

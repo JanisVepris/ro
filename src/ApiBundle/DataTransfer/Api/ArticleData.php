@@ -42,6 +42,18 @@ class ArticleData
     private $image;
 
     /**
+     * @var string
+     * @Serializer\Type("string")
+     */
+    private $thumbBig;
+
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     */
+    private $thumbSmall;
+
+    /**
      * @var \DateTime
      * @Serializer\Type("DateTime<'Y.m.d H:i'>")
      */
@@ -55,7 +67,7 @@ class ArticleData
      * @param string $image
      * @param string $createdOn
      */
-    public function __construct($id, $slug, $title, $description, $content, $image, $createdOn)
+    public function __construct($id, $slug, $title, $description, $content, $image, $thumbBig, $thumbSmall, $createdOn)
     {
         $this->id = $id;
         $this->title = $title;
@@ -64,5 +76,7 @@ class ArticleData
         $this->image = $image;
         $this->createdOn = $createdOn;
         $this->slug = $slug;
+        $this->thumbBig = $thumbBig;
+        $this->thumbSmall = $thumbSmall;
     }
 }

@@ -1,7 +1,7 @@
 services:
     api.factory.article_data_factory:
         class: ApiBundle\Factory\ArticleDataFactory
-        arguments: ['@core.service.absolute_url_generator']
+        arguments: ['@core.service.absolute_url_generator', '@core.service.image_resizer']
 
     api.factory.event_data_factory:
         class: ApiBundle\Factory\EventDataFactory
@@ -10,3 +10,7 @@ services:
     api.factory.track_data_factory:
         class: ApiBundle\Factory\TrackDataFactory
         arguments: ['@core.service.absolute_url_generator']
+
+    api.factory.article_list_item_data_factory:
+        class: ApiBundle\Factory\ArticleListItemDataFactory
+        arguments: ['@core.service.image_resizer']

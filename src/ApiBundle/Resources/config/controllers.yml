@@ -10,6 +10,7 @@ services:
         arguments:
             - "@ro.service.article_service"
             - "@api.factory.article_data_factory"
+            - "@api.factory.article_list_item_data_factory"
 
     api.controller.events_controller:
         class: ApiBundle\Controller\Api\EventsController

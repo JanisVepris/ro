@@ -2,3 +2,11 @@ services:
     core.service.absolute_url_generator:
         class: CoreBundle\Service\AbsoluteUrlGenerator
         arguments: ['@router.request_context']
+
+    core.service.image_resizer:
+        class: CoreBundle\Service\ImageResizer
+        arguments:
+            - '@request_stack'
+            - '@core.service.absolute_url_generator'
+            - '@liip_imagine.cache.manager'
+            - '@liip_imagine.controller'

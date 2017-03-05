@@ -42,3 +42,13 @@ liip_imagine:
             quality: 65
             filters:
               thumbnail: { size: [250, 170], mode: inset, position: center}
+
+        article_thumb_big:
+            quality: 75
+            filters:
+                thumbnail: { size: [640, 360], mode: outbound, position: center}
+
+        article_thumb_small:
+            quality: 60
+            filters:
+                thumbnail: { size: [480, 270], mode: outbound, position: center}
