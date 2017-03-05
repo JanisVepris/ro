@@ -51,8 +51,13 @@ body {
     transition: opacity 1s ease-in-out;
 }
 
-.content .article {
+.article {
     font-size: 18px;
+    margin-top: 36px;
+}
+
+.content .date {
+    margin-top: 0px;
 }
 
 // Media queries
@@ -69,7 +74,7 @@ body {
     .article-title {
         font-size: 40px;
     }
-    .content .article {
+    .article {
         font-size: 16px;
     }
 }
@@ -86,10 +91,12 @@ body {
         padding: 24px;
     }
     .article-title {
-        font-size: 26px;
+        font-size: 20px;
+        margin-bottom: 18px;
     }
-    .content .article {
+    .article {
         font-size: 15px;
+        margin-top: 18px;
     }
 }
 

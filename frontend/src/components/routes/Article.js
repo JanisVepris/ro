@@ -13,8 +13,8 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<label className="article-title">{ this.props.title }</label>
-				<label className="article" style={{ display: 'block' }}>{ this.props.date }</label>
-				<div className="article mt-xl" dangerouslySetInnerHTML={{ __html: this.props.content }} />
+				<label className="article date" style={{ display: 'block' }}>{ this.props.date }</label>
+				<div className="article" dangerouslySetInnerHTML={{ __html: this.props.content }} />
 			</div>
 		)
 	}

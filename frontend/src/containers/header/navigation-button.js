@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 
 	return {
 		label: Config.categories[activeCategory].title,
-		expanded: state.header.isNavigationDropdownVisible
+		expanded: state.header.isNavigationDropdownVisible,
+		mobile: true
 	}
 }
 
