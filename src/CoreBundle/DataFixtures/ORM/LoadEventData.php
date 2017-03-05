@@ -109,6 +109,7 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
 
             $event
                 ->setTitle($eventData['title'])
+                ->setDescription($faker->text(400))
                 ->setEventDate(new \DateTime(sprintf('-%d years', $eventCount--)))
                 ->setEventImage($eventImage);
 

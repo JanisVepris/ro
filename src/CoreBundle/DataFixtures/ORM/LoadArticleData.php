@@ -36,7 +36,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
                 $article
                     ->setEvent($event)
                     ->setTitle($faker->sentence(10))
-                    ->setDescription($faker->paragraph(4))
+                    ->setDescription($faker->text(400))
                     ->setContent($faker->paragraphs(4, true))
                     ->setPublished(true)
                     ->setArticleImage($articleImage);

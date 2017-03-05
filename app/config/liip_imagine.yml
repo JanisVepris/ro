@@ -52,3 +52,9 @@ liip_imagine:
             quality: 60
             filters:
                 thumbnail: { size: [480, 270], mode: outbound, position: center}
+
+        og_preview_image:
+            quality: 80
+            filters:
+                upscale: { min: [1200, 630] }
+                thumbnail: { size: [1200, 630], mode: outbound, position: center}

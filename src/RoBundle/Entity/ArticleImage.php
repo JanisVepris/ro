@@ -3,7 +3,6 @@ namespace RoBundle\Entity;
 
 use CoreBundle\Entity\AbstractUploadableEntity;
 use CoreBundle\Traits\EntityIdFieldTrait;
-use CoreBundle\Entity\UploadableEntityInterface;
 use CoreBundle\Traits\UploadableEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Uploadable;
@@ -11,6 +10,7 @@ use Gedmo\Mapping\Annotation\Uploadable;
 /**
  * @ORM\Table(name="ro3_article_image")
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  * @Uploadable(
  *     pathMethod="getUploadPath",
  *     allowOverwrite=true,

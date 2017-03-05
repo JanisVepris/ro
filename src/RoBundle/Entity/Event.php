@@ -35,6 +35,13 @@ class Event
     private $title;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="event_date", type="datetime", unique=true)
@@ -397,6 +404,22 @@ class Event
     public function setLyrics(Lyrics $lyrics)
     {
         $this->lyrics = $lyrics;
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Event
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -84,6 +84,12 @@ class EventData
     private $hasVideoPlaylist;
 
     /**
+     * @var MetaData
+     * @Serializer\Type("ApiBundle\DataTransfer\Api\MetaData")
+     */
+    private $metadata;
+
+    /**
      * @param int $id
      * @param string $title
      * @param int $playlistId
@@ -110,7 +116,8 @@ class EventData
         $hasTeam,
         $hasScript,
         $hasGallery,
-        $hasVideoPlaylist
+        $hasVideoPlaylist,
+        MetaData $metadata
     ) {
         $this->id = $id;
         $this->title = $title;
@@ -125,5 +132,6 @@ class EventData
         $this->hasScript = $hasScript;
         $this->hasGallery = $hasGallery;
         $this->hasVideoPlaylist = $hasVideoPlaylist;
+        $this->metadata = $metadata;
     }
 }

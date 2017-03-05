@@ -10,9 +10,13 @@ class EventDataFactory
     /** @var AbsoluteUrlGenerator */
     private $absoluteUrlGenerator;
 
-    public function __construct(AbsoluteUrlGenerator $absoluteUrlGenerator)
+    /** @var MetaDataFactory */
+    private $metaDataFactory;
+
+    public function __construct(AbsoluteUrlGenerator $absoluteUrlGenerator, MetaDataFactory $metaDataFactory)
     {
         $this->absoluteUrlGenerator = $absoluteUrlGenerator;
+        $this->metaDataFactory = $metaDataFactory;
     }
 
     public function createFromEntity(Event $event)
@@ -30,7 +34,8 @@ class EventDataFactory
             $event->hasTeam(),
             $event->hasScript(),
             $event->hasGallery(),
-            $event->hasVideoPlaylist()
+            $event->hasVideoPlaylist(),
+            $this->metaDataFactory->createFromEvent($event)
         );
     }
 }

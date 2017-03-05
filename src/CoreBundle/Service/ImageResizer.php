@@ -39,8 +39,6 @@ class ImageResizer
      */
     public function getSmallArticleThumbnail($imageUri)
     {
-//        $imageUri = $this->removeLeadingSlash($imageUri);
-
         $this->resizeImage($imageUri, 'article_thumb_small');
 
         return $this->liipImagineCacheManager->getBrowserPath($imageUri, 'article_thumb_small');
@@ -52,11 +50,20 @@ class ImageResizer
      */
     public function getBigArticleThumbnail($imageUri)
     {
-//        $imageUri = $this->removeLeadingSlash($imageUri);
-
         $this->resizeImage($imageUri, 'article_thumb_big');
 
         return $this->liipImagineCacheManager->getBrowserPath($imageUri, 'article_thumb_big');
+    }
+
+    /**
+     * @param string $imageUri
+     * @return string
+     */
+    public function getFacebookPreviewImage($imageUri)
+    {
+        $this->resizeImage($imageUri, 'og_preview_image');
+
+        return $this->liipImagineCacheManager->getBrowserPath($imageUri, 'og_preview_image');
     }
 
     private function resizeImage($imageUri, $filterName)
@@ -66,10 +73,5 @@ class ImageResizer
             $imageUri,
             $filterName
         );
-    }
-
-    private function removeLeadingSlash($imageUri)
-    {
-        return preg_replace('/^\//', '', $imageUri);
     }
 }

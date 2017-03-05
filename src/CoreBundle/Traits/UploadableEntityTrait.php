@@ -30,6 +30,12 @@ trait UploadableEntityTrait
      */
     public $file;
 
+    /**
+     * @var string
+     * @ORM\Column(name="mime_type", type="string", nullable=true)
+     */
+    private $mimeType;
+
     public function getFilePath()
     {
         return $this->filePath;
@@ -90,6 +96,19 @@ trait UploadableEntityTrait
         $path = preg_replace('/^web\//', '', $this->filePath);
 
         return sprintf('/%s', $path);
+    }
+
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function updateMimeType()
+    {
+        $this->mimeType = $this->file->getMimeType();
     }
 
     public function setAsFixture()

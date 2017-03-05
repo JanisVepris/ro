@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation\Uploadable;
 /**
  * @ORM\Table(name="ro3_gallery_image")
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  * @Uploadable(
  *     pathMethod="getUploadPath",
  *     allowOverwrite=false,

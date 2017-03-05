@@ -1,4 +1,5 @@
 <?php
+
 namespace ApiBundle\Factory;
 
 use ApiBundle\DataTransfer\Api\ArticleData;
@@ -11,13 +12,20 @@ class ArticleDataFactory
     /** @var AbsoluteUrlGenerator */
     private $absoluteUrlGenerator;
 
+    /** @var MetaDataFactory */
+    private $metaDataFactory;
+
     /** @var ImageResizer */
     private $imageResizer;
 
-    public function __construct(AbsoluteUrlGenerator $absoluteUrlGenerator, ImageResizer $imageResizer)
-    {
+    public function __construct(
+        AbsoluteUrlGenerator $absoluteUrlGenerator,
+        ImageResizer $imageResizer,
+        MetaDataFactory $metaDataFactory
+    ) {
         $this->absoluteUrlGenerator = $absoluteUrlGenerator;
         $this->imageResizer = $imageResizer;
+        $this->metaDataFactory = $metaDataFactory;
     }
 
     public function createFromEntity(Article $article)
@@ -37,7 +45,8 @@ class ArticleDataFactory
             $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($imageUrl),
             $this->imageResizer->getBigArticleThumbnail($article->getArticleImage()->getWebPath()),
             $this->imageResizer->getSmallArticleThumbnail($article->getArticleImage()->getWebPath()),
-            $article->getCreatedOn()
+            $article->getCreatedOn(),
+            $this->metaDataFactory->createFromArticle($article)
         );
     }
 }
