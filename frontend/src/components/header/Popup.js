@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import OnClickOutside from 'react-onclickoutside'
+import SmoothCollapse from 'react-smooth-collapse'
 
 class Popup extends React.Component {
 
@@ -13,27 +14,28 @@ class Popup extends React.Component {
 			hidden
 		} = this.props
 
-		if (hidden) {
-			return <div/>
-		}
+		const className = 'header-dropdown' + (hidden ? ' hidden' : '')
 
 		return (
-			<div className="header-dropdown">
-				{ 
-					labels.map((label, index) => {
+				<div className={ className }>
+					<SmoothCollapse expanded={ !hidden }>
+					{ 
+						labels.map((label, index) => {
 
-						const isSelected = index === selectedIndex
-						const selectedClassName = isSelected ? ' selected' : ''
-						const className = 'no-select pl-l'  + selectedClassName
+							const isSelected = index === selectedIndex
+							const selectedClassName = isSelected ? ' selected' : ''
+							const className = 'dropdown-option no-select pl-l'  + selectedClassName
 
-						return (
-							<div key={ index } className={ className } onClick={ actions[index] }>
-							{ label }
-						</div>
-						)
-					})
-				}
-			</div>
+							return (
+								<div key={ index } className={ className } onClick={ actions[index] }>
+								{ label }
+							</div>
+							)
+						})
+					}
+					</SmoothCollapse>
+				</div>
+			
 		)
 	}
 
