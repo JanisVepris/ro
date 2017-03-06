@@ -2,26 +2,22 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\UrlItemListData;
+use ApiBundle\Factory\GalleryImageListDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
-use RoBundle\Service\GalleryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Functional as F;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @Rest\Route(service="api.controller.images_controller") */
 class ImagesController extends AbstractApiController
 {
-    /** @var GalleryService */
-    private $galleryService;
+    /** @var GalleryImageListDataFactory */
+    private $galleryImageListDataFactory;
 
-    /**
-     * @param GalleryService $galleryService
-     */
-    public function __construct(GalleryService $galleryService)
+    public function __construct(GalleryImageListDataFactory $galleryImageListDataFactory)
     {
-        $this->galleryService = $galleryService;
+        $this->galleryImageListDataFactory = $galleryImageListDataFactory;
     }
 
     /**
@@ -39,10 +35,12 @@ class ImagesController extends AbstractApiController
      */
     public function indexAction(Event $event)
     {
-        $images = $this->galleryService->getImageListData($event);
+        if (!$event->hasGallery()) {
+            throw new NotFoundHttpException();
+        }
 
         return $this->createView(
-            UrlItemListData::create($images)
+            $this->galleryImageListDataFactory->createFromEvent($event)
         );
     }
 }

@@ -80,9 +80,6 @@ class Gallery
         return $this;
     }
 
-    /**
-     * @return GalleryImage[]
-     */
     public function getImages()
     {
         return $this->images;

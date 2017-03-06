@@ -8,9 +8,8 @@ class VideoListData
     /**
      * @var VideoListItemData[]
      * @Serializer\Type("array<ApiBundle\DataTransfer\Api\VideoListItemData>")
-     * @Serializer\Inline()
      */
-    private $videos;
+    private $items;
 
     /**
      * @var MetaData
@@ -24,7 +23,7 @@ class VideoListData
      */
     private function __construct(array $videos, MetaData $metadata)
     {
-        $this->videos = $videos;
+        $this->items = $videos;
         $this->metadata = $metadata;
     }
 

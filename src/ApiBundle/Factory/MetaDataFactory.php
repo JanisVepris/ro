@@ -5,6 +5,7 @@ use ApiBundle\DataTransfer\Api\MetaData;
 use CoreBundle\Service\ImageResizer;
 use RoBundle\Entity\Article;
 use RoBundle\Entity\Event;
+use RoBundle\Entity\GalleryImage;
 
 class MetaDataFactory
 {
@@ -84,6 +85,22 @@ class MetaDataFactory
             static::OG_SITE_NAME,
             $this->imageResizer->getFacebookPreviewImage($event->getEventImage()->getWebPath()),
             $event->getEventImage()->getMimeType(),
+            $event->getDescription()
+        );
+    }
+
+    public function createImageGalleryMetaDataFromEvent(Event $event)
+    {
+        /** @var GalleryImage $ogImage */
+        $ogImage = $event->getGallery()->getImages()->first();
+
+        return MetaData::create(
+            sprintf('%s "%s" Nuotraukų Galerija', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($ogImage->getWebPath()),
+            $ogImage->getMimeType(),
             $event->getDescription()
         );
     }

@@ -27,7 +27,7 @@ services:
         class: ApiBundle\Controller\Api\ImagesController
         parent: api.controller.abstract_controller
         arguments:
-            - "@ro.service.gallery_service"
+            - "@api.factory.gallery_image_list_data_factory"
 
     api.controller.lyrics_controller:
         class: ApiBundle\Controller\Api\LyricsController
@@ -51,7 +51,7 @@ services:
         class: ApiBundle\Controller\Api\TracksController
         parent: api.controller.abstract_controller
         arguments:
-            - "@api.factory.track_data_factory"
+            - "@api.factory.track_list_data_factory"
 
     api.controller.videos_controller:
         class: ApiBundle\Controller\Api\VideosController

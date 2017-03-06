@@ -2,7 +2,6 @@
 
 namespace RoBundle\Service;
 
-use ApiBundle\DataTransfer\Api\UrlItemData;
 use CoreBundle\Service\AbsoluteUrlGenerator;
 use Doctrine\ORM\EntityManager;
 use RoBundle\Entity\Event;
@@ -10,8 +9,6 @@ use RoBundle\Entity\Gallery;
 use RoBundle\Entity\GalleryImage;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Functional as F;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GalleryService
 {
@@ -66,32 +63,9 @@ class GalleryService
         return $galleryImage->getFileName();
     }
 
-    public function removeGalleryImage($image)
+    public function removeGalleryImage(GalleryImage $image)
     {
         $this->em->remove($image);
         $this->em->flush();
-    }
-
-    public function getImageListData(Event $event)
-    {
-        if (!$event->hasGallery()) {
-            throw new NotFoundHttpException();
-        }
-
-        $gallery = $event->getGallery();
-
-        if (!$gallery->hasImages()) {
-            throw new NotFoundHttpException();
-        }
-
-        $images = $gallery->getImages();
-
-        $images = F\map($images, function (GalleryImage $image) {
-            $url = $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($image->getWebPath());
-
-            return UrlItemData::create($url);
-        });
-
-        return $images;
     }
 }
