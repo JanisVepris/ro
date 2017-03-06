@@ -27,6 +27,7 @@ class FactsController extends AbstractApiController
      */
     public function getAction(Event $event)
     {
+        // TODO: add metadata
         if (!$event->hasFacts()) {
             throw new NotFoundHttpException();
         }

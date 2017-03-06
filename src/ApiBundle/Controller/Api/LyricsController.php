@@ -28,6 +28,7 @@ class LyricsController extends AbstractApiController
      */
     public function indexAction(Event $event)
     {
+        // TODO: add metadata
         return $this->createView(
             LyricsListData::create($event->getLyrics()->getLyricList()->toArray())
         );

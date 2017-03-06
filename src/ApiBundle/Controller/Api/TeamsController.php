@@ -27,6 +27,7 @@ class TeamsController extends AbstractApiController
      */
     public function getAction(Event $event)
     {
+        // TODO: Add metadata
         if (!$event->hasTeam()) {
             throw new NotFoundHttpException();
         }

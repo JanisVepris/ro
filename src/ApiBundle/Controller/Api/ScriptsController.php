@@ -27,6 +27,7 @@ class ScriptsController extends AbstractApiController
      */
     public function getAction(Event $event)
     {
+        // TODO: add metadata
         if (!$event->hasScript()) {
             throw new NotFoundHttpException();
         }
