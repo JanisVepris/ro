@@ -5,20 +5,8 @@ use ApiBundle\DataTransfer\Api\EventData;
 use CoreBundle\Service\AbsoluteUrlGenerator;
 use RoBundle\Entity\Event;
 
-class EventDataFactory
+class EventDataFactory extends AbstractApiDataFactory
 {
-    /** @var AbsoluteUrlGenerator */
-    private $absoluteUrlGenerator;
-
-    /** @var MetaDataFactory */
-    private $metaDataFactory;
-
-    public function __construct(AbsoluteUrlGenerator $absoluteUrlGenerator, MetaDataFactory $metaDataFactory)
-    {
-        $this->absoluteUrlGenerator = $absoluteUrlGenerator;
-        $this->metaDataFactory = $metaDataFactory;
-    }
-
     public function createFromEntity(Event $event)
     {
         return new EventData(

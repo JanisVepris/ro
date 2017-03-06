@@ -6,16 +6,8 @@ use ApiBundle\DataTransfer\Api\ArticleListItemData;
 use CoreBundle\Service\ImageResizer;
 use RoBundle\Entity\Article;
 
-class ArticleListItemDataFactory
+class ArticleListItemDataFactory extends AbstractApiDataFactory
 {
-    /** @var ImageResizer */
-    private $imageResizer;
-
-    public function __construct(ImageResizer $imageResizer)
-    {
-        $this->imageResizer = $imageResizer;
-    }
-
     public function createFromEntity(Article $article)
     {
         return ArticleListItemData::create(

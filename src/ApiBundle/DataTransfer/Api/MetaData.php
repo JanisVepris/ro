@@ -113,7 +113,7 @@ class MetaData
      * @param integer $ogImageHeight
      * @param integer $ogImageWidth
      * @param string $googleDescription
-     * @return static
+     * @return MetaData
      */
     public static function create(
         $ogTitle,

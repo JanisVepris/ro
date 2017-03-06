@@ -3,6 +3,7 @@ namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use ApiBundle\DataTransfer\Api\UrlItemData;
+use ApiBundle\Factory\PosterDataFactory;
 use CoreBundle\Service\AbsoluteUrlGenerator;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -13,15 +14,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /** @Rest\Route(service="api.controller.posters_controller") */
 class PostersController extends AbstractApiController
 {
-    /** @var AbsoluteUrlGenerator */
-    private $absoluteUrlGenerator;
+    /** @var PosterDataFactory */
+    private $posterDataFactory;
 
     /**
      * @param AbsoluteUrlGenerator $absoluteUrlGenerator
      */
-    public function __construct(AbsoluteUrlGenerator $absoluteUrlGenerator)
+    public function __construct(PosterDataFactory $posterDataFactory)
     {
-        $this->absoluteUrlGenerator = $absoluteUrlGenerator;
+        $this->posterDataFactory = $posterDataFactory;
     }
 
     /**
@@ -43,8 +44,8 @@ class PostersController extends AbstractApiController
             throw new NotFoundHttpException();
         }
 
-        $url = $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($event->getPoster()->getWebPath());
-
-        return $this->createView(UrlItemData::create($url));
+        return $this->createView(
+            $this->posterDataFactory->createFromEvent($event)
+        );
     }
 }

@@ -7,27 +7,8 @@ use CoreBundle\Service\AbsoluteUrlGenerator;
 use CoreBundle\Service\ImageResizer;
 use RoBundle\Entity\Article;
 
-class ArticleDataFactory
+class ArticleDataFactory extends AbstractApiDataFactory
 {
-    /** @var AbsoluteUrlGenerator */
-    private $absoluteUrlGenerator;
-
-    /** @var MetaDataFactory */
-    private $metaDataFactory;
-
-    /** @var ImageResizer */
-    private $imageResizer;
-
-    public function __construct(
-        AbsoluteUrlGenerator $absoluteUrlGenerator,
-        ImageResizer $imageResizer,
-        MetaDataFactory $metaDataFactory
-    ) {
-        $this->absoluteUrlGenerator = $absoluteUrlGenerator;
-        $this->imageResizer = $imageResizer;
-        $this->metaDataFactory = $metaDataFactory;
-    }
-
     public function createFromEntity(Article $article)
     {
         if ($article->getArticleImage()) {

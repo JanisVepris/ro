@@ -37,7 +37,7 @@ services:
         class: ApiBundle\Controller\Api\PostersController
         parent: api.controller.abstract_controller
         arguments:
-            - "@core.service.absolute_url_generator"
+            - "@api.factory.poster_data_factory"
 
     api.controller.scripts_controller:
         class: ApiBundle\Controller\Api\ScriptsController

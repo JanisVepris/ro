@@ -48,4 +48,17 @@ class MetaDataFactory
             $event->getDescription()
         );
     }
+
+    public function createPosterMetadataFromEvent(Event $event)
+    {
+        return MetaData::create(
+            sprintf('%s "%s" Plakatas', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($event->getPoster()->getWebPath()),
+            $event->getPoster()->getMimeType(),
+            $event->getDescription()
+        );
+    }
 }

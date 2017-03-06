@@ -1,25 +1,31 @@
 services:
-    api.factory.article_data_factory:
-        class: ApiBundle\Factory\ArticleDataFactory
-        arguments:
-            - '@core.service.absolute_url_generator'
-            - '@core.service.image_resizer'
-            - '@api.factory.meta_data_factory'
-
-    api.factory.event_data_factory:
-        class: ApiBundle\Factory\EventDataFactory
-        arguments:
-            - '@core.service.absolute_url_generator'
-            - '@api.factory.meta_data_factory'
-
-    api.factory.track_data_factory:
-        class: ApiBundle\Factory\TrackDataFactory
-        arguments: ['@core.service.absolute_url_generator']
-
-    api.factory.article_list_item_data_factory:
-        class: ApiBundle\Factory\ArticleListItemDataFactory
-        arguments: ['@core.service.image_resizer']
-
     api.factory.meta_data_factory:
         class: ApiBundle\Factory\MetaDataFactory
         arguments: ['@core.service.image_resizer']
+
+    api.factory.abstract_factory:
+        abstract: true
+        calls:
+            - ['setMetaDataFactory', ['@api.factory.meta_data_factory']]
+            - ['setAbsoluteUrlGenerator', ['@core.service.absolute_url_generator']]
+            - ['setImageResizer', ['@core.service.image_resizer']]
+
+    api.factory.article_data_factory:
+        class: ApiBundle\Factory\ArticleDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.event_data_factory:
+        class: ApiBundle\Factory\EventDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.track_data_factory:
+        class: ApiBundle\Factory\TrackDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.article_list_item_data_factory:
+        class: ApiBundle\Factory\ArticleListItemDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.poster_data_factory:
+        class: ApiBundle\Factory\PosterDataFactory
+        parent: api.factory.abstract_factory
