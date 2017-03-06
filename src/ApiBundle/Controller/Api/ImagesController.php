@@ -24,7 +24,7 @@ class ImagesController extends AbstractApiController
      * @ApiDoc(
      *     description="Get image list by gallery id",
      *     section="Gallery",
-     *     output="ApiBundle\DataTransfer\Api\UrlItemListData"
+     *     output="ApiBundle\DataTransfer\Api\GalleryImageListData"
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/gallery/images",

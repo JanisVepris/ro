@@ -2,7 +2,6 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\UrlItemData;
 use ApiBundle\Factory\PosterDataFactory;
 use CoreBundle\Service\AbsoluteUrlGenerator;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -29,7 +28,7 @@ class PostersController extends AbstractApiController
      * @ApiDoc(
      *     description="Get event poster by id",
      *     section="Poster",
-     *     output="ApiBundle\DataTransfer\Api\UrlItemData"
+     *     output="ApiBundle\DataTransfer\Api\PosterData"
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/poster",

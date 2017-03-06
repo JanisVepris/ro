@@ -17,7 +17,7 @@ class LyricsController extends AbstractApiController
      * @ApiDoc(
      *     description="Get LyricItem list by event id.",
      *     section="Lyrics",
-     *     output="ApiBundle\DataTransfer\Api\LyricListData"
+     *     output="ApiBundle\DataTransfer\Api\LyricsListData"
      * )
      * @Rest\Get(
      *     path="/api/events/{eventId}/lyrics",

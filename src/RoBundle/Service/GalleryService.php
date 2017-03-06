@@ -1,5 +1,4 @@
 <?php
-
 namespace RoBundle\Service;
 
 use CoreBundle\Service\AbsoluteUrlGenerator;
