@@ -56,3 +56,5 @@ services:
     api.controller.videos_controller:
         class: ApiBundle\Controller\Api\VideosController
         parent: api.controller.abstract_controller
+        arguments:
+            - '@api.factory.video_list_data_factory'

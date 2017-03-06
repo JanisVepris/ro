@@ -74,4 +74,17 @@ class MetaDataFactory
             $event->getDescription()
         );
     }
+
+    public function createVideoPlaylistMetadataFromEvent(Event $event)
+    {
+        return MetaData::create(
+            sprintf('%s "%s" Video Grojaraštis', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($event->getEventImage()->getWebPath()),
+            $event->getEventImage()->getMimeType(),
+            $event->getDescription()
+        );
+    }
 }

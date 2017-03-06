@@ -35,3 +35,7 @@ services:
     api.factory.poster_data_factory:
         class: ApiBundle\Factory\PosterDataFactory
         parent: api.factory.abstract_factory
+
+    api.factory.video_list_data_factory:
+        class: ApiBundle\Factory\VideoListDataFactory
+        parent: api.factory.abstract_factory

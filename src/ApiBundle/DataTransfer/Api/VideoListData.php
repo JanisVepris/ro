@@ -13,10 +13,28 @@ class VideoListData
     private $videos;
 
     /**
-     * @param VideoListItemData[] $videos
+     * @var MetaData
+     * @Serializer\Type("ApiBundle\DataTransfer\Api\MetaData")
      */
-    public function __construct(array $videos)
+    private $metadata;
+
+    /**
+     * @param VideoListItemData[] $videos
+     * @param MetaData $metadata
+     */
+    private function __construct(array $videos, MetaData $metadata)
     {
         $this->videos = $videos;
+        $this->metadata = $metadata;
+    }
+
+    /**
+     * @param VideoListItemData[] $videos
+     * @param MetaData $metadata
+     * @return VideoListData
+     */
+    public static function create(array $videos, MetaData $metadata)
+    {
+        return new static($videos, $metadata);
     }
 }
