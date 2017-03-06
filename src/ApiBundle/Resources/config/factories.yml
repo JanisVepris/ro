@@ -22,6 +22,12 @@ services:
         class: ApiBundle\Factory\TrackDataFactory
         parent: api.factory.abstract_factory
 
+    api.factory.track_list_data_factory:
+        class: ApiBundle\Factory\PosterDataFactory
+        parent: api.factory.abstract_factory
+        arguments:
+            - '@api.factory.track_data_factory'
+
     api.factory.article_list_item_data_factory:
         class: ApiBundle\Factory\ArticleListItemDataFactory
         parent: api.factory.abstract_factory

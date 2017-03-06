@@ -2,24 +2,22 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\TrackListData;
-use ApiBundle\Factory\TrackDataFactory;
+use ApiBundle\Factory\TrackListDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Functional as F;
 
 /** @Rest\Route(service="api.controller.tracks_controller") */
 class TracksController extends AbstractApiController
 {
-    /** @var TrackDataFactory */
-    private $trackDataFactory;
+    /** @var TrackListDataFactory */
+    private $trackListDataFactory;
 
-    public function __construct(TrackDataFactory $trackDataFactory)
+    public function __construct(TrackListDataFactory $trackListDataFactory)
     {
-        $this->trackDataFactory = $trackDataFactory;
+        $this->trackListDataFactory = $trackListDataFactory;
     }
 
     /**
@@ -41,10 +39,8 @@ class TracksController extends AbstractApiController
             throw new NotFoundHttpException();
         }
 
-        $tracks = F\map($event->getPlaylist()->getTracks()->toArray(), [$this->trackDataFactory, 'createFromEntity']);
-
         return $this->createView(
-            TrackListData::create($tracks)
+            $this->trackListDataFactory->createFromEvent($event)
         );
     }
 }

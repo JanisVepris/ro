@@ -13,19 +13,28 @@ class TrackListData
     private $items;
 
     /**
-     * @param TrackListItemData[] $tracks
+     * @var MetaData
+     * @Serializer\Type("ApiBundle\DataTransfer\Api\MetaData")
      */
-    private function __construct($items)
+    private $metadata;
+
+    /**
+     * @param TrackListItemData[] $tracks
+     * @param MetaData $metadata
+     */
+    private function __construct(array $items, MetaData $metadata)
     {
         $this->items = $items;
+        $this->metadata = $metadata;
     }
 
     /**
      * @param TrackListItemData[] $tracks
+     * @param MetaData $metadata
      * @return static
      */
-    public static function create(array $tracks)
+    public static function create(array $tracks, MetaData $metadata)
     {
-        return new static($tracks);
+        return new static($tracks, $metadata);
     }
 }
