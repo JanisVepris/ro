@@ -14,6 +14,10 @@
 	margin-top: 12px
 }
 
+.mb {
+	margin-bottom: 12px
+}
+
 .mt-xl {
 	margin-top: 36px
 }
@@ -48,7 +52,7 @@
 }
 
 .max-opacity {
-	opacity: 1;
+	opacity: 1 !important; 
 }
 
 .no-click {

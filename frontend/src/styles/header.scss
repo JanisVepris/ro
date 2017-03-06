@@ -78,17 +78,14 @@
     cursor: pointer;
 }
 
-.header-dropdown > * > * > *:first-child {
-    margin-top: 12px
+.header-dropdown > * > *{
+    padding: 12px 0px;
 }
 
-.header-dropdown > * > * > *:last-child {
-    margin-bottom: 12px
+.header-dropdown .dropdown-option:first-child {
+    margin-top: 0px;
 }
 
-.hidden .selected {
-    color: #727272 !important;
-}
 
 .header-dropdown .selected {
     color: #E4E4E4;

@@ -1,6 +1,6 @@
 .expandable-item-container {
 	clear: both;
-    margin-bottom: 12px;
+    background-color: #fff;
 	border: 1px solid #ddd;
 	border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -16,7 +16,7 @@
 
 .expandable-item-content {
 	color: #333;
-    background-color: #fff;
+    opacity: 0;
 	padding: 12px 24px;
 }
 
