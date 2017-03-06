@@ -566,6 +566,9 @@
       "properties" : {
         "url" : {
           "type" : "string"
+        },
+        "metadata" : {
+          "$ref" : "#/definitions/Metadata"
         }
       }
     },
