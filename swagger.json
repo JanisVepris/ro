@@ -576,6 +576,12 @@
       "properties" : {
         "url" : {
           "type" : "string"
+        },
+        "urlMobile" : {
+          "type" : "string"
+        },
+        "thumbnail" : {
+          "type" : "string"
         }
       }
     },
@@ -604,10 +610,10 @@
           "type" : "string"
         },
         "ogImageHeight" : {
-          "type" : "string"
+          "type" : "integer"
         },
         "ogImageWidth" : {
-          "type" : "string"
+          "type" : "integer"
         },
         "googleDescription" : {
           "type" : "string"
