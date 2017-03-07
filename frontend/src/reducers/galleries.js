@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import { toReducer } from './utils'
 
 import { 
-	GALLERY_SET
+	GALLERY_SET,
+	GALLERY_IMAGE_SET_ACTIVE
 } from '../actions/galleries'
 
 const byId = toReducer({}, state => ({
@@ -12,6 +13,11 @@ const byId = toReducer({}, state => ({
 	})
 }))
 
+const activeImageIndex = toReducer({}, () => ({
+	[GALLERY_IMAGE_SET_ACTIVE]: action => action.index
+}))
+
 export default combineReducers({
-	byId
+	byId,
+	activeImageIndex
 })

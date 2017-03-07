@@ -16,7 +16,9 @@ export default class Gallery extends React.Component {
 				<div className="image-gallery">
 					{
 						this.props.items.map((item, index) => (
-							<img key={ index } src={ item.thumbnail }/>
+							<div className="image-gallery-img-container">
+								<img key={ index } src={ item.thumbnail }/>
+							</div>
 						))
 					}
 				</div>
