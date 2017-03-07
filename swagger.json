@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "MIDI RO API",
-    "version" : "1.0.0"
+    "version" : "1"
   },
   "host" : "ro.dev",
   "schemes" : [ "http" ],
