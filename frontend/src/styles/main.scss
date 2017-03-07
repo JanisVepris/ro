@@ -44,6 +44,10 @@ body {
     opacity: 0;
 }
 
+.content.gallery {
+    padding: 36px 72px;
+}
+
 .opacity-animation {
     -webkit-transition: opacity 1s ease-in-out;
     -moz-transition: opacity 1s ease-in-out;
@@ -89,7 +93,7 @@ body {
 // Mobile
 @media screen and (max-width: 650px) {
     .content {
-        padding: 24px;
+        padding: 24px !important;
     }
     .article-title {
         font-size: 20px;
@@ -103,7 +107,7 @@ body {
 
 @media screen and (max-width: 500px) {
     .content {
-        padding: 12px;
+        padding: 12px !important;
     }
 }
 

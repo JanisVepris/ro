@@ -8,6 +8,7 @@ import '../styles/main.scss'
 import '../styles/header.scss'
 import '../styles/footer.scss'
 import '../styles/helpers.scss'
+import '../styles/gallery.scss'
 import '../styles/news-overview.scss'
 import '../styles/expandable-item.scss'
 

@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
 
 	return {
 		headerLoading,
-		contentLoading
+		contentLoading,
+		activeCategory: state.app.activeCategory
 	}
 }
 

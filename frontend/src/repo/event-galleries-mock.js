@@ -9,9 +9,24 @@ export default (id) => {
       				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg'
 				},
 				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg'
+				},
+				{ 
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Kristina_14.jpg',
 					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Kristina_14.jpg',
       				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Kristina_14.jpg'
+				},
+				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg'
+				},
+				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg'
 				},
 				{ 
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg',
@@ -37,6 +52,11 @@ export default (id) => {
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg',
 					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg',
       				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg'
+				},
+				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg'
 				},
 				{ 
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
@@ -85,9 +105,24 @@ export default (id) => {
       				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg'
 				},
 				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg'
+				},
+				{ 
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Kristina_14.jpg',
 					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Kristina_14.jpg',
       				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Kristina_14.jpg'
+				},
+				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg'
+				},
+				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg'
 				},
 				{ 
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg',
@@ -113,6 +148,11 @@ export default (id) => {
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg',
 					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg',
       				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_1.jpg'
+				},
+				{ 
+					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+					'urlMobile': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg',
+      				'thumbnail': 'http://rokooperos.midi.lt/wp-content/grand-media/image/12967541_1259123157450563_7576621597490668625_o.jpg'
 				},
 				{ 
 					'url': 'http://rokooperos.midi.lt/wp-content/grand-media/image/Maknis_4.jpg',

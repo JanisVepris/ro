@@ -37,7 +37,7 @@ export default class App extends React.Component {
 				: ' max-opacity opacity-animation'
 			)
 
-		const contentClassName = 'content'
+		const contentClassName = `content ${this.props.activeCategory}`
 			+ ( this.props.headerLoading || this.props.contentLoading || this.state.reanimate
 				? ' no-click'
 				: ' max-opacity opacity-animation'
