@@ -6,7 +6,6 @@
   },
   "host" : "ro.dev",
   "schemes" : [ "http" ],
-  "basePath" : "/",
   "produces" : [ "application/json" ],
   "paths" : {
     "/api/events" : {
