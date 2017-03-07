@@ -171,7 +171,7 @@
         }
       }
     },
-    "/api/events/{eventId}/videoPlaylists/videos" : {
+    "/api/events/{eventId}/videoPlaylist/videos" : {
       "get" : {
         "summary" : "Get a list of video URLs",
         "parameters" : [ {
