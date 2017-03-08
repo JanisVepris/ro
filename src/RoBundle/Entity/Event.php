@@ -123,8 +123,12 @@ class Event
     private $videoPlaylist;
 
     /**
-     * Event constructor.
+     * @var boolean
+     *
+     * @ORM\Column(name="disabled", type="boolean")
      */
+    private $disabled = false;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -486,6 +490,22 @@ class Event
     public function hasLyricsRelation()
     {
         return (bool) $this->lyrics;
+    }
+
+    public function isDisabled()
+    {
+        return $this->disabled;
+    }
+
+    /**
+     * @param bool $disabled
+     * @return Event
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+
+        return $this;
     }
 
     public function __toString()

@@ -84,6 +84,12 @@ class EventData
     private $hasAudioPlaylist;
 
     /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     */
+    private $isDisabled;
+
+    /**
      * @var MetaData
      * @Serializer\Type("ApiBundle\DataTransfer\Api\MetaData")
      */
@@ -116,6 +122,7 @@ class EventData
         $hasGallery,
         $hasVideoPlaylist,
         $hasAudioPlaylist,
+        $isDisabled,
         MetaData $metadata
     ) {
         $this->id = $id;
@@ -132,5 +139,6 @@ class EventData
         $this->hasVideoPlaylist = $hasVideoPlaylist;
         $this->hasAudioPlaylist = $hasAudioPlaylist;
         $this->metadata = $metadata;
+        $this->isDisabled = $isDisabled;
     }
 }

@@ -10,6 +10,7 @@ use RoBundle\Entity\Event;
 use RoBundle\Service\EventService;
 use Functional as F;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @Rest\Route(service="api.controller.events_controller") */
 class EventsController extends AbstractApiController
@@ -68,6 +69,10 @@ class EventsController extends AbstractApiController
      */
     public function getAction(Event $event)
     {
+        if ($event->isDisabled()) {
+            throw new NotFoundHttpException();
+        }
+
         return $this->createView(
             $this->eventDataFactory->createFromEntity($event)
         );

@@ -12,6 +12,7 @@
   "hasGallery": "@boolean@",
   "hasVideoPlaylist": "@boolean@",
   "hasAudioPlaylist": "@boolean@",
+  "isDisabled": "@boolean@",
   "metadata": {
     "ogTitle": "@string@",
     "ogDescription": "@string@",

@@ -25,19 +25,27 @@ class EventListItemData
     private $slug;
 
     /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     */
+    private $isDisabled;
+
+    /**
      * @param int $id
      * @param string $title
      * @param string $slug
+     * @param boolean $isDisabled
      */
-    private function __construct($id, $title, $slug)
+    private function __construct($id, $title, $slug, $isDisabled)
     {
         $this->id = $id;
         $this->title = $title;
         $this->slug = $slug;
+        $this->isDisabled = $isDisabled;
     }
 
     public static function createFromEntity(Event $event)
     {
-        return new static($event->getId(), $event->getTitle(), $event->getSlug());
+        return new static($event->getId(), $event->getTitle(), $event->getSlug(), $event->isDisabled());
     }
 }

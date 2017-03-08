@@ -22,6 +22,7 @@ class EventDataFactory extends AbstractApiDataFactory
             $event->hasGallery(),
             $event->hasVideoPlaylist(),
             $event->hasAudioPlaylist(),
+            $event->isDisabled(),
             $this->metaDataFactory->createFromEvent($event)
         );
     }

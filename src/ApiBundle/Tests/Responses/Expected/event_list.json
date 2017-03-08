@@ -2,7 +2,8 @@
   {
     "id": "@integer@",
     "title": "@string@",
-    "slug": "@string@"
+    "slug": "@string@",
+    "isDisabled": "@boolean@"
   },
   "@...@"
 ]
