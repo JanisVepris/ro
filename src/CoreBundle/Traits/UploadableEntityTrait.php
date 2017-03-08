@@ -4,7 +4,6 @@ namespace CoreBundle\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait UploadableEntityTrait
 {
@@ -23,12 +22,6 @@ trait UploadableEntityTrait
      * @Gedmo\UploadableFileName
      */
     private $fileName;
-
-    /**
-     * @var UploadedFile
-     * @Assert\File()
-     */
-    public $file;
 
     /**
      * @var string

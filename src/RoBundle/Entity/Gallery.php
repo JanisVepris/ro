@@ -5,6 +5,7 @@ use CoreBundle\Traits\CreatedOnEntityTrait;
 use CoreBundle\Traits\UpdatedOnEntityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ro3_gallery")
@@ -34,6 +35,7 @@ class Gallery
     /**
      * @var ArrayCollection|GalleryImage[]
      * @ORM\OneToMany(targetEntity="RoBundle\Entity\GalleryImage", mappedBy="gallery", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $images;
 

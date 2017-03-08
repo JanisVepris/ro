@@ -67,6 +67,7 @@ class Article
      * @var ArticleImage
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\ArticleImage", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="article_image_id", referencedColumnName="id")
+     * @Assert\Valid()
      */
     private $articleImage;
 

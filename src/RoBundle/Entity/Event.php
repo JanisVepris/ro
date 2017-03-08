@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Traits\CreatedOnEntityTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ro3_event")
@@ -64,6 +65,7 @@ class Event
      * @var EventImage
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\EventImage", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="event_image_id", referencedColumnName="id")
+     * @Assert\Valid()
      */
     private $eventImage;
 
@@ -77,6 +79,7 @@ class Event
      * @var Poster
      * @ORM\OneToOne(targetEntity="RoBundle\Entity\Poster", mappedBy="event", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="poster_id", referencedColumnName="id")
+     * @Assert\Valid()
      */
     private $poster;
 

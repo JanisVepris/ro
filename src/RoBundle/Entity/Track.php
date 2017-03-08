@@ -7,6 +7,8 @@ use CoreBundle\Traits\EntityIdFieldTrait;
 use CoreBundle\Traits\UploadableEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Uploadable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ro3_playlist_tracks")
@@ -24,6 +26,14 @@ class Track extends AbstractUploadableEntity
     use EntityIdFieldTrait;
     use UploadableEntityTrait;
     use CreatedOnEntityTrait;
+
+    /**
+     * @var UploadedFile
+     * @Assert\File(
+     *     mimeTypes={"audio/mpeg"}
+     * )
+     */
+    public $file;
 
     /** @var string */
     private $uploadPath = self::BASE_UPLOAD_DIR . '/Audio/';

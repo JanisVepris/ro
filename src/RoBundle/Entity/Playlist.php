@@ -3,6 +3,7 @@ namespace RoBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ro3_playlist")
@@ -28,6 +29,7 @@ class Playlist
     /**
      * @var ArrayCollection|Track[]
      * @ORM\OneToMany(targetEntity="RoBundle\Entity\Track", mappedBy="playlist", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $tracks;
 
