@@ -33,7 +33,7 @@ class Gallery
 
     /**
      * @var ArrayCollection|GalleryImage[]
-     * @ORM\OneToMany(targetEntity="RoBundle\Entity\GalleryImage", mappedBy="gallery")
+     * @ORM\OneToMany(targetEntity="RoBundle\Entity\GalleryImage", mappedBy="gallery", cascade={"persist", "remove"})
      */
     private $images;
 
@@ -104,6 +104,7 @@ class Gallery
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
+            $image->setGallery($this);
         }
 
         return $this;

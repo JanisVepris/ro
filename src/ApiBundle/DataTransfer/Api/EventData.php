@@ -18,12 +18,6 @@ class EventData
     private $title;
 
     /**
-     * @var integer
-     * @Serializer\Type("integer")
-     */
-    private $playlistId;
-
-    /**
      * @var \DateTime
      * @Serializer\Type("DateTime<'Y.m.d'>")
      */
@@ -84,6 +78,12 @@ class EventData
     private $hasVideoPlaylist;
 
     /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     */
+    private $hasAudioPlaylist;
+
+    /**
      * @var MetaData
      * @Serializer\Type("ApiBundle\DataTransfer\Api\MetaData")
      */
@@ -92,7 +92,6 @@ class EventData
     /**
      * @param int $id
      * @param string $title
-     * @param int $playlistId
      * @param \DateTime $eventDate
      * @param string $image
      * @param string $slug
@@ -106,7 +105,6 @@ class EventData
     public function __construct(
         $id,
         $title,
-        $playlistId,
         \DateTime $eventDate,
         $image,
         $slug,
@@ -117,11 +115,11 @@ class EventData
         $hasScript,
         $hasGallery,
         $hasVideoPlaylist,
+        $hasAudioPlaylist,
         MetaData $metadata
     ) {
         $this->id = $id;
         $this->title = $title;
-        $this->playlistId = $playlistId;
         $this->eventDate = $eventDate;
         $this->image = $image;
         $this->slug = $slug;
@@ -132,6 +130,7 @@ class EventData
         $this->hasScript = $hasScript;
         $this->hasGallery = $hasGallery;
         $this->hasVideoPlaylist = $hasVideoPlaylist;
+        $this->hasAudioPlaylist = $hasAudioPlaylist;
         $this->metadata = $metadata;
     }
 }

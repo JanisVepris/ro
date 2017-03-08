@@ -2,7 +2,7 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\HtmlContentData;
+use ApiBundle\Factory\ScriptDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
@@ -12,6 +12,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /** @Rest\Route(service="api.controller.scripts_controller") */
 class ScriptsController extends AbstractApiController
 {
+    /** @var ScriptDataFactory */
+    private $scriptDataFactory;
+
+    public function __construct(ScriptDataFactory $scriptDataFactory)
+    {
+        $this->scriptDataFactory = $scriptDataFactory;
+    }
+
     /**
      * @ApiDoc(
      *     description="Get script page content by event id.",
@@ -27,13 +35,12 @@ class ScriptsController extends AbstractApiController
      */
     public function getAction(Event $event)
     {
-        // TODO: add metadata
         if (!$event->hasScript()) {
             throw new NotFoundHttpException();
         }
 
         return $this->createView(
-            HtmlContentData::create($event->getScript()->getContent())
+            $this->scriptDataFactory->createFromEvent($event)
         );
     }
 }

@@ -77,6 +77,7 @@ class Lyrics
     {
         if (!$this->lyricList->contains($lyric)) {
             $this->lyricList->add($lyric);
+            $lyric->setLyrics($this);
         }
 
         return $this;

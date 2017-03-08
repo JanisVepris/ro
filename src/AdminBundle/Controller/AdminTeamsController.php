@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @Route("/event/{eventId}/team", service="admin.controller.teamss_controller") */
+/** @Route("/event/{eventId}/team", service="admin.controller.teams_controller") */
 class AdminTeamsController extends AbstractAdminController
 {
     /** @var TeamService */

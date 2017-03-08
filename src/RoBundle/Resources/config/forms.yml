@@ -29,7 +29,7 @@ services:
         tags:
             - { name: form.type }
 
-    ro.form.type.lyric:
+    ro.form.type.audio:
         class: RoBundle\Form\Type\AudioType
         tags:
             - { name: form.type }

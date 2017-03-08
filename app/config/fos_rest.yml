@@ -8,8 +8,8 @@ fos_rest:
     exception:
         enabled: true
         codes:
-            'Doctrine\ORM\EntityNotFoundException': HTTP_NOT_FOUND
-            'Doctrine\ORM\NoResultException': HTTP_NOT_FOUND
+            'Doctrine\ORM\EntityNotFoundException': 404
+            'Doctrine\ORM\NoResultException': 404
     serializer:
         serialize_null: true
     view:

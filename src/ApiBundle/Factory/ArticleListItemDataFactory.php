@@ -1,9 +1,7 @@
 <?php
-
 namespace ApiBundle\Factory;
 
 use ApiBundle\DataTransfer\Api\ArticleListItemData;
-use CoreBundle\Service\ImageResizer;
 use RoBundle\Entity\Article;
 
 class ArticleListItemDataFactory extends AbstractApiDataFactory

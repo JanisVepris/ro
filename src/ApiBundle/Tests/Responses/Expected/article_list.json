@@ -1,0 +1,17 @@
+{
+  "total": "@integer@",
+  "limit": "@integer@",
+  "offset": "@integer@",
+  "articles": [
+    {
+      "id": "@integer@",
+      "slug": "@string@",
+      "title": "@string@",
+      "description": "@string@",
+      "thumbBig": "@string@.isUrl()",
+      "thumbSmall": "@string@.isUrl()",
+      "createdOn": "@string@"
+    },
+    "@...@"
+  ]
+}

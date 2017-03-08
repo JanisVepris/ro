@@ -1,0 +1,23 @@
+{
+  "id": "@integer@",
+  "slug": "@string@",
+  "title": "@string@",
+  "image": "@string@.isUrl()",
+  "description": "@string@",
+  "content": "@string@",
+  "thumbBig": "@string@.isUrl()",
+  "thumbSmall": "@string@.isUrl()",
+  "createdOn": "@string@",
+  "metadata": {
+    "ogTitle": "@string@",
+    "ogDescription": "@string@",
+    "ogType": "@string@",
+    "ogSiteName": "@string@",
+    "ogLocale": "@string@",
+    "ogImage": "@string@.isUrl()",
+    "ogImageType": "@string@",
+    "ogImageHeight": "@integer@",
+    "ogImageWidth": "@integer@",
+    "googleDescription": "@string@"
+  }
+}

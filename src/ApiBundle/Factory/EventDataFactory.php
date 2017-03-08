@@ -2,7 +2,6 @@
 namespace ApiBundle\Factory;
 
 use ApiBundle\DataTransfer\Api\EventData;
-use CoreBundle\Service\AbsoluteUrlGenerator;
 use RoBundle\Entity\Event;
 
 class EventDataFactory extends AbstractApiDataFactory
@@ -12,7 +11,6 @@ class EventDataFactory extends AbstractApiDataFactory
         return new EventData(
             $event->getId(),
             $event->getTitle(),
-            $event->getPlaylist() ? $event->getPlaylist()->getId() : null,
             $event->getEventDate(),
             $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($event->getEventImage()->getWebPath()),
             $event->getSlug(),
@@ -23,6 +21,7 @@ class EventDataFactory extends AbstractApiDataFactory
             $event->hasScript(),
             $event->hasGallery(),
             $event->hasVideoPlaylist(),
+            $event->hasAudioPlaylist(),
             $this->metaDataFactory->createFromEvent($event)
         );
     }

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "@integer@",
+    "title": "@string@",
+    "slug": "@string@"
+  },
+  "@...@"
+]

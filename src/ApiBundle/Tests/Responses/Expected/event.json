@@ -1,0 +1,27 @@
+{
+  "title": "@string@",
+  "id": "@integer@",
+  "eventDate": "@string@",
+  "image": "@string@.isUrl()",
+  "slug": "@string@",
+  "hasLyrics": "@boolean@",
+  "hasFacts": "@boolean@",
+  "hasPoster": "@boolean@",
+  "hasTeam": "@boolean@",
+  "hasScript": "@boolean@",
+  "hasGallery": "@boolean@",
+  "hasVideoPlaylist": "@boolean@",
+  "hasAudioPlaylist": "@boolean@",
+  "metadata": {
+    "ogTitle": "@string@",
+    "ogDescription": "@string@",
+    "ogType": "@string@",
+    "ogSiteName": "@string@",
+    "ogLocale": "@string@",
+    "ogImage": "@string@.isUrl()",
+    "ogImageType": "@string@",
+    "ogImageHeight": "@integer@",
+    "ogImageWidth": "@integer@",
+    "googleDescription": "@string@"
+  }
+}

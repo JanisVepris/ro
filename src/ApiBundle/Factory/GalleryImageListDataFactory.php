@@ -1,6 +1,7 @@
 <?php
 namespace ApiBundle\Factory;
 
+use ApiBundle\DataTransfer\Api\GalleryImageData;
 use ApiBundle\DataTransfer\Api\GalleryImageListData;
 use ApiBundle\DataTransfer\Api\UrlItemData;
 use RoBundle\Entity\Event;
@@ -13,9 +14,11 @@ class GalleryImageListDataFactory extends AbstractApiDataFactory
     {
         /** @var UrlItemData[] $images */
         $images = F\map($event->getGallery()->getImages(), function (GalleryImage $image) {
-            $url =  $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($image->getWebPath());
-
-            return UrlItemData::create($url);
+            return GalleryImageData::create(
+                $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($image->getWebPath()),
+                $this->imageResizer->getGalleryImageForMobile($image->getWebPath()),
+                $this->imageResizer->getGalleryImageThumbnail($image->getWebPath())
+            );
         });
 
         return GalleryImageListData::create(

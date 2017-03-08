@@ -8,7 +8,6 @@ class TrackListData
     /**
      * @var TrackListItemData[]
      * @Serializer\Type("array<ApiBundle\DataTransfer\Api\TrackListItemData>")
-     * @Serializer\Inline()
      */
     private $items;
 

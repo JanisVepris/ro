@@ -1,0 +1,15 @@
+{
+  "content": "@string@",
+  "metadata": {
+    "ogTitle": "@string@",
+    "ogDescription": "@string@",
+    "ogType": "@string@",
+    "ogSiteName": "@string@",
+    "ogLocale": "@string@",
+    "ogImage": "@string@.isUrl()",
+    "ogImageType": "@string@",
+    "ogImageHeight": "@integer@",
+    "ogImageWidth": "@integer@",
+    "googleDescription": "@string@"
+  }
+}

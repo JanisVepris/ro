@@ -106,7 +106,7 @@ class Event
 
     /**
      * @var Gallery
-     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Gallery", mappedBy="event")
+     * @ORM\OneToOne(targetEntity="RoBundle\Entity\Gallery", mappedBy="event", cascade={"persist", "remove"})
      */
     private $gallery;
 
@@ -299,6 +299,7 @@ class Event
     public function setTeam(Team $team)
     {
         $this->team = $team;
+        $team->setEvent($this);
 
         return $this;
     }
@@ -318,6 +319,7 @@ class Event
     public function setScript(Script $script)
     {
         $this->script = $script;
+        $script->setEvent($this);
 
         return $this;
     }
@@ -337,6 +339,7 @@ class Event
     public function setFacts(Facts $facts)
     {
         $this->facts = $facts;
+        $facts->setEvent($this);
 
         return $this;
     }
@@ -404,6 +407,7 @@ class Event
     public function setLyrics(Lyrics $lyrics)
     {
         $this->lyrics = $lyrics;
+        $lyrics->setEvent($this);
 
         return $this;
     }
@@ -482,15 +486,6 @@ class Event
     public function hasLyricsRelation()
     {
         return (bool) $this->lyrics;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function setYearValueFromEventDate()
-    {
-        $this->year = $this->eventDate->format('Y');
     }
 
     public function __toString()

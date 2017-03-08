@@ -3,7 +3,6 @@ namespace ApiBundle\DataTransfer\Api;
 
 use JMS\Serializer\Annotation as Serializer;
 use RoBundle\Entity\Article;
-use Functional as F;
 
 class ArticleListData
 {

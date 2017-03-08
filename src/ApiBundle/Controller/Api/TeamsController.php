@@ -2,7 +2,7 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
-use ApiBundle\DataTransfer\Api\HtmlContentData;
+use ApiBundle\Factory\TeamDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
@@ -12,6 +12,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /** @Rest\Route(service="api.controller.teams_controller") */
 class TeamsController extends AbstractApiController
 {
+    /** @var TeamDataFactory */
+    private $teamDataFactory;
+
+    public function __construct(TeamDataFactory $teamDataFactory)
+    {
+        $this->teamDataFactory = $teamDataFactory;
+    }
+
     /**
      * @ApiDoc(
      *     description="Get team page content by event id.",
@@ -27,13 +35,12 @@ class TeamsController extends AbstractApiController
      */
     public function getAction(Event $event)
     {
-        // TODO: Add metadata
         if (!$event->hasTeam()) {
             throw new NotFoundHttpException();
         }
 
         return $this->createView(
-            HtmlContentData::create($event->getTeam()->getContent())
+            $this->teamDataFactory->createFromEvent($event)
         );
     }
 }

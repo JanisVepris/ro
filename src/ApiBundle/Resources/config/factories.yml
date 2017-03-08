@@ -43,3 +43,19 @@ services:
     api.factory.gallery_image_list_data_factory:
         class: ApiBundle\Factory\GalleryImageListDataFactory
         parent: api.factory.abstract_factory
+
+    api.factory.team_data_factory:
+        class: ApiBundle\Factory\TeamDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.lyrics_list_data_factory:
+        class: ApiBundle\Factory\LyricsListDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.facts_data_factory:
+        class: ApiBundle\Factory\FactsDataFactory
+        parent: api.factory.abstract_factory
+
+    api.factory.script_data_factory:
+        class: ApiBundle\Factory\ScriptDataFactory
+        parent: api.factory.abstract_factory

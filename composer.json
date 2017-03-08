@@ -39,14 +39,16 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "liip/imagine-bundle": "^1.7",
         "lstrojny/functional-php": "^1.4",
-        "egeloen/ckeditor-bundle": "^4.0",
+        "egeloen/ckeditor-bundle": "^4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "fzaninotto/faker": "^1.6",
-        "squizlabs/php_codesniffer": "^2.8"
+        "squizlabs/php_codesniffer": "^2.8",
+        "lakion/api-test-case": "^1.1",
+        "eightpoints/guzzle-bundle": "^5.3"
     },
     "scripts": {
         "symfony-scripts": [

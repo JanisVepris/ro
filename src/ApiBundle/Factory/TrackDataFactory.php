@@ -2,7 +2,6 @@
 namespace ApiBundle\Factory;
 
 use ApiBundle\DataTransfer\Api\TrackListItemData;
-use CoreBundle\Service\AbsoluteUrlGenerator;
 use RoBundle\Entity\Track;
 
 class TrackDataFactory extends AbstractApiDataFactory

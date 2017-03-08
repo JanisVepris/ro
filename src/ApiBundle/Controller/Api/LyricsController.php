@@ -3,16 +3,25 @@ namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
 use ApiBundle\DataTransfer\Api\LyricData;
-use ApiBundle\DataTransfer\Api\LyricsListData;
+use ApiBundle\Factory\LyricsListDataFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
 use RoBundle\Entity\Lyric;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @Rest\Route(service="api.controller.lyrics_controller") */
 class LyricsController extends AbstractApiController
 {
+    /** @var LyricsListDataFactory */
+    private $lyricsListDataFactory;
+
+    public function __construct(LyricsListDataFactory $lyricsListDataFactory)
+    {
+        $this->lyricsListDataFactory = $lyricsListDataFactory;
+    }
+
     /**
      * @ApiDoc(
      *     description="Get LyricItem list by event id.",
@@ -28,9 +37,12 @@ class LyricsController extends AbstractApiController
      */
     public function indexAction(Event $event)
     {
-        // TODO: add metadata
+        if (!$event->hasLyrics()) {
+            throw new NotFoundHttpException();
+        }
+
         return $this->createView(
-            LyricsListData::create($event->getLyrics()->getLyricList()->toArray())
+            $this->lyricsListDataFactory->createFromEvent($event)
         );
     }
 
@@ -50,6 +62,10 @@ class LyricsController extends AbstractApiController
      */
     public function getAction(Event $event, Lyric $lyric)
     {
+        if ($event->getId() !== $lyric->getLyrics()->getEvent()->getId()) {
+            throw new NotFoundHttpException();
+        }
+
         return $this->createView(
             LyricData::createFromEntity($lyric)
         );

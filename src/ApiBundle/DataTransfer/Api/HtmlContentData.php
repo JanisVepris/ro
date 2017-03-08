@@ -13,15 +13,19 @@ class HtmlContentData
     private $content;
 
     /**
-     * @param string $content
+     * @var MetaData
+     * @Serializer\Type("ApiBundle\DataTransfer\Api\MetaData")
      */
-    private function __construct($content)
+    private $metadata;
+
+    private function __construct($content, MetaData $metadata)
     {
         $this->content = $content;
+        $this->metadata = $metadata;
     }
 
-    public static function create($content)
+    public static function create($content, MetaData $metadata)
     {
-        return new static($content);
+        return new static($content, $metadata);
     }
 }

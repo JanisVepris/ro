@@ -66,6 +66,20 @@ class ImageResizer
         return $this->liipImagineCacheManager->getBrowserPath($imageUri, 'og_preview_image');
     }
 
+    public function getGalleryImageThumbnail($imageUri)
+    {
+        $this->resizeImage($imageUri, 'gallery_thumb');
+
+        return $this->liipImagineCacheManager->getBrowserPath($imageUri, 'gallery_thumb');
+    }
+
+    public function getGalleryImageForMobile($imageUri)
+    {
+        $this->resizeImage($imageUri, 'gallery_image_mobile');
+
+        return $this->liipImagineCacheManager->getBrowserPath($imageUri, 'gallery_image_mobile');
+    }
+
     private function resizeImage($imageUri, $filterName)
     {
         $this->liipImagineController->filterAction(

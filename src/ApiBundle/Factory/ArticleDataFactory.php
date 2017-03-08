@@ -1,10 +1,7 @@
 <?php
-
 namespace ApiBundle\Factory;
 
 use ApiBundle\DataTransfer\Api\ArticleData;
-use CoreBundle\Service\AbsoluteUrlGenerator;
-use CoreBundle\Service\ImageResizer;
 use RoBundle\Entity\Article;
 
 class ArticleDataFactory extends AbstractApiDataFactory

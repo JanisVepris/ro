@@ -38,7 +38,7 @@ liip_imagine:
               upscale: { min: [200, 200] }
               thumbnail: { size: [200, 200], mode: outbound, position: center}
 
-        gallery_thumb:
+        admin_gallery_thumb:
             quality: 65
             filters:
               thumbnail: { size: [250, 170], mode: inset, position: center}
@@ -58,3 +58,14 @@ liip_imagine:
             filters:
                 upscale: { min: [1200, 630] }
                 thumbnail: { size: [1200, 630], mode: outbound, position: center}
+
+        gallery_thumb:
+            quality: 60
+            filters:
+                thumbnail: { size: [600, 600], mode: inset, position: center}
+
+        gallery_image_mobile:
+            quality: 70
+            filters:
+                scale:
+                    dim: [1200, 1200]

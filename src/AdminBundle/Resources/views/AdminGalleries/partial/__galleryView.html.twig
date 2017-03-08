@@ -7,7 +7,7 @@
             {% for image in gallery.images %}
                     <div class="col-md-4 text-center">
                         <div>
-                            <img src="{{ image.webPath()|imagine_filter('gallery_thumb') }}" alt="" class="gallery-thumb">
+                            <img src="{{ image.webPath()|imagine_filter('admin_gallery_thumb') }}" alt="" class="gallery-thumb">
                         </div>
                         <div>
                             <a href="{{ path('admin_galleries_image_remove', {'eventId': event.id, 'imageId': image.id}) }}">Pašalinti</a>

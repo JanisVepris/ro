@@ -2,9 +2,20 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use \PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 
 class AppKernel extends Kernel
 {
+    protected function getContainerBaseClass()
+    {
+        if ('test' === $this->environment) {
+            return MockerContainer::class;
+        }
+
+        return parent::getContainerBaseClass();
+    }
+
+
     public function registerBundles()
     {
         $bundles = [
@@ -37,6 +48,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Nelmio\ApiDocBundle\NelmioApiDocBundle();
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new EightPoints\Bundle\GuzzleBundle\GuzzleBundle();
         }
 
         return $bundles;

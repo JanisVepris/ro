@@ -1,8 +1,6 @@
 <?php
-
 namespace ApiBundle\DataTransfer\Api;
 
-use RoBundle\Entity\Article;
 use JMS\Serializer\Annotation as Serializer;
 
 class ArticleListItemData

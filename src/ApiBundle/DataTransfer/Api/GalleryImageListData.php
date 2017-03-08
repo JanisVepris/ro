@@ -6,8 +6,8 @@ use JMS\Serializer\Annotation as Serializer;
 class GalleryImageListData
 {
     /**
-     * @var UrlItemData[]
-     * @Serializer\Type("array<ApiBundle\DataTransfer\Api\UrlItemData>")
+     * @var GalleryImageData[]
+     * @Serializer\Type("array<ApiBundle\DataTransfer\Api\GalleryImageData>")
      */
     private $items;
 
@@ -18,7 +18,7 @@ class GalleryImageListData
     private $metadata;
 
     /**
-     * @param UrlItemData[] $items
+     * @param GalleryImageData[] $items
      */
     private function __construct(array $items, MetaData $metadata)
     {
@@ -27,7 +27,7 @@ class GalleryImageListData
     }
 
     /**
-     * @param UrlItemData[] $items
+     * @param GalleryImageData[] $items
      * @return static
      */
     public static function create(array $items, MetaData $metadata)

@@ -22,6 +22,8 @@ services:
     api.controller.facts_controller:
         class: ApiBundle\Controller\Api\FactsController
         parent: api.controller.abstract_controller
+        arguments:
+            - "@api.factory.facts_data_factory"
 
     api.controller.images_controller:
         class: ApiBundle\Controller\Api\ImagesController
@@ -32,6 +34,8 @@ services:
     api.controller.lyrics_controller:
         class: ApiBundle\Controller\Api\LyricsController
         parent: api.controller.abstract_controller
+        arguments:
+            - '@api.factory.lyrics_list_data_factory'
 
     api.controller.posters_controller:
         class: ApiBundle\Controller\Api\PostersController
@@ -42,10 +46,14 @@ services:
     api.controller.scripts_controller:
         class: ApiBundle\Controller\Api\ScriptsController
         parent: api.controller.abstract_controller
+        arguments:
+            - "@api.factory.script_data_factory"
 
     api.controller.teams_controller:
         class: ApiBundle\Controller\Api\TeamsController
         parent: api.controller.abstract_controller
+        arguments:
+            - '@api.factory.team_data_factory'
 
     api.controller.tracks_controller:
         class: ApiBundle\Controller\Api\TracksController

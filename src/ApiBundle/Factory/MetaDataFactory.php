@@ -104,4 +104,56 @@ class MetaDataFactory
             $event->getDescription()
         );
     }
+
+    public function createTeamMetaDataFromEvent(Event $event)
+    {
+        return MetaData::create(
+            sprintf('%s "%s" Dalyviai', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($event->getEventImage()->getWebPath()),
+            $event->getEventImage()->getMimeType(),
+            $event->getDescription()
+        );
+    }
+
+    public function createLyricsMetaDataFromEvent(Event $event)
+    {
+        return MetaData::create(
+            sprintf('%s "%s" Dainų tekstai', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($event->getEventImage()->getWebPath()),
+            $event->getEventImage()->getMimeType(),
+            $event->getDescription()
+        );
+    }
+
+    public function createFactsMetaDataFromEvent(Event $event)
+    {
+        return MetaData::create(
+            sprintf('%s "%s" Įdomūs faktai', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($event->getEventImage()->getWebPath()),
+            $event->getEventImage()->getMimeType(),
+            $event->getDescription()
+        );
+    }
+
+    public function createScriptMetaDataFromEvent(Event $event)
+    {
+        return MetaData::create(
+            sprintf('%s "%s" Scenarijus', static::OG_SITE_NAME, $event->getTitle()),
+            $event->getDescription(),
+            static::OG_TYPE_ARTICLE,
+            static::OG_SITE_NAME,
+            $this->imageResizer->getFacebookPreviewImage($event->getEventImage()->getWebPath()),
+            $event->getEventImage()->getMimeType(),
+            $event->getDescription()
+        );
+    }
 }
