@@ -1,12 +1,12 @@
 import React from 'react'
-import { loadGallery } from '../../actions/galleries'
-import { navigateToCategory } from '../../actions/header'
+
+import ImageView from '../../containers/image-view'
 
 export default class Gallery extends React.Component {
 
 	componentWillMount() {
-		this.props.dispatch(navigateToCategory('gallery'))
-		this.props.dispatch(loadGallery(this.props.galleryId))
+		this.props.navigateToCategory('gallery')
+		this.props.loadGallery(this.props.galleryId)
 	}
 
 	render() {
@@ -16,12 +16,13 @@ export default class Gallery extends React.Component {
 				<div className="image-gallery">
 					{
 						this.props.items.map((item, index) => (
-							<div className="image-gallery-img-container">
-								<img key={ index } src={ item.thumbnail }/>
+							<div key={ index } className="image-gallery-img-container">
+								<img src={ item.thumbnail } onClick={ () => this.props.setActiveGalleryImage(index) }/>
 							</div>
 						))
 					}
 				</div>
+				<ImageView galleryId={ this.props.galleryId }/>
 			</div>
 		)
 	}

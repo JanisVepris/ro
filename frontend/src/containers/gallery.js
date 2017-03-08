@@ -1,6 +1,9 @@
 import { connect } from 'react-redux'
 import GalleryComponent from '../components/routes/Gallery'
 
+import { setActiveGalleryImage, loadGallery } from '../actions/galleries'
+import { navigateToCategory } from '../actions/header'
+
 const mapStateToProps = (state) => {
 	
 	const activeEventId = state.app.activeEventId
@@ -18,5 +21,10 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(
-	mapStateToProps
+	mapStateToProps,
+	{
+		setActiveGalleryImage,
+		loadGallery,
+		navigateToCategory
+	}
 )(GalleryComponent)

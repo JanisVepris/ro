@@ -13,7 +13,7 @@ const byId = toReducer({}, state => ({
 	})
 }))
 
-const activeImageIndex = toReducer({}, () => ({
+const activeImageIndex = toReducer(null, () => ({
 	[GALLERY_IMAGE_SET_ACTIVE]: action => action.index
 }))
 
