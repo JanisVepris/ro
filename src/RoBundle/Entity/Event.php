@@ -71,7 +71,7 @@ class Event
 
     /**
      * @var ArrayCollection|Article[]
-     * @ORM\OneToMany(targetEntity="RoBundle\Entity\Article", mappedBy="event", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="RoBundle\Entity\Article", mappedBy="event", cascade={"persist", "remove"})
      */
     private $articles;
 

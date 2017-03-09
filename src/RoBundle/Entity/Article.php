@@ -208,7 +208,7 @@ class Article
 
     public function getArticleImage()
     {
-        if (!$this->articleImage) {
+        if (!$this->articleImage && $this->event) {
             return $this->event->getEventImage();
         }
         return $this->articleImage;
