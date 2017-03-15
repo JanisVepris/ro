@@ -4,15 +4,17 @@ import ImageView from '../components/ImageView'
 import { setActiveGalleryImage } from '../actions/galleries'
 
 const mapStateToProps = (_state, ownProps) => (state) => {
+	
+	const previousIndex = state.galleries.activeImageIndex - 1
+	const nextIndex = state.galleries.activeImageIndex + 1
 
 	const activeGallery = state.galleries.byId[ownProps.galleryId]
 	const image = activeGallery && activeGallery.items[state.galleries.activeImageIndex] || {}
-	const previousImage = activeGallery && activeGallery.items[state.galleries.activeImageIndex - 1] || {}
-	const nextImage = activeGallery && activeGallery.items[state.galleries.activeImageIndex + 1] || {}
+	const previousImage = activeGallery && activeGallery.items[previousIndex] && previousIndex
+	const nextImage = activeGallery && activeGallery.items[nextIndex] && nextIndex
 	
 	return {
 		hidden: !activeGallery || state.galleries.activeImageIndex === null,
-		currentIndex: state.galleries.activeImageIndex,
 		image,
 		previousImage,
 		nextImage

@@ -8,8 +8,7 @@ const ImageView = ({
 	image,
 	previousImage,
 	nextImage,
-	setActiveGalleryImage,
-	currentIndex
+	setActiveGalleryImage
 }) => {
 
 	if (hidden) {
@@ -18,13 +17,29 @@ const ImageView = ({
 
 	return (
 		<div className="image-view-container" onClick={ () => setActiveGalleryImage() }>
-			<div onClick={ (e) => e.stopPropagation() }>
-				<ImageLoader
-					src={ image.url }
-					preloader={ Spinner }
-					className="image-view-main"
-					
-					/>
+			<div className="image-view-main">
+				<div className="arrow-container" onClick={ (e) => e.stopPropagation() }>
+
+					{ previousImage > -1 && 
+						<div className="arrow-left" onClick={ () => setActiveGalleryImage(previousImage) }>
+							<img />
+						</div>
+					}
+
+					<ImageLoader
+						src={ image.url }
+						wrapper={React.DOM.div}
+						preloader={ Spinner }
+						>
+					</ImageLoader>
+
+					{ !!nextImage && 
+						<div className="arrow-right" onClick={ () => setActiveGalleryImage(nextImage) }>
+							<img />
+						</div>
+					}
+
+				</div>
 			</div>
 		</div>
 	)

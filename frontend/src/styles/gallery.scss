@@ -72,13 +72,75 @@
 	background-color: rgba(0, 0, 0, 0.9)
 }
 
-.image-view-main img {
+.image-view-main {
+	align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.image-view-main .imageloader img,
+.image-view-main .arrow-container {
+	max-width: 90vw;
+	max-height: 90vh;
+}
+
+.arrow-container {
+	position: relative;
+	display: inline-block;
+}
+
+.image-view-main .imageloader {
+	display: inline-block
+}
+
+.arrow-left, .arrow-right {
 	position: absolute;
-	top: 0;
-	right: 0;
+	width: 15%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.arrow-container:hover .arrow-left img,
+.arrow-container:hover .arrow-right img {
+	opacity: 1;
+}
+
+.arrow-left img, .arrow-right img {
+	content: url('./media/arrow.png');
+	max-height: 3vh;
+	max-width: 60%;
+	position: absolute;
+	opacity: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+	-webkit-filter: brightness(60%);
+	filter: brightness(60%);
+	transition: opacity 0.5s;
+}
+
+.arrow-left img {
+	-webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
 	left: 0;
-	bottom: 0;
-	margin: auto;
-	max-width: 80%;
-	max-height: 80%;
+}
+
+.arrow-right img {
+	-webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+	right: 0;
+}
+
+.arrow-right {
+	right: 0;
+	top: 0;
+}
+
+@media screen and (max-width: 650px) {
+	.arrow-left, .arrow-right {
+		opacity: 1
+	}
 }
