@@ -30,6 +30,9 @@ const mapStateToProps = (state) => {
 	} else 
 	if (activeCategory === 'team') {
 		contentLoading = !state.events.teamById[activeEventId]
+	} else 
+	if (activeCategory === 'poster') {
+		contentLoading = !state.events.posterById[activeEventId]
 	}
 
 	return {

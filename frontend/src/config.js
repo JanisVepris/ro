@@ -27,6 +27,10 @@ export default {
 		script: {
 			title: 'Scenarijus',
 			slug: 'scenarijus'
+		},
+		poster: {
+			title: 'Plakatas',
+			slug: 'plakatas'
 		}
 	}
 }

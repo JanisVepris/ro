@@ -30,8 +30,7 @@ const ImageView = ({
 						src={ image.url }
 						wrapper={React.DOM.div}
 						preloader={ Spinner }
-						>
-					</ImageLoader>
+						/>
 
 					{ !!nextImage && 
 						<div className="arrow-right" onClick={ () => setActiveGalleryImage(nextImage) }>

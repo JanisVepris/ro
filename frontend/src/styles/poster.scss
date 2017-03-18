@@ -1,0 +1,13 @@
+.content.poster img {
+	padding-top: 36px;
+	width: 80%;
+	display: table-caption;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 650px) {
+    .content.poster img {
+		padding-top: 24px;
+		width: 90%;
+	}
+}

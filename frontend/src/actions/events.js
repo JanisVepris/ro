@@ -3,6 +3,7 @@ import * as eventArticlesRepo from '../repo/event-articles'
 import * as eventScriptRepo from '../repo/event-script'
 import * as eventFactsRepo from '../repo/event-facts'
 import * as eventTeamRepo from '../repo/event-team'
+import * as eventPosterRepo from '../repo/event-poster'
 
 // Action types
 export const EVENT_ADD = 'EVENT_ADD'
@@ -10,6 +11,7 @@ export const EVENT_NEWS_SET = 'EVENT_NEWS_SET'
 export const EVENT_FACTS_SET = 'EVENT_FACTS_SET'
 export const EVENT_TEAM_SET = 'EVENT_TEAM_SET'
 export const EVENT_SCRIPT_SET = 'EVENT_SCRIPT_SET'
+export const EVENT_POSTER_SET = 'EVENT_POSTER_SET'
 
 // Action creators
 export const addEvent = (event) => ({
@@ -39,6 +41,12 @@ export const setScript = (id, script) => ({
 	type: EVENT_SCRIPT_SET,
 	id,
 	script
+})
+
+export const setPoster = (id, poster) => ({
+	type: EVENT_POSTER_SET,
+	id,
+	poster
 })
 
 // Thunks
@@ -129,6 +137,24 @@ export const loadEventFacts = (id) => (
 
 	return eventFactsRepo.getFacts(id)
 		.then(response => dispatch(setFacts(id, response)))
+		.catch(err => {
+			console.log(err)
+		})
+}
+
+export const loadEventPoster = (id) => (
+	dispatch,
+	getState
+) => {
+
+	const state = getState()
+
+	if (state.events.posterById[id]) {
+		return Promise.resolve()
+	}
+
+	return eventPosterRepo.getPoster(id)
+		.then(response => dispatch(setPoster(id, response)))
 		.catch(err => {
 			console.log(err)
 		})

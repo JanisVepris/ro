@@ -35,6 +35,10 @@ const getAvailableCategories = createSelector(
 			options.push('script')
 		}
 
+		if (eventInfo.hasPoster) {
+			options.push('poster')
+		}
+
 		return options
 	}
 )

@@ -11,6 +11,7 @@ import Videos from './containers/videos'
 import Team from './containers/team'
 import Script from './containers/script'
 import Facts from './containers/facts'
+import Poster from './containers/poster'
 
 export default () => {
 
@@ -20,7 +21,8 @@ export default () => {
 	const videosUrl = '/:eventSlug/' + Config.categories.videos.slug
 	const scriptUrl = '/:eventSlug/' + Config.categories.script.slug
 	const teamUrl = '/:eventSlug/' + Config.categories.team.slug
-	const facts = '/:eventSlug/' + Config.categories.facts.slug
+	const factsUrl = '/:eventSlug/' + Config.categories.facts.slug
+	const posterUrl = '/:eventSlug/' + Config.categories.poster.slug
 
 	return (
 		<Router history={ history }>
@@ -32,7 +34,8 @@ export default () => {
 				<Route path={ videosUrl } component={ Videos } />
 				<Route path={ scriptUrl } component={ Script } />
 				<Route path={ teamUrl } component={ Team } />
-				<Route path={ facts } component={ Facts } />
+				<Route path={ factsUrl } component={ Facts } />
+				<Route path={ posterUrl } component={ Poster } />
 			</Route>
 		</Router>
 	)
