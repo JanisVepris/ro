@@ -8,6 +8,9 @@ import News from './containers/news'
 import Article from './containers/article'
 import Gallery from './containers/gallery'
 import Videos from './containers/videos'
+import Team from './containers/team'
+import Script from './containers/script'
+import Facts from './containers/facts'
 
 export default () => {
 
@@ -15,6 +18,9 @@ export default () => {
 	const articlesUrl = '/:eventSlug/' + Config.categories.news.slug + '/:articleSlug'
 	const galleryUrl = '/:eventSlug/' + Config.categories.gallery.slug
 	const videosUrl = '/:eventSlug/' + Config.categories.videos.slug
+	const scriptUrl = '/:eventSlug/' + Config.categories.script.slug
+	const teamUrl = '/:eventSlug/' + Config.categories.team.slug
+	const facts = '/:eventSlug/' + Config.categories.facts.slug
 
 	return (
 		<Router history={ history }>
@@ -24,6 +30,9 @@ export default () => {
 				<Route path={ articlesUrl } component={ Article } />
 				<Route path={ galleryUrl } component={ Gallery } />
 				<Route path={ videosUrl } component={ Videos } />
+				<Route path={ scriptUrl } component={ Script } />
+				<Route path={ teamUrl } component={ Team } />
+				<Route path={ facts } component={ Facts } />
 			</Route>
 		</Router>
 	)

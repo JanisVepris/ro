@@ -3,7 +3,10 @@ import { toReducer } from './utils'
 
 import { 
 	EVENT_ADD,
-	EVENT_NEWS_SET
+	EVENT_NEWS_SET,
+	EVENT_FACTS_SET,
+	EVENT_SCRIPT_SET,
+	EVENT_TEAM_SET
 } from '../actions/events'
 
 import { 
@@ -23,6 +26,27 @@ const newsById = toReducer({}, state => ({
 	[EVENT_NEWS_SET]: action => ({
 		...state,
 		[action.id]: action.news
+	})
+}))
+
+const factsById = toReducer({}, state => ({
+	[EVENT_FACTS_SET]: action => ({
+		...state,
+		[action.id]: action.facts
+	})
+}))
+
+const scriptById = toReducer({}, state => ({
+	[EVENT_SCRIPT_SET]: action => ({
+		...state,
+		[action.id]: action.script
+	})
+}))
+
+const teamById = toReducer({}, state => ({
+	[EVENT_TEAM_SET]: action => ({
+		...state,
+		[action.id]: action.team
 	})
 }))
 
@@ -46,5 +70,8 @@ export default combineReducers({
 	newsById,
 	activeArticle,
 	articleLoading,
-	articleById
+	articleById,
+	factsById,
+	teamById,
+	scriptById
 })

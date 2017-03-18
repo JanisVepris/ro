@@ -23,6 +23,18 @@ const getAvailableCategories = createSelector(
 			options.push('videos')
 		}
 
+		if (eventInfo.hasFacts) {
+			options.push('facts')
+		}
+
+		if (eventInfo.hasTeam) {
+			options.push('team')
+		}
+
+		if (eventInfo.hasScript) {
+			options.push('script')
+		}
+
 		return options
 	}
 )

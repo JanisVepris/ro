@@ -15,6 +15,18 @@ export default {
 		videos: {
 			title: 'Įrašai',
 			slug: 'irasai'
+		},
+		team: {
+			title: 'Komanda',
+			slug: 'komanda'
+		},
+		facts: {
+			title: 'Įdomus faktai',
+			slug: 'faktai'
+		},
+		script: {
+			title: 'Scenarijus',
+			slug: 'scenarijus'
 		}
 	}
 }

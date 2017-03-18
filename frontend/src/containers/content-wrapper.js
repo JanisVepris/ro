@@ -21,6 +21,15 @@ const mapStateToProps = (state) => {
 	} else 
 	if (activeCategory === 'gallery') {
 		contentLoading = !state.galleries.byId[state.events.byId[activeEventId].galleryId]
+	} else 
+	if (activeCategory === 'script') {
+		contentLoading = !state.events.scriptById[activeEventId]
+	} else 
+	if (activeCategory === 'facts') {
+		contentLoading = !state.events.factsById[activeEventId]
+	} else 
+	if (activeCategory === 'team') {
+		contentLoading = !state.events.teamById[activeEventId]
 	}
 
 	return {

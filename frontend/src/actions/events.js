@@ -1,9 +1,15 @@
 import * as eventInfoRepo from '../repo/event-info'
 import * as eventArticlesRepo from '../repo/event-articles'
+import * as eventScriptRepo from '../repo/event-script'
+import * as eventFactsRepo from '../repo/event-facts'
+import * as eventTeamRepo from '../repo/event-team'
 
 // Action types
 export const EVENT_ADD = 'EVENT_ADD'
 export const EVENT_NEWS_SET = 'EVENT_NEWS_SET'
+export const EVENT_FACTS_SET = 'EVENT_FACTS_SET'
+export const EVENT_TEAM_SET = 'EVENT_TEAM_SET'
+export const EVENT_SCRIPT_SET = 'EVENT_SCRIPT_SET'
 
 // Action creators
 export const addEvent = (event) => ({
@@ -15,6 +21,24 @@ export const setNews = (id, news) => ({
 	type: EVENT_NEWS_SET,
 	id,
 	news
+})
+
+export const setFacts = (id, facts) => ({
+	type: EVENT_FACTS_SET,
+	id,
+	facts
+})
+
+export const setTeam = (id, team) => ({
+	type: EVENT_TEAM_SET,
+	id,
+	team
+})
+
+export const setScript = (id, script) => ({
+	type: EVENT_SCRIPT_SET,
+	id,
+	script
 })
 
 // Thunks
@@ -51,6 +75,60 @@ export const loadEventNews = (id) => (
 
 	return eventArticlesRepo.getEventArticles(id)
 		.then(response => dispatch(setNews(id, response)))
+		.catch(err => {
+			console.log(err)
+		})
+}
+
+export const loadEventScript = (id) => (
+	dispatch,
+	getState
+) => {
+
+	const state = getState()
+
+	if (state.events.scriptById[id]) {
+		return Promise.resolve()
+	}
+
+	return eventScriptRepo.getScript(id)
+		.then(response => dispatch(setScript(id, response)))
+		.catch(err => {
+			console.log(err)
+		})
+}
+
+export const loadEventTeam = (id) => (
+	dispatch,
+	getState
+) => {
+
+	const state = getState()
+
+	if (state.events.teamById[id]) {
+		return Promise.resolve()
+	}
+
+	return eventTeamRepo.getTeam(id)
+		.then(response => dispatch(setTeam(id, response)))
+		.catch(err => {
+			console.log(err)
+		})
+}
+
+export const loadEventFacts = (id) => (
+	dispatch,
+	getState
+) => {
+
+	const state = getState()
+
+	if (state.events.factsById[id]) {
+		return Promise.resolve()
+	}
+
+	return eventFactsRepo.getFacts(id)
+		.then(response => dispatch(setFacts(id, response)))
 		.catch(err => {
 			console.log(err)
 		})
