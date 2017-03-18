@@ -31,6 +31,10 @@ export default {
 		poster: {
 			title: 'Plakatas',
 			slug: 'plakatas'
+		},
+		playlist: {
+			title: 'MP3',
+			slug: 'mp3'
 		}
 	}
 }

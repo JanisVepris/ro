@@ -7,7 +7,8 @@ import {
 	EVENT_FACTS_SET,
 	EVENT_SCRIPT_SET,
 	EVENT_TEAM_SET,
-	EVENT_POSTER_SET
+	EVENT_POSTER_SET,
+	EVENT_PLAYLIST_SET
 } from '../actions/events'
 
 import { 
@@ -58,6 +59,13 @@ const posterById = toReducer({}, state => ({
 	})
 }))
 
+const playlistById = toReducer({}, state => ({
+	[EVENT_PLAYLIST_SET]: action => ({
+		...state,
+		[action.id]: action.playlist
+	})
+}))
+
 const articleById = toReducer({}, state => ({
 	[ARTICLE_SET]: action => ({
 		...state,
@@ -82,5 +90,6 @@ export default combineReducers({
 	factsById,
 	teamById,
 	scriptById,
-	posterById
+	posterById,
+	playlistById
 })

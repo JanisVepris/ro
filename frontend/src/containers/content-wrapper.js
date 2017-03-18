@@ -33,6 +33,9 @@ const mapStateToProps = (state) => {
 	} else 
 	if (activeCategory === 'poster') {
 		contentLoading = !state.events.posterById[activeEventId]
+	} else 
+	if (activeCategory === 'playlist') {
+		contentLoading = !state.events.playlistById[activeEventId]
 	}
 
 	return {

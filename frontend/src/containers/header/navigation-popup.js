@@ -39,6 +39,10 @@ const getAvailableCategories = createSelector(
 			options.push('poster')
 		}
 
+		if (eventInfo.hasAudioPlaylist) {
+			options.push('playlist')
+		}
+
 		return options
 	}
 )

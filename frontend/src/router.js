@@ -12,6 +12,7 @@ import Team from './containers/team'
 import Script from './containers/script'
 import Facts from './containers/facts'
 import Poster from './containers/poster'
+import Playlist from './containers/playlist'
 
 export default () => {
 
@@ -23,6 +24,7 @@ export default () => {
 	const teamUrl = '/:eventSlug/' + Config.categories.team.slug
 	const factsUrl = '/:eventSlug/' + Config.categories.facts.slug
 	const posterUrl = '/:eventSlug/' + Config.categories.poster.slug
+	const playlistUrl = '/:eventSlug/' + Config.categories.playlist.slug
 
 	return (
 		<Router history={ history }>
@@ -36,6 +38,7 @@ export default () => {
 				<Route path={ teamUrl } component={ Team } />
 				<Route path={ factsUrl } component={ Facts } />
 				<Route path={ posterUrl } component={ Poster } />
+				<Route path={ playlistUrl } component={ Playlist } />
 			</Route>
 		</Router>
 	)
