@@ -1,7 +1,7 @@
 import * as eventGalleryRepo from '../repo/event-galleries'
 
 // Action types
-export const GALLERY_SET = 'EVENT_NEWS_SET'
+export const GALLERY_SET = 'GALLERY_SET'
 export const GALLERY_IMAGE_SET_ACTIVE = 'GALLERY_IMAGE_SET_ACTIVE'
 
 // Action creators
