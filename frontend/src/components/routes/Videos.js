@@ -19,16 +19,14 @@ export default class Videos extends React.Component {
 				<p className="article-title">{ this.props.title }</p>
 				{ this.props.initialized && this.props.videos.map((video, index) => 
 					<ExpandableItem key={ index } title={ video.title }>
-						<div className="expandable-item-video-max-width">
-							<div className="expandable-item-video-wrapper">
-								<ReactPlayer 
-									url={ video.url }
-									controls={ true }
-									className='expandable-item-video'
-									width={ 'auto' }
-									height={ 'auto' }
-									/>
-							</div>
+						<div className="expandable-item-video-wrapper">
+							<ReactPlayer 
+								url={ video.url }
+								controls={ true }
+								className='expandable-item-video'
+								width={ 'auto' }
+								height={ 'auto' }
+								/>
 						</div>
 					</ExpandableItem>
 				)}

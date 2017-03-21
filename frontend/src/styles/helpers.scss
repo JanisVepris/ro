@@ -47,6 +47,16 @@
 	position: relative;
 }
 
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.transparent {
+	background-color: transparent !important;
+}
+
 .min-opacity {
 	opacity: 0;
 }

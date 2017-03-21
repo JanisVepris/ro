@@ -1,11 +1,8 @@
 .expandable-item-container {
 	clear: both;
-    background-color: #fff;
-	border: 1px solid #ddd;
-	border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-	border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    background-color: black;
+    color: #555;
+    max-width: 640px;
 }
 
 .expandable-item-title {
@@ -17,12 +14,7 @@
 .expandable-item-content {
 	color: #333;
     opacity: 0;
-	padding: 12px 24px;
-}
-
-.expandable-item-video-max-width {
-    max-width: 640px;
-    margin: auto;
+	padding: 6px;
 }
 
 .expandable-item-video-wrapper {

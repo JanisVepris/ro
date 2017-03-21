@@ -5,7 +5,7 @@ export const getPlaylist = (eventId) => {
 	
 	if (USE_MOCK) {
 
-		const mock = require('./event-galleries-mock')
+		const mock = require('./event-playlists-mock')
 		const delayedPromise = new Promise((resolve) => setTimeout(() => resolve(mock(eventId)), 300))
 		return Promise.resolve(delayedPromise)
 	}
