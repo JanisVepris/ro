@@ -1,15 +1,25 @@
 import * as React from 'react'
-import '../../styles/main.scss'
 
 const Button = ({
 	label,
-	onClick
+	onClick,
+	expanded,
+	mobile
 }) => {
 
+	const className = 'header-button no-select' + (expanded ? ' expanded' : '')
+
 	return (
-		<div className="header-button" onClick={ onClick }>
-			{ label }
-			<i className="arrow mr-s" />
+		<div className={ className } onClick={ onClick }>
+			<label>{ label }</label>
+			<i className="arrow ml" />
+			{ mobile &&
+				<div className="mobile-navigation-button">
+					<div className="bar1"></div>
+					<div className="bar2"></div>
+					<div className="bar3"></div>
+				</div>
+			}
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import '../../styles/main.scss'
 
 import OnClickOutside from 'react-onclickoutside'
+import Collapse from 'react-collapse'
 
 class Popup extends React.Component {
 
@@ -10,40 +10,38 @@ class Popup extends React.Component {
 		const {
 			labels,
 			selectedIndex,
+			disabledEvents = [],
 			actions,
 			hidden
 		} = this.props
 
-		if (hidden) {
-			return <div/>
-		}
+		const className = 'header-dropdown' + (hidden ? ' hidden' : '')
 
 		return (
-			<div className="header-dropdown">
+			<div className={ className }>
+				<Collapse isOpened={ !hidden } >
 				{ 
 					labels.map((label, index) => {
 
 						const isSelected = index === selectedIndex
-						const selectedClassName = isSelected ? 'selected' : ''
+						const selectedClassName = isSelected ? ' selected' : ''
+						const disabledClassName = disabledEvents[index] ? ' disabled' : ''
+						const className = 'dropdown-option no-select pl-l' + selectedClassName + disabledClassName
 
 						return (
-							<div key={ index } className={ selectedClassName } onClick={ actions[index] }>
+							<div key={ index } className={ className } onClick={ () => { if (!disabledEvents[index]) actions[index]() } }>
 							{ label }
 						</div>
 						)
 					})
 				}
+				</Collapse>
 			</div>
 		)
 	}
 
-	handleClickOutside(e) {
-		
-		const isClickOnToggler = 
-			e.target.className === this.props.ignoreOnClickOutsideClass || 
-			e.target.parentNode.className === this.props.ignoreOnClickOutsideClass
-
-		if (!this.props.hidden && !isClickOnToggler) {
+	handleClickOutside() {
+		if (!this.props.hidden) {
 			this.props.onClickOutside()
 		}
 	}

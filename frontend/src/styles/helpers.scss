@@ -10,6 +10,18 @@
 	margin-left: 12px
 }
 
+.mt {
+	margin-top: 12px
+}
+
+.mb {
+	margin-bottom: 12px
+}
+
+.mt-xl {
+	margin-top: 36px
+}
+
 .ml-xl {
 	margin-left: 36px
 }
@@ -24,5 +36,33 @@
 
 .float-right {
 	float: right;
+	margin-left: auto;
 }
 
+.clickable {
+	cursor: pointer;
+}
+
+.relative {
+	position: relative;
+}
+
+.min-opacity {
+	opacity: 0;
+}
+
+.max-opacity {
+	opacity: 1 !important; 
+}
+
+.no-click {
+	pointer-events: none;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}

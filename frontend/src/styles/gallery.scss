@@ -1,0 +1,146 @@
+.image-gallery {
+	line-height: 0;
+
+	-webkit-column-count: 5;
+	-webkit-column-gap:   0px;
+	-moz-column-count:    5;
+	-moz-column-gap:      0px;
+	column-count:         5;
+	column-gap:           0px;
+
+	-moz-column-count:    4;
+	-webkit-column-count: 4;
+	column-count:         4;
+
+	margin-left: 15px;
+}
+
+.image-gallery img {
+	width: 100% !important;
+	height: auto !important;
+	-webkit-filter: grayscale(100%) brightness(100%);
+	filter: grayscale(100%) brightness(100%);
+	transition: filter 0.5s;
+	cursor: pointer;
+}
+
+.image-gallery .image-gallery-img-container {
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+.image-gallery img:hover {
+	-webkit-filter: grayscale(0%) brightness(120%);
+	filter: grayscale(0%) brightness(120%);
+}
+
+@media (max-width: 1200px) {
+	.image-gallery {
+		-moz-column-count:    3;
+		-webkit-column-count: 3;
+		column-count:         3;
+	}
+}
+@media (max-width: 950px) {
+	.image-gallery {
+		-moz-column-count:    2;
+		-webkit-column-count: 2;
+		column-count:         2;
+	}
+}
+@media (max-width: 500px) {
+	.image-gallery {
+		-moz-column-count:    1;
+		-webkit-column-count: 1;
+		column-count:         1;
+	}
+}
+
+.gallery .article-title {
+	margin-left: 15px;
+	margin-bottom: 0px;
+}
+
+// Image view
+.image-view-container {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.9)
+}
+
+.image-view-main {
+	align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.image-view-main .imageloader img,
+.image-view-main .arrow-container {
+	max-width: 90vw;
+	max-height: 90vh;
+}
+
+.arrow-container {
+	position: relative;
+	display: inline-block;
+}
+
+.image-view-main .imageloader {
+	display: inline-block
+}
+
+.arrow-left, .arrow-right {
+	position: absolute;
+	width: 15%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.arrow-container:hover .arrow-left img,
+.arrow-container:hover .arrow-right img {
+	opacity: 1;
+}
+
+.arrow-left img, .arrow-right img {
+	content: url('./media/arrow.png');
+	max-height: 3vh;
+	max-width: 60%;
+	position: absolute;
+	opacity: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+	-webkit-filter: brightness(60%);
+	filter: brightness(60%);
+	transition: opacity 0.5s;
+}
+
+.arrow-left img {
+	-webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+	left: 0;
+}
+
+.arrow-right img {
+	-webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+	right: 0;
+}
+
+.arrow-right {
+	right: 0;
+	top: 0;
+}
+
+@media screen and (max-width: 650px) {
+	.arrow-left, .arrow-right {
+		opacity: 1
+	}
+}

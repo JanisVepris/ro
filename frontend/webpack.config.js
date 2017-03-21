@@ -1,9 +1,21 @@
 /* eslint-disable */
 var path = require('path')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
+var webpack = require('webpack')
+var fs = require('fs')
+
+fs.accessSync('./config.json', fs.F_OK)
+var config = require('./config.json')
 
 var appRoot = 'src'
 var buildDir = __dirname + '/../src/TemplateBundle/Resources/public'
+
+var nopt = require("nopt")
+var args = nopt({
+	'useMock': Boolean
+}, {}, process.argv)
+
+var USE_MOCK = !!args.useMock
 
 //var extractCSS = new ExtractTextPlugin('stylesheets/main.css')
 
@@ -22,6 +34,10 @@ module.exports = {
 	},
 	module: {
 		loaders: [
+			{
+				test: /\.json?$/,
+				loader: 'json-loader'
+			},
 			{
 				test: /\.(woff2?|ttf|eot|png)$/,
 				loader: 'url?limit=10000'
@@ -49,6 +65,10 @@ module.exports = {
 			root: buildDir,
 			verbose: true,
 			dry: false
+		}),
+		new webpack.DefinePlugin({
+			USE_MOCK: USE_MOCK,
+			'WEB_API_URL': JSON.stringify(config.webApiUrl)
 		})
 	]
 };
