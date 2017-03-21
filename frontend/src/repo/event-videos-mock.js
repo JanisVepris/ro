@@ -1,5 +1,5 @@
-export default (id) => {
-
+/* global module */
+module.exports = (id) => {
 	const eventsVideos = {
 		[112014]: {
 			items: [

@@ -87,10 +87,11 @@ export const navigateToArticle = (articleSlug) => (
 }
 
 const loadArticle = (articleId) => (
-	dispatch
+	dispatch,
+	getState
 ) => {
 
-	return articleRepo.getArticle(articleId)
+	return articleRepo.getArticle(getState().app.activeEventId, articleId)
 		.then(response => {
 			dispatch(setArticle(articleId, response))
 			return Promise.resolve(response)

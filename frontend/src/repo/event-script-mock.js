@@ -1,4 +1,5 @@
-export default (id) => {
+/* global module */
+module.exports = (id) => {
 
 	const eventsScript = {
 		[112014]: {

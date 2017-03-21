@@ -1,8 +1,16 @@
-import eventArticlesMock from './event-articles-mock'
+/* global WEB_API_URL USE_MOCK require */
+import superagent from 'superagent'
 
-export const getEventArticles = (id) => {
+export const getEventArticles = (eventId) => {
+	
+	if (USE_MOCK) {
 
-	const delayedPromise = new Promise((resolve) => setTimeout(() => resolve(eventArticlesMock(id)), 500))
+		const mock = require('./event-articles-mock')
+		const delayedPromise = new Promise((resolve) => setTimeout(() => resolve(mock(eventId)), 300))
+		return Promise.resolve(delayedPromise)
+	}
 
-	return Promise.resolve(delayedPromise)
+	return superagent
+		.get(WEB_API_URL + `/events/${eventId}/articles`)
+		.then(res => res.body)
 }

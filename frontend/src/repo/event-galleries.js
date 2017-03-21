@@ -1,8 +1,16 @@
-import eventGalleriesMock from './event-galleries-mock'
+/* global WEB_API_URL USE_MOCK require */
+import superagent from 'superagent'
 
 export const getGallery = (eventId) => {
+	
+	if (USE_MOCK) {
 
-	const delayedPromise = new Promise((resolve) => setTimeout(() => resolve(eventGalleriesMock(eventId)), 300))
+		const mock = require('./event-galleries-mock')
+		const delayedPromise = new Promise((resolve) => setTimeout(() => resolve(mock(eventId)), 300))
+		return Promise.resolve(delayedPromise)
+	}
 
-	return Promise.resolve(delayedPromise)
+	return superagent
+		.get(WEB_API_URL + `/events/${eventId}/gallery/images`)
+		.then(res => res.body)
 }

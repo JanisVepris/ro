@@ -1,4 +1,5 @@
-export default [
+/* global module */
+module.exports = [
 	{
 		id: 112015,
 		name: 'Prototipas',
