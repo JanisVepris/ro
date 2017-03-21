@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 		contentLoading = !state.videos.byId[state.events.byId[activeEventId].videoPlaylistId]
 	} else 
 	if (activeCategory === 'gallery') {
-		contentLoading = !state.galleries.byId[state.events.byId[activeEventId].galleryId]
+		contentLoading = !state.galleries.byId[activeEventId]
 	} else 
 	if (activeCategory === 'script') {
 		contentLoading = !state.events.scriptById[activeEventId]

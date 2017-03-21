@@ -7,14 +7,13 @@ import { navigateToCategory } from '../actions/header'
 const mapStateToProps = (state) => {
 	
 	const activeEventId = state.app.activeEventId
-	const activeGalleryId = state.events.byId[activeEventId].galleryId
-	const activeGallery = state.galleries.byId[activeGalleryId]
+	const activeGallery = state.galleries.byId[activeEventId]
 	const items = activeGallery && activeGallery.items || []
 	const eventName = state.app.eventsById[activeEventId].name
 
 	return {
 		galleryLoading: !activeGallery,
-		galleryId: activeGalleryId,
+		galleryId: activeEventId,
 		items,
 		title: eventName + ': Galerija',
 	}

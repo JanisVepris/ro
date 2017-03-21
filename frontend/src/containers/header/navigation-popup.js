@@ -15,7 +15,7 @@ const getAvailableCategories = createSelector(
 
 		const options = ['news']
 
-		if (eventInfo.galleryId) {
+		if (eventInfo.hasGallery) {
 			options.push('gallery')
 		}
 
