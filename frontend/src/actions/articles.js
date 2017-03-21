@@ -44,6 +44,8 @@ export const navigateToArticle = (articleSlug) => (
 	const eventSlug = eventsById[activeEventId].slug
 
 	dispatch(push('/' + eventSlug + '/' + categorySlug + '/' + articleSlug))
+
+	dispatch(setHeaderLoading(true))
 	
 	window.scrollTo(0, 0)
 
@@ -54,9 +56,9 @@ export const navigateToArticle = (articleSlug) => (
 			
 			const article = eventNews && eventNews.articles.find(article => article.slug === articleSlug)
 
-			if (article.image) {
-				dispatch(setHeaderLoading(true))
-			}
+			// if (article.image) {
+			// 	dispatch(setHeaderLoading(true))
+			// }
 
 			const articleId = article && article.id
 
@@ -70,10 +72,8 @@ export const navigateToArticle = (articleSlug) => (
 		})
 		.then(article => {
 			
-			if (article.image) {
-				// setint maza jei telefuons
-				dispatch(setHeaderCover(article.image))
-			}
+			// setint maza jei telefuons
+			dispatch(setHeaderCover(article.image))
 			
 			dispatch(setActiveArticle(article.id))
 			dispatch(setArticleLoading(false))
