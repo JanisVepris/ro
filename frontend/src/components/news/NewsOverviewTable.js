@@ -32,7 +32,7 @@ export default class NewsOverviewTable extends React.Component {
 					{
 						firstArticle &&
 							<NewsOverviewLatestItem 
-								imageUrl={ firstArticle.image }
+								imageUrl={ firstArticle.thumbBig }
 								description={ firstArticle.description }
 								title={ firstArticle.title }
 								onClick={ firstArticle.onClick }
@@ -45,7 +45,7 @@ export default class NewsOverviewTable extends React.Component {
 						articles.map((newsItem, index) => (
 							<NewsOverviewItem
 								key={ index }
-								imageUrl={ newsItem.image }
+								imageUrl={ newsItem.thumbSmall }
 								title={ newsItem.title }
 								onClick={ newsItem.onClick }
 								createdOn={ newsItem.createdOn }
