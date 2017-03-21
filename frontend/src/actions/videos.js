@@ -10,20 +10,21 @@ const setVideoPlaylist = (id, playlist) => ({
 	playlist
 })
 
-export const loadVideoPlaylist = (id) => (
+export const loadVideoPlaylist = () => (
 	dispatch,
 	getState
 ) => {
 
 	const state = getState()
+	const { activeEventId } = state.app
 
-	if (state.galleries.byId[id]) {
+	if (state.galleries.byId[activeEventId]) {
 		return Promise.resolve()
 	}
 
-	return eventVideosRepo.getVideoPlaylist(state.app.activeEventId, id)
+	return eventVideosRepo.getVideoPlaylist(activeEventId)
 		.then(response => {
-			dispatch(setVideoPlaylist(id, response))
+			dispatch(setVideoPlaylist(activeEventId, response))
 		})
 		.catch(err => {
 			console.log(err)

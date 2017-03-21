@@ -4,15 +4,13 @@ import VideoPlaylistComponent from '../components/routes/Videos'
 const mapStateToProps = (state) => {
 	
 	const activeEventId = state.app.activeEventId
-	const { videoPlaylistId } = state.events.byId[activeEventId]
-	const videos = state.videos.byId[videoPlaylistId]
+	const videosData = state.videos.byId[activeEventId]
 
 	const eventName = state.app.eventsById[activeEventId].name
 
 	return {
-		initialized: !!videos,
-		videoPlaylistId,
-		videos,
+		initialized: !!videosData,
+		videos: videosData && videosData.items,
 		title: eventName + ': Įrašai',
 		hidden: state.header.loading
 	}

@@ -19,7 +19,7 @@ const getAvailableCategories = createSelector(
 			options.push('gallery')
 		}
 
-		if (eventInfo.videoPlaylistId) {
+		if (eventInfo.hasVideoPlaylist) {
 			options.push('videos')
 		}
 

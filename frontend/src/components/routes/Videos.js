@@ -10,7 +10,7 @@ export default class Videos extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(navigateToCategory('videos'))
-		this.props.dispatch(loadVideoPlaylist(this.props.videoPlaylistId))
+		this.props.dispatch(loadVideoPlaylist())
 	}
 
 	render() {

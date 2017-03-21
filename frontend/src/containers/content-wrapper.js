@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 		contentLoading = !state.events.articleById[state.events.activeArticle]
 	} else 	
 	if (activeCategory === 'videos') {
-		contentLoading = !state.videos.byId[state.events.byId[activeEventId].videoPlaylistId]
+		contentLoading = !state.videos.byId[activeEventId]
 	} else 
 	if (activeCategory === 'gallery') {
 		contentLoading = !state.galleries.byId[activeEventId]
