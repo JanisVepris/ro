@@ -6,7 +6,7 @@ export default class Gallery extends React.Component {
 
 	componentWillMount() {
 		this.props.navigateToCategory('gallery')
-		this.props.loadGallery(this.props.galleryId)
+		this.props.loadGallery()
 	}
 
 	render() {
