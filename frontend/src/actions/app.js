@@ -49,7 +49,7 @@ export const initialize = (urlParams) => (
 			dispatch(setAvailableEvents(response))
 
 			const activeEvent = urlParams.eventSlug
-				? response.find(event => event.slug === urlParams.eventSlug) || response[0]
+				? response.find(event => event.slug === urlParams.eventSlug && !event.isDisabled) || response[0]
 				: response[0]
 
 			if (!activeEvent.id) {
@@ -106,17 +106,17 @@ export const setActiveEventBySlug = (slug) => (
 	dispatch,
 	getState
 ) => {
-	
-	if (!slug) {
-		dispatch(setActiveEvent(getState().app.defaultEventId))
-		return
-	}
 
 	const { eventsById } = getState().app
 
 	const event = Object.keys(eventsById)
 		.map(eventId => eventsById[eventId])
-		.find(event => event.slug === slug)
+		.find(event => event.slug === slug && !event.isDisabled)
+
+	if (!event) {
+		dispatch(setActiveEvent(getState().app.defaultEventId))
+		return
+	}
 
 	const eventId = event && event.id
 	

@@ -18,6 +18,16 @@ const getEventsLabels = createSelector(
 	[])
 )
 
+const getDisabledEvents = createSelector(
+	getEvents,
+	(events) => Object.keys(events).reduce(
+		(obj, event) => [
+			events[event].isDisabled,
+			...obj
+		],
+	[])
+)
+
 const getEventsIds = createSelector(
 	getEvents,
 	(events) => Object.keys(events).reduce(
@@ -32,6 +42,7 @@ const mapStateToProps = (state) => ({
 	labels: getEventsLabels(state),
 	ids: getEventsIds(state),
 	selectedIndex: getEventsIds(state).indexOf(state.app.activeEventId),
+	disabledEvents: getDisabledEvents(state),
 	hidden: !state.header.isEventsDropdownVisible,
 	outsideClickIgnoreClass: 'header-events'
 })

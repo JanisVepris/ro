@@ -12,7 +12,7 @@ export default class App extends React.Component {
 			<div>
 				<label className="article-title">{ this.props.title }</label>
 
-				{ this.props.playlist }
+				{console.log(this.props.playlist)}
 			</div>
 		)
 	}

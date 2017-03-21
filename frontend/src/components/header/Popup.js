@@ -10,6 +10,7 @@ class Popup extends React.Component {
 		const {
 			labels,
 			selectedIndex,
+			disabledEvents = [],
 			actions,
 			hidden
 		} = this.props
@@ -24,10 +25,11 @@ class Popup extends React.Component {
 
 						const isSelected = index === selectedIndex
 						const selectedClassName = isSelected ? ' selected' : ''
-						const className = 'dropdown-option no-select pl-l'  + selectedClassName
+						const disabledClassName = disabledEvents[index] ? ' disabled' : ''
+						const className = 'dropdown-option no-select pl-l' + selectedClassName + disabledClassName
 
 						return (
-							<div key={ index } className={ className } onClick={ actions[index] }>
+							<div key={ index } className={ className } onClick={ () => { if (!disabledEvents[index]) actions[index]() } }>
 							{ label }
 						</div>
 						)

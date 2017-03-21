@@ -86,13 +86,13 @@
     margin-top: 0px;
 }
 
-
 .header-dropdown .selected {
     color: #E4E4E4;
 }
 
-.dropdown-option {
-    //transition: color 0.1s;
+.header-dropdown .disabled {
+    color: #555;
+    cursor: default;
 }
 
 .header i.arrow {
