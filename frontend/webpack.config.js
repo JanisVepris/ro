@@ -8,7 +8,7 @@ fs.accessSync('./config.json', fs.F_OK)
 var config = require('./config.json')
 
 var appRoot = 'src'
-var buildDir = __dirname + '/../src/TemplateBundle/Resources/public'
+var buildDir = __dirname + '/../web'
 
 var nopt = require("nopt")
 var args = nopt({

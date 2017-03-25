@@ -2,7 +2,7 @@
 
 var webpack = require('webpack')
 
-var buildDir = __dirname + '/../src/TemplateBundle/Resources/public'
+var buildDir = __dirname + '/../web'
 
 module.exports = require('./webpack.config.js')
 

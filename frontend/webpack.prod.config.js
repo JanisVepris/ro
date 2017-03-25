@@ -4,7 +4,7 @@ var webpack = require('webpack')
 
 module.exports = require('./webpack.config.js')
 
-var buildDir = __dirname + '/../src/TemplateBundle/Resources/public'
+var buildDir = __dirname + '/../web'
 
 // disable the hot reload
 module.exports.entry = [
