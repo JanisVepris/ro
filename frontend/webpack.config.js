@@ -59,7 +59,7 @@ module.exports = {
 		contentBase: buildDir
 	},
 	plugins: [
-		new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
+		new CleanWebpackPlugin(['js/bundle.js'], {
 			root: buildDir,
 			verbose: true,
 			dry: false
