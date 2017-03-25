@@ -17,8 +17,6 @@ var args = nopt({
 
 var USE_MOCK = !!args.useMock
 
-//var extractCSS = new ExtractTextPlugin('stylesheets/main.css')
-
 module.exports = {
 	app_root: 'src',
 	entry: [
