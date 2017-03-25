@@ -152,11 +152,18 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
 
     private function createImageGallery(Event $event)
     {
+        $galleryImages = [
+            __DIR__ . '/../Files/images/gallery1.jpg',
+            __DIR__ . '/../Files/images/gallery2.jpg',
+            __DIR__ . '/../Files/images/gallery3.jpg',
+        ];
+
+        $path = $galleryImages[array_rand($galleryImages)];
+
         $gallery = new Gallery();
         $gallery->setEvent($event);
 
-        $path = $this->faker->image(sys_get_temp_dir(), 300, 300, 'cats');
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 7; $i++) {
             $galleryImage = new GalleryImage();
             $galleryImage
                 ->setFile(new UploadedFile($path, $path))
@@ -211,7 +218,7 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
         $video
             ->setVideoPlaylist($playlist)
             ->setTitle($this->faker->sentence(2))
-            ->setUrl($this->faker->unique()->url);
+            ->setUrl('https://www.youtube.com/watch?v=gHxvP7Sxyrw');
 
         $playlist->addVideo($video);
 
@@ -228,7 +235,12 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
 
     private function createEventImage()
     {
-        $path = $this->faker->image(sys_get_temp_dir(), 300, 300, 'cats');
+        $coverImages = [
+            __DIR__ . '/../Files/images/cover1.png',
+            __DIR__ . '/../Files/images/cover2.png',
+        ];
+
+        $path = $coverImages[array_rand($coverImages)];
 
         $eventImage = new EventImage();
         $eventImage
@@ -240,7 +252,7 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
 
     private function createEventPoster()
     {
-        $path = $this->faker->image(sys_get_temp_dir(), 300, 300, 'cats');
+        $path = __DIR__ . '/../Files/images/poster1.jpg';
 
         $poster = new Poster();
         $poster

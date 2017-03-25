@@ -33,7 +33,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
         foreach ($events as $event) {
             for ($i = 1; $i < 7; $i++) {
                 // Create an image for the article
-                $path = $faker->image(sys_get_temp_dir(), 500, 500, 'fashion');
+                $path = __DIR__ . '/../Files/images/article1.jpg';
                 $articleImage = new ArticleImage();
                 $articleImage
                     ->setFile(new UploadedFile($path, $path))
