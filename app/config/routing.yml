@@ -7,14 +7,13 @@ _liip_imagine:
 api:
     resource: "@ApiBundle/Resources/config/routing.yml"
     type:     rest
-    prefix:   /
-
-ro:
-    resource: "@RoBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    prefix:   /api
 
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
+
+ro:
+    resource: "@RoBundle/Controller/"
+    type:     annotation

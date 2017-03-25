@@ -27,7 +27,7 @@ class FactsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\HtmlContentData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/facts",
+     *     path="/events/{eventId}/facts",
      *     name="ro_api_facts_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

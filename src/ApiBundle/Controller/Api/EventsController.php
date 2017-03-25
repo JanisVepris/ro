@@ -38,7 +38,7 @@ class EventsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\EventListItemData"
      * )
      * @Rest\Get(
-     *     path="/api/events",
+     *     path="/events",
      *     name="ro_api_events_index"
      * )
      * @Rest\View
@@ -61,7 +61,7 @@ class EventsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\EventData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}",
+     *     path="/events/{eventId}",
      *     name="ro_api_events_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

@@ -27,7 +27,7 @@ class ScriptsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\HtmlContentData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/script",
+     *     path="/events/{eventId}/script",
      *     name="ro_api_scripts_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

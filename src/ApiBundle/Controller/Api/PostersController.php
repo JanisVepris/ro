@@ -31,7 +31,7 @@ class PostersController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\PosterData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/poster",
+     *     path="/events/{eventId}/poster",
      *     name="ro_api_posters_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

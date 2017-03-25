@@ -29,7 +29,7 @@ class LyricsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\LyricsListData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/lyrics",
+     *     path="/events/{eventId}/lyrics",
      *     name="ro_api_lyrics_index"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})
@@ -53,7 +53,7 @@ class LyricsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\LyricData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/lyrics/{lyricId}",
+     *     path="/events/{eventId}/lyrics/{lyricId}",
      *     name="ro_api_lyrics_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

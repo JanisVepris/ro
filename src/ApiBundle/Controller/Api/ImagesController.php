@@ -27,7 +27,7 @@ class ImagesController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\GalleryImageListData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/gallery/images",
+     *     path="/events/{eventId}/gallery/images",
      *     name="ro_api_images_index"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

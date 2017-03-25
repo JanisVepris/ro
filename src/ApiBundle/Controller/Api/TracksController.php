@@ -27,7 +27,7 @@ class TracksController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\TrackListData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/audioPlaylist/tracks",
+     *     path="/events/{eventId}/audioPlaylist/tracks",
      *     name="ro_api_tracks_index"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

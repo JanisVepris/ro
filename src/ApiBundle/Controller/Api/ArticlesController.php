@@ -43,7 +43,7 @@ class ArticlesController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\ArticleListData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/articles",
+     *     path="/events/{eventId}/articles",
      *     name="ro_api_articles_index"
      * )
      * @Rest\QueryParam(
@@ -80,7 +80,7 @@ class ArticlesController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\ArticleData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/articles/{articleId}",
+     *     path="/events/{eventId}/articles/{articleId}",
      *     name="ro_api_articles_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})

@@ -27,7 +27,7 @@ class TeamsController extends AbstractApiController
      *     output="ApiBundle\DataTransfer\Api\HtmlContentData"
      * )
      * @Rest\Get(
-     *     path="/api/events/{eventId}/team",
+     *     path="/events/{eventId}/team",
      *     name="ro_api_teams_get"
      * )
      * @ParamConverter("event", options={"id" = "eventId"})
