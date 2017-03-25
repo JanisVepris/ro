@@ -7551,90 +7551,34 @@
 	        return doneResult();
 	      }
 
+	      context.method = method;
+	      context.arg = arg;
+
 	      while (true) {
 	        var delegate = context.delegate;
 	        if (delegate) {
-	          if (method === "return" ||
-	              (method === "throw" && delegate.iterator[method] === undefined)) {
-	            // A return or throw (when the delegate iterator has no throw
-	            // method) always terminates the yield* loop.
-	            context.delegate = null;
-
-	            // If the delegate iterator has a return method, give it a
-	            // chance to clean up.
-	            var returnMethod = delegate.iterator["return"];
-	            if (returnMethod) {
-	              var record = tryCatch(returnMethod, delegate.iterator, arg);
-	              if (record.type === "throw") {
-	                // If the return method threw an exception, let that
-	                // exception prevail over the original return or throw.
-	                method = "throw";
-	                arg = record.arg;
-	                continue;
-	              }
-	            }
-
-	            if (method === "return") {
-	              // Continue with the outer return, now that the delegate
-	              // iterator has been terminated.
-	              continue;
-	            }
+	          var delegateResult = maybeInvokeDelegate(delegate, context);
+	          if (delegateResult) {
+	            if (delegateResult === ContinueSentinel) continue;
+	            return delegateResult;
 	          }
-
-	          var record = tryCatch(
-	            delegate.iterator[method],
-	            delegate.iterator,
-	            arg
-	          );
-
-	          if (record.type === "throw") {
-	            context.delegate = null;
-
-	            // Like returning generator.throw(uncaught), but without the
-	            // overhead of an extra function call.
-	            method = "throw";
-	            arg = record.arg;
-	            continue;
-	          }
-
-	          // Delegate generator ran and handled its own exceptions so
-	          // regardless of what the method was, we continue as if it is
-	          // "next" with an undefined arg.
-	          method = "next";
-	          arg = undefined;
-
-	          var info = record.arg;
-	          if (info.done) {
-	            context[delegate.resultName] = info.value;
-	            context.next = delegate.nextLoc;
-	          } else {
-	            state = GenStateSuspendedYield;
-	            return info;
-	          }
-
-	          context.delegate = null;
 	        }
 
-	        if (method === "next") {
+	        if (context.method === "next") {
 	          // Setting context._sent for legacy support of Babel's
 	          // function.sent implementation.
-	          context.sent = context._sent = arg;
+	          context.sent = context._sent = context.arg;
 
-	        } else if (method === "throw") {
+	        } else if (context.method === "throw") {
 	          if (state === GenStateSuspendedStart) {
 	            state = GenStateCompleted;
-	            throw arg;
+	            throw context.arg;
 	          }
 
-	          if (context.dispatchException(arg)) {
-	            // If the dispatched exception was caught by a catch block,
-	            // then let that catch block handle the exception normally.
-	            method = "next";
-	            arg = undefined;
-	          }
+	          context.dispatchException(context.arg);
 
-	        } else if (method === "return") {
-	          context.abrupt("return", arg);
+	        } else if (context.method === "return") {
+	          context.abrupt("return", context.arg);
 	        }
 
 	        state = GenStateExecuting;
@@ -7647,30 +7591,106 @@
 	            ? GenStateCompleted
 	            : GenStateSuspendedYield;
 
-	          var info = {
+	          if (record.arg === ContinueSentinel) {
+	            continue;
+	          }
+
+	          return {
 	            value: record.arg,
 	            done: context.done
 	          };
 
-	          if (record.arg === ContinueSentinel) {
-	            if (context.delegate && method === "next") {
-	              // Deliberately forget the last sent value so that we don't
-	              // accidentally pass it on to the delegate.
-	              arg = undefined;
-	            }
-	          } else {
-	            return info;
-	          }
-
 	        } else if (record.type === "throw") {
 	          state = GenStateCompleted;
 	          // Dispatch the exception by looping back around to the
-	          // context.dispatchException(arg) call above.
-	          method = "throw";
-	          arg = record.arg;
+	          // context.dispatchException(context.arg) call above.
+	          context.method = "throw";
+	          context.arg = record.arg;
 	        }
 	      }
 	    };
+	  }
+
+	  // Call delegate.iterator[context.method](context.arg) and handle the
+	  // result, either by returning a { value, done } result from the
+	  // delegate iterator, or by modifying context.method and context.arg,
+	  // setting context.delegate to null, and returning the ContinueSentinel.
+	  function maybeInvokeDelegate(delegate, context) {
+	    var method = delegate.iterator[context.method];
+	    if (method === undefined) {
+	      // A .throw or .return when the delegate iterator has no .throw
+	      // method always terminates the yield* loop.
+	      context.delegate = null;
+
+	      if (context.method === "throw") {
+	        if (delegate.iterator.return) {
+	          // If the delegate iterator has a return method, give it a
+	          // chance to clean up.
+	          context.method = "return";
+	          context.arg = undefined;
+	          maybeInvokeDelegate(delegate, context);
+
+	          if (context.method === "throw") {
+	            // If maybeInvokeDelegate(context) changed context.method from
+	            // "return" to "throw", let that override the TypeError below.
+	            return ContinueSentinel;
+	          }
+	        }
+
+	        context.method = "throw";
+	        context.arg = new TypeError(
+	          "The iterator does not provide a 'throw' method");
+	      }
+
+	      return ContinueSentinel;
+	    }
+
+	    var record = tryCatch(method, delegate.iterator, context.arg);
+
+	    if (record.type === "throw") {
+	      context.method = "throw";
+	      context.arg = record.arg;
+	      context.delegate = null;
+	      return ContinueSentinel;
+	    }
+
+	    var info = record.arg;
+
+	    if (! info) {
+	      context.method = "throw";
+	      context.arg = new TypeError("iterator result is not an object");
+	      context.delegate = null;
+	      return ContinueSentinel;
+	    }
+
+	    if (info.done) {
+	      // Assign the result of the finished delegate to the temporary
+	      // variable specified by delegate.resultName (see delegateYield).
+	      context[delegate.resultName] = info.value;
+
+	      // Resume execution at the desired location (see delegateYield).
+	      context.next = delegate.nextLoc;
+
+	      // If context.method was "throw" but the delegate handled the
+	      // exception, let the outer generator proceed normally. If
+	      // context.method was "next", forget context.arg since it has been
+	      // "consumed" by the delegate iterator. If context.method was
+	      // "return", allow the original .return call to continue in the
+	      // outer generator.
+	      if (context.method !== "return") {
+	        context.method = "next";
+	        context.arg = undefined;
+	      }
+
+	    } else {
+	      // Re-yield the result returned by the delegate method.
+	      return info;
+	    }
+
+	    // The delegate iterator is finished, so forget it and continue with
+	    // the outer generator.
+	    context.delegate = null;
+	    return ContinueSentinel;
 	  }
 
 	  // Define Generator.prototype.{next,throw,return} in terms of the
@@ -7793,6 +7813,9 @@
 	      this.done = false;
 	      this.delegate = null;
 
+	      this.method = "next";
+	      this.arg = undefined;
+
 	      this.tryEntries.forEach(resetTryEntry);
 
 	      if (!skipTempReset) {
@@ -7829,7 +7852,15 @@
 	        record.type = "throw";
 	        record.arg = exception;
 	        context.next = loc;
-	        return !!caught;
+
+	        if (caught) {
+	          // If the dispatched exception was caught by a catch block,
+	          // then let that catch block handle the exception normally.
+	          context.method = "next";
+	          context.arg = undefined;
+	        }
+
+	        return !! caught;
 	      }
 
 	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
@@ -7897,12 +7928,12 @@
 	      record.arg = arg;
 
 	      if (finallyEntry) {
+	        this.method = "next";
 	        this.next = finallyEntry.finallyLoc;
-	      } else {
-	        this.complete(record);
+	        return ContinueSentinel;
 	      }
 
-	      return ContinueSentinel;
+	      return this.complete(record);
 	    },
 
 	    complete: function(record, afterLoc) {
@@ -7914,11 +7945,14 @@
 	          record.type === "continue") {
 	        this.next = record.arg;
 	      } else if (record.type === "return") {
-	        this.rval = record.arg;
+	        this.rval = this.arg = record.arg;
+	        this.method = "return";
 	        this.next = "end";
 	      } else if (record.type === "normal" && afterLoc) {
 	        this.next = afterLoc;
 	      }
+
+	      return ContinueSentinel;
 	    },
 
 	    finish: function(finallyLoc) {
@@ -7956,6 +7990,12 @@
 	        resultName: resultName,
 	        nextLoc: nextLoc
 	      };
+
+	      if (this.method === "next") {
+	        // Deliberately forget the last sent value so that we don't
+	        // accidentally pass it on to the delegate.
+	        this.arg = undefined;
+	      }
 
 	      return ContinueSentinel;
 	    }
@@ -26275,10 +26315,10 @@
 	 */
 
 	function getUnboundedScrollPosition(scrollable) {
-	  if (scrollable === window) {
+	  if (scrollable.Window && scrollable instanceof scrollable.Window) {
 	    return {
-	      x: window.pageXOffset || document.documentElement.scrollLeft,
-	      y: window.pageYOffset || document.documentElement.scrollTop
+	      x: scrollable.pageXOffset || scrollable.document.documentElement.scrollLeft,
+	      y: scrollable.pageYOffset || scrollable.document.documentElement.scrollTop
 	    };
 	  }
 	  return {
@@ -27027,7 +27067,9 @@
 	 * @return {boolean} Whether or not the object is a DOM node.
 	 */
 	function isNode(object) {
-	  return !!(object && (typeof Node === 'function' ? object instanceof Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
+	  var doc = object ? object.ownerDocument || object : document;
+	  var defaultView = doc.defaultView || window;
+	  return !!(object && (typeof defaultView.Node === 'function' ? object instanceof defaultView.Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
 	}
 
 	module.exports = isNode;
@@ -27036,7 +27078,7 @@
 /* 449 */
 /***/ function(module, exports) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
@@ -27057,19 +27099,24 @@
 	 *
 	 * The activeElement will be null only if the document or document body is not
 	 * yet defined.
+	 *
+	 * @param {?DOMDocument} doc Defaults to current document.
+	 * @return {?DOMElement}
 	 */
-	function getActiveElement() /*?DOMElement*/{
-	  if (typeof document === 'undefined') {
+	function getActiveElement(doc) /*?DOMElement*/{
+	  doc = doc || global.document;
+	  if (typeof doc === 'undefined') {
 	    return null;
 	  }
 	  try {
-	    return document.activeElement || document.body;
+	    return doc.activeElement || doc.body;
 	  } catch (e) {
-	    return document.body;
+	    return doc.body;
 	  }
 	}
 
 	module.exports = getActiveElement;
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 450 */
@@ -29487,7 +29534,7 @@
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
-	var _connectAdvanced = __webpack_require__(480);
+	var _connectAdvanced = __webpack_require__(479);
 
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 
@@ -29512,15 +29559,9 @@
 
 	var _react = __webpack_require__(299);
 
-	var _Subscription = __webpack_require__(477);
+	var _PropTypes = __webpack_require__(477);
 
-	var _Subscription2 = _interopRequireDefault(_Subscription);
-
-	var _storeShape = __webpack_require__(478);
-
-	var _storeShape2 = _interopRequireDefault(_storeShape);
-
-	var _warning = __webpack_require__(479);
+	var _warning = __webpack_require__(478);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -29581,132 +29622,42 @@
 	}
 
 	Provider.propTypes = {
-	  store: _storeShape2.default.isRequired,
+	  store: _PropTypes.storeShape.isRequired,
 	  children: _react.PropTypes.element.isRequired
 	};
 	Provider.childContextTypes = {
-	  store: _storeShape2.default.isRequired,
-	  storeSubscription: _react.PropTypes.instanceOf(_Subscription2.default)
+	  store: _PropTypes.storeShape.isRequired,
+	  storeSubscription: _PropTypes.subscriptionShape
 	};
 	Provider.displayName = 'Provider';
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
 /* 477 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	// encapsulates the subscription logic for connecting a component to the redux store, as
-	// well as nesting subscriptions of descendant components, so that we can ensure the
-	// ancestor components re-render before descendants
-
-	var CLEARED = null;
-	var nullListeners = {
-	  notify: function notify() {}
-	};
-
-	function createListenerCollection() {
-	  // the current/next pattern is copied from redux's createStore code.
-	  // TODO: refactor+expose that code to be reusable here?
-	  var current = [];
-	  var next = [];
-
-	  return {
-	    clear: function clear() {
-	      next = CLEARED;
-	      current = CLEARED;
-	    },
-	    notify: function notify() {
-	      var listeners = current = next;
-	      for (var i = 0; i < listeners.length; i++) {
-	        listeners[i]();
-	      }
-	    },
-	    subscribe: function subscribe(listener) {
-	      var isSubscribed = true;
-	      if (next === current) next = current.slice();
-	      next.push(listener);
-
-	      return function unsubscribe() {
-	        if (!isSubscribed || current === CLEARED) return;
-	        isSubscribed = false;
-
-	        if (next === current) next = current.slice();
-	        next.splice(next.indexOf(listener), 1);
-	      };
-	    }
-	  };
-	}
-
-	var Subscription = function () {
-	  function Subscription(store, parentSub) {
-	    _classCallCheck(this, Subscription);
-
-	    this.store = store;
-	    this.parentSub = parentSub;
-	    this.unsubscribe = null;
-	    this.listeners = nullListeners;
-	  }
-
-	  Subscription.prototype.addNestedSub = function addNestedSub(listener) {
-	    this.trySubscribe();
-	    return this.listeners.subscribe(listener);
-	  };
-
-	  Subscription.prototype.notifyNestedSubs = function notifyNestedSubs() {
-	    this.listeners.notify();
-	  };
-
-	  Subscription.prototype.isSubscribed = function isSubscribed() {
-	    return Boolean(this.unsubscribe);
-	  };
-
-	  Subscription.prototype.trySubscribe = function trySubscribe() {
-	    if (!this.unsubscribe) {
-	      // this.onStateChange is set by connectAdvanced.initSubscription()
-	      this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.onStateChange) : this.store.subscribe(this.onStateChange);
-
-	      this.listeners = createListenerCollection();
-	    }
-	  };
-
-	  Subscription.prototype.tryUnsubscribe = function tryUnsubscribe() {
-	    if (this.unsubscribe) {
-	      this.unsubscribe();
-	      this.unsubscribe = null;
-	      this.listeners.clear();
-	      this.listeners = nullListeners;
-	    }
-	  };
-
-	  return Subscription;
-	}();
-
-	exports.default = Subscription;
-
-/***/ },
-/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
+	exports.storeShape = exports.subscriptionShape = undefined;
 
 	var _react = __webpack_require__(299);
 
-	exports.default = _react.PropTypes.shape({
+	var subscriptionShape = exports.subscriptionShape = _react.PropTypes.shape({
+	  trySubscribe: _react.PropTypes.func.isRequired,
+	  tryUnsubscribe: _react.PropTypes.func.isRequired,
+	  notifyNestedSubs: _react.PropTypes.func.isRequired,
+	  isSubscribed: _react.PropTypes.func.isRequired
+	});
+
+	var storeShape = exports.storeShape = _react.PropTypes.shape({
 	  subscribe: _react.PropTypes.func.isRequired,
 	  dispatch: _react.PropTypes.func.isRequired,
 	  getState: _react.PropTypes.func.isRequired
 	});
 
 /***/ },
-/* 479 */
+/* 478 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29736,7 +29687,7 @@
 	}
 
 /***/ },
-/* 480 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -29747,23 +29698,21 @@
 
 	exports.default = connectAdvanced;
 
-	var _hoistNonReactStatics = __webpack_require__(481);
+	var _hoistNonReactStatics = __webpack_require__(480);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
 	var _react = __webpack_require__(299);
 
-	var _Subscription = __webpack_require__(477);
+	var _Subscription = __webpack_require__(482);
 
 	var _Subscription2 = _interopRequireDefault(_Subscription);
 
-	var _storeShape = __webpack_require__(478);
-
-	var _storeShape2 = _interopRequireDefault(_storeShape);
+	var _PropTypes = __webpack_require__(477);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29776,6 +29725,29 @@
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	var hotReloadingVersion = 0;
+	var dummyState = {};
+	function noop() {}
+	function makeSelectorStateful(sourceSelector, store) {
+	  // wrap the selector in an object that tracks its results between runs.
+	  var selector = {
+	    run: function runComponentSelector(props) {
+	      try {
+	        var nextProps = sourceSelector(store.getState(), props);
+	        if (nextProps !== selector.props || selector.error) {
+	          selector.shouldComponentUpdate = true;
+	          selector.props = nextProps;
+	          selector.error = null;
+	        }
+	      } catch (error) {
+	        selector.shouldComponentUpdate = true;
+	        selector.error = error;
+	      }
+	    }
+	  };
+
+	  return selector;
+	}
+
 	function connectAdvanced(
 	/*
 	  selectorFactory is a func that is responsible for returning the selector function used to
@@ -29814,11 +29786,11 @@
 	  var subscriptionKey = storeKey + 'Subscription';
 	  var version = hotReloadingVersion++;
 
-	  var contextTypes = (_contextTypes = {}, _contextTypes[storeKey] = _storeShape2.default, _contextTypes[subscriptionKey] = _react.PropTypes.instanceOf(_Subscription2.default), _contextTypes);
-	  var childContextTypes = (_childContextTypes = {}, _childContextTypes[subscriptionKey] = _react.PropTypes.instanceOf(_Subscription2.default), _childContextTypes);
+	  var contextTypes = (_contextTypes = {}, _contextTypes[storeKey] = _PropTypes.storeShape, _contextTypes[subscriptionKey] = _PropTypes.subscriptionShape, _contextTypes);
+	  var childContextTypes = (_childContextTypes = {}, _childContextTypes[subscriptionKey] = _PropTypes.subscriptionShape, _childContextTypes);
 
 	  return function wrapWithConnect(WrappedComponent) {
-	    (0, _invariant2.default)(typeof WrappedComponent == 'function', 'You must pass a component to the function returned by ' + ('connect. Instead received ' + WrappedComponent));
+	    (0, _invariant2.default)(typeof WrappedComponent == 'function', 'You must pass a component to the function returned by ' + ('connect. Instead received ' + JSON.stringify(WrappedComponent)));
 
 	    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
@@ -29847,16 +29819,11 @@
 	        _this.version = version;
 	        _this.state = {};
 	        _this.renderCount = 0;
-	        _this.store = _this.props[storeKey] || _this.context[storeKey];
-	        _this.parentSub = props[subscriptionKey] || context[subscriptionKey];
-
+	        _this.store = props[storeKey] || context[storeKey];
+	        _this.propsMode = Boolean(props[storeKey]);
 	        _this.setWrappedInstance = _this.setWrappedInstance.bind(_this);
 
-	        (0, _invariant2.default)(_this.store, 'Could not find "' + storeKey + '" in either the context or ' + ('props of "' + displayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "' + storeKey + '" as a prop to "' + displayName + '".'));
-
-	        // make sure `getState` is properly bound in order to avoid breaking
-	        // custom store implementations that rely on the store's context
-	        _this.getState = _this.store.getState.bind(_this.store);
+	        (0, _invariant2.default)(_this.store, 'Could not find "' + storeKey + '" in either the context or props of ' + ('"' + displayName + '". Either wrap the root component in a <Provider>, ') + ('or explicitly pass "' + storeKey + '" as a prop to "' + displayName + '".'));
 
 	        _this.initSelector();
 	        _this.initSubscription();
@@ -29866,7 +29833,12 @@
 	      Connect.prototype.getChildContext = function getChildContext() {
 	        var _ref2;
 
-	        return _ref2 = {}, _ref2[subscriptionKey] = this.subscription || this.parentSub, _ref2;
+	        // If this component received store from props, its subscription should be transparent
+	        // to any descendants receiving store+subscription from context; it passes along
+	        // subscription passed to it. Otherwise, it shadows the parent subscription, which allows
+	        // Connect to control ordering of notifications to flow top-down.
+	        var subscription = this.propsMode ? null : this.subscription;
+	        return _ref2 = {}, _ref2[subscriptionKey] = subscription || this.context[subscriptionKey], _ref2;
 	      };
 
 	      Connect.prototype.componentDidMount = function componentDidMount() {
@@ -29893,12 +29865,11 @@
 
 	      Connect.prototype.componentWillUnmount = function componentWillUnmount() {
 	        if (this.subscription) this.subscription.tryUnsubscribe();
-	        // these are just to guard against extra memory leakage if a parent element doesn't
-	        // dereference this instance properly, such as an async callback that never finishes
 	        this.subscription = null;
+	        this.notifyNestedSubs = noop;
 	        this.store = null;
-	        this.parentSub = null;
-	        this.selector.run = function () {};
+	        this.selector.run = noop;
+	        this.selector.shouldComponentUpdate = false;
 	      };
 
 	      Connect.prototype.getWrappedInstance = function getWrappedInstance() {
@@ -29911,55 +29882,47 @@
 	      };
 
 	      Connect.prototype.initSelector = function initSelector() {
-	        var dispatch = this.store.dispatch;
-	        var getState = this.getState;
-
-	        var sourceSelector = selectorFactory(dispatch, selectorFactoryOptions);
-
-	        // wrap the selector in an object that tracks its results between runs
-	        var selector = this.selector = {
-	          shouldComponentUpdate: true,
-	          props: sourceSelector(getState(), this.props),
-	          run: function runComponentSelector(props) {
-	            try {
-	              var nextProps = sourceSelector(getState(), props);
-	              if (selector.error || nextProps !== selector.props) {
-	                selector.shouldComponentUpdate = true;
-	                selector.props = nextProps;
-	                selector.error = null;
-	              }
-	            } catch (error) {
-	              selector.shouldComponentUpdate = true;
-	              selector.error = error;
-	            }
-	          }
-	        };
+	        var sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions);
+	        this.selector = makeSelectorStateful(sourceSelector, this.store);
+	        this.selector.run(this.props);
 	      };
 
 	      Connect.prototype.initSubscription = function initSubscription() {
-	        var _this2 = this;
+	        if (!shouldHandleStateChanges) return;
 
-	        if (shouldHandleStateChanges) {
-	          (function () {
-	            var subscription = _this2.subscription = new _Subscription2.default(_this2.store, _this2.parentSub);
-	            var dummyState = {};
+	        // parentSub's source should match where store came from: props vs. context. A component
+	        // connected to the store via props shouldn't use subscription from context, or vice versa.
+	        var parentSub = (this.propsMode ? this.props : this.context)[subscriptionKey];
+	        this.subscription = new _Subscription2.default(this.store, parentSub, this.onStateChange.bind(this));
 
-	            subscription.onStateChange = function onStateChange() {
-	              this.selector.run(this.props);
+	        // `notifyNestedSubs` is duplicated to handle the case where the component is  unmounted in
+	        // the middle of the notification loop, where `this.subscription` will then be null. An
+	        // extra null check every change can be avoided by copying the method onto `this` and then
+	        // replacing it with a no-op on unmount. This can probably be avoided if Subscription's
+	        // listeners logic is changed to not call listeners that have been unsubscribed in the
+	        // middle of the notification loop.
+	        this.notifyNestedSubs = this.subscription.notifyNestedSubs.bind(this.subscription);
+	      };
 
-	              if (!this.selector.shouldComponentUpdate) {
-	                subscription.notifyNestedSubs();
-	              } else {
-	                this.componentDidUpdate = function componentDidUpdate() {
-	                  this.componentDidUpdate = undefined;
-	                  subscription.notifyNestedSubs();
-	                };
+	      Connect.prototype.onStateChange = function onStateChange() {
+	        this.selector.run(this.props);
 
-	                this.setState(dummyState);
-	              }
-	            }.bind(_this2);
-	          })();
+	        if (!this.selector.shouldComponentUpdate) {
+	          this.notifyNestedSubs();
+	        } else {
+	          this.componentDidUpdate = this.notifyNestedSubsOnComponentDidUpdate;
+	          this.setState(dummyState);
 	        }
+	      };
+
+	      Connect.prototype.notifyNestedSubsOnComponentDidUpdate = function notifyNestedSubsOnComponentDidUpdate() {
+	        // `componentDidUpdate` is conditionally implemented when `onStateChange` determines it
+	        // needs to notify nested subs. Once called, it unimplements itself until further state
+	        // changes occur. Doing it this way vs having a permanent `componentDidMount` that does
+	        // a boolean check every time avoids an extra method call most of the time, resulting
+	        // in some perf boost.
+	        this.componentDidUpdate = undefined;
+	        this.notifyNestedSubs();
 	      };
 
 	      Connect.prototype.isSubscribed = function isSubscribed() {
@@ -29967,7 +29930,7 @@
 	      };
 
 	      Connect.prototype.addExtraProps = function addExtraProps(props) {
-	        if (!withRef && !renderCountProp) return props;
+	        if (!withRef && !renderCountProp && !(this.propsMode && this.subscription)) return props;
 	        // make a shallow copy so that fields added don't leak to the original selector.
 	        // this is especially important for 'ref' since that's a reference back to the component
 	        // instance. a singleton memoized selector would then be holding a reference to the
@@ -29975,6 +29938,7 @@
 	        var withExtras = _extends({}, props);
 	        if (withRef) withExtras.ref = this.setWrappedInstance;
 	        if (renderCountProp) withExtras[renderCountProp] = this.renderCount++;
+	        if (this.propsMode && this.subscription) withExtras[subscriptionKey] = this.subscription;
 	        return withExtras;
 	      };
 
@@ -30018,7 +29982,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 481 */
+/* 480 */
 /***/ function(module, exports) {
 
 	/**
@@ -30074,7 +30038,7 @@
 
 
 /***/ },
-/* 482 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30132,6 +30096,104 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
+/* 482 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	// encapsulates the subscription logic for connecting a component to the redux store, as
+	// well as nesting subscriptions of descendant components, so that we can ensure the
+	// ancestor components re-render before descendants
+
+	var CLEARED = null;
+	var nullListeners = {
+	  notify: function notify() {}
+	};
+
+	function createListenerCollection() {
+	  // the current/next pattern is copied from redux's createStore code.
+	  // TODO: refactor+expose that code to be reusable here?
+	  var current = [];
+	  var next = [];
+
+	  return {
+	    clear: function clear() {
+	      next = CLEARED;
+	      current = CLEARED;
+	    },
+	    notify: function notify() {
+	      var listeners = current = next;
+	      for (var i = 0; i < listeners.length; i++) {
+	        listeners[i]();
+	      }
+	    },
+	    subscribe: function subscribe(listener) {
+	      var isSubscribed = true;
+	      if (next === current) next = current.slice();
+	      next.push(listener);
+
+	      return function unsubscribe() {
+	        if (!isSubscribed || current === CLEARED) return;
+	        isSubscribed = false;
+
+	        if (next === current) next = current.slice();
+	        next.splice(next.indexOf(listener), 1);
+	      };
+	    }
+	  };
+	}
+
+	var Subscription = function () {
+	  function Subscription(store, parentSub, onStateChange) {
+	    _classCallCheck(this, Subscription);
+
+	    this.store = store;
+	    this.parentSub = parentSub;
+	    this.onStateChange = onStateChange;
+	    this.unsubscribe = null;
+	    this.listeners = nullListeners;
+	  }
+
+	  Subscription.prototype.addNestedSub = function addNestedSub(listener) {
+	    this.trySubscribe();
+	    return this.listeners.subscribe(listener);
+	  };
+
+	  Subscription.prototype.notifyNestedSubs = function notifyNestedSubs() {
+	    this.listeners.notify();
+	  };
+
+	  Subscription.prototype.isSubscribed = function isSubscribed() {
+	    return Boolean(this.unsubscribe);
+	  };
+
+	  Subscription.prototype.trySubscribe = function trySubscribe() {
+	    if (!this.unsubscribe) {
+	      this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.onStateChange) : this.store.subscribe(this.onStateChange);
+
+	      this.listeners = createListenerCollection();
+	    }
+	  };
+
+	  Subscription.prototype.tryUnsubscribe = function tryUnsubscribe() {
+	    if (this.unsubscribe) {
+	      this.unsubscribe();
+	      this.unsubscribe = null;
+	      this.listeners.clear();
+	      this.listeners = nullListeners;
+	    }
+	  };
+
+	  return Subscription;
+	}();
+
+	exports.default = Subscription;
+
+/***/ },
 /* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -30143,7 +30205,7 @@
 
 	exports.createConnect = createConnect;
 
-	var _connectAdvanced = __webpack_require__(480);
+	var _connectAdvanced = __webpack_require__(479);
 
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 
@@ -30268,28 +30330,39 @@
 /* 484 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	exports.__esModule = true;
 	exports.default = shallowEqual;
 	var hasOwn = Object.prototype.hasOwnProperty;
 
-	function shallowEqual(a, b) {
-	  if (a === b) return true;
+	function is(x, y) {
+	  if (x === y) {
+	    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+	  } else {
+	    return x !== x && y !== y;
+	  }
+	}
 
-	  var countA = 0;
-	  var countB = 0;
+	function shallowEqual(objA, objB) {
+	  if (is(objA, objB)) return true;
 
-	  for (var key in a) {
-	    if (hasOwn.call(a, key) && a[key] !== b[key]) return false;
-	    countA++;
+	  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+	    return false;
 	  }
 
-	  for (var _key in b) {
-	    if (hasOwn.call(b, _key)) countB++;
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+
+	  if (keysA.length !== keysB.length) return false;
+
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!hasOwn.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+	      return false;
+	    }
 	  }
 
-	  return countA === countB;
+	  return true;
 	}
 
 /***/ },
@@ -31417,10 +31490,12 @@
 	      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
 	    };
 
-	    proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
+	    // allow detectFactoryAndVerify to get ownProps
+	    proxy.dependsOnOwnProps = true;
 
 	    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
 	      proxy.mapToProps = mapToProps;
+	      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
 	      var props = proxy(stateOrDispatch, ownProps);
 
 	      if (typeof props === 'function') {
@@ -31452,7 +31527,7 @@
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _warning = __webpack_require__(479);
+	var _warning = __webpack_require__(478);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -31680,7 +31755,7 @@
 	exports.__esModule = true;
 	exports.default = verifySubselectors;
 
-	var _warning = __webpack_require__(479);
+	var _warning = __webpack_require__(478);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -32076,7 +32151,7 @@
 	exports.getParams = getParams;
 	exports.formatPattern = formatPattern;
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -32323,7 +32398,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -33750,7 +33825,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34081,7 +34156,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34276,7 +34351,7 @@
 
 	exports.default = withRouter;
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34284,7 +34359,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _hoistNonReactStatics = __webpack_require__(481);
+	var _hoistNonReactStatics = __webpack_require__(480);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
@@ -34362,7 +34437,7 @@
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34428,7 +34503,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34541,7 +34616,7 @@
 
 	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34604,7 +34679,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34668,7 +34743,7 @@
 
 	var _Actions = __webpack_require__(542);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -34831,11 +34906,11 @@
 	 */
 	var useQueries = function useQueries(createHistory) {
 	  return function () {
-	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	    var history = createHistory(options);
-	    var stringifyQuery = options.stringifyQuery;
-	    var parseQueryString = options.parseQueryString;
+	    var stringifyQuery = options.stringifyQuery,
+	        parseQueryString = options.parseQueryString;
 
 
 	    if (typeof stringifyQuery !== 'function') stringifyQuery = defaultStringifyQuery;
@@ -34975,9 +35050,9 @@
 		switch (opts.arrayFormat) {
 			case 'index':
 				return function (key, value, accumulator) {
-					result = /\[(\d*)]$/.exec(key);
+					result = /\[(\d*)\]$/.exec(key);
 
-					key = key.replace(/\[\d*]$/, '');
+					key = key.replace(/\[\d*\]$/, '');
 
 					if (!result) {
 						accumulator[key] = value;
@@ -34993,9 +35068,9 @@
 
 			case 'bracket':
 				return function (key, value, accumulator) {
-					result = /(\[])$/.exec(key);
+					result = /(\[\])$/.exec(key);
 
-					key = key.replace(/\[]$/, '');
+					key = key.replace(/\[\]$/, '');
 
 					if (!result || accumulator[key] === undefined) {
 						accumulator[key] = value;
@@ -35182,11 +35257,11 @@
 	exports.__esModule = true;
 	exports.locationsAreEqual = exports.statesAreEqual = exports.createLocation = exports.createQuery = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -35205,9 +35280,9 @@
 	};
 
 	var createLocation = exports.createLocation = function createLocation() {
-	  var input = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
-	  var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
-	  var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	  var input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/';
+	  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Actions.POP;
+	  var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
 	  var object = typeof input === 'string' ? (0, _PathUtils.parsePath)(input) : input;
 
@@ -35287,12 +35362,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var addQueryStringValueToPath = exports.addQueryStringValueToPath = function addQueryStringValueToPath(path, key, value) {
-	  var _parsePath = parsePath(path);
-
-	  var pathname = _parsePath.pathname;
-	  var search = _parsePath.search;
-	  var hash = _parsePath.hash;
-
+	  var _parsePath = parsePath(path),
+	      pathname = _parsePath.pathname,
+	      search = _parsePath.search,
+	      hash = _parsePath.hash;
 
 	  return createPath({
 	    pathname: pathname,
@@ -35302,12 +35375,10 @@
 	};
 
 	var stripQueryStringValueFromPath = exports.stripQueryStringValueFromPath = function stripQueryStringValueFromPath(path, key) {
-	  var _parsePath2 = parsePath(path);
-
-	  var pathname = _parsePath2.pathname;
-	  var search = _parsePath2.search;
-	  var hash = _parsePath2.hash;
-
+	  var _parsePath2 = parsePath(path),
+	      pathname = _parsePath2.pathname,
+	      search = _parsePath2.search,
+	      hash = _parsePath2.hash;
 
 	  return createPath({
 	    pathname: pathname,
@@ -35319,9 +35390,8 @@
 	};
 
 	var getQueryStringValueFromPath = exports.getQueryStringValueFromPath = function getQueryStringValueFromPath(path, key) {
-	  var _parsePath3 = parsePath(path);
-
-	  var search = _parsePath3.search;
+	  var _parsePath3 = parsePath(path),
+	      search = _parsePath3.search;
 
 	  var match = search.match(new RegExp('[?&]' + key + '=([a-zA-Z0-9]+)'));
 	  return match && match[1];
@@ -35363,10 +35433,10 @@
 	var createPath = exports.createPath = function createPath(location) {
 	  if (location == null || typeof location === 'string') return location;
 
-	  var basename = location.basename;
-	  var pathname = location.pathname;
-	  var search = location.search;
-	  var hash = location.hash;
+	  var basename = location.basename,
+	      pathname = location.pathname,
+	      search = location.search,
+	      hash = location.hash;
 
 	  var path = (basename || '') + pathname;
 
@@ -35398,7 +35468,7 @@
 
 	var useBasename = function useBasename(createHistory) {
 	  return function () {
-	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	    var history = createHistory(options);
 	    var basename = options.basename;
@@ -35408,7 +35478,7 @@
 	      if (!location) return location;
 
 	      if (basename && location.basename == null) {
-	        if (location.pathname.indexOf(basename) === 0) {
+	        if (location.pathname.toLowerCase().indexOf(basename.toLowerCase()) === 0) {
 	          location.pathname = location.pathname.substring(basename.length);
 	          location.basename = basename;
 
@@ -35506,7 +35576,7 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -35532,7 +35602,7 @@
 	};
 
 	var createMemoryHistory = function createMemoryHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  if (Array.isArray(options)) {
 	    options = { entries: options };
@@ -35599,9 +35669,9 @@
 	    go: go
 	  }));
 
-	  var _options = options;
-	  var entries = _options.entries;
-	  var current = _options.current;
+	  var _options = options,
+	      entries = _options.entries,
+	      current = _options.current;
 
 
 	  if (typeof entries === 'string') {
@@ -35661,13 +35731,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var createHistory = function createHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var getCurrentLocation = options.getCurrentLocation;
-	  var getUserConfirmation = options.getUserConfirmation;
-	  var pushLocation = options.pushLocation;
-	  var replaceLocation = options.replaceLocation;
-	  var go = options.go;
-	  var keyLength = options.keyLength;
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var getCurrentLocation = options.getCurrentLocation,
+	      getUserConfirmation = options.getUserConfirmation,
+	      pushLocation = options.pushLocation,
+	      replaceLocation = options.replaceLocation,
+	      go = options.go,
+	      keyLength = options.keyLength;
 
 
 	  var currentLocation = void 0;
@@ -35796,7 +35866,7 @@
 	  };
 
 	  var createLocation = function createLocation(location, action) {
-	    var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
+	    var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : createKey();
 	    return (0, _LocationUtils.createLocation)(location, action, key);
 	  };
 
@@ -36001,7 +36071,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -36036,18 +36106,18 @@
 	 * behavior using { forceRefresh: true } in options.
 	 */
 	var createBrowserHistory = function createBrowserHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Browser history needs a DOM') : (0, _invariant2.default)(false) : void 0;
 
 	  var useRefresh = options.forceRefresh || !(0, _DOMUtils.supportsHistory)();
 	  var Protocol = useRefresh ? RefreshProtocol : BrowserProtocol;
 
-	  var getUserConfirmation = Protocol.getUserConfirmation;
-	  var getCurrentLocation = Protocol.getCurrentLocation;
-	  var pushLocation = Protocol.pushLocation;
-	  var replaceLocation = Protocol.replaceLocation;
-	  var go = Protocol.go;
+	  var getUserConfirmation = Protocol.getUserConfirmation,
+	      getCurrentLocation = Protocol.getCurrentLocation,
+	      pushLocation = Protocol.pushLocation,
+	      replaceLocation = Protocol.replaceLocation,
+	      go = Protocol.go;
 
 
 	  var history = (0, _createHistory2.default)(_extends({
@@ -36153,8 +36223,9 @@
 
 	var startListener = exports.startListener = function startListener(listener) {
 	  var handlePopState = function handlePopState(event) {
-	    if (event.state !== undefined) // Ignore extraneous popstate events in WebKit
-	      listener(_createLocation(event.state));
+	    if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) // Ignore extraneous popstate events in WebKit
+	      return;
+	    listener(_createLocation(event.state));
 	  };
 
 	  (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
@@ -36177,8 +36248,8 @@
 	};
 
 	var updateLocation = function updateLocation(location, updateState) {
-	  var state = location.state;
-	  var key = location.key;
+	  var state = location.state,
+	      key = location.key;
 
 
 	  if (state !== undefined) (0, _DOMStateStorage.saveState)(key, state);
@@ -36245,6 +36316,15 @@
 	 */
 	var supportsPopstateOnHashchange = exports.supportsPopstateOnHashchange = function supportsPopstateOnHashchange() {
 	  return window.navigator.userAgent.indexOf('Trident') === -1;
+	};
+
+	/**
+	 * Returns true if a given popstate event is an extraneous WebKit event.
+	 * Accounts for the fact that Chrome on iOS fires real popstate events
+	 * containing undefined state when pressing the back button.
+	 */
+	var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
+	  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
 	};
 
 /***/ },
@@ -36439,7 +36519,7 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _invariant = __webpack_require__(482);
+	var _invariant = __webpack_require__(481);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -36487,12 +36567,12 @@
 	};
 
 	var createHashHistory = function createHashHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Hash history needs a DOM') : (0, _invariant2.default)(false) : void 0;
 
-	  var queryKey = options.queryKey;
-	  var hashType = options.hashType;
+	  var queryKey = options.queryKey,
+	      hashType = options.hashType;
 
 
 	  process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(queryKey !== false, 'Using { queryKey: false } no longer works. Instead, just don\'t ' + 'use location state if you don\'t want a key in your URL query string') : void 0;
@@ -36687,8 +36767,8 @@
 	};
 
 	var updateLocation = function updateLocation(location, pathCoder, queryKey, updateHash) {
-	  var state = location.state;
-	  var key = location.key;
+	  var state = location.state,
+	      key = location.key;
 
 
 	  var path = pathCoder.encodePath((0, _PathUtils.createPath)(location));
@@ -37187,7 +37267,7 @@
 	  };
 	  unsubscribeFromHistory = history.listen(handleLocationChange);
 
-	  // support history 3.x
+	  // History 3.x doesn't call listen synchronously, so fire the initial location change ourselves
 	  if (history.getCurrentLocation) {
 	    handleLocationChange(history.getCurrentLocation());
 	  }
@@ -37213,10 +37293,12 @@
 	        }
 	      });
 
-	      // History listeners expect a synchronous call. Make the first call to the
+	      // History 2.x listeners expect a synchronous call. Make the first call to the
 	      // listener after subscribing to the store, in case the listener causes a
 	      // location change (e.g. when it redirects)
-	      listener(lastPublishedLocation);
+	      if (!history.getCurrentLocation) {
+	        listener(lastPublishedLocation);
+	      }
 
 	      // Let user unsubscribe later
 	      return function () {
@@ -39858,9 +39940,6 @@
 	});
 	exports.getEventInfo = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -39870,26 +39949,20 @@
 	var getEventInfo = exports.getEventInfo = function getEventInfo(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-info-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-info-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId)).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-info.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -39906,9 +39979,6 @@
 	});
 	exports.getEventArticles = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -39918,26 +39988,20 @@
 	var getEventArticles = exports.getEventArticles = function getEventArticles(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-articles-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-articles-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/articles')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-articles.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -39954,9 +40018,6 @@
 	});
 	exports.getScript = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -39966,26 +40027,20 @@
 	var getScript = exports.getScript = function getScript(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-script-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-script-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/script')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-script.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40002,9 +40057,6 @@
 	});
 	exports.getFacts = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40014,26 +40066,20 @@
 	var getFacts = exports.getFacts = function getFacts(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-facts-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-facts-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/facts')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-facts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40050,9 +40096,6 @@
 	});
 	exports.getTeam = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40062,26 +40105,20 @@
 	var getTeam = exports.getTeam = function getTeam(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-team-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-team-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/team')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-team.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40098,9 +40135,6 @@
 	});
 	exports.getPoster = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40110,26 +40144,20 @@
 	var getPoster = exports.getPoster = function getPoster(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-poster-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-poster-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/poster')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-poster.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40146,9 +40174,6 @@
 	});
 	exports.getPlaylist = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40158,26 +40183,20 @@
 	var getPlaylist = exports.getPlaylist = function getPlaylist(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-playlists-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-playlists-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/audioPlaylist/tracks')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-playlists.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40526,9 +40545,6 @@
 	});
 	exports.getArticle = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40538,26 +40554,20 @@
 	var getArticle = exports.getArticle = function getArticle(eventId, id) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-article-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(id));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-article-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(id));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/articles/' + id)).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-article.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40713,9 +40723,6 @@
 	});
 	exports.getVideoPlaylist = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40725,26 +40732,20 @@
 	var getVideoPlaylist = exports.getVideoPlaylist = function getVideoPlaylist(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-videos-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-videos-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/videoPlaylist/videos')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-videos.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -40861,9 +40862,6 @@
 	});
 	exports.getGallery = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global WEB_API_URL USE_MOCK require */
-
-
 	var _superagent = __webpack_require__(580);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -40873,26 +40871,20 @@
 	var getGallery = exports.getGallery = function getGallery(eventId) {
 
 		if (false) {
-			var _ret = function () {
 
-				var mock = require('./event-galleries-mock');
-				var delayedPromise = new Promise(function (resolve) {
-					return setTimeout(function () {
-						return resolve(mock(eventId));
-					}, 300);
-				});
-				return {
-					v: Promise.resolve(delayedPromise)
-				};
-			}();
-
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+			var mock = require('./event-galleries-mock');
+			var delayedPromise = new Promise(function (resolve) {
+				return setTimeout(function () {
+					return resolve(mock(eventId));
+				}, 300);
+			});
+			return Promise.resolve(delayedPromise);
 		}
 
 		return _superagent2.default.get(("http://rokooperos.midi.lt/api/") + ('/events/' + eventId + '/gallery/images')).then(function (res) {
 			return res.body;
 		});
-	};
+	}; /* global WEB_API_URL USE_MOCK require */
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/rmikalkevicius/GIT/ro/frontend/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "event-galleries.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -41276,29 +41268,39 @@
 	exports.defaultMemoize = defaultMemoize;
 	exports.createSelectorCreator = createSelectorCreator;
 	exports.createStructuredSelector = createStructuredSelector;
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 	function defaultEqualityCheck(a, b) {
 	  return a === b;
 	}
 
+	function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+	  if (prev === null || next === null || prev.length !== next.length) {
+	    return false;
+	  }
+
+	  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+	  var length = prev.length;
+	  for (var i = 0; i < length; i++) {
+	    if (!equalityCheck(prev[i], next[i])) {
+	      return false;
+	    }
+	  }
+
+	  return true;
+	}
+
 	function defaultMemoize(func) {
-	  var equalityCheck = arguments.length <= 1 || arguments[1] === undefined ? defaultEqualityCheck : arguments[1];
+	  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
 
 	  var lastArgs = null;
 	  var lastResult = null;
+	  // we reference arguments instead of spreading them for performance reasons
 	  return function () {
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
+	    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+	      // apply arguments instead of spreading for performance.
+	      lastResult = func.apply(null, arguments);
 	    }
 
-	    if (lastArgs === null || lastArgs.length !== args.length || !args.every(function (value, index) {
-	      return equalityCheck(value, lastArgs[index]);
-	    })) {
-	      lastResult = func.apply(undefined, args);
-	    }
-	    lastArgs = args;
+	    lastArgs = arguments;
 	    return lastResult;
 	  };
 	}
@@ -41319,13 +41321,13 @@
 	}
 
 	function createSelectorCreator(memoize) {
-	  for (var _len2 = arguments.length, memoizeOptions = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-	    memoizeOptions[_key2 - 1] = arguments[_key2];
+	  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	    memoizeOptions[_key - 1] = arguments[_key];
 	  }
 
 	  return function () {
-	    for (var _len3 = arguments.length, funcs = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	      funcs[_key3] = arguments[_key3];
+	    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      funcs[_key2] = arguments[_key2];
 	    }
 
 	    var recomputations = 0;
@@ -41334,19 +41336,23 @@
 
 	    var memoizedResultFunc = memoize.apply(undefined, [function () {
 	      recomputations++;
-	      return resultFunc.apply(undefined, arguments);
+	      // apply arguments instead of spreading for performance.
+	      return resultFunc.apply(null, arguments);
 	    }].concat(memoizeOptions));
 
-	    var selector = function selector(state, props) {
-	      for (var _len4 = arguments.length, args = Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
-	        args[_key4 - 2] = arguments[_key4];
+	    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+	    var selector = defaultMemoize(function () {
+	      var params = [];
+	      var length = dependencies.length;
+
+	      for (var i = 0; i < length; i++) {
+	        // apply arguments instead of spreading and mutate a local list of params for performance.
+	        params.push(dependencies[i].apply(null, arguments));
 	      }
 
-	      var params = dependencies.map(function (dependency) {
-	        return dependency.apply(undefined, [state, props].concat(args));
-	      });
-	      return memoizedResultFunc.apply(undefined, _toConsumableArray(params));
-	    };
+	      // apply arguments instead of spreading for performance.
+	      return memoizedResultFunc.apply(null, params);
+	    });
 
 	    selector.resultFunc = resultFunc;
 	    selector.recomputations = function () {
@@ -41362,7 +41368,7 @@
 	var createSelector = exports.createSelector = createSelectorCreator(defaultMemoize);
 
 	function createStructuredSelector(selectors) {
-	  var selectorCreator = arguments.length <= 1 || arguments[1] === undefined ? createSelector : arguments[1];
+	  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
 
 	  if (typeof selectors !== 'object') {
 	    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
@@ -41371,8 +41377,8 @@
 	  return selectorCreator(objectKeys.map(function (key) {
 	    return selectors[key];
 	  }), function () {
-	    for (var _len5 = arguments.length, values = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-	      values[_key5] = arguments[_key5];
+	    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      values[_key3] = arguments[_key3];
 	    }
 
 	    return values.reduce(function (composition, value, index) {
@@ -41542,7 +41548,7 @@
 	   * Check if the browser scrollbar was clicked
 	   */
 	  var clickedScrollbar = function(evt) {
-	    return document.documentElement.clientWidth <= evt.clientX;
+	    return document.documentElement.clientWidth <= evt.clientX || document.documentElement.clientHeight <= evt.clientY;
 	  };
 
 	  /**
@@ -41598,6 +41604,12 @@
 
 	        // this is given meaning in componentDidMount
 	        __outsideClickHandler: function() {},
+
+	        getDefaultProps: function() {
+	          return {
+	            excludeScrollbar: config && config.excludeScrollbar
+	          };
+	        },
 
 	        /**
 	         * Add click listeners to the current document,
@@ -41655,7 +41667,7 @@
 	            instance,
 	            clickOutsideHandler,
 	            this.props.outsideClickIgnoreClass || IGNORE_CLASS,
-	            this.props.excludeScrollbar || false,
+	            this.props.excludeScrollbar, // fallback not needed, prop always exists because of getDefaultProps
 	            this.props.preventDefault || false,
 	            this.props.stopPropagation || false
 	          );
@@ -44436,8 +44448,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./main.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./main.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./main.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./main.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -44545,7 +44557,7 @@
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -44796,8 +44808,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./header.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./header.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./header.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./header.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -44854,8 +44866,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./footer.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./footer.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./footer.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./footer.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -44912,8 +44924,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./poster.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./poster.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./poster.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./poster.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -44952,8 +44964,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./helpers.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./helpers.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./helpers.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./helpers.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -44992,8 +45004,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./gallery.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./gallery.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./gallery.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./gallery.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -45032,8 +45044,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./news-overview.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./news-overview.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./news-overview.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./news-overview.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -45072,8 +45084,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./expandable-item.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./expandable-item.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./expandable-item.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./expandable-item.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
