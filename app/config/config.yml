@@ -60,9 +60,25 @@ doctrine:
 
 assetic:
     debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
+    use_controller: false
+#    use_controller: '%kernel.debug%'
+#    read_from: '@TemplateBundle/Resources/public/js'
+#    write_to: '%kernel.root_dir%/../web/js'
     filters:
         cssrewrite: ~
+    assets:
+#        default:
+#            inputs:
+#                - '@TemplateBundle/Resources/public/js/1bf71be111189e76987a4bb9b3115cb7.ttf'
+#                - '@TemplateBundle/Resources/public/js/e605f2f859072ed0443aeda5adec4181.ttf'
+        font_1:
+            inputs:
+                - '@TemplateBundle/Resources/public/js/1bf71be111189e76987a4bb9b3115cb7.ttf'
+            output: 'js/1bf71be111189e76987a4bb9b3115cb7.ttf'
+        font_2:
+            inputs:
+                - '@TemplateBundle/Resources/public/js/e605f2f859072ed0443aeda5adec4181.ttf'
+            output: 'js/e605f2f859072ed0443aeda5adec4181.ttf'
 
 stof_doctrine_extensions:
     orm:
