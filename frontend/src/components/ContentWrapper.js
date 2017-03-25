@@ -1,7 +1,7 @@
 import React from 'react'
 import Spinner from './Spinner'
 
-import Cover from '../containers/header/Cover'
+import Cover from '../containers/header/cover'
 
 export default class App extends React.Component {
 

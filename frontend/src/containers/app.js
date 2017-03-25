@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import AppComponent from '../components/app'
+import AppComponent from '../components/App'
 
 const mapStateToProps = (state) => ({
 	initialized: state.app.initialized
