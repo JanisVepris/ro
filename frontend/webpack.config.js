@@ -39,6 +39,10 @@ module.exports = {
 				loader: 'json-loader'
 			},
 			{
+				test: /\.scss$/,
+				loaders: ['style', 'css', 'sass'],
+			},
+			{
 				test: /\.(woff2?|ttf|eot|png)$/,
 				loader: 'url?limit=10000'
 			},
@@ -46,10 +50,6 @@ module.exports = {
 				test: /\.js$/,
 				loaders: ['react-hot', 'babel'],
 				exclude: /node_modules/,
-			},
-			{
-				test: /\.scss$/,
-				loaders: ['style', 'css', 'sass'],
 			},
 			{
 				test: /\.css$/,
