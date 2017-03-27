@@ -1,51 +1,105 @@
 {% from '@Admin/AdminLayout/macros.html.twig' import table_action_edit %}
 {% from '@Admin/AdminLayout/macros.html.twig' import table_action_delete %}
-<tr>
-    <td class="text-center text-vertical-center">
-        {{ event_thumb(event, 'small', true) }}
-    </td>
-    <td class="text-center text-vertical-center">
-        {{ event.eventDate|date('Y-m-d') }}
-    </td>
-    <td class="text-left text-vertical-center">
-        <a href="{{ path('admin_articles_list', {'eventId': event.id}) }}">
-            <h4>{{ event.title }}</h4>
-        </a>
-    </td>
-    <td class="text-center text-vertical-center">
-        {% if event.hasPoster %}
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        {% else %}
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        {% endif %}
-    </td>
-    <td class="text-center text-vertical-center">
-        {% if event.hasScript %}
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        {% else %}
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        {% endif %}
-    </td>
-    <td class="text-center text-vertical-center">
-        {% if event.hasTeam %}
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        {% else %}
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        {% endif %}
-    </td>
-    <td class="text-center text-vertical-center">
-        {% if event.hasFacts %}
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        {% else %}
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        {% endif %}
-    </td>
-    <td class="text-center text-vertical-center">
-        <div class="btn-group">
-            {{ table_action_edit(path('admin_events_edit', {'eventId': event.id})) }}
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                {{ table_action_delete(path('admin_events_delete', {'eventId': event.id })) }}
-            {% endif %}
+
+<div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center text-uppercase">
+           <strong>{{ event.title }}</strong>
         </div>
-    </td>
-</tr>
+        <div class="panel-body text-center">
+            <a href="{{ path('admin_articles_list', {'eventId': event.id}) }}">
+                {{ event_thumb(event, 'large', true) }}
+            </a>
+        </div>
+        <div class="panel-footer">
+            {#{{ event.eventDate|date('Y-m-d') }}#}
+            {#{% if event.hasPoster %}#}
+                {#<span class="event-list glyphicon glyphicon-picture"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasGallery %}#}
+                {#<span class="event-list glyphicon glyphicon-camera"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasAudioPlaylist %}#}
+                {#<span class="event-list glyphicon glyphicon-music"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasVideoPlaylist %}#}
+                {#<span class="event-list glyphicon glyphicon-play"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasLyrics %}#}
+                {#<span class="event-list glyphicon glyphicon-headphones"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasScript %}#}
+                {#<span class="event-list glyphicon glyphicon-list-alt"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasTeam %}#}
+                {#<span class="event-list glyphicon glyphicon-user"></span>#}
+            {#{% endif %}#}
+
+            {#{% if event.hasFacts %}#}
+                {#<span class="event-list glyphicon glyphicon-question-sign"></span>#}
+            {#{% endif %}#}
+            {#<div class="clearfix"></div>#}
+
+                <div class="clearfix">
+                    <a href="{{ path('admin_events_edit', {'eventId': event.id}) }}" class="btn btn-raised btn-info pull-left">Redaguoti</a>
+                    <a href="{{ path('admin_events_delete', {'eventId': event.id }) }}" class="btn btn-raised btn-warning pull-right">Ištrinti</a>
+                </div>
+        </div>
+    </div>
+</div>
+
+{#<tr>#}
+    {#<td class="text-center text-vertical-center">#}
+
+    {#</td>#}
+    {#<td class="text-center text-vertical-center">#}
+        {#{{ event.eventDate|date('Y-m-d') }}#}
+    {#</td>#}
+    {#<td class="text-left text-vertical-center">#}
+        {#<a href="{{ path('admin_articles_list', {'eventId': event.id}) }}">#}
+            {#<h4>{{ event.title }}</h4>#}
+        {#</a>#}
+    {#</td>#}
+    {#<td class="text-center text-vertical-center">#}
+        {#{% if event.hasPoster %}#}
+            {#<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>#}
+        {#{% else %}#}
+            {#<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+        {#{% endif %}#}
+    {#</td>#}
+    {#<td class="text-center text-vertical-center">#}
+        {#{% if event.hasScript %}#}
+            {#<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>#}
+        {#{% else %}#}
+            {#<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+        {#{% endif %}#}
+    {#</td>#}
+    {#<td class="text-center text-vertical-center">#}
+        {#{% if event.hasTeam %}#}
+            {#<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>#}
+        {#{% else %}#}
+            {#<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+        {#{% endif %}#}
+    {#</td>#}
+    {#<td class="text-center text-vertical-center">#}
+        {#{% if event.hasFacts %}#}
+            {#<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>#}
+        {#{% else %}#}
+            {#<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+        {#{% endif %}#}
+    {#</td>#}
+    {#<td class="text-center text-vertical-center">#}
+        {#<div class="btn-group">#}
+            {#{{ table_action_edit(path('admin_events_edit', {'eventId': event.id})) }}#}
+            {#{% if is_granted('ROLE_SUPER_ADMIN') %}#}
+                {#{{ table_action_delete(path('admin_events_delete', {'eventId': event.id })) }}#}
+            {#{% endif %}#}
+        {#</div>#}
+    {#</td>#}
+{#</tr>#}

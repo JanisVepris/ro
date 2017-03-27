@@ -17,3 +17,8 @@ body {
 .text-vertical-center {
     vertical-align: middle !important;
 }
+
+.event-list.glyphicon {
+    margin-left: 5px;
+    float: right;
+}
