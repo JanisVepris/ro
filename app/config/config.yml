@@ -5,6 +5,7 @@ imports:
     - { resource: fos_user.yml }
     - { resource: fos_rest.yml }
     - { resource: fos_cache.yml }
+    - { resource: knp_menu.yml }
     - { resource: liip_imagine.yml }
     - { resource: ivory_ck_editor.yml }
 

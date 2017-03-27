@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
             // RO Bundles
             new CoreBundle\CoreBundle(),

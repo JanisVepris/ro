@@ -1,0 +1,6 @@
+services:
+     admin.menu_builder:
+        class: AdminBundle\Menu\Sidebar
+        arguments: ["@knp_menu.factory", "@request_stack"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main } # the previous menu
