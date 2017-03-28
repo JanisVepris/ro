@@ -1,30 +1,14 @@
 {% extends '@Admin/admin_base_no_sidebar.html.twig' %}
 
-{% from '@Admin/AdminLayout/macros.html.twig' import main_toolbar %}
-
-{% set tabTitle = 'Event list' %}
-
-{% block sidebar %}
-{% endblock %}
+{% set tabTitle = 'Roko Operų Sąrašas' %}
+{% set pageTitle = 'Roko Operų Sąrašas' %}
+{% set sidebar = false %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h2>MIDI Roko Operos</h2>
-        </div>
-    </div>
+    {#<div class="col-md-12">#}
+        {#<a href="{{ path('admin_events_create') }}" class="btn btn-primary btn-lg btn-block btn-raised">Sukurti naują</a>#}
+    {#</div>#}
 
-    <div class="row">
-        <div class="col-md-12">
-            <a href="{{ path('admin_events_create') }}" class="btn btn-primary btn-lg btn-block btn-raised">Sukurti naują</a>
-        </div>
-    </div>
+    {% include '@Admin/AdminEvents/partial/__event_table_list.html.twig' with {'events': events} %}
 
-    <div class="row">
-        {% for event in events %}
-            {% include '@Admin/AdminEvents/partial/__event_table_row.html.twig' with {'event': event} %}
-        {% else %}
-            <h2>Roko Operų sąrašas tuščias ;(</h2>
-        {% endfor %}
-    </div>
 {% endblock %}

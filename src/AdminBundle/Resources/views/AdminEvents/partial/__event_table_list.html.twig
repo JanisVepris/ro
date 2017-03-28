@@ -1,0 +1,58 @@
+{% from '@Admin/AdminLayout/macros.html.twig' import has_or_not %}
+
+<div class="row">
+    {% for event in events %}
+        <div class="col s12 m6 l4">
+            <div class="card light-blue darken-4">
+                <div class="card-image">
+                    <a href="{{ path('admin_articles_list', {'eventId': event.id}) }}">
+                        {{ event_thumb(event, 'extra_large') }}
+                        <span class="card-title">{{ event.title }}</span>
+                        <a href="{{ path('admin_events_edit', {'eventId': event.id}) }}" class="btn-floating halfway-fab waves-effect waves-light orange lighten-1"><i class="material-icons">mode_edit</i></a>
+                    </a>
+                </div>
+                <div class="card-content white-text">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <p>Renginio data: {{ event.eventDate|date('Y-m-d') }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m12 l7">
+                            <p>Straipsnių: {{ event.articleCount }}</p>
+                            <p>Nuotraukų: {{ event.photoCount }}</p>
+                            <p>Audio: {{ event.playlistCount}}</p>
+                            <p>Video: {{ event.videoPlaylistCount}}</p>
+                        </div>
+                        <div class="col s12 l5">
+                            <p>Tekstai: {{ has_or_not(event.hasLyrics) }}</p>
+                            <p>Plakatas: {{ has_or_not(event.hasPoster) }}</p>
+                            <p>Faktai: {{ has_or_not(event.playlistCount) }}</p>
+                            <p>Scenarijus: {{ has_or_not(event.hasScript) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h2>Roko Operų sąrašas tuščias ;(</h2>
+    {% endfor %}
+</div>
+{#<div class="col-sm-12 col-md-6 col-lg-4">#}
+    {#<div class="panel panel-primary">#}
+        {#<div class="panel-heading text-center text-uppercase">#}
+           {#<strong>{{ event.title }}</strong>#}
+        {#</div>#}
+        {#<div class="panel-body text-center">#}
+            {#<a href="{{ path('admin_articles_list', {'eventId': event.id}) }}">#}
+                {#{{ event_thumb(event, 'large', true) }}#}
+            {#</a>#}
+        {#</div>#}
+        {#<div class="panel-footer">#}
+                {#<div class="clearfix">#}
+                    {#<a href="{{ path('admin_events_edit', {'eventId': event.id}) }}" class="btn btn-raised btn-info pull-left">Redaguoti</a>#}
+                    {#<a href="{{ path('admin_events_delete', {'eventId': event.id }) }}" class="btn btn-raised btn-warning pull-right">Ištrinti</a>#}
+                {#</div>#}
+        {#</div>#}
+    {#</div>#}
+{#</div>#}

@@ -43,7 +43,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 #    form_themes: ['@AdminBundle/Resources/views/Form/bootstrap_3_material_layout.html.twig']
-    form_themes: ['bootstrap_3_layout.html.twig']
+    form_themes: ['materialize_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:

@@ -1,5 +1,4 @@
 <?php
-
 namespace RoBundle\Form\Type;
 
 use RoBundle\Entity\EventImage;
@@ -14,10 +13,13 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('disabled', CheckboxType::class, ['required' => false])
-            ->add('eventDate', DateType::class)
-            ->add('eventImage', UploadFileType::class, ['data_class' => EventImage::class]);
+            ->add('title', TextType::class, ['label' => 'Roko Operos Pavadinimas'])
+            ->add('disabled', CheckboxType::class, ['required' => false, 'label' => 'Deaktyvuoti'])
+            ->add('eventDate', DateType::class, ['label' => 'Renginio Data'])
+            ->add('eventImage', UploadFileType::class, [
+                'data_class' => EventImage::class,
+                'label' => 'Pagrindinė nuotrauka'
+            ]);
     }
 
     public function getBlockPrefix()

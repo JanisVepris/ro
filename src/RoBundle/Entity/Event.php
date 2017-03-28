@@ -500,6 +500,26 @@ class Event
         return $this->disabled;
     }
 
+    public function getPhotoCount()
+    {
+        return $this->hasGallery() ? $this->gallery->getImages()->count() : 0;
+    }
+
+    public function getArticleCount()
+    {
+        return $this->articles->count();
+    }
+
+    public function getPlaylistCount()
+    {
+        return $this->hasAudioPlaylist() ? $this->playlist->getTracks()->count() : 0;
+    }
+
+    public function getVideoPlaylistCount()
+    {
+        return $this->hasVideoPlaylist() ? $this->videoPlaylist->getVideos()->count() : 0;
+    }
+
     /**
      * @param bool $disabled
      * @return Event
