@@ -88,4 +88,9 @@ class ArticleService
     {
         return $this->articleRepository->findPublishedArticleById($event, $articleId);
     }
+
+    public function getLastUpdatedAt()
+    {
+        return $this->articleRepository->findLastUpdatedAt();
+    }
 }

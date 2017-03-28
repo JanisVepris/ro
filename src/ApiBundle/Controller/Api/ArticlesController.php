@@ -3,9 +3,11 @@
 namespace ApiBundle\Controller\Api;
 
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Controller\CacheableApiControllerInterface;
 use ApiBundle\DataTransfer\Api\ArticleListData;
 use ApiBundle\Factory\ArticleDataFactory;
 use ApiBundle\Factory\ArticleListItemDataFactory;
+use DateTime;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use RoBundle\Entity\Event;
@@ -15,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Functional as F;
 
 /** @Rest\Route(service="api.controller.articles_controller") */
-class ArticlesController extends AbstractApiController
+class ArticlesController extends AbstractApiController implements CacheableApiControllerInterface
 {
     /** @var ArticleService */
     private $articleService;
@@ -94,8 +96,18 @@ class ArticlesController extends AbstractApiController
             throw new NotFoundHttpException();
         }
 
-        return $this->createView(
+        $response = $this->createView(
             $this->articleDataFactory->createFromEntity($article)
         );
+
+        $response->setLastModified($this->getLastModifiedDate())->setPublic();
+
+        return $response;
+    }
+
+    /** @return DateTime */
+    public function getLastModifiedDate()
+    {
+        return $this->articleService->getLastUpdatedAt();
     }
 }

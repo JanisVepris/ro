@@ -76,4 +76,17 @@ class ArticleRepository extends EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+
+    public function findLastUpdatedAt()
+    {
+        $result = $this
+            ->createQueryBuilder('a')
+            ->select('a.updatedOn')
+            ->orderBy('a.updatedOn', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+
+        return $result['updatedOn'];
+    }
 }
