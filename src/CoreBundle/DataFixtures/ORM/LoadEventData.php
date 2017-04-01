@@ -156,14 +156,24 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
             __DIR__ . '/../Files/images/gallery1.jpg',
             __DIR__ . '/../Files/images/gallery2.jpg',
             __DIR__ . '/../Files/images/gallery3.jpg',
+            __DIR__ . '/../Files/images/gallery4.jpg',
+            __DIR__ . '/../Files/images/gallery5.jpg',
+            __DIR__ . '/../Files/images/gallery6.jpg',
+            __DIR__ . '/../Files/images/gallery7.jpg',
+            __DIR__ . '/../Files/images/gallery8.jpg',
+            __DIR__ . '/../Files/images/gallery9.jpg',
+            __DIR__ . '/../Files/images/gallery10.jpg',
+            __DIR__ . '/../Files/images/gallery11.jpg',
+            __DIR__ . '/../Files/images/gallery12.jpg',
+            __DIR__ . '/../Files/images/gallery13.jpg',
         ];
-
-        $path = $galleryImages[array_rand($galleryImages)];
 
         $gallery = new Gallery();
         $gallery->setEvent($event);
 
-        for ($i = 1; $i <= 7; $i++) {
+        for ($i = 1; $i <= 15; $i++) {
+            $path = $galleryImages[array_rand($galleryImages)];
+
             $galleryImage = new GalleryImage();
             $galleryImage
                 ->setFile(new UploadedFile($path, $path))
@@ -226,7 +236,7 @@ class LoadEventData extends AbstractFixture implements OrderedFixtureInterface, 
         $video
             ->setVideoPlaylist($playlist)
             ->setTitle($this->faker->sentence(2))
-            ->setUrl($this->faker->unique()->url);
+            ->setUrl('https://www.youtube.com/watch?v=gHxvP7Sxyrw');
 
         $playlist->addVideo($video);
 
