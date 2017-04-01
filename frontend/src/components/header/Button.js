@@ -11,7 +11,7 @@ const Button = ({
 
 	return (
 		<div className={ className } onClick={ onClick }>
-			<label>{ label }</label>
+			<label className="ellipsis">{ label }</label>
 			<i className="arrow ml" />
 			{ mobile &&
 				<div className="mobile-navigation-button">

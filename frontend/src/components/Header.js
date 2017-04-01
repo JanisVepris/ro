@@ -9,7 +9,7 @@ const Header = () => (
 	<div className="header">
 		<i className="facebook-icon ml-xl" onClick={() => { window.open('https://www.facebook.com/rokooperos') }} />
 		<i className="instagram-icon ml" onClick={() => { window.open('https://www.instagram.com/midirokooperos/') }} />
-		<div className="header-events ml">
+		<div className="header-events ml" style={{ maxWidth: '80%' }}>
 			<EventsButton />
 			<EventsPopup />
 		</div>
