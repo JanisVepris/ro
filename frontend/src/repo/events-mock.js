@@ -2,19 +2,19 @@
 module.exports = [
 	{
 		id: 112015,
-		name: 'Prototipas',
+		title: 'Prototipas',
 		slug: 'prototipas',
 		isDisabled: false
 	},
 	{
 		id: 112014,
-		name: 'Naktis, kai sustojo malūnas',
+		title: 'Naktis, kai sustojo malūnas',
 		slug: 'malunas',
 		isDisabled: false
 	},
 	{
 		id: 112013,
-		name: 'Raudonkepuraitė',
+		title: 'Raudonkepuraitė',
 		slug: 'raudonkepuraite',
 		isDisabled: true
 	}

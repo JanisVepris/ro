@@ -5,7 +5,7 @@ const mapStateToProps = (state) => {
 	
 	const activeEventId = state.app.activeEventId
 	const news = state.events.newsById[activeEventId]
-	const eventName = state.app.eventsById[activeEventId].name
+	const eventName = state.app.eventsById[activeEventId].title
 
 	return {
 		eventId: activeEventId,

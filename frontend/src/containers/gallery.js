@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 	const activeEventId = state.app.activeEventId
 	const activeGallery = state.galleries.byId[activeEventId]
 	const items = activeGallery && activeGallery.items || []
-	const eventName = state.app.eventsById[activeEventId].name
+	const eventName = state.app.eventsById[activeEventId].title
 
 	return {
 		galleryLoading: !activeGallery,

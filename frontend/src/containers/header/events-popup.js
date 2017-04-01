@@ -12,7 +12,7 @@ const getEventsLabels = createSelector(
 	getEvents,
 	(events) => Object.keys(events).reduce(
 		(obj, event) => [
-			events[event].name,
+			events[event].title,
 			...obj
 		],
 	[])
