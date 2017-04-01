@@ -1,43 +1,40 @@
 {% extends '@Admin/admin_base_no_sidebar.html.twig' %}
 {% from '@Admin/AdminLayout/macros.html.twig' import form_actions %}
 
+{% set tabTitle = 'Roko Opera' %}
+{% set pageTitle = 'Roko Opera' %}
+{% set sidebar = false %}
+
+
 {% block content %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="jumbotron">
-                <h2>Nauja Roko Opera</h2>
-
-                {{ form_start(form) }}
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ form_row(form.title) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        {{ form_row(form.eventDate) }}
-                        {{ form_row(form.disabled) }}
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        {{ form_row(form.eventImage) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        {{ form_actions(path('admin_events_list')) }}
-                    </div>
-                </div>
-
-                <div class="hidden">
-                    {{ form_rest(form) }}
-                </div>
-
-                {{ form_end(form) }}
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.title) }}
             </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ form_row(form.eventDate) }}
+                {{ form_row(form.disabled) }}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                {{ form_row(form.eventImage) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                {{ form_actions(path('admin_events_list')) }}
+            </div>
+        </div>
+
+        <div class="hidden">
+            {{ form_rest(form) }}
+        </div>
+
+        {{ form_end(form) }}
 {% endblock %}
 
 {% block sidebar %}{% endblock %}

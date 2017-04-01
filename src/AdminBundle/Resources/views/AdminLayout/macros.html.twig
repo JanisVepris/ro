@@ -1,7 +1,23 @@
-{% macro has_or_not(boolValue) %}
+{% macro green_or_red_accent(boolValue, text) %}
     {% if boolValue %}
-        Yra
+        <span class="green-text text-accent-4">{{ text }}</span>
     {% else %}
-        Nėra
+        <span class="deep-orange-text text-accent-3">{{ text }}</span>
     {% endif %}
 {% endmacro %}
+
+{% macro form_actions(cancelUrl) %}
+    <div class="row form-actions">
+        <div class="col s12">
+            <button class="btn btn-large waves-effect waves-light" type="submit" name="action">
+                <i class="material-icons left">done</i> Išsaugoti
+            </button>
+            {% if cancelUrl is defined %}
+                <a href="{{ cancelUrl }}" class="btn btn-large waves-effect waves-light deep-orange lighten-1">
+                    <i class="material-icons left">not_interested</i> Atšaukti
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
