@@ -65,6 +65,10 @@ class ArticlesController extends AbstractApiController implements CacheableApiCo
      */
     public function indexAction(Event $event, $limit, $offset)
     {
+        if (!$event->hasArticles()) {
+            throw new NotFoundHttpException();
+        }
+
         $articles = $this->articleService->getPublishedArticles($event, $limit, $offset);
         $articleCount = $this->articleService->countPublishedArticles($event);
 
