@@ -14,6 +14,7 @@ class EventDataFactory extends AbstractApiDataFactory
             $event->getEventDate(),
             $this->absoluteUrlGenerator->generateAbsoluteUrlFromRelative($event->getEventImage()->getWebPath()),
             $event->getSlug(),
+            $event->hasArticles(),
             $event->hasLyrics(),
             $event->hasFacts(),
             $event->hasPoster(),

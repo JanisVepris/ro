@@ -4,6 +4,7 @@
   "eventDate": "@string@",
   "image": "@string@.isUrl()",
   "slug": "@string@",
+  "hasArticles": "@boolean@",
   "hasLyrics": "@boolean@",
   "hasFacts": "@boolean@",
   "hasPoster": "@boolean@",

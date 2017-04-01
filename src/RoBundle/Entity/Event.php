@@ -520,6 +520,11 @@ class Event
         return $this->hasVideoPlaylist() ? $this->videoPlaylist->getVideos()->count() : 0;
     }
 
+    public function hasArticles()
+    {
+        return $this->articles->count() > 0;
+    }
+
     /**
      * @param bool $disabled
      * @return Event

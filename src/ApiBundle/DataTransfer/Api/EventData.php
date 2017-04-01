@@ -39,6 +39,12 @@ class EventData
      * @var boolean
      * @Serializer\Type("boolean")
      */
+    private $hasArticles;
+
+    /**
+     * @var boolean
+     * @Serializer\Type("boolean")
+     */
     private $hasLyrics;
 
     /**
@@ -114,6 +120,7 @@ class EventData
         \DateTime $eventDate,
         $image,
         $slug,
+        $hasArticles,
         $hasLyrics,
         $hasFacts,
         $hasPoster,
@@ -130,6 +137,7 @@ class EventData
         $this->eventDate = $eventDate;
         $this->image = $image;
         $this->slug = $slug;
+        $this->hasArticles = $hasArticles;
         $this->hasLyrics = $hasLyrics;
         $this->hasFacts = $hasFacts;
         $this->hasPoster = $hasPoster;
