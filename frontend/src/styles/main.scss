@@ -168,3 +168,22 @@ img {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+// Custom scroll
+.custom-scrollbar::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: #727272;
+}
+
+.custom-scrollbar::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #727272;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb
+{
+	border-radius: 0px;
+	background-color: #555;
+}

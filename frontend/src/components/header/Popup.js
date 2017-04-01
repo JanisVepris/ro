@@ -15,7 +15,7 @@ class Popup extends React.Component {
 			hidden
 		} = this.props
 
-		const className = 'header-dropdown' + (hidden ? ' hidden' : '')
+		const className = 'header-dropdown custom-scrollbar' + (hidden ? ' hidden' : '')
 
 		return (
 			<div className={ className }>
