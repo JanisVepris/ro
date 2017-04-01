@@ -33,6 +33,10 @@ const eventsById = toReducer({}, () => ({
 	)
 }))
 
+const eventsIds = toReducer([], () => ({
+	[APP_SET_EVENTS]: action => action.events.map(event => event.id)
+}))
+
 const activeCategory = toReducer('', () => ({
 	[APP_SET_ACTIVE_CATEGORY]: action => action.category
 }))
@@ -42,5 +46,6 @@ export default combineReducers({
 	activeEventId,
 	defaultEventId,
 	eventsById,
+	eventsIds,
 	activeCategory
 })

@@ -7,41 +7,24 @@ import { navigateToOverview } from '../../actions/app'
 import { toggleEventsDropdown } from '../../actions/header'
 
 const getEvents = (state) => state.app.eventsById
+const getEventsIds = (state) => state.app.eventsIds
 
 const getEventsLabels = createSelector(
+	getEventsIds,
 	getEvents,
-	(events) => Object.keys(events).reduce(
-		(obj, event) => [
-			events[event].title,
-			...obj
-		],
-	[])
+	(eventsIds, events) => eventsIds.map(id => events[id].title)
 )
 
 const getDisabledEvents = createSelector(
+	getEventsIds,
 	getEvents,
-	(events) => Object.keys(events).reduce(
-		(obj, event) => [
-			events[event].isDisabled,
-			...obj
-		],
-	[])
-)
-
-const getEventsIds = createSelector(
-	getEvents,
-	(events) => Object.keys(events).reduce(
-		(obj, event) => [
-			events[event].id,
-			...obj
-		],
-	[])
+	(eventsIds, events) => eventsIds.map(id => events[id].isDisabled)
 )
 
 const mapStateToProps = (state) => ({
 	labels: getEventsLabels(state),
-	ids: getEventsIds(state),
-	selectedIndex: getEventsIds(state).indexOf(state.app.activeEventId),
+	ids: state.app.eventsIds,
+	selectedIndex: state.app.eventsIds.indexOf(state.app.activeEventId),
 	disabledEvents: getDisabledEvents(state),
 	hidden: !state.header.isEventsDropdownVisible,
 	outsideClickIgnoreClass: 'header-events'

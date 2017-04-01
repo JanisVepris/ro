@@ -14,7 +14,8 @@ module.exports = (id) => {
 			hasTeam: true,
 			hasScript: true,
 			hasAudioPlaylist: true,
-			hasVideoPlaylist: true
+			hasVideoPlaylist: true,
+			hasArticles: true
 		},
 		[112014]: {
 			title: 'Naktis, kai sustojo malūnas',
@@ -28,7 +29,8 @@ module.exports = (id) => {
 			hasTeam: false,
 			hasScript: true,
 			hasAudioPlaylist: true,
-			hasVideoPlaylist: false
+			hasVideoPlaylist: false,
+			hasArticles: false
 		}
 	}
 
