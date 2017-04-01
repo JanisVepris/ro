@@ -410,6 +410,9 @@
         "slug" : {
           "type" : "string"
         },
+        "hasArticles" : {
+          "type" : "boolean"
+        },
         "hasLyrics" : {
           "type" : "boolean"
         },
