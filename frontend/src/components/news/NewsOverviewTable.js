@@ -20,7 +20,7 @@ export default class NewsOverviewTable extends React.Component {
 				this.setState({ marginSpacingMod })
 			}
 		})
-	}  
+	}
 
 	render() {
 

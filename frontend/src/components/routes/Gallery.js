@@ -13,7 +13,7 @@ export default class Gallery extends React.Component {
 		return (
 			<div>
 				<p className="article-title">{ this.props.title }</p>
-				<div className="image-gallery">
+				<div className="image-gallery mt">
 					{
 						this.props.items.map((item, index) => (
 							<div key={ index } className="image-gallery-img-container">

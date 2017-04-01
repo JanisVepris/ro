@@ -3,46 +3,58 @@ import ImageLoader from 'react-imageloader'
 
 import Spinner from './Spinner'
 
-const ImageView = ({
-	hidden,
-	image,
-	previousImage,
-	nextImage,
-	setActiveGalleryImage
-}) => {
+export default class ImageView extends React.Component {
 
-	if (hidden) {
-		return <div/>
-	}
+	// handleKeyDown(event) {
+	// 	if (event.keyCode === 27) {
+	// 		console.log(this)
+	// 		this.props.setActiveGalleryImage()
+	// 	}
+	// }
 
-	return (
-		<div className="image-view-container" onClick={ () => setActiveGalleryImage() }>
-			<div className="image-view-main">
-				<div className="arrow-container" onClick={ (e) => e.stopPropagation() }>
+	render() {
 
-					{ previousImage > -1 && 
-						<div className="arrow-left" onClick={ () => setActiveGalleryImage(previousImage) }>
-							<img />
-						</div>
-					}
+		const {
+			hidden,
+			image,
+			previousImage,
+			nextImage,
+			setActiveGalleryImage
+		} = this.props
 
-					<ImageLoader
-						src={ image.url }
-						wrapper={React.DOM.div}
-						preloader={ Spinner }
-						/>
+		// document.body.addEventListener('keydown', this.handleKeyDown)
 
-					{ !!nextImage && 
-						<div className="arrow-right" onClick={ () => setActiveGalleryImage(nextImage) }>
-							<img />
-						</div>
-					}
+		if (hidden) {
+			//document.body.removeEventListener('keydown', this.handleKeyDown)
+			return <div/>
+		}
 
+		return (
+			<div className="image-view-container" onClick={ () => setActiveGalleryImage() }>
+				<div className="image-view-main">
+					<div className="arrow-container" onClick={ (e) => e.stopPropagation() }>
+
+						{ previousImage > -1 && 
+							<div className="arrow-left" onClick={ () => setActiveGalleryImage(previousImage) }>
+								<img />
+							</div>
+						}
+
+						<ImageLoader
+							src={ image.url }
+							wrapper={React.DOM.div}
+							preloader={ Spinner }
+							/>
+
+						{ !!nextImage && 
+							<div className="arrow-right" onClick={ () => setActiveGalleryImage(nextImage) }>
+								<img />
+							</div>
+						}
+
+					</div>
 				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
-
-
-export default ImageView
