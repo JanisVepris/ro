@@ -17,6 +17,7 @@ import {
 	ARTICLE_SET
 } from '../actions/articles'
 
+// Reducers
 const byId = toReducer({}, state => ({
 	[EVENT_ADD]: action => ({
 		...state,

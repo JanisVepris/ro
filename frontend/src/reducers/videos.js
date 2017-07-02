@@ -5,6 +5,7 @@ import {
 	VIDEO_PLAYLIST_SET
 } from '../actions/videos.js'
 
+// Reducers
 const byId = toReducer({}, state => ({
 	[VIDEO_PLAYLIST_SET]: action => ({
 		...state,

@@ -9,6 +9,7 @@ import {
 	APP_SET_ACTIVE_CATEGORY
 } from '../actions/app'
 
+// Reducers
 const initialized = toReducer(false, () => ({
 	[APP_SET_INITIALIZED]: () => true
 }))

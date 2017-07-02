@@ -8,6 +8,7 @@ import {
 	HEADER_SET_LOADING
 } from '../actions/header'
 
+// Reducers
 const isEventsDropdownVisible = toReducer(false, state => ({
 	[HEADER_TOGGLE_EVENTS]: () => state = !state
 }))

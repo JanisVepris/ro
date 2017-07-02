@@ -6,6 +6,7 @@ import {
 	GALLERY_IMAGE_SET_ACTIVE
 } from '../actions/galleries'
 
+// Reducers
 const byId = toReducer({}, state => ({
 	[GALLERY_SET]: action => ({
 		...state,
