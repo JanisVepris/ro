@@ -16,46 +16,13 @@ export const EVENT_POSTER_SET = 'EVENT_POSTER_SET'
 export const EVENT_PLAYLIST_SET = 'EVENT_PLAYLIST_SET'
 
 // Action creators
-export const addEvent = (event) => ({
-	type: EVENT_ADD,
-	event
-})
-
-export const setNews = (id, news) => ({
-	type: EVENT_NEWS_SET,
-	id,
-	news
-})
-
-export const setFacts = (id, facts) => ({
-	type: EVENT_FACTS_SET,
-	id,
-	facts
-})
-
-export const setTeam = (id, team) => ({
-	type: EVENT_TEAM_SET,
-	id,
-	team
-})
-
-export const setScript = (id, script) => ({
-	type: EVENT_SCRIPT_SET,
-	id,
-	script
-})
-
-export const setPoster = (id, poster) => ({
-	type: EVENT_POSTER_SET,
-	id,
-	poster
-})
-
-export const setPlaylist = (id, playlist) => ({
-	type: EVENT_PLAYLIST_SET,
-	id,
-	playlist
-})
+export const addEvent = (event) => ({ type: EVENT_ADD, event })
+export const setNews = (id, news) => ({ type: EVENT_NEWS_SET, id, news })
+export const setFacts = (id, facts) => ({ type: EVENT_FACTS_SET, id, facts })
+export const setTeam = (id, team) => ({ type: EVENT_TEAM_SET, id, team })
+export const setScript = (id, script) => ({ type: EVENT_SCRIPT_SET, id, script })
+export const setPoster = (id, poster) => ({ type: EVENT_POSTER_SET, id, poster })
+export const setPlaylist = (id, playlist) => ({ type: EVENT_PLAYLIST_SET, id, playlist })
 
 // Thunks
 export const loadEventInfo = (id) => (

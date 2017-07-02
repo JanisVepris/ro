@@ -13,22 +13,11 @@ export const ARTICLE_SET_LOADING = 'ARTICLE_SET_LOADING'
 export const ARTICLE_SET = 'ARTICLE_SET'
 
 // Action creators
-export const setActiveArticle = (id) => ({
-	type: ARTICLE_SET_ACTIVE,
-	id
-})
+export const setActiveArticle = (id) => ({ type: ARTICLE_SET_ACTIVE, id })
+export const setArticleLoading = (loading) => ({ type: ARTICLE_SET_LOADING, loading })
+export const setArticle = (id, article) => ({ type: ARTICLE_SET, id, article })
 
-export const setArticleLoading = (loading) => ({
-	type: ARTICLE_SET_LOADING,
-	loading
-})
-
-export const setArticle = (id, article) => ({
-	type: ARTICLE_SET,
-	id,
-	article
-})
-
+// Thunks
 export const navigateToArticle = (articleSlug) => (
 	dispatch,
 	getState

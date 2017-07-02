@@ -7,36 +7,18 @@ import { loadEventInfo, loadEventNews } from './events'
 import { setHeaderCover, setHeaderLoading } from './header'
 
 // Action types
-export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
 export const APP_SET_EVENTS = 'APP_SET_EVENTS'
+export const APP_SET_INITIALIZED = 'APP_SET_INITIALIZED'
 export const APP_SET_ACTIVE_EVENT = 'APP_SET_ACTIVE_EVENT'
 export const APP_SET_DEFAULT_EVENT = 'APP_SET_DEFAULT_EVENT'
 export const APP_SET_ACTIVE_CATEGORY = 'APP_SET_ACTIVE_CATEGORY'
 
 // Action creators
-export const setInitialized = () => ({
-	type: APP_SET_INITIALIZED
-})
-
-export const setActiveEvent = (id) => ({
-	type: APP_SET_ACTIVE_EVENT,
-	id
-})
-
-export const setAvailableEvents = (events) => ({
-	type: APP_SET_EVENTS,
-	events
-})
-
-export const setActiveCategory = (category) => ({
-	type: APP_SET_ACTIVE_CATEGORY,
-	category
-})
-
-export const setDefaultEvent = (id) => ({
-	type: APP_SET_DEFAULT_EVENT,
-	id
-})
+export const setInitialized = () => ({ type: APP_SET_INITIALIZED })
+export const setActiveEvent = (id) => ({ type: APP_SET_ACTIVE_EVENT, id })
+export const setDefaultEvent = (id) => ({ type: APP_SET_DEFAULT_EVENT, id })
+export const setAvailableEvents = (events) => ({ type: APP_SET_EVENTS, events })
+export const setActiveCategory = (category) => ({ type: APP_SET_ACTIVE_CATEGORY, category })
 
 // Thunks
 export const initialize = (urlParams) => (

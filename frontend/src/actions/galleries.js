@@ -5,17 +5,10 @@ export const GALLERY_SET = 'GALLERY_SET'
 export const GALLERY_IMAGE_SET_ACTIVE = 'GALLERY_IMAGE_SET_ACTIVE'
 
 // Action creators
-const setGallery = (id, gallery) => ({
-	type: GALLERY_SET,
-	id,
-	gallery
-})
+const setGallery = (id, gallery) => ({ type: GALLERY_SET, id, gallery })
+export const setActiveGalleryImage = (index = null) => ({ type: GALLERY_IMAGE_SET_ACTIVE, index })
 
-export const setActiveGalleryImage = (index = null) => ({
-	type: GALLERY_IMAGE_SET_ACTIVE,
-	index
-})
-
+// Thunks
 export const loadGallery = () => (
 	dispatch,
 	getState

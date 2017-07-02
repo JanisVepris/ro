@@ -4,12 +4,9 @@ import * as eventVideosRepo from '../repo/event-videos'
 export const VIDEO_PLAYLIST_SET = 'VIDEO_PLAYLIST_SET'
 
 // Action creators
-const setVideoPlaylist = (id, playlist) => ({
-	type: VIDEO_PLAYLIST_SET,
-	id,
-	playlist
-})
+const setVideoPlaylist = (id, playlist) => ({ type: VIDEO_PLAYLIST_SET, id, playlist })
 
+// Thunks
 export const loadVideoPlaylist = () => (
 	dispatch,
 	getState

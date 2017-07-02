@@ -10,24 +10,12 @@ export const HEADER_SET_COVER = 'HEADER_SET_COVER'
 export const HEADER_SET_LOADING = 'HEADER_SET_LOADING'
 
 // Action creators
-export const toggleEventsDropdown = () => ({
-	type: HEADER_TOGGLE_EVENTS
-})
+export const toggleEventsDropdown = () => ({ type: HEADER_TOGGLE_EVENTS })
+export const toggleNavigationDropdown = () => ({ type: HEADER_TOGGLE_NAVIGATION })
+export const setHeaderImage = (url) => ({ type: HEADER_SET_COVER, url })
+export const setHeaderLoading = (loading) => ({ type: HEADER_SET_LOADING, loading })
 
-export const toggleNavigationDropdown = () => ({
-	type: HEADER_TOGGLE_NAVIGATION
-})
-
-export const setHeaderImage = (url) => ({
-	type: HEADER_SET_COVER,
-	url
-})
-
-export const setHeaderLoading = (loading) => ({
-	type: HEADER_SET_LOADING,
-	loading
-})
-
+// Thunks
 export const navigateToCategory = (category) => (
 	dispatch,
 	getState
