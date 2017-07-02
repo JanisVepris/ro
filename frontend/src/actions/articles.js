@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 import Config from '../config'
 
 import { setActiveCategory } from './app'
@@ -14,8 +15,8 @@ export const ARTICLE_SET = 'ARTICLE_SET'
 
 // Action creators
 export const setActiveArticle = (id) => ({ type: ARTICLE_SET_ACTIVE, id })
-export const setArticleLoading = (loading) => ({ type: ARTICLE_SET_LOADING, loading })
 export const setArticle = (id, article) => ({ type: ARTICLE_SET, id, article })
+const setArticleLoading = (loading) => ({ type: ARTICLE_SET_LOADING, loading })
 
 // Thunks
 export const navigateToArticle = (articleSlug) => (
@@ -24,70 +25,75 @@ export const navigateToArticle = (articleSlug) => (
 ) => {
 
 	dispatch(setActiveCategory('article'))
+	dispatch(setHeaderLoading(true))
 	dispatch(setArticleLoading(true))
 
-	const state = getState()
-	const { activeEventId, activeCategory, eventsById } = state.app
-
+	const { activeEventId, activeCategory, eventsById } = getState().app
 	const categorySlug = Config.categories[activeCategory].slug
 	const eventSlug = eventsById[activeEventId].slug
 
-	dispatch(push('/' + eventSlug + '/' + categorySlug + '/' + articleSlug))
-
-	dispatch(setHeaderLoading(true))
-	
 	window.scrollTo(0, 0)
 
+	const newRoute = '/' + eventSlug + '/' + categorySlug + '/' + articleSlug
+
+	if (browserHistory.getCurrentLocation().pathname !== newRoute) {
+		dispatch(push(newRoute))
+	}
+	
 	return dispatch(loadEventNews(activeEventId))
-		.then(() => {
-			
-			const eventNews = getState().events.newsById[activeEventId]
-			
-			const article = eventNews && eventNews.articles.find(article => article.slug === articleSlug)
-
-			if (article.image) {
-				dispatch(setHeaderLoading(true))
-			}
-
-			const articleId = article && article.id
-
-			if (getState().events.articleById[articleId]) {
-				return Promise.resolve(article)
-			}
-
-			return articleId
-				? dispatch(loadArticle(articleId))
-				: Promise.reject()
+		.then(() => dispatch(loadAndSetArticle(articleSlug)))
+		.then(() => dispatch(setArticleLoading(false)))
+		.catch(err => {
+			console.log('404: Article failed to load, error: ', err)
+			dispatch(setArticleLoading(false))
 		})
+}
+
+const loadAndSetArticle = (articleSlug) => (
+	dispatch,
+	getState
+) => {
+
+	const { events, app } = getState()
+	const eventNews = events.newsById[app.activeEventId]
+	const article = eventNews && eventNews.articles.find(article => article.slug === articleSlug)
+	const articleId = article && article.id
+
+	if (!article || !articleId) {
+		return Promise.reject()
+	}
+
+	if (article && article.image) {
+		dispatch(setHeaderLoading(true))
+	}
+
+	if (events.articleById[articleId]) {
+
+		dispatch(setHeaderCover(events.articleById[articleId].image))
+		return Promise.resolve(article)	
+	}
+
+	return dispatch((loadArticle(articleId)))
 		.then(article => {
-			
-			// setint maza jei telefuons
+
 			if (article.image) {
 				dispatch(setHeaderCover(article.image))
 			}
 			
 			dispatch(setActiveArticle(article.id))
-			dispatch(setArticleLoading(false))
 
 			return Promise.resolve()
-		})
-		.catch(err => {
-			console.log('Article failed to load, error: ', err)
-			dispatch(setArticleLoading(false))
 		})
 }
 
 const loadArticle = (articleId) => (
 	dispatch,
 	getState
-) => {
-
-	return articleRepo.getArticle(getState().app.activeEventId, articleId)
-		.then(response => {
-			dispatch(setArticle(articleId, response))
-			return Promise.resolve(response)
-		})
-		.catch(err => {
-			console.log(err)
-		})
-}
+) => articleRepo.getArticle(getState().app.activeEventId, articleId)
+	.then(response => {
+		dispatch(setArticle(articleId, response))
+		return Promise.resolve(response)
+	})
+	.catch(err => {
+		console.log(err)
+	})

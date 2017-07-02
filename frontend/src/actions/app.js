@@ -76,8 +76,10 @@ export const navigateToOverview = (id) => (
 	const eventSlug = eventsById[id].slug
 	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug
 
-	browserHistory.push(newPath)
-	dispatch(push(newPath))
+	if (browserHistory.getCurrentLocation().pathname !== newPath) {
+		browserHistory.push(newPath)
+		dispatch(push(newPath))
+	}
 	
 	return dispatch(loadEventInfo(id))
 		.then(() => dispatch(loadEventNews(id)))
@@ -100,11 +102,11 @@ export const setActiveEventBySlug = (slug) => (
 		return
 	}
 
-	const eventId = event && event.id
+	const eventId = event.id
 	
 	if (eventId === getState().app.activeEventId) {
 		return
 	}
-	
-	dispatch(setActiveEvent(eventId))
+
+	dispatch(navigateToOverview(eventId))
 }

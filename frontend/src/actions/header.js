@@ -36,7 +36,12 @@ export const navigateToCategory = (category) => (
 	const categorySlug = Config.categories[category].slug
 	const eventSlug = state.app.eventsById[state.app.activeEventId].slug
 
-	dispatch(push('/' + eventSlug + '/' + categorySlug))
+	const newPath = '/' + eventSlug + '/' + categorySlug
+
+	if (browserHistory.getCurrentLocation().pathname !== newPath) {
+		dispatch(push(newPath))
+	}
+
 	dispatch(setActiveCategory(category))
 }
 
