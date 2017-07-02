@@ -1,72 +1,55 @@
 /* eslint-disable */
-var path = require('path')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
-var webpack = require('webpack')
-var fs = require('fs')
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpack = require('webpack')
+const fs = require('fs')
+
+const buildDir = __dirname + '/../web'
 
 fs.accessSync('./config.json', fs.F_OK)
-var config = require('./config.json')
+const config = require('./config.json')
 
-var appRoot = 'src'
-var buildDir = __dirname + '/../web'
-
-var nopt = require("nopt")
-var args = nopt({
-	'useMock': Boolean
-}, {}, process.argv)
-
-var USE_MOCK = !!args.useMock
-
-module.exports = {
-	app_root: 'src',
+module.exports = (env = {}) => ({
 	entry: [
-		'webpack-dev-server/client?http://localhost:8080',
-		'webpack/hot/only-dev-server',
 		'babel-polyfill',
-		__dirname + '/' + appRoot + '/index.js',
+		__dirname + '/src/index.js'
 	],
+	devServer: {
+		contentBase: buildDir
+	},
 	output: {
 		path: buildDir + '/js',
 		publicPath: '/js/',
 		filename: 'bundle.js',
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
-				test: /\.json?$/,
-				loader: 'json-loader'
+				test: /\.js$/,
+				loaders: ['react-hot-loader', 'babel-loader'],
+				exclude: /node_modules/
 			},
 			{
 				test: /\.scss$/,
-				loaders: ['style', 'css', 'sass'],
+				loaders: ['style-loader', 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.(woff2?|ttf|eot|png)$/,
-				loader: 'url?limit=10000'
-			},
-			{
-				test: /\.js$/,
-				loaders: ['react-hot', 'babel'],
-				exclude: /node_modules/,
-			},
-			{
-				test: /\.css$/,
-				loaders: ['style', 'css'],
+				loader: 'url-loader'
 			}
-		],
-	},
-	devServer: {
-		contentBase: buildDir
+		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['js/bundle.js'], {
-			root: buildDir,
-			verbose: true,
-			dry: false
+		new CleanWebpackPlugin(['js/'], {
+			root: buildDir
 		}),
 		new webpack.DefinePlugin({
-			USE_MOCK: USE_MOCK,
-			'WEB_API_URL': JSON.stringify(config.webApiUrl)
+			'process.env.NODE_ENV': JSON.stringify(env.prod ? 'production' : 'development'),
+			'WEB_API_URL': JSON.stringify(config.webApiUrl),
+			'USE_MOCK': !!env.mock
 		})
 	]
-};
+	.concat(!!env.prod ? [
+		new webpack.optimize.UglifyJsPlugin()
+	] : [])
+})

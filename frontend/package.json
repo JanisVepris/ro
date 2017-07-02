@@ -5,9 +5,10 @@
   "main": "index.js",
   "homepage": "http://rokooperos.midi.lt",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080 --useMock",
-    "build": "webpack --config webpack.dev.config.js",
-    "build:prod": "webpack -p --config webpack.prod.config.js"
+    "start": "webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080",
+    "start:mock": "npm run start -- --env.mock",
+    "build": "webpack --env.dev",
+    "build:prod": "webpack -p --env.prod"
   },
   "babel": {
     "presets": [
@@ -19,7 +20,6 @@
     ]
   },
   "dependencies": {
-    "nopt": "^4.0.1",
     "react": "^15.4.2",
     "react-audio-player": "^0.3.3",
     "react-bootstrap": "^0.30.7",
@@ -61,8 +61,8 @@
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
   },
   "author": "Rokas Mikalkevičius",
   "license": "MIT"
