@@ -1,8 +1,6 @@
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
-
 import Popup from '../../components/header/Popup'
-
 import { navigateToOverview } from '../../actions/app'
 import { toggleEventsDropdown } from '../../actions/header'
 
@@ -23,8 +21,8 @@ const getDisabledEvents = createSelector(
 
 const mapStateToProps = (state) => ({
 	labels: getEventsLabels(state),
-	ids: state.app.eventsIds,
-	selectedIndex: state.app.eventsIds.indexOf(state.app.activeEventId),
+	ids: getEventsIds(state),
+	selectedIndex: getEventsIds(state).indexOf(state.app.activeEventId),
 	disabledEvents: getDisabledEvents(state),
 	hidden: !state.header.isEventsDropdownVisible,
 	outsideClickIgnoreClass: 'header-events'

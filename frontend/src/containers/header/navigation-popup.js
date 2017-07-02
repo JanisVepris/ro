@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import Config from '../../config'
-
 import Popup from '../../components/header/Popup'
-
 import { navigateToCategory } from '../../actions/header' 
 import { toggleNavigationDropdown } from '../../actions/header'
 
@@ -15,33 +13,13 @@ const getAvailableCategories = createSelector(
 
 		const options = ['news']
 
-		if (eventInfo.hasGallery) {
-			options.push('gallery')
-		}
-
-		if (eventInfo.hasVideoPlaylist) {
-			options.push('videos')
-		}
-
-		if (eventInfo.hasFacts) {
-			options.push('facts')
-		}
-
-		if (eventInfo.hasTeam) {
-			options.push('team')
-		}
-
-		if (eventInfo.hasScript) {
-			options.push('script')
-		}
-
-		if (eventInfo.hasPoster) {
-			options.push('poster')
-		}
-
-		if (eventInfo.hasAudioPlaylist) {
-			options.push('playlist')
-		}
+		if (eventInfo.hasGallery) options.push('gallery')
+		if (eventInfo.hasVideoPlaylist) options.push('videos')
+		if (eventInfo.hasFacts) options.push('facts')
+		if (eventInfo.hasTeam) options.push('team')
+		if (eventInfo.hasScript) options.push('script')
+		if (eventInfo.hasPoster) options.push('poster')
+		if (eventInfo.hasAudioPlaylist) options.push('playlist')
 
 		return options
 	}

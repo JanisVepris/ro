@@ -1,11 +1,11 @@
 import { push } from 'react-router-redux'
 import Config from '../config'
 
-import * as articleRepo from '../repo/event-article'
-
 import { setActiveCategory } from './app'
 import { loadEventNews } from './events'
 import { setHeaderLoading, setHeaderCover } from './header'
+
+import * as articleRepo from '../repo/event-article'
 
 // Action types
 export const ARTICLE_SET_ACTIVE = 'ARTICLE_SET_ACTIVE'
