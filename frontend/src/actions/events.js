@@ -33,9 +33,7 @@ export const loadEventInfo = (id) => (
 	getState
 ) => {
 	
-	const state = getState()
-
-	if (state.events.byId[id]) {
+	if (getState().events.byId[id]) {
 		return Promise.resolve()
 	}
 
@@ -69,9 +67,7 @@ export const loadEventScript = (id) => (
 	getState
 ) => {
 
-	const state = getState()
-
-	if (state.events.scriptById[id]) {
+	if (getState().events.scriptById[id]) {
 		return Promise.resolve()
 	}
 
@@ -87,9 +83,7 @@ export const loadEventTeam = (id) => (
 	getState
 ) => {
 
-	const state = getState()
-
-	if (state.events.teamById[id]) {
+	if (getState().events.teamById[id]) {
 		return Promise.resolve()
 	}
 
@@ -105,9 +99,7 @@ export const loadEventFacts = (id) => (
 	getState
 ) => {
 
-	const state = getState()
-
-	if (state.events.factsById[id]) {
+	if (getState().events.factsById[id]) {
 		return Promise.resolve()
 	}
 
@@ -123,9 +115,7 @@ export const loadEventPoster = (id) => (
 	getState
 ) => {
 
-	const state = getState()
-
-	if (state.events.posterById[id]) {
+	if (getState().events.posterById[id]) {
 		return Promise.resolve()
 	}
 
@@ -141,9 +131,7 @@ export const loadEventPlaylist = (id) => (
 	getState
 ) => {
 
-	const state = getState()
-
-	if (state.events.playlistById[id]) {
+	if (getState().events.playlistById[id]) {
 		return Promise.resolve()
 	}
 
