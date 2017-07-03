@@ -3,17 +3,19 @@ import { browserHistory } from 'react-router'
 import Config from '../config'
 
 import { setActiveCategory } from './app'
-import { loadEventNews } from './events'
+import { loadEventNews, setNews } from './events'
 import { setHeaderLoading, setHeaderCover } from './header'
 
 import * as articleRepo from '../repo/event-article'
 
 // Action types
+export const ARTICLES_SET_PAGE = 'ARTICLES_SET_PAGE'
 export const ARTICLE_SET_ACTIVE = 'ARTICLE_SET_ACTIVE'
 export const ARTICLE_SET_LOADING = 'ARTICLE_SET_LOADING'
 export const ARTICLE_SET = 'ARTICLE_SET'
 
 // Action creators
+export const setArticlesPage = (page) => ({ type: ARTICLES_SET_PAGE, page })
 export const setActiveArticle = (id) => ({ type: ARTICLE_SET_ACTIVE, id })
 export const setArticle = (id, article) => ({ type: ARTICLE_SET, id, article })
 const setArticleLoading = (loading) => ({ type: ARTICLE_SET_LOADING, loading })
@@ -97,3 +99,17 @@ const loadArticle = (articleId) => (
 	.catch(err => {
 		console.log(err)
 	})
+
+export const changePage = (page) => (
+	dispatch,
+	getState
+) => {
+
+	const state = getState()
+	const { activeEventId } = state.app
+	const { articlesPage } = state.events
+
+	dispatch(setNews(activeEventId, null))
+	dispatch(setArticlesPage(page))
+	return dispatch(loadEventNews(activeEventId))
+}

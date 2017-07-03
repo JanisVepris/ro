@@ -7,7 +7,7 @@ import * as eventPosterRepo from '../repo/event-poster'
 import * as eventPlaylistRepo from '../repo/event-playlists'
 
 // Constants
-const ARTICLES_IN_PAGE = 7
+export const ARTICLES_IN_PAGE = 7
 
 // Action types
 export const EVENT_ADD = 'EVENT_ADD'
@@ -51,11 +51,13 @@ export const loadEventNews = (id) => (
 	getState
 ) => {
 
-	if (getState().events.newsById[id]) {
+	const { newsById, articlesPage } = getState().events
+
+	if (newsById[id]) {
 		return Promise.resolve()
 	}
 
-	return eventArticlesRepo.getEventArticles(id, ARTICLES_IN_PAGE, 0)
+	return eventArticlesRepo.getEventArticles(id, ARTICLES_IN_PAGE, 0 + ARTICLES_IN_PAGE * (articlesPage - 1))
 		.then(response => dispatch(setNews(id, response)))
 		.catch(err => {
 			console.log(err)

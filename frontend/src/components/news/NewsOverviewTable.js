@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import NewsOverviewLatestItem from './NewsOverviewLatestItem'
 import NewsOverviewItem from './NewsOverviewItem'
+import Paging from '../../containers/news/paging'
 
 export default class NewsOverviewTable extends React.Component {
 
@@ -56,6 +57,7 @@ export default class NewsOverviewTable extends React.Component {
 						)
 					)}
 				</div>
+				<Paging />
 			</div>
 		)
 	}

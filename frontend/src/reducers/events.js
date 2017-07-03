@@ -11,7 +11,8 @@ import {
 	EVENT_PLAYLIST_SET
 } from '../actions/events'
 
-import { 
+import {
+	ARTICLES_SET_PAGE,
 	ARTICLE_SET_ACTIVE,
 	ARTICLE_SET_LOADING,
 	ARTICLE_SET
@@ -82,9 +83,14 @@ const articleLoading = toReducer(false, () => ({
 	[ARTICLE_SET_LOADING]: action => action.loading
 }))
 
+const articlesPage = toReducer(1, () => ({
+	[ARTICLES_SET_PAGE]: action => action.page
+}))
+
 export default combineReducers({
 	byId,
 	newsById,
+	articlesPage,
 	activeArticle,
 	articleLoading,
 	articleById,
