@@ -102,6 +102,66 @@ module.exports = (id) => {
 			content: '<p>zabassss</p>',
 			date: '2016.03.12'
 		},
+		[201506]: {
+			id: 201506,
+			title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
+			image: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
+			content: '<p>zabassss</p>',
+			date: '2016.03.12'
+		},
+		[201507]: {
+			id: 201507,
+			title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
+			image: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
+			content: '<p>zabassss</p>',
+			date: '2016.03.12'
+		},
+		[201508]: {
+			id: 201508,
+			title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
+			image: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
+			content: '<p>zabassss</p>',
+			date: '2016.03.12'
+		},
+		[201509]: {
+			id: 201509,
+			title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
+			image: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
+			content: '<p>zabassss</p>',
+			date: '2016.03.12'
+		},
+		[201510]: {
+			id: 201510,
+			title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
+			image: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
+			content: '<p>zabassss</p>',
+			date: '2016.03.12'
+		},
+		[201511]: {
+			id: 201511,
+			title: 'Nuo MIDI Roko Operos iki profesionaliosios scenos: Artūras Žabas' ,
+			image: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
+			description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
+			content: '<p>zabassss</p>',
+			date: '2016.03.12'
+		}
 	}
 
 	return articles[id]
