@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux'
 import { setActiveCategory } from './app'
+import { browserHistory } from 'react-router'
 
 import Config from '../config'
 
@@ -51,6 +52,8 @@ export const setHeaderCover = (url, animate) => (
 ) => {
 
 	dispatch(setHeaderLoading(true))
+
+	window.scrollTo(0, 0)
 
 	if (getState().header.coverUrl === url) {
 		if (animate) {

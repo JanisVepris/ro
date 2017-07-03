@@ -1,5 +1,4 @@
-/* global module */
-module.exports = (id) => {
+module.exports = (id, limit = 5, offset = 0) => {
 
 	const eventArticles = {
 		[112014]: {
@@ -66,7 +65,7 @@ module.exports = (id) => {
 					thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
-					createdOn: '2016.03.12'
+					createdOn: '2016.03.13'
 				},
 				{
 					id: 201503,
@@ -75,7 +74,7 @@ module.exports = (id) => {
 					thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
-					createdOn: '2016.03.12'
+					createdOn: '2016.03.14'
 				},
 				{
 					id: 201504,
@@ -84,7 +83,7 @@ module.exports = (id) => {
 					thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
-					createdOn: '2016.03.12'
+					createdOn: '2016.03.15'
 				},
 				{
 					id: 201505,
@@ -93,11 +92,16 @@ module.exports = (id) => {
 					thumbBig: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					thumbSmall: 'https://www.dropbox.com/s/uiekg1iv5iemeh6/fotke.jpg?raw=1',
 					description: 'Šiais metais MIDI Roko Operos komanda kaip niekad stengiasi palaikyti ryšį su senbuviais – tais, kurie būtų įdomūs ne tik mums patiems, bet ir skaitytojams, nes jie yra žinomi muzikos pasaulyje.',
-					createdOn: '2016.03.12'
+					createdOn: '2016.03.16'
 				}
 			]
 		}
 	}
 
-	return eventArticles[id]
+	return {
+		...eventArticles[id],
+		limit,
+		offset,
+		articles: eventArticles[id].articles.slice(offset, offset + limit)
+	}
 }
