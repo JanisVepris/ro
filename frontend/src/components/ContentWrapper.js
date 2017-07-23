@@ -31,12 +31,12 @@ export default class App extends React.Component {
 
 	render() {
 
-		const coverWrapperClassName = 'cover-wrapper'
-			+ ( this.state.fullPageReload 
+		const coverWrapperClassName = 'cover-wrapper' + (
+			this.state.fullPageReload 
 				? ' no-click'
 				: ' max-opacity opacity-animation'
-			)
-
+		)
+		
 		const contentClassName = `content ${this.props.activeCategory}`
 			+ ( this.props.headerLoading || this.props.contentLoading || this.state.reanimate
 				? ' no-click'

@@ -123,6 +123,31 @@
 	text-align: justify;
 }
 
+// Paging
+.paging-title {
+	display: inline-block;
+	background-color: #1E1E1E;
+	padding: 6px 9px;
+	cursor: default;
+}
+
+.paging-block {
+	background-color: #1E1E1E;
+	padding: 6px 9px;
+	display: inline-block;
+	cursor: pointer;
+	transition: color .2s ease-out;
+}
+
+.paging-block.active {
+	color: #E4E4E4;
+	cursor: default;
+}
+
+.paging-block:hover {
+	color: #E4E4E4;
+}
+
 // Animations
 .latest-article:hover .latest-article-info > *,
 .news-overview-item:hover > * {

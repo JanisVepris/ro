@@ -14,22 +14,27 @@ const Paging = ({
 	const elements = []
 
 	for (var i = 1; i <= pageCount; i++) {
-		elements.push(<div  key={ i }>{ i }</div>)
+		elements.push(<div key={ i }>{ i }</div>)
 	}
 
-	// pasirefactoring, cia biski baisu
+	const pages = new Array(pageCount)
+		.fill(0)
+		.map((_page, index) => index + 1)
+
 	return (
 		<div>
-			<p>Puslapis:</p>
-			current: { currentPage }
-			{ 
-				elements.map((element, index) => (
-					<div key={ index } onClick={ () => onPageChange(index + 1) }>
-						{ element }
-					</div>
-				))
+			<div className="paging-title">Puslapiai:</div>
+			{ currentPage !== 1 && 
+				<div className="paging-block" onClick={ () => onPageChange(currentPage - 1) }> { '<' }</div>
 			}
-			total: { pageCount }
+			{ pages.map(page => {
+				
+				const className = "paging-block" + (page === currentPage ? ' active' : '')
+				return <div key={ page } className={ className } onClick={ () => onPageChange(page) }>{ page }</div>
+			})}
+			{ pageCount > 1 && currentPage !== pageCount && 
+				<div className="paging-block" onClick={ () => onPageChange(currentPage + 1) }> { '>' } </div>
+			}
 		</div>
 	)
 }

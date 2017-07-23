@@ -93,7 +93,7 @@ body {
 // Mobile
 @media screen and (max-width: 650px) {
     .content {
-        padding: 24px !important;
+        padding: 24px 24px 36px 24px !important;
     }
     .article-title {
         font-size: 20px;
@@ -107,7 +107,7 @@ body {
 
 @media screen and (max-width: 500px) {
     .content {
-        padding: 12px !important;
+        padding: 12px 12px 36px 12px !important;
     }
 }
 

@@ -109,7 +109,11 @@ export const changePage = (page) => (
 	const { activeEventId } = state.app
 	const { articlesPage } = state.events
 
+	const cover = document.getElementsByClassName('cover-wrapper')[0]
+
 	dispatch(setNews(activeEventId, null))
 	dispatch(setArticlesPage(page))
+	
+	window.scrollTo(0, cover.offsetHeight)
 	return dispatch(loadEventNews(activeEventId))
 }
