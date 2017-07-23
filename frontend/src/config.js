@@ -4,9 +4,9 @@ export default {
 			title: 'Naujienos',
 			slug: 'naujienos'
 		},
-		article: {
+		articles: {
 			title: 'Naujienos',
-			slug: 'naujienos'
+			slug: 'irasai'
 		},
 		gallery: {
 			title: 'Galerija',

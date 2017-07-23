@@ -26,12 +26,12 @@ export const navigateToArticle = (articleSlug) => (
 	getState
 ) => {
 
-	dispatch(setActiveCategory('article'))
+	dispatch(setActiveCategory('articles'))
 	dispatch(setHeaderLoading(true))
 	dispatch(setArticleLoading(true))
 
 	const { activeEventId, activeCategory, eventsById } = getState().app
-	const categorySlug = Config.categories[activeCategory].slug
+	const categorySlug = Config.categories['articles'].slug
 	const eventSlug = eventsById[activeEventId].slug
 
 	window.scrollTo(0, 0)
@@ -106,14 +106,25 @@ export const changePage = (page) => (
 ) => {
 
 	const state = getState()
-	const { activeEventId } = state.app
+	const { activeEventId, eventsById } = state.app
 	const { articlesPage } = state.events
 
 	const cover = document.getElementsByClassName('cover-wrapper')[0]
-
-	dispatch(setNews(activeEventId, null))
-	dispatch(setArticlesPage(page))
-	
 	window.scrollTo(0, cover.offsetHeight)
+
+	const eventSlug = eventsById[activeEventId].slug
+	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug + (
+		page && page > 1
+			? `/${page}`
+			: ''
+	)
+
+	if (browserHistory.getCurrentLocation().pathname !== newPath) {
+		browserHistory.push(newPath)
+		dispatch(push(newPath))
+	}
+
+	dispatch(setArticlesPage(page))
+	dispatch(setNews(activeEventId, null))
 	return dispatch(loadEventNews(activeEventId))
 }

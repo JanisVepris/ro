@@ -16,8 +16,8 @@ import Playlist from './containers/playlist'
 
 export default () => {
 
-	const newsUrl = '/:eventSlug/' + Config.categories.news.slug
-	const articlesUrl = '/:eventSlug/' + Config.categories.news.slug + '/:articleSlug'
+	const newsUrl = '/:eventSlug/' + Config.categories.news.slug + '(/:newsPageSlug)'
+	const articlesUrl = '/:eventSlug/' + Config.categories.articles.slug + '/:articleSlug'
 	const galleryUrl = '/:eventSlug/' + Config.categories.gallery.slug
 	const videosUrl = '/:eventSlug/' + Config.categories.videos.slug
 	const scriptUrl = '/:eventSlug/' + Config.categories.script.slug

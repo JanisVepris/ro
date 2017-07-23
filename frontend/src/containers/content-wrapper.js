@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 	if (activeCategory === 'news') {
 		contentLoading = !state.events.newsById[activeEventId]
 	} else 
-	if (activeCategory === 'article') {
+	if (activeCategory === 'articles') {
 		contentLoading = !state.events.articleById[state.events.activeArticle]
 	} else 	
 	if (activeCategory === 'videos') {

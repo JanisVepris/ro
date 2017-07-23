@@ -3,8 +3,6 @@ import superagent from 'superagent'
 import * as queryString from 'queryString'
 
 export const getEventArticles = (eventId, limit, offset) => {
-	
-	console.log(limit, offset)
 
 	if (USE_MOCK) {
 

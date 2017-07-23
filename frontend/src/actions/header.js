@@ -30,7 +30,7 @@ export const navigateToCategory = (category) => (
 
 	const newHeaderUrl = state.events.byId[state.app.activeEventId].image
 	
-	if (category !== 'article' && newHeaderUrl !== state.header.coverUrl) {
+	if (category !== 'articles' && newHeaderUrl !== state.header.coverUrl) {
 		dispatch(setHeaderCover(newHeaderUrl, true))
 	}
 	

@@ -6,7 +6,7 @@ import NewsOverviewTable from '../../containers/news/news-overview-table'
 export default class News extends React.Component {
 
 	componentWillMount() {
-		this.props.dispatch(navigateToOverview(this.props.eventId))
+		this.props.dispatch(navigateToOverview(this.props.eventId, this.props.params.newsPageSlug))
 	}
 
 	render() {

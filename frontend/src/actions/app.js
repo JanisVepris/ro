@@ -5,6 +5,7 @@ import Config from '../config'
 
 import { loadEventInfo, loadEventNews } from './events'
 import { setHeaderCover, setHeaderLoading } from './header'
+import { setArticlesPage } from './articles'
 
 // Action types
 export const APP_SET_EVENTS = 'APP_SET_EVENTS'
@@ -21,7 +22,7 @@ export const setAvailableEvents = (events) => ({ type: APP_SET_EVENTS, events })
 export const setActiveCategory = (category) => ({ type: APP_SET_ACTIVE_CATEGORY, category })
 
 // Thunks
-export const initialize = (urlParams) => (
+export const initialize = ({ eventSlug, newsPageSlug }) => (
 	dispatch
 ) => {
 
@@ -30,8 +31,8 @@ export const initialize = (urlParams) => (
 
 			dispatch(setAvailableEvents(response))
 
-			const activeEvent = urlParams.eventSlug
-				? response.find(event => event.slug === urlParams.eventSlug && !event.isDisabled) || response[0]
+			const activeEvent = eventSlug
+				? response.find(event => event.slug === eventSlug && !event.isDisabled) || response[0]
 				: response[0]
 
 			if (!activeEvent.id) {
@@ -40,6 +41,10 @@ export const initialize = (urlParams) => (
 			
 			dispatch(setDefaultEvent(response[0].id))
 			dispatch(setActiveEvent(activeEvent.id))
+
+			if (newsPageSlug) {
+				dispatch(setArticlesPage(parseInt(newsPageSlug, 10) || 1))
+			}
 
 			return dispatch(loadEventInfo(activeEvent.id))
 				.then(() => dispatch(loadEventNews(activeEvent.id)))
@@ -51,7 +56,7 @@ export const initialize = (urlParams) => (
 }
 
 // Thunks
-export const navigateToOverview = (id) => (
+export const navigateToOverview = (id, page) => (
 	dispatch,
 	getState
 ) => {
@@ -74,7 +79,11 @@ export const navigateToOverview = (id) => (
 	window.scrollTo(0, 0)
 
 	const eventSlug = eventsById[id].slug
-	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug
+	const newPath = '/' + eventSlug + '/' + Config.categories['news'].slug + (
+		page
+			? `/${page}`
+			: ''
+	)
 
 	if (browserHistory.getCurrentLocation().pathname !== newPath) {
 		browserHistory.push(newPath)
